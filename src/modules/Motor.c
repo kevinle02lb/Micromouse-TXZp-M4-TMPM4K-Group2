@@ -1,31 +1,53 @@
 /**
  * @file        Motor.c
- * @brief       Motor control implementation for TB67H450AFNG
- * @version     V1.0.0
- * @date        08-06-2026
+ * @brief       Motor control implementation for TB67H450AFNG (slow-decay)
+ * @version     V2.0.0
+ * @date        26-07-2026
  *
  * @details
- *   See motor.h for wiring and truth table details.
+ *   High-level motor control. See motor.h for wiring and truth table.
  *
- *   Direction-change policy (RM-T32A-C §4.6.1):
- *   OUTCRA1 / OUTCRB1 may only be written while RUNA = 0.
+ *   Direction-change policy (RM-T32A-C 4.6.1):
+ *   OUTCRA1 / OUTCRB1 are writable only while RUNA = 0. A direction
+ *   change therefore stops the channel, rewrites output control, and
+ *   restarts. Duty-only updates (RGx0) are double-buffered and may be
+ *   written while the channel runs.
  *
- *   ┌─────────────────────────┬─────────────────────────────┐
- *   │  Scenario               │  Action                     │
- *   ├─────────────────────────┼─────────────────────────────┤
- *   │  Same dir, moving       │  Live duty write only       │
- *   │  Same dir, BRAKE/STOP   │  No-op                      │
- *   │  Any direction change   │  Stop → reconfigure → Start │
- *   └─────────────────────────┴─────────────────────────────┘
+ *     +-------------------------+-------------------------------+
+ *     |  Scenario               |  Action                       |
+ *     +-------------------------+-------------------------------+
+ *     |  Same dir, moving       |  Live duty write only         |
+ *     |  Same dir, BRAKE/STOP   |  No-op                        |
+ *     |  Any direction change   |  Stop -> reconfigure -> Start |
+ *     +-------------------------+-------------------------------+
  *
- *   Output mapping (IN1=TimerA/OUTA, IN2=TimerB/OUTB):
- *   ─────────────────────────────────────────────────────────
- *   FORWARD : IN1=PWM,  IN2=LOW  (datasheet calls this forward)
- *   REVERSE : IN1=LOW,  IN2=PWM  (datasheet calls this reverse)
- *   BRAKE   : IN1=HIGH, IN2=HIGH (motor shorted, fast stop)
- *   STOP    : IN1=LOW,  IN2=LOW  (standby, freewheel)
+ *   Drive scheme: SLOW DECAY (IN1 = TimerA/OUTA, IN2 = TimerB/OUTB).
+ *   The PWM off-phase is BRAKE (both inputs high), not coast. Winding
+ *   current recirculates rather than collapsing each cycle, which
+ *   raises low-duty torque and linearises speed-vs-duty relative to
+ *   fast decay.
  *
- *  @note
+ *     FORWARD : IN1 = HIGH (static), IN2 = PWM
+ *                 PWM low  -> IN1=H, IN2=L -> forward drive
+ *                 PWM high -> IN1=H, IN2=H -> brake (recirculate)
+ *     REVERSE : IN1 = PWM, IN2 = HIGH (static)
+ *                 PWM low  -> IN1=L, IN2=H -> reverse drive
+ *                 PWM high -> IN1=H, IN2=H -> brake (recirculate)
+ *     BRAKE   : IN1 = HIGH, IN2 = HIGH  (both outputs low, shorted)
+ *     STOP    : IN1 = LOW,  IN2 = LOW   (Hi-Z / standby; the only coast)
+ *
+ *   Consequence of slow decay: a direction commanded at 0 % duty holds
+ *   the motor in BRAKE, not coast. STOP selects the free/standby state.
+ *
+ *   Duty geometry (RGx0 is non-inverted in this scheme):
+ *   The PWM pin uses T32A_OUTPUT_PPG = SET on CMP0 (RGx0), CLEAR on CMP1
+ *   (RGx1 = period). Counting up from 0, the pin is LOW over 0..RGx0 and
+ *   HIGH over RGx0..period. In slow decay the drive phase is the PWM-LOW
+ *   phase, so drive time equals RGx0 counts and RGx0 maps directly to
+ *   duty: RGx0 = speed% * period. (Fast decay drives on the HIGH phase,
+ *   which is why an inverted mapping is required there.)
+ *
+ * @note
  *   File structure and Doxygen formatting assisted by AI.
  *
  * Copyright (c) [Kevin Le] 2026
@@ -46,19 +68,23 @@ static motor_dir_t motor_right_dir = STOP;
  * ========================================================================== */
 
 /**
- * @brief  Convert speed % to timer compare value.
- * @param  speed   0–100 (%)
- * @param  period  Timer period in counts
- * @return Duty value in [0, period-1]
+ * @brief  Convert a speed percentage to a timer compare value (RGx0).
+ * @param  speed   Speed in percent, 0-100.
+ * @param  period  Timer period in counts.
+ * @return Compare value in [0, period-1]; RGx0 equals drive-time counts.
+ *
+ * @note   Non-inverted (slow-decay sense): a larger value yields more
+ *         drive time, since the drive phase is the PWM-LOW interval
+ *         (0..RGx0). A speed of 0 gives RGx0 = 0, i.e. full brake.
  */
 static uint16_t Speed_ToDuty(uint8_t speed, uint16_t period)
 {
     if (speed >= MAX_SPEED)
     {
-        return 0;
+        return (uint16_t)(period - 1U);     /* Near-full drive (1 count brake) */
     }
 
-    return (uint16_t)(period - 1U - ((uint32_t)speed * (uint32_t)(period - 1U) / (uint32_t)MAX_SPEED));     /* Inverted: Period - duty ticks */
+    return (uint16_t)((uint32_t)speed * (uint32_t)(period - 1U) / (uint32_t)MAX_SPEED);
 }
 
 /* ==========================================================================
@@ -67,10 +93,10 @@ static uint16_t Speed_ToDuty(uint8_t speed, uint16_t period)
 
 void Motor_Init(void)
 {
-    T32A0_Init(T32A_CH0_PERIOD);   /* Left motor */
+    T32A0_Init(T32A_CH0_PERIOD);   /* Left motor  */
     T32A3_Init(T32A_CH3_PERIOD);   /* Right motor */
 
-    /* Safe initial state: both inputs LOW (standby) */
+    /* Safe initial state: both inputs LOW (standby / Hi-Z) */
     T32A0_SetOutCRA1(T32A_OUTPUT_LOW);
     T32A0_SetOutCRB1(T32A_OUTPUT_LOW);
     T32A3_SetOutCRA1(T32A_OUTPUT_LOW);
@@ -100,58 +126,59 @@ void Motor_Stop(void)
 }
 
 /* ==========================================================================
- *   Left motor
+ *   Left motor  (T32A0: IN1 = A/OUTA, IN2 = B/OUTB)
  * ========================================================================== */
 
 void Motor_SetLeft(motor_dir_t dir, uint8_t speed)
 {
     uint16_t duty = Speed_ToDuty(speed, PERIOD_L);
 
-    /* Fast path: same direction, just update duty */
+    /* Fast path: same direction, update the PWM leg's duty only.
+       FORWARD drives the PWM on IN2 (B); REVERSE on IN1 (A). */
     if (dir == motor_left_dir)
     {
-        if (dir == FORWARD)      /* IN1 duty */
+        if (dir == FORWARD)
         {
-            T32A0_SetTimerA0(duty);
+            T32A0_SetTimerB0(duty);   /* IN2 is the PWM leg in FORWARD */
         }
-        else if (dir == REVERSE) /* IN2 duty */
+        else if (dir == REVERSE)
         {
-            T32A0_SetTimerB0(duty);
+            T32A0_SetTimerA0(duty);   /* IN1 is the PWM leg in REVERSE */
         }
-        /* BRAKE / STOP: nothing to update */
+        /* BRAKE / STOP: no live update required */
         return;
     }
 
-    /* Full path: stop, reconfigure, restart */
+    /* Full path: stop, reconfigure output control, restart */
     T32A0_Stop();
 
     switch (dir)
     {
-        /* IN1=PWM, IN2=LOW → OUT1=H, OUT2=L → M1(+) positive */
+        /* Slow-decay forward: IN1 static HIGH, IN2 PWM (low = drive) */
         case FORWARD:
-            T32A0_SetOutCRA1(T32A_OUTPUT_PPG);       /* IN1 = PWM  */
-            T32A0_SetOutCRB1(T32A_OUTPUT_LOW);       /* IN2 = LOW  */
-            T32A0_SetTimerA0(duty);
-            T32A0_SetTimerB0(0U);
-            break;
-
-        /* IN1=LOW, IN2=PWM → OUT1=L, OUT2=H →  M1(+) negative */
-        case REVERSE:
-            T32A0_SetOutCRA1(T32A_OUTPUT_LOW);       /* IN1 = LOW  */
-            T32A0_SetOutCRB1(T32A_OUTPUT_PPG);       /* IN2 = PWM  */
+            T32A0_SetOutCRA1(T32A_OUTPUT_HIGH);      /* IN1 = static HIGH */
+            T32A0_SetOutCRB1(T32A_OUTPUT_PPG);       /* IN2 = PWM         */
             T32A0_SetTimerA0(0U);
             T32A0_SetTimerB0(duty);
             break;
 
-        /* IN1=HIGH, IN2=HIGH → both outputs L → motor shorted */
-        case BRAKE:
-            T32A0_SetOutCRA1(T32A_OUTPUT_HIGH);
-            T32A0_SetOutCRB1(T32A_OUTPUT_HIGH);
-            T32A0_SetTimerA0(0U);    /* Clean compare regs */
+        /* Slow-decay reverse: IN2 static HIGH, IN1 PWM (low = drive) */
+        case REVERSE:
+            T32A0_SetOutCRA1(T32A_OUTPUT_PPG);       /* IN1 = PWM         */
+            T32A0_SetOutCRB1(T32A_OUTPUT_HIGH);      /* IN2 = static HIGH */
+            T32A0_SetTimerA0(duty);
             T32A0_SetTimerB0(0U);
             break;
 
-        /* IN1=LOW, IN2=LOW → Hi-Z → standby */
+        /* IN1=HIGH, IN2=HIGH -> both outputs low -> motor shorted */
+        case BRAKE:
+            T32A0_SetOutCRA1(T32A_OUTPUT_HIGH);
+            T32A0_SetOutCRB1(T32A_OUTPUT_HIGH);
+            T32A0_SetTimerA0(0U);
+            T32A0_SetTimerB0(0U);
+            break;
+
+        /* IN1=LOW, IN2=LOW -> Hi-Z -> standby (true coast) */
         case STOP:
             T32A0_SetOutCRA1(T32A_OUTPUT_LOW);
             T32A0_SetOutCRB1(T32A_OUTPUT_LOW);
@@ -165,23 +192,23 @@ void Motor_SetLeft(motor_dir_t dir, uint8_t speed)
 }
 
 /* ==========================================================================
- *   Right motor
+ *   Right motor  (T32A3: IN1 = A/OUTA, IN2 = B/OUTB)
  * ========================================================================== */
 
 void Motor_SetRight(motor_dir_t dir, uint8_t speed)
 {
     uint16_t duty = Speed_ToDuty(speed, PERIOD_R);
 
-    /* Fast path */
+    /* Fast path: FORWARD drives the PWM on IN2 (B); REVERSE on IN1 (A). */
     if (dir == motor_right_dir)
     {
         if (dir == FORWARD)
         {
-            T32A3_SetTimerA0(duty);
+            T32A3_SetTimerB0(duty);   /* IN2 is the PWM leg in FORWARD */
         }
         else if (dir == REVERSE)
         {
-            T32A3_SetTimerB0(duty);
+            T32A3_SetTimerA0(duty);   /* IN1 is the PWM leg in REVERSE */
         }
         return;
     }
@@ -190,20 +217,23 @@ void Motor_SetRight(motor_dir_t dir, uint8_t speed)
 
     switch (dir)
     {
+        /* Slow-decay forward: IN1 static HIGH, IN2 PWM (low = drive) */
         case FORWARD:
-            T32A3_SetOutCRA1(T32A_OUTPUT_PPG);      
-            T32A3_SetOutCRB1(T32A_OUTPUT_LOW);      
-            T32A3_SetTimerA0(duty);
-            T32A3_SetTimerB0(0U);
-            break;
-
-        case REVERSE:
-            T32A3_SetOutCRA1(T32A_OUTPUT_LOW);    
-            T32A3_SetOutCRB1(T32A_OUTPUT_PPG);      
+            T32A3_SetOutCRA1(T32A_OUTPUT_HIGH);      /* IN1 = static HIGH */
+            T32A3_SetOutCRB1(T32A_OUTPUT_PPG);       /* IN2 = PWM         */
             T32A3_SetTimerA0(0U);
             T32A3_SetTimerB0(duty);
             break;
 
+        /* Slow-decay reverse: IN2 static HIGH, IN1 PWM (low = drive) */
+        case REVERSE:
+            T32A3_SetOutCRA1(T32A_OUTPUT_PPG);       /* IN1 = PWM         */
+            T32A3_SetOutCRB1(T32A_OUTPUT_HIGH);      /* IN2 = static HIGH */
+            T32A3_SetTimerA0(duty);
+            T32A3_SetTimerB0(0U);
+            break;
+
+        /* IN1=HIGH, IN2=HIGH -> both outputs low -> motor shorted */
         case BRAKE:
             T32A3_SetOutCRA1(T32A_OUTPUT_HIGH);
             T32A3_SetOutCRB1(T32A_OUTPUT_HIGH);
@@ -211,6 +241,7 @@ void Motor_SetRight(motor_dir_t dir, uint8_t speed)
             T32A3_SetTimerB0(0U);
             break;
 
+        /* IN1=LOW, IN2=LOW -> Hi-Z -> standby (true coast) */
         case STOP:
             T32A3_SetOutCRA1(T32A_OUTPUT_LOW);
             T32A3_SetOutCRB1(T32A_OUTPUT_LOW);
@@ -236,4 +267,3 @@ void Motor_Set(motor_t motor, motor_dir_t dir, uint8_t speed)
         default:                                        break;
     }
 }
-

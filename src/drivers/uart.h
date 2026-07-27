@@ -6,26 +6,27 @@
  *
  * @details
  *   UART driver for Pins PC0 & PC1
- * 
- *   Handles input Clock of 80Mhz
- *   
+
  *   Alias:
  *   UART Channel 0 - Port C
  *      UT0RXD:  PC0 - RX 
  *      UT0TXDA: PC1 - TX
  *   
- *   Target/Goal:
+ *   Target/Goal: @ 10Mhz
  *   BAUD Rate: 115200 Bd (baud)
  *   Data Length: 8 bits
  *   Parity: N/A
  *   Stop bit: 1-bit
  * 
- *   Check Section 5. Usage Example
- *      5.1. Baud Rate Setting Value:
- *          Table 5.2 Setting Example at ΦTx =80MHz, <PRSEL> =0000, and <KEN> =1
+ *   Baud divider (UART-C RM Section 5, N + (64-K)/64 division, KEN=1):
+ *       Baud = ΦT0 / (16 * (N + (64 - K)/64))
+ *
+ *   Computed for ΦT0 = 10 MHz, <PRSEL> = 0000 (1/1), <KEN> = 1:
  *   bps            <BRK>           <BRN>           Calculated Value (bps)
- *   115200         0x26            0x02B                   115191
- *   115200         0x27            0x02B                   115232
+ *   115200         0x25 (K=37)     0x05 (N=5)              115274   (+0.06%)
+ *
+ *   Alt, if 5 MHz (core MCKSEL = ΦT0/2):
+ *   115200         0x12 (K=18)     0x02 (N=2)              114943   (-0.22%)
  * 
  *   Reference:
  *   - Product Info:  https://toshiba.semicon-storage.com/info/TXZP-PINFO-M4K(2)_en_20231225.pdf?did=70854

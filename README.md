@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🐭 Toshiba Micromouse
+# 🐭 Toshiba Micromouse - Work in Progress
 
 **Autonomous 16×16 Maze-Solving Robot**  
 *Register-level firmware on Arm Cortex-M4*
@@ -106,5 +106,5 @@ Flash:   512 KB on-chip
 
 <div align="center">
 
-**Kevin Le** &nbsp;•&nbsp; 2026 &nbsp;•&nbsp;
+**Kevin Le** &nbsp;•&nbsp; 2026 &nbsp;
 </div>

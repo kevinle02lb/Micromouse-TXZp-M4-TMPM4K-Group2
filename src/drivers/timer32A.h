@@ -25,9 +25,10 @@ extern volatile bool T32A01AC_IRQ_Fire;
 /* ==========================================================================
  *   Config
  * ========================================================================== */
-#define T32A_CH0_PERIOD     2000    /*!< 80 MHz / 1:1 / 2000 = 40 kHz PWM */
-#define T32A_CH3_PERIOD     2000    /*!< Same for right motor */
-#define T32A_CH1_1KHZ       80000   /*!< 80Mhz / 1:1 / 80000 = 1kHz */
+#define T32A_PHIT0_HZ       80000000UL                /*!< ΦT0 timer clock — set to your actual value (80 MHz @ PLL-on) */
+#define T32A_CH0_PERIOD     (T32A_PHIT0_HZ / 20000)   /*!< ΦT0 / 1:1 / 20 kHz PWM */
+#define T32A_CH3_PERIOD     (T32A_PHIT0_HZ / 20000)   /*!< Same for CH3 PPG  */
+#define T32A_CH1_1KHZ       (T32A_PHIT0_HZ / 1000)    /*!< ΦT0 / 1:1 / 1 kHz control loop */
 
 #define T32A_MODE_16BIT     0
 #define T32A_MODE_32BIT     1
@@ -62,7 +63,7 @@ extern volatile bool T32A01AC_IRQ_Fire;
 
 #define T32A_CRx_STARTx_MASK    ((uint32_t)0x07 << 0U)    /*!< Sets the counter start condition mask*/
 #define T32A_CRx_STOPx_MASK     ((uint32_t)0x07 << 4U)    /*!< Sets the counter stop condition mask*/
-#define T32A_CRx_RELDx_MASK     ((uint32_t)0x03 << 8U)    /*!< Reload timing mask */
+#define T32A_CRx_RELDx_MASK     ((uint32_t)0x07 << 8U)    /*!< Reload timing mask */
 #define T32A_CRx_UPDNx_MASK     ((uint32_t)0x03 << 16U)   /*!< Count direction mask */
 #define T32A_UPDNx              ((uint32_t)0x00 << 16U)   /*!< 00 = Up, 01 = Down */
 #define T32A_CRx_WBFx_MASK      ((uint32_t)0x01 << 20U)   /*!< Double-buffer enable */

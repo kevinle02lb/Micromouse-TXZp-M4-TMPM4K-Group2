@@ -106,7 +106,7 @@
 /* ==========================================================================
  *   ADxMOD1 — Mode Setting Register 1
  * ========================================================================== */
-#define ADxMOD1_40MHZ                           ((uint32_t)0x00306122)   /*!< MOD1 value for 0.96 µs @ 40 MHz SCLK */
+#define ADxMOD1_N5_SGL                          ((uint32_t)0x00306122)   /*!< MOD1 n=5 sampling recipe (0.96 µs @ 40 MHz SCLK; runs proportionally slower at lower SCLK) */
 
 /* ==========================================================================
  *   ADxEXAZSEL — AIN Sampling Time Selection

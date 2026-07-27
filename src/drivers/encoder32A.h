@@ -43,12 +43,13 @@
 #define INPCR_SYNCSPLMD_MASK    ((uint32_t)0x01 << 1U)   /*!< PWM sync sampling mode */
 #define INPCR_SYNCNCZEN_MASK    ((uint32_t)0x01 << 2U)   /*!< Noise cancel at PWM-on */
 #define INPCR_NCT_MASK          ((uint32_t)0x7F << 8U)   /*!< Noise cancellation time mask */
-#define INPCR_NCT_400ns         ((uint32_t)0x04 << 8U)   /*!< 4 × sample clock cycles */
+#define INPCR_NCT_4CYC          ((uint32_t)0x04 << 8U)   /*!< 4 × sample clock cycles */
 
 /* ==========================================================================
  *   CLKCR — Sample Clock
  * ========================================================================== */
-#define CLKCR_SPLCKS_8DIV   ((uint32_t)0x03 << 0U)   /*!< Fsys / 8 = 10 MHz @ 80 MHz */
+#define CLKCR_SPLCKS_8DIV       ((uint32_t)0x03 << 0U)   /*!< Fsys / 8 */
+#define CLKCR_SPLCKS_DIV_MASK   ((uint32_t)0x03 << 0U)   /*!< Fsys mask 0x11 */
 
 /* ==========================================================================
  *   STS — Status

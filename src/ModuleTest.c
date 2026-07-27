@@ -19,13 +19,14 @@
 #include "modules/IrSensor.h"   
 #include "drivers/uart.h"
 #include "modules/Motion.h"
+#include "gpio.h"
 
 /* ==========================================================================
  *   Module Defines
  * ========================================================================== */
-//#define MOTOR_TEST
+#define MOTOR_TEST
 //#define IR_TEST
-#define MOTION_TEST
+//#define MOTION_TEST
 
 
 /* ==========================================================================
@@ -33,12 +34,12 @@
  * ========================================================================== */
 #ifdef MOTOR_TEST
 
-    #define TEST_DUTY_LOW           25U
+    #define TEST_DUTY_LOW           70U
     #define TEST_DUTY_MID           50U
-    #define TEST_DUTY_HIGH          100U
+    #define TEST_DUTY_HIGH          60U
 
     #define TEST_PHASE_MS           2000U   /*!< Hold time per phase */
-    #define TEST_SETTLE_MS          500U    /*!< Brake gap between phases */
+    #define TEST_SETTLE_MS          750U    /*!< Brake gap between phases */
 
 
     /**
@@ -85,7 +86,7 @@
         { REVERSE, TEST_DUTY_LOW,  STOP,    0U,             TEST_PHASE_MS,   3U },
         { STOP,    0U,             REVERSE, TEST_DUTY_LOW,  TEST_PHASE_MS,   4U },
         { FORWARD, TEST_DUTY_LOW,  FORWARD, TEST_DUTY_LOW,  TEST_PHASE_MS,   5U },
-        { BRAKE,   0U,             BRAKE,   0U,             TEST_SETTLE_MS,  6U },
+        { STOP,    0U,             STOP,    0U,             TEST_SETTLE_MS,  6U },
         { FORWARD, TEST_DUTY_MID,  REVERSE, TEST_DUTY_MID,  TEST_PHASE_MS,   7U },
         { REVERSE, TEST_DUTY_MID,  FORWARD, TEST_DUTY_MID,  TEST_PHASE_MS,   8U },
         { STOP,    0U,             STOP,    0U,             TEST_SETTLE_MS,  9U },
@@ -96,7 +97,7 @@
         { REVERSE, TEST_DUTY_HIGH, STOP,    0U,             TEST_PHASE_MS,  12U },
         { STOP,    0U,             REVERSE, TEST_DUTY_HIGH, TEST_PHASE_MS,  13U },
         { FORWARD, TEST_DUTY_HIGH, FORWARD, TEST_DUTY_HIGH, TEST_PHASE_MS,  14U },
-        { BRAKE,   0U,             BRAKE,   0U,             TEST_SETTLE_MS, 15U },
+        { STOP,   0U,              STOP,    0U,             TEST_SETTLE_MS, 15U },
         { FORWARD, TEST_DUTY_HIGH, REVERSE, TEST_DUTY_HIGH, TEST_PHASE_MS,  16U },
         { REVERSE, TEST_DUTY_HIGH, FORWARD, TEST_DUTY_HIGH, TEST_PHASE_MS,  17U },
         { STOP,    0U,             STOP,    0U,             TEST_SETTLE_MS, 18U }
@@ -130,12 +131,12 @@
         {
             if(Timebase_GetAndClear())
             {
-                Encoder_Update();
+                //Encoder_Update();
 
-                test_enc_left  = Encoder_GetPosition(MOTOR_LEFT);
-                test_enc_right = Encoder_GetPosition(MOTOR_RIGHT);
-                test_cps_left  = Encoder_GetSpeed_CPS(MOTOR_LEFT);
-                test_cps_right = Encoder_GetSpeed_CPS(MOTOR_RIGHT);
+                // test_enc_left  = Encoder_GetPosition(MOTOR_LEFT);
+                // test_enc_right = Encoder_GetPosition(MOTOR_RIGHT);
+                // test_cps_left  = Encoder_GetSpeed_CPS(MOTOR_LEFT);
+                // test_cps_right = Encoder_GetSpeed_CPS(MOTOR_RIGHT);
     
                 ++ticks;
             }
@@ -147,8 +148,8 @@
      */
     static void MotorTest_Run(void)
     {
-        uint32_t idn;
-        int32_t start_left, start_right;
+        uint32_t idn = 0;
+        int32_t start_left = 0 , start_right = 0;
 
 
         for ( idn = 0 ; idn < MOTOR_SEQ_LENGTH ; ++idn)
@@ -157,16 +158,16 @@
 
             phase_idn = phase->idn;
 
-            start_left = Encoder_GetPosition(MOTOR_LEFT);
-            start_right = Encoder_GetPosition(MOTOR_RIGHT);
+            // start_left = Encoder_GetPosition(MOTOR_LEFT);
+            // start_right = Encoder_GetPosition(MOTOR_RIGHT);
 
             Motor_Set(MOTOR_LEFT, phase->left_dir, phase->left_duty);
             Motor_Set(MOTOR_RIGHT, phase->right_dir, phase->right_duty);
 
             Test_HoldMS(phase->hold_ms);
 
-            test_phase_dl = Encoder_GetPosition(MOTOR_LEFT) - start_left;
-            test_phase_dr = Encoder_GetPosition(MOTOR_RIGHT) - start_right;
+            // test_phase_dl = Encoder_GetPosition(MOTOR_LEFT) - start_left;
+            // test_phase_dr = Encoder_GetPosition(MOTOR_RIGHT) - start_right;
 
 
             /* Reset - Set up for next phase testing */
@@ -324,7 +325,6 @@ static void Test_Init(void)
 
 int main(void)
 {   
-    SystemInit();
     Test_Init();
 
     #ifdef MOTOR_TEST
