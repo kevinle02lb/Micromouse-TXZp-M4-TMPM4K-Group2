@@ -6,10 +6,12 @@
  *
  * @details
  *   Configures T32A channels 0 and 3 for PPG (PWM) output on motor drivers.
- *   16-bit mode, up-counting, double-buffered, 40 kHz @ 80 MHz / 1:1 prescaler.
+ *   16-bit mode, up-counting, double-buffered, 20 kHz @ 80 MHz / 1:1 prescaler.
+ * 
+ *   Update: 10Mhz Clock input or 80Mhz (ΦT0m)
  * 
  *   Configures T32A Channel 1 for Interval timer Interrupt
- *   32-bit mode, up-counting, double-buffered, 1kHz @ 80 Mhz / 1:1 prescaler.
+ *   32-bit mode, up-counting, double-buffered, 1kHz @ 10 Mhz / 1:1 prescaler.
  *
  *   Pin Assignments:
  *   - T32A0: PA3 (OUTA), PA4 (OUTB) — Left motor

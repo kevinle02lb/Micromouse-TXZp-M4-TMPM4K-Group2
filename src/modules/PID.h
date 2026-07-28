@@ -6,7 +6,7 @@
  *
  * @details
  * @note
- *   
+ *
  *
  *   File structure and Doxygen formatting assisted by AI.
  *

@@ -14,7 +14,7 @@
  *      UT0RXD:  PC0 - RX 
  *      UT0TXDA: PC1 - TX
  *   
- *   Target/Goal:
+ *   Target/Goal: @ 10Mhz
  *   BAUD Rate: 115200 Bd (baud)
  *   Data Length: 8 bits
  *   Parity: N/A
@@ -26,6 +26,15 @@
  *   bps            <BRK>           <BRN>           Calculated Value (bps)
  *   115200         0x26            0x02B                   115191
  *   115200         0x27            0x02B                   115232
+ * 
+ *          Computed for ΦTx = fsysm = 10 MHz, <PRSEL> = 0000 (1/1), <KEN> = 1:
+ *   bps            <BRK>           <BRN>           Calculated Value (bps)
+ *   115200         0x25 (K=37)     0x05 (N=5)              115274   (+0.06%)
+ *
+ *   Alt, if fsysm = 5 MHz (core MCKSEL = fsysh/2):
+ *   115200         0x12 (K=18)     0x02 (N=2)              114943   (-0.22%)
+ * 
+ *   
  * 
  *   Reference:
  *   - Product Info:  https://toshiba.semicon-storage.com/info/TXZP-PINFO-M4K(2)_en_20231225.pdf?did=70854
@@ -45,7 +54,7 @@
 #include "gpio.h"
 #include <stddef.h>
 
-#define UARTx_BRD_BRN               0x02B       /* N = 43 */
+#define UARTx_BRD_BRN               0x2B        /* N = 43 */
 #define UARTx_BRD_BRK               0x26        /* K = 38 */
 
 #define UARTx_CR0_SM_8BIT           0x01        /* SM[1:0] = 01: 8-bit data length */

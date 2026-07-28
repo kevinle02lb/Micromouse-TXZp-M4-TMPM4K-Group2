@@ -35,8 +35,8 @@ typedef enum
 
 typedef enum
 {
-    FORWARD = 0,   /*!< Forward        (IN2=PWM,  IN1=LOW) */
-    REVERSE,       /*!< Reverse        (IN1=PWM,  IN2=LOW) */
+    FORWARD = 0,   /*!< Forward        (IN1=PWM,  IN2=LOW) */
+    REVERSE,       /*!< Reverse        (IN1=LOW,  IN2=PWM) */
     BRAKE,         /*!< Active brake   (IN1=HIGH, IN2=HIGH, motor shorted) */
     STOP           /*!< Stop/standby   (IN1=LOW,  IN2=LOW,  Hi-Z output) */
 } motor_dir_t;

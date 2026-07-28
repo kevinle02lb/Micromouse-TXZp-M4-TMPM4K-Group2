@@ -94,7 +94,7 @@ typedef struct
 
 /**
  * @brief  Number of measured calibration points.
- * @note   Start with 5-6 points. Add more if curve is non-linear.
+ * @note   
  */
 #define IR_CAL_POINTS       6U
 

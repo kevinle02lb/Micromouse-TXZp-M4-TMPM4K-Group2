@@ -162,9 +162,6 @@ static void IR_UpdateDistances(void)
  *   3. reflected = raw - ambient
  *
  *   Timing:
- *   - IR decay after OFF:  50 µs
- *   - IR propagation ON: 100 µs
- *   - Total: ~200 µs
  */
 void IR_SampleAll(void)
 {
@@ -174,10 +171,10 @@ void IR_SampleAll(void)
 
     /* [1] Ambient reading — all emitters OFF */
     IR_AllEmittersOff();
-    SysTick_us(50U);             /* Wait for previous IR to decay */
+    SysTick_us(10U);             /* Wait for previous IR to decay */
 
     Start_ADC();                 /* Trigger both ADC units, DMA re-armed */
-    SysTick_us(20U);             /* Wait for 2 conversions + DMA burst */
+    SysTick_us(5U);              /* Wait for 2 conversions + DMA burst */
 
     bufA = DMA_GetADCABuffer();
     bufC = DMA_GetADCCBuffer();
@@ -189,10 +186,10 @@ void IR_SampleAll(void)
 
     /* [2] Reflected reading — all emitters ON */
     IR_AllEmittersOn();
-    SysTick_us(75U);            /* Allow IR to reach wall and reflect back */
+    SysTick_us(12U);             /* Allow IR to reach wall and reflect back */
 
     Start_ADC();                 /* Re-arm DMA + trigger both units */
-    SysTick_us(20U);             /* Wait for conversion + DMA */
+    SysTick_us(5U);              /* Wait for conversion + DMA */
 
     ir_data.raw[IR_FAR_LEFT]  = bufA[0];
     ir_data.raw[IR_LEFT]      = bufA[1];

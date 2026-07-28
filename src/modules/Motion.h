@@ -22,8 +22,8 @@
 #include "Motor.h"
 
 /* User Changeable Speed */
-#define TURN_SPEED              2500        /*!< Turn Speed in CPS */
-#define MOVE_SPEED              3000        /*!< Move forward Speed in CPS */
+#define TURN_SPEED              300         /*!< Turn Speed in CPS */
+#define MOVE_SPEED              600         /*!< Move forward Speed in CPS */
 
 #define MOTION_DEADZONE         0.5f
 #define MOTION_ROUND_OFFSET     0.5f
@@ -37,5 +37,8 @@ void Motion_SetMoveBackwardSpeed(float speed_cps);
 void Motion_SetTurnLeftSpeed(float speed_cps);
 void Motion_SetTurnRightSpeed(float speed_cps);
 void Motion_Stop(void);
+
+float Motion_GetTarget(motor_t motor);      /*!< Commanded speed for a wheel (CPS) */
+float Motion_GetOutput(motor_t motor);      /*!< Last PID output for a wheel, [-100, +100] */
 
 #endif /* MOTION_H */

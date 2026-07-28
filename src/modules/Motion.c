@@ -32,6 +32,9 @@ static pid_t pid_right;
 static float target_left = 0.0f;
 static float target_right = 0.0f;
 
+static float output_left  = 0.0f;
+static float output_right = 0.0f;
+
 /* ==========================================================================
  *   Private Helpers
  * ========================================================================== */
@@ -103,7 +106,6 @@ void Motion_Update(void)
 {
     float actual_left, actual_right;
     float error_left, error_right;
-    float output_left, output_right;
 
     actual_left = (float)Encoder_GetSpeed_CPS(MOTOR_LEFT);
     actual_right = (float)Encoder_GetSpeed_CPS(MOTOR_RIGHT);
@@ -179,6 +181,35 @@ void Motion_Stop(void)
     PID_Reset(&pid_right);
     target_left = 0.0f;
     target_right = 0.0f;
+    output_left  = 0.0f;
+    output_right = 0.0f;
     Motor_Set(MOTOR_LEFT, STOP, 0U);
     Motor_Set(MOTOR_RIGHT, STOP, 0U);
+}
+
+
+/* ==========================================================================
+ *   Accessors/Getters
+ * ========================================================================== */
+
+/**
+ * @brief  Get target (Set Point - SP)
+ * @details  
+ */
+float Motion_GetTarget(motor_t motor)
+{
+    if (motor == MOTOR_LEFT)  return target_left;
+    if (motor == MOTOR_RIGHT) return target_right;
+    return 0.0f;
+}
+
+/**
+ * @brief  Get manipulated variable(MV) output
+ * @details  
+ */
+float Motion_GetOutput(motor_t motor)
+{
+    if (motor == MOTOR_LEFT)  return output_left;
+    if (motor == MOTOR_RIGHT) return output_right;
+    return 0.0f;
 }

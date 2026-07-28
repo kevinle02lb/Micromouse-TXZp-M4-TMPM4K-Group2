@@ -66,7 +66,7 @@ void ENC0_Init(void)
     /* [4] Input circuit: 10 MHz sample clock, 400 ns noise cancellation */
     TSB_EN0->CLKCR = CLKCR_SPLCKS_8DIV;                          /* Fsys/8 = 10 MHz */
     TSB_EN0->INPCR &= ~(INPCR_SYNCSPLEN_MASK | INPCR_SYNCSPLMD_MASK | INPCR_SYNCNCZEN_MASK);
-    TSB_EN0->INPCR = (TSB_EN0->INPCR & ~INPCR_NCT_MASK) | INPCR_NCT_400ns;
+    TSB_EN0->INPCR = (TSB_EN0->INPCR & ~INPCR_NCT_MASK) | INPCR_NCT_4CYC;
 
     /* [5] Decoder: CW/CCW edge detection (default) */
     TSB_EN0->TNCR &= ~TNCR_DECMD_MASK;
@@ -98,10 +98,10 @@ void ENC2_Init(void)
     TSB_EN2->TNCR &= ~TNCR_ENCLR_MASK;
     
 
-    /* [4] Input circuit: 10 MHz sample, 400 ns noise cancellation */
+    /* [4] Input circuit: 1.25 MHz sample / 3.2 µs @ 10 MHz Fsys */
     TSB_EN2->CLKCR = CLKCR_SPLCKS_8DIV;
     TSB_EN2->INPCR &= ~(INPCR_SYNCSPLEN_MASK | INPCR_SYNCSPLMD_MASK | INPCR_SYNCNCZEN_MASK);
-    TSB_EN2->INPCR = (TSB_EN2->INPCR & ~INPCR_NCT_MASK) | INPCR_NCT_400ns;
+    TSB_EN2->INPCR = (TSB_EN2->INPCR & ~INPCR_NCT_MASK) | INPCR_NCT_4CYC;
 
     /* [5] Decoder: CW/CCW edge detection */
     TSB_EN2->TNCR &= ~TNCR_DECMD_MASK;

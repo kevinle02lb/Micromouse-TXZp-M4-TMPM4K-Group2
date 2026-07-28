@@ -26,6 +26,7 @@
 #include "FloodFill.h"
 #include "Motion.h"
 #include "Odometry.h"
+#include "Encoder.h"
 #include <math.h>
 
 /* ==========================================================================
@@ -39,6 +40,8 @@
 
 #define HEADING_COUNT       4U          // N/E/S/W grid quantization
 #define HEADING_MASK        3U          // (idx & 3) wraps 0..3 without branches
+
+#define KP_STRAIGHT   2.0f              /* start small; tune up until straight without wobble */
 
 /* ==========================================================================
  *   State Machine
@@ -81,6 +84,10 @@ static float   target_heading_rad;      // heading_rad[heading_idx] for the acti
 
 static float drive_start_x_mm;          // odometry X captured at move start
 static float drive_start_y_mm;          // odometry Y captured at move start
+
+static int32_t drive_start_countL;      // encoder gets counter of Left
+static int32_t drive_start_countR;      // encoder gets counter of Right
+
 static uint16_t pause_tick_count;
 
 /* ==========================================================================
@@ -109,6 +116,10 @@ static void BeginDrive(void)
 {
     drive_start_x_mm = Odometry_GetX_mm();
     drive_start_y_mm = Odometry_GetY_mm();
+
+    drive_start_countL = Encoder_GetPosition(MOTOR_LEFT);
+    drive_start_countR = Encoder_GetPosition(MOTOR_RIGHT);  
+
     Motion_SetMoveForwardSpeed(MOVE_SPEED);
     nav_state = NAV_DRIVING;
 }
@@ -211,6 +222,16 @@ void Navigator_Update(void)
             float dy = Odometry_GetY_mm() - drive_start_y_mm;
             float dist_traveled = sqrtf((dx * dx) + (dy * dy));
 
+            /* Error calculation to travel of traveling stright */
+            int32_t dL = Encoder_GetPosition(MOTOR_LEFT)  - drive_start_countL;
+            int32_t dR = Encoder_GetPosition(MOTOR_RIGHT) - drive_start_countR;
+
+            float err  = (float)(dR - dL);        /* >0 → right ran farther → veering LEFT */
+            float corr = KP_STRAIGHT * err;
+
+            Motion_SetSpeed(MOVE_SPEED + corr, MOVE_SPEED - corr);
+
+            /* Distance Check */
             if (dist_traveled >= (CELL_SIZE_MM - DIST_TOLERANCE_MM))
             {
                 Motion_Stop();
@@ -221,7 +242,7 @@ void Navigator_Update(void)
         }
 
         /* ==============================================================
-         *  NAV_PAUSED — settle, then tell FloodFill the move completed
+         *  NAV_PAUSED — Pause, then tell FloodFill the move completed
          * ============================================================== */
         case NAV_PAUSED:
             pause_tick_count++;

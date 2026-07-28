@@ -122,9 +122,8 @@ void AINA_Init(void)
     /* [3] Enable ADC conversion clock (ADCLK) */
     TSB_CG->SPCLKEN |= CG_CGSPCLKEN_ADCKEN0;
 
-    /* [4] Set ADCLK prescaler = /4 (bits [2:0] = 000), sampling time for EXAZ0/EXAZ1 */
+    /* [4] ADCLK prescaler = /4 -> SCLK = ADCLK/4. EXAZ left at reset (m=1) */
     TSB_ADA->CLK &= ~ADxCLK_VADCLK_MASK;
-    TSB_ADA->CLK |= ADXCLK_EXAZ0_40MHZ | ADXCLK_EXAZ1_40MHZ;
 
     /* [5] Enable ADC analog circuit, exit low-power mode */
     TSB_ADA->MOD0 |= ADxMOD0_DACON;
@@ -133,8 +132,10 @@ void AINA_Init(void)
     /* [6] Wait for analog stabilization (3 us minimum per datasheet) */
     SysTick_us(3U);
 
-    /* [7] Set conversion timing: 0.96 us @ 40 MHz SCLK (RM Table 6-1) */
-    TSB_ADA->MOD1 = ADxMOD1_40MHZ;
+    /* [7] Conversion timing — keep a DOCUMENTED MOD1 value (the 40 MHz recipe).
+     *     Do NOT drop to reset 0x00004000: it is not a characterized operating
+     *     config. At 2.5 MHz SCLK. */
+    TSB_ADA->MOD1 = ADxMOD1_N5_SGL;
     TSB_ADA->MOD2 = 0;
 
     /* [8] Select EXAZ0 sampling time for both channels */
@@ -176,7 +177,7 @@ void AINC_Init(void)
 
     /* [4] Set ADCLK prescaler = /4, sampling time for EXAZ0/EXAZ1 */
     TSB_ADC->CLK &= ~ADxCLK_VADCLK_MASK;
-    TSB_ADC->CLK |= ADXCLK_EXAZ0_40MHZ | ADXCLK_EXAZ1_40MHZ;
+    
 
     /* [5] Enable ADC analog circuit, exit low-power mode */
     TSB_ADC->MOD0 |= ADxMOD0_DACON;
@@ -186,7 +187,7 @@ void AINC_Init(void)
     SysTick_us(3U);
 
     /* [7] Set conversion timing */
-    TSB_ADC->MOD1 = ADxMOD1_40MHZ;
+    TSB_ADC->MOD1 = ADxMOD1_N5_SGL;
     TSB_ADC->MOD2 = 0;
 
     /* [8] Select EXAZ0 sampling time for both channels */
@@ -217,6 +218,8 @@ void AINC_Init(void)
 void AINA_StartSGL(void)
 {
     TSB_ADA->CR0 |= ADxCR0_SGL;
+    while (!(TSB_ADA->ST & ADxST_SNGF)) { ; }   /* wait for SNGF to assert (up to 5 SCLK latency) */
+    while (  TSB_ADA->ST & ADxST_SNGF ) { ; }   /* then wait for it to clear = done */
 }
 
 /**
@@ -225,6 +228,8 @@ void AINA_StartSGL(void)
 void AINC_StartSGL(void)
 {
     TSB_ADC->CR0 |= ADxCR0_SGL;
+    while (!(TSB_ADC->ST & ADxST_SNGF)) { ; }   /* wait for SNGF to assert (up to 5 SCLK latency) */
+    while (  TSB_ADC->ST & ADxST_SNGF ) { ; }   /* then wait for it to clear = done */
 }
 
 /**
@@ -267,11 +272,11 @@ uint16_t AINA_Read(uint8_t channel)
 
     if (channel == 16) 
     {
-        result = (uint16_t)(TSB_ADA->REG0 & ADxREGn_ADRn);
+        result = (uint16_t)((TSB_ADA->REG0 & ADxREGn_ADRn) >> 4U);
     } 
     else if (channel == 15) 
     {
-        result = (uint16_t)(TSB_ADA->REG1 & ADxREGn_ADRn);
+        result = (uint16_t)((TSB_ADA->REG1 & ADxREGn_ADRn) >> 4U);
     }
     return result;
 }
@@ -291,11 +296,11 @@ uint16_t AINC_Read(uint8_t channel)
 
     if (channel == 1) 
     {
-        result = (uint16_t)(TSB_ADC->REG0 & ADxREGn_ADRn);
+        result = (uint16_t)((TSB_ADC->REG0 & ADxREGn_ADRn) >> 4U);
     } 
     else if (channel == 0) 
     {
-        result = (uint16_t)(TSB_ADC->REG1 & ADxREGn_ADRn);
+        result = (uint16_t)((TSB_ADC->REG1 & ADxREGn_ADRn) >> 4U);
     }
     return result;
 }

@@ -96,6 +96,7 @@
 #include "modules/IrSensor.h"    // IR wall sensing (ADC + DMA)
 #include "modules/FloodFill.h"   // pure maze planner (BFS)
 #include "modules/Navigator.h"   // top-level motion sequencer FSM
+#include "drivers/uart.h"		 // uart for debugging
 
 
 void ModuleInit(void);
@@ -122,7 +123,7 @@ int main(void)
 		}
 	}
 
-	return 0;                           // unreachable; loop never exits
+	return 0;
 }
 
 

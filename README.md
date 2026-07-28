@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🐭 Toshiba Micromouse
+# 🐭 Toshiba Micromouse - Work in Progress
 
 **Autonomous 16×16 Maze-Solving Robot**  
 *Register-level firmware on Arm Cortex-M4*
@@ -74,7 +74,7 @@ The same silicon built for industrial three-phase drives runs a smaller-scale pr
 
 <br>
 
-<img src="docs/assets/fusion_robot.png" width="480" alt="Fusion 360 Robot Render">
+<img src="docs/assets/micromouse_fusion.gif" width="480" alt="Fusion 360 Robot Render">
 
 *Fusion 360 render of the full mechanical assembly*
 
@@ -83,13 +83,14 @@ The same silicon built for industrial three-phase drives runs a smaller-scale pr
 ---
 
 ## Documentation
-
+ 
 | Path | Contents |
 |------|----------|
 | [`src/README.md`](src/README.md) | Firmware architecture, control loops, pin map, timer config |
-| [`pcb/README.md`](pcb/README.md) | Board specs, layout, schematic, component list |
-| [`src/drivers/`](src/drivers/) | Register-level hardware abstraction layer |
-| [`src/modules/`](src/modules/) | Application logic: planner, navigator, controller |
+| [`hardware/README.md`](hardware/README.md) | Hardware overview — chassis (Fusion) + PCB (KiCad) |
+| [`hardware/pcb/README.md`](hardware/pcb/README.md) | Board specs, layout, schematic, component list |
+| [`docs/README.md`](docs/README.md) | Docs index — assets, evidence, and analysis tooling |
+| [`docs/evidence/README.md`](docs/evidence/README.md) | Module-test checklist and captured evidence |
 
 ---
 
@@ -106,6 +107,5 @@ Flash:   512 KB on-chip
 
 <div align="center">
 
-**Kevin Le** &nbsp;•&nbsp; 2026 &nbsp;•&nbsp; Work in Progress
-
+**Kevin Le** &nbsp;•&nbsp; 2026 &nbsp;
 </div>

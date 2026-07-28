@@ -6,7 +6,8 @@
  *
  * @details
  *   Blocking delay using ARM SysTick timer. No ISR required.
- *   System clock: 160 MHz → 160 cycles = 1 µs.
+ *   System clock: 10 MHz → 10 cycles = 1 µs. 
+ *                 160 MHz → 160 cycles = 1 µs. 
  *
  *   Reference:
  *   - ARM DDI0403: https://developer.arm.com/documentation/ddi0403/ee
@@ -20,14 +21,20 @@
 #include "systick.h"
 
 /* ==========================================================================
+ *   Config
+ * ========================================================================== */
+#define SYSTICK_CLK_HZ          160000000UL                       /*!< Core clock feeding SysTick () */
+#define SYSTICK_CYCLES_PER_US   (SYSTICK_CLK_HZ / 16000000UL)     /*!< 160 cycles = 1 µs @ 160 MHz */
+
+/* ==========================================================================
  *   Delay Functions
  * ========================================================================== */
 
 /**
  * @brief  Blocking delay in microseconds.
- * @param  val  Delay in µs (max ~104 ms at 160 MHz).
+ * @param  val  Delay in µs (max = 0xFFFFFF / SYSTICK_CYCLES_PER_US ≈ 1.68 s @ 10 MHz).
  *
- *   LOAD = (val × 160) - 1 cycles.
+ *   LOAD = (val × SYSTICK_CYCLES_PER_US) - 1 cycles.
  *   Uses processor clock (CLKSOURCE = 1), no interrupt (TICKINT = 0).
  */
 void SysTick_us(uint32_t val)
@@ -35,12 +42,12 @@ void SysTick_us(uint32_t val)
     if (val == 0U) { return; }
 
     /* Clamp to max LOAD (0xFFFFFF) */
-    if (val > (SysTick_LOAD_RELOAD_Msk / 160U)) 
+    if (val > (SysTick_LOAD_RELOAD_Msk / SYSTICK_CYCLES_PER_US)) 
     {
-        val = SysTick_LOAD_RELOAD_Msk / 160U;
+        val = SysTick_LOAD_RELOAD_Msk / SYSTICK_CYCLES_PER_US;
     }
 
-    SysTick->LOAD = (uint32_t)((val * 160U) - 1U);
+    SysTick->LOAD = (uint32_t)((val * SYSTICK_CYCLES_PER_US) - 1U);
     SysTick->VAL  = 0;                                            /* Clear current value */
     SysTick->CTRL = (SysTick_CTRL_CLKSOURCE_Msk |                 /* Processor clock */
                      SysTick_CTRL_ENABLE_Msk);                    /* Start counter */
