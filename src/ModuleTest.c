@@ -34,9 +34,9 @@
  * ========================================================================== */
 #ifdef MOTOR_TEST
 
-    #define TEST_DUTY_LOW           70U
-    #define TEST_DUTY_MID           50U
-    #define TEST_DUTY_HIGH          60U
+    #define TEST_DUTY_LOW           10U
+    #define TEST_DUTY_MID           20U
+    #define TEST_DUTY_HIGH          30U
 
     #define TEST_PHASE_MS           2000U   /*!< Hold time per phase */
     #define TEST_SETTLE_MS          750U    /*!< Brake gap between phases */

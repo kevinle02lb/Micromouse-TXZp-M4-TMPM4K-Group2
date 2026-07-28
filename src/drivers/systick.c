@@ -23,7 +23,7 @@
 /* ==========================================================================
  *   Config
  * ========================================================================== */
-#define SYSTICK_CLK_HZ          160000000UL                       /*!< Core clock feeding SysTick (10 MHz @ PLL-off) */
+#define SYSTICK_CLK_HZ          160000000UL                       /*!< Core clock feeding SysTick () */
 #define SYSTICK_CYCLES_PER_US   (SYSTICK_CLK_HZ / 16000000UL)     /*!< 160 cycles = 1 µs @ 160 MHz */
 
 /* ==========================================================================
