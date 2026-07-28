@@ -1,11 +1,9 @@
 <div align="center">
 
-# Micromouse PCB
+# Hardware
 
-**Custom 4-Layer Control Board**  
-*Integrated MCU, motor drivers, and IR sensing*
-
-<img src="../docs/assets/pcb-3d.png" width="520" alt="PCB 3D render">
+**Physical design layer — mechanical + electrical**  
+*3D-printed chassis in Fusion, custom control PCB in KiCad*
 
 </div>
 
@@ -13,11 +11,49 @@
 
 ## Overview
 
-The mainboard is a custom 4-layer PCB designed in KiCad that carries the full electronics stack on a single micromouse-sized board: the microcontroller, dual motor drivers, four IR wall sensors, and the power and debug interface.
+The `hardware/` directory holds everything physical about the micromouse. The mechanical design — chassis and overall body — lives in Fusion, while the electronics — the custom 4-layer control board — live in KiCad. Each has its own subfolder with its own design files.
 
 ---
 
-## Board Specs
+## Structure
+
+| Folder | Tool | Contents |
+|--------|------|----------|
+| [`fusion/`](fusion/) | Fusion | Chassis and mechanical model — STL for printing, STEP for CAD |
+| [`pcb/`](pcb/) | KiCad | 4-layer control board — schematic, layout, gerbers, BOM |
+
+---
+
+## Mechanical — Fusion
+
+The chassis is designed in Fusion and 3D-printed. It carries the PCB, motors, and wheels, and defines the overall footprint of the mouse.
+
+<!-- Add a render here once you have one, e.g.:
+<div align="center">
+<img src="../docs/assets/chassis-3d.png" width="480" alt="Chassis render">
+</div>
+-->
+
+| Spec | Detail |
+|------|--------|
+| Process | MJF (Multi Jet Fusion), via JLC3DP |
+| Material | PA12-HP nylon |
+| Finish | Dyed black (Optional) |
+| Dimensions | 10.8 × 8.24 × 5.74 cm |
+| Volume | 17.39 cm³ |
+
+### Files
+
+| File | Contents |
+|------|----------|
+| [`fusion/chassis.stl`](fusion/chassis.stl) | Print-ready chassis mesh (STL) |
+| [`fusion/Micromouse_v1.step`](fusion/Micromouse_v1.step) | Parametric mechanical model (STEP) |
+
+---
+
+## Electrical — PCB
+
+A custom 4-layer control board designed in KiCad, carrying the MCU, dual motor drivers, IR wall sensors, and the power and debug interface on a single micromouse-sized board.
 
 | Spec | Detail |
 |------|--------|
@@ -25,73 +61,11 @@ The mainboard is a custom 4-layer PCB designed in KiCad that carries the full el
 | MCU | Toshiba TMPM4KNF10AFG (Cortex-M4F) |
 | Motor drivers | 2 × TB67H450AFNG H-bridge |
 | Sensing | 4 × IR emitter / receiver pairs |
-| Debug | CMSIS-DAP (SWD) via TXB0104 level shifter |
 | Supply | 5 V |
 
----
+Full details, schematic, and design files are in the PCB README:
 
-## Layout
-
-<div align="center">
-
-<img src="../docs/assets/pcb-layout.png" width="480" alt="PCB layout">
-
-*Copper layers and component placement*
-
-</div>
-
----
-
-## Key Components
-
-| Component | Part | Role |
-|-----------|------|------|
-| MCU | TMPM4KNF10AFG | Cortex-M4F — control & sensing |
-| Motor driver | TB67H450AFNG ×2 | Brushed DC H-bridge, PWM speed control |
-| Motors | Pololu #5211 N20 30:1 | Drive, with quadrature encoders |
-| IR sensing | IR LED + phototransistor ×4 | Wall detection via ADC |
-| Level shifter | TXB0104 | 5 V ↔ 3.3 V for SWD debug |
-
----
-
-## Bench Setup
-
-External equipment used for programming and debug:
-
-<div align="center">
-
-<img src="../docs/assets/cmsis_txb104.JPG" width="300" alt="SWD debug setup"> &nbsp;&nbsp; <img src="../docs/assets/usb_ttl.JPG" width="300" alt="USB-UART converter">
-
-*SWD debug via level shifter, and USB-UART for serial logging*
-
-</div>
-
-| Equipment | Purpose |
-|-----------|---------|
-| CMSIS-DAP probe | SWD programming & debug |
-| Logic level shifter | 5 V ↔ 3.3 V for the SWD lines |
-| USB-UART converter | Serial console (115200 8-N-1) over the CH340G/debug UART |
-
----
-
-## Schematic
-
-The full schematic is available as a PDF:
-
-[View schematic (PDF)](Schematic.pdf)
-
----
-
-## Design Files
-
-| File | Contents |
-|------|----------|
-| [`TMPM4KNF10AFG.kicad_sch`](TMPM4KNF10AFG.kicad_sch) | Schematic source (KiCad) |
-| [`TMPM4KNF10AFG.kicad_pcb`](TMPM4KNF10AFG.kicad_pcb) | Board layout source (KiCad) |
-| [`Schematic.pdf`](Schematic.pdf) | Rendered schematic |
-| [`board.step`](board.step) | 3D board model (STEP) |
-| [`BOM.csv`](BOM.csv) | Bill of materials |
-| [`gerber/`](gerber/) | Fabrication outputs |
+**→ [`pcb/README.md`](pcb/README.md)**
 
 ---
 
