@@ -87,7 +87,8 @@ The same silicon built for industrial three-phase drives runs a smaller-scale pr
 | Path | Contents |
 |------|----------|
 | [`src/README.md`](src/README.md) | Firmware architecture, control loops, pin map, timer config |
-| [`pcb/README.md`](pcb/README.md) | Board specs, layout, schematic, component list |
+| [`hardware/README.md`](hardware/README.md) | Hardware overview — chassis (Fusion) + PCB (KiCad) |
+| [`hardware/pcb/README.md`](hardware/pcb/README.md) | Board specs, layout, schematic, component list |
 | [`docs/README.md`](docs/README.md) | Docs index — assets, evidence, and analysis tooling |
 | [`docs/evidence/README.md`](docs/evidence/README.md) | Module-test checklist and captured evidence |
 
