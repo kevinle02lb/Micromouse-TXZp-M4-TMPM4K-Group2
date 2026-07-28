@@ -39,7 +39,7 @@
  *                 PWM low  -> IN1=H, IN2=L -> drive
  *                 PWM high -> IN1=H, IN2=H -> brake (recirculate)
  *     BRAKE   : IN1 = HIGH, IN2 = HIGH  (both outputs low, shorted)
- *     STOP    : IN1 = LOW,  IN2 = LOW   (Hi-Z / standby; the only coast)
+ *     STOP    : IN1 = LOW,  IN2 = LOW   (Hi-Z / standby)
  *
  *   Consequence of slow decay: a direction commanded at 0 % duty holds
  *   the motor in BRAKE, not coast. STOP selects the free/standby state.
@@ -181,7 +181,7 @@ void Motor_SetLeft(motor_dir_t dir, uint8_t speed)
             T32A0_SetTimerB0(0U);
             break;
  
-        /* IN1=LOW, IN2=LOW -> Hi-Z -> standby (true coast) */
+        /* IN1=LOW, IN2=LOW -> Hi-Z -> standby */
         case STOP:
             T32A0_SetOutCRA1(T32A_OUTPUT_LOW);
             T32A0_SetOutCRB1(T32A_OUTPUT_LOW);
@@ -244,7 +244,7 @@ void Motor_SetRight(motor_dir_t dir, uint8_t speed)
             T32A3_SetTimerB0(0U);
             break;
  
-        /* IN1=LOW, IN2=LOW -> Hi-Z -> standby (true coast) */
+        /* IN1=LOW, IN2=LOW -> Hi-Z -> standby */
         case STOP:
             T32A3_SetOutCRA1(T32A_OUTPUT_LOW);
             T32A3_SetOutCRB1(T32A_OUTPUT_LOW);

@@ -131,12 +131,12 @@
         {
             if(Timebase_GetAndClear())
             {
-                //Encoder_Update();
+                Encoder_Update();
 
-                // test_enc_left  = Encoder_GetPosition(MOTOR_LEFT);
-                // test_enc_right = Encoder_GetPosition(MOTOR_RIGHT);
-                // test_cps_left  = Encoder_GetSpeed_CPS(MOTOR_LEFT);
-                // test_cps_right = Encoder_GetSpeed_CPS(MOTOR_RIGHT);
+                test_enc_left  = Encoder_GetPosition(MOTOR_LEFT);
+                test_enc_right = Encoder_GetPosition(MOTOR_RIGHT);
+                test_cps_left  = Encoder_GetSpeed_CPS(MOTOR_LEFT);
+                test_cps_right = Encoder_GetSpeed_CPS(MOTOR_RIGHT);
     
                 ++ticks;
             }
@@ -158,16 +158,16 @@
 
             phase_idn = phase->idn;
 
-            // start_left = Encoder_GetPosition(MOTOR_LEFT);
-            // start_right = Encoder_GetPosition(MOTOR_RIGHT);
+            start_left = Encoder_GetPosition(MOTOR_LEFT);
+            start_right = Encoder_GetPosition(MOTOR_RIGHT);
 
             Motor_Set(MOTOR_LEFT, phase->left_dir, phase->left_duty);
             Motor_Set(MOTOR_RIGHT, phase->right_dir, phase->right_duty);
 
             Test_HoldMS(phase->hold_ms);
 
-            // test_phase_dl = Encoder_GetPosition(MOTOR_LEFT) - start_left;
-            // test_phase_dr = Encoder_GetPosition(MOTOR_RIGHT) - start_right;
+            test_phase_dl = Encoder_GetPosition(MOTOR_LEFT) - start_left;
+            test_phase_dr = Encoder_GetPosition(MOTOR_RIGHT) - start_right;
 
 
             /* Reset - Set up for next phase testing */
