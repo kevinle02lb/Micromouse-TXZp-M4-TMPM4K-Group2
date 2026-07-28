@@ -60,7 +60,7 @@ External equipment used for programming and debug:
 
 <div align="center">
 
-<img src="../../docs/assets/cmsis_txb104.JPG" width="300" alt="SWD debug setup"> &nbsp;&nbsp; <img src="../../docs/assets/usb_ttl.JPG" width="300" alt="USB-UART converter">
+<img src="../../docs/assets/cmsis_txb0104.JPG" width="300" alt="SWD debug setup"> &nbsp;&nbsp; <img src="../../docs/assets/usb_ttl.JPG" width="300" alt="USB-UART converter">
 
 *SWD debug via level shifter, and USB-UART for serial logging*
 
@@ -71,6 +71,8 @@ External equipment used for programming and debug:
 | CMSIS-DAP probe | SWD programming & debug |
 | Logic level shifter | 5 V ↔ 3.3 V for the SWD lines |
 | USB-UART converter | Serial console (115200 8-N-1) over the CH340G/debug UART |
+
+Note: TXB0104 OE has a Pull-up. Recommended: 10k - 50k Ohms 
 
 ---
 
