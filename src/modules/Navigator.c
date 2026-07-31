@@ -33,13 +33,18 @@
  *   Tuning Constants
  * ========================================================================== */
 
-#define CELL_SIZE_MM        180.0f      // one maze cell, center to center
-#define TURN_TOLERANCE_RAD  0.05f       // ~3 deg: "close enough" for a turn
-#define DIST_TOLERANCE_MM   5.0f        // stop this far before full cell
-#define PAUSE_TICKS         50U         // settle time between moves (50 ms @ 1 kHz)
+#define CELL_SIZE_MM        180.0f      /* one maze cell, center to center */ 
+#define TURN_TOLERANCE_RAD  0.05f       /* ~3 deg: "close enough" for a turn */
+#define DIST_TOLERANCE_MM   3.0f        /* stop this far before full cell */
+#define PAUSE_TICKS         50U         /* settle time between moves (50 ms @ 1 kHz) */ 
 
-#define HEADING_COUNT       4U          // N/E/S/W grid quantization
-#define HEADING_MASK        3U          // (idx & 3) wraps 0..3 without branches
+#define DRIVE_ACCEL_CPS2    2000.0f                         /* ramp rate — start low, raise if too slow */
+#define CELL_SIZE_COUNTS    (CELL_SIZE_MM / MM_PER_COUNT)   /* one cell in per counts */
+static float drive_target_cps;                              /* profiled setpoint, carried tick-to-tick */
+#define CONTROL_DT          0.001f      /* control tick period (1 kHz) */
+
+#define HEADING_COUNT       4U          /* N/E/S/W grid quantization */ 
+#define HEADING_MASK        3U          /* (idx & 3) wraps 0..3 */ 
 
 #define KP_STRAIGHT   2.0f              /* start small; tune up until straight without wobble */
 
@@ -120,8 +125,8 @@ static void BeginDrive(void)
     drive_start_countL = Encoder_GetPosition(MOTOR_LEFT);
     drive_start_countR = Encoder_GetPosition(MOTOR_RIGHT);  
 
-    Motion_SetMoveForwardSpeed(MOVE_SPEED);
-    nav_state = NAV_DRIVING;
+    drive_target_cps  = 0.0f;         /* profile ramps from rest */
+    nav_state   = NAV_DRIVING;
 }
 
 /* ==========================================================================
@@ -226,10 +231,29 @@ void Navigator_Update(void)
             int32_t dL = Encoder_GetPosition(MOTOR_LEFT)  - drive_start_countL;
             int32_t dR = Encoder_GetPosition(MOTOR_RIGHT) - drive_start_countR;
 
-            float err  = (float)(dR - dL);        /* >0 → right ran farther → veering LEFT */
+            /* Trapezoidal Motion Profile */
+            float drive_traveled_counts  = 0.5f * (float)(dL + dR);         /* average traveled counts */
+            float drive_remaining_counts = CELL_SIZE_COUNTS - drive_traveled_counts;
+            if (drive_remaining_counts < 0.0f)
+                drive_remaining_counts = 0.0f;
+
+            float rampup_limit_cps  = drive_target_cps + DRIVE_ACCEL_CPS2 * CONTROL_DT;
+            float brake_limit_cps = sqrtf(2.0f * DRIVE_ACCEL_CPS2 * drive_remaining_counts);
+
+            float target_cps = MOVE_SPEED;
+
+            if (rampup_limit_cps < target_cps)
+                target_cps = rampup_limit_cps;
+            if (brake_limit_cps < target_cps)
+                target_cps = brake_limit_cps;
+
+            drive_target_cps = target_cps;   
+
+            /* Straightness trim rides on top of the profile */
+            float err  = (float)(dR - dL);      // >0 → right ran farther → veering LEFT
             float corr = KP_STRAIGHT * err;
 
-            Motion_SetSpeed(MOVE_SPEED + corr, MOVE_SPEED - corr);
+            Motion_SetSpeed(target_cps + corr, target_cps - corr);
 
             /* Distance Check */
             if (dist_traveled >= (CELL_SIZE_MM - DIST_TOLERANCE_MM))

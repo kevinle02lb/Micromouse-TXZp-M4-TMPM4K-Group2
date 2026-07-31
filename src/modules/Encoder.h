@@ -31,24 +31,20 @@
 #include <stdbool.h>
 #include "Motor.h"      /* for motor_t */
 
+#define SPEED_WINDOW_TICKS  20U
+
 typedef struct
 {
     int32_t raw_count;          /*!< Latest hardware counter value */
     int32_t prev_count;         /*!< Value from previous tick */
     int32_t delta;              /*!< raw - prev (counts per tick) */
     int32_t position;           /*!< Accumulated signed position */
-    int32_t speed_filtered;     /*!< IIR-filtered speed (counts per second) */
+    int32_t speed;              /*!< speed (counts per second) */
+    int32_t position_history[SPEED_WINDOW_TICKS + 1];  /*!< Ring buffer of recent positions for windowed speed */
+    uint8_t history_head;                              /*!< Index of the newest entry in position_history */                 
 } encoder_t;
 
-/* ==========================================================================
- *   Configuration
- * ========================================================================== */
 
-/**
- * @brief  IIR filter shift for speed smoothing.
- *         alpha = 1 / 2^SHIFT.  SHIFT=4 → alpha=1/16, gentle filtering.
- */
-#define SPEED_FILTER_SHIFT  4U
 
 /* ==========================================================================
  *   Function Prototypes

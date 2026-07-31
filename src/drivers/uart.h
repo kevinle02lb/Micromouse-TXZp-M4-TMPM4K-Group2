@@ -52,6 +52,11 @@
 #define CG_FSYSMENA_IPMENA21                        ((uint32_t)0x01 << 21U)     /*!< Clock enable of UART ch0 (TSEL21) */
 
 /* ==========================================================================
+ *   [UARTxSWRST] (Software Reset Register)
+ * ========================================================================== */
+#define UARTx_SWRST_SWRSTF                          ((uint32_t)0x01 << 7U )     /*!< Software reset flag. 0: Not asserted 1 | 1 : Asserted */
+
+/* ==========================================================================
  *   UART Clock & Presaler
  * ========================================================================== */
 #define UARTx_CLK_PRSEL_MASK                        ((uint32_t)0x0F << 4U )     /*!< Prescaler dividing ratio selection mask. PRSEL[3:0] */ 

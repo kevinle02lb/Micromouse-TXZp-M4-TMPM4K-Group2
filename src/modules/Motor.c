@@ -60,7 +60,7 @@
 #include "Motor.h"
 #include "drivers/timer32A.h"
 
-#define MAX_SPEED   100U
+#define MAX_DUTY    100U
 #define PERIOD_L    ((uint16_t)T32A_CH0_PERIOD)
 #define PERIOD_R    ((uint16_t)T32A_CH3_PERIOD)
 
@@ -72,8 +72,8 @@ static motor_dir_t motor_right_dir = STOP;
  * ========================================================================== */
 
 /**
- * @brief  Convert a speed percentage to a timer compare value (RGx0).
- * @param  speed   Speed in percent, 0-100.
+ * @brief  Convert a speed/duty percentage to a timer compare value (RGx0).
+ * @param  duty   Duty in percent, 0-100.
  * @param  period  Timer period in counts.
  * @return Compare value in [0, period-1]; RGx0 equals drive-time counts.
  *
@@ -81,14 +81,14 @@ static motor_dir_t motor_right_dir = STOP;
  *         drive time, since the drive phase is the PWM-LOW interval
  *         (0..RGx0). A speed of 0 gives RGx0 = 0, i.e. full brake.
  */
-static uint16_t Speed_ToDuty(uint8_t speed, uint16_t period)
+static uint16_t Duty_ToCompare(uint8_t duty, uint16_t period)
 {
-    if (speed >= MAX_SPEED)
+    if (duty >= MAX_DUTY)
     {
         return (uint16_t)(period - 1U);     /* Near-full drive (1 count brake) */
     }
 
-    return (uint16_t)((uint32_t)speed * (uint32_t)(period - 1U) / (uint32_t)MAX_SPEED);
+    return (uint16_t)((uint32_t)duty * (uint32_t)(period - 1U) / (uint32_t)MAX_DUTY);
 }
 
 /* ==========================================================================
@@ -135,7 +135,7 @@ void Motor_Stop(void)
 
 void Motor_SetLeft(motor_dir_t dir, uint8_t speed)
 {
-    uint16_t duty = Speed_ToDuty(speed, PERIOD_L);
+    uint16_t duty = Duty_ToCompare(speed, PERIOD_L);
  
     /* Fast path: same direction, update the PWM leg's duty only. FORWARD drives the PWM on IN1 (A); REVERSE on IN2 (B). */
     if (dir == motor_left_dir)
@@ -200,7 +200,7 @@ void Motor_SetLeft(motor_dir_t dir, uint8_t speed)
  
 void Motor_SetRight(motor_dir_t dir, uint8_t speed)
 {
-    uint16_t duty = Speed_ToDuty(speed, PERIOD_R);
+    uint16_t duty = Duty_ToCompare(speed, PERIOD_R);
  
     /* Fast path: FORWARD drives the PWM on IN1 (A); REVERSE on IN2 (B). */
     if (dir == motor_right_dir)

@@ -14,7 +14,7 @@
  *      UT0RXD:  PC0 - RX 
  *      UT0TXDA: PC1 - TX
  *   
- *   Target/Goal: @ 10Mhz
+ *   Target/Goal: @ 80Mhz
  *   BAUD Rate: 115200 Bd (baud)
  *   Data Length: 8 bits
  *   Parity: N/A
@@ -120,8 +120,11 @@ void UART_Init(void)
     TSB_CG->FSYSMENA |= CG_PORTC;                       /* Port C Clk En */
     TSB_CG->FSYSMENA |= CG_FSYSMENA_IPMENA21;           /* UART CH0 Clk En */
 
-    /* [2] Route PC0 (UT0RXD) / PC1 (UT0TXDA) to the UART function */
+    /* [2] Route PC0 (UT0RXD) / PC1 (UT0TXDA) to the UART function & Reset UART */
     UART_PORT_C_Init();
+    TSB_UART0->SWRST = 0x02U;                            /* Software Reset */
+    TSB_UART0->SWRST = 0x01U;
+    while ((TSB_UART0->SWRST & UARTx_SWRST_SWRSTF) != 0U) { ; }  /* wait SWRSTF=0 */
 
     /* [3] Wait until the setting registers are writable (<SUE> = 0) */
     while ( (TSB_UART0->SR & UARTx_SR_SUE) != 0U ) { ; }

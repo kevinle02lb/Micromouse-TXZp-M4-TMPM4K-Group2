@@ -34,9 +34,9 @@ typedef struct
  *   PID Default Gains
  * ========================================================================== */
 
-#define PID_KP               0.5f
-#define PID_KI               0.1f
-#define PID_KD               0.02f
+#define PID_KP               0.05f
+#define PID_KI               0.125f
+#define PID_KD               0.000f
 #define PID_DT               0.001f
 #define PID_OUT_MIN          -100.0f
 #define PID_OUT_MAX          100.0f

@@ -67,14 +67,6 @@
  *   - Bit 1 (0x02): East wall
  *   - Bit 2 (0x04): South wall
  *   - Bit 3 (0x08): West wall
- *
- *   Example: walls[3][5] = 0x0B means:
- *   - North (0x01): yes
- *   - East  (0x02): yes
- *   - South (0x04): no
- *   - West  (0x08): yes
- *
- *   Only SOUTH is open.
  */
 static uint8_t walls[MAZE_SIZE][MAZE_SIZE];
 

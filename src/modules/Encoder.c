@@ -61,23 +61,30 @@ static encoder_t enc_state[2];
  * ========================================================================== */
 
 /**
- * @brief  Apply IIR low‑pass filter to a speed value.
- * @param  prev   Previous filtered value (y[n-1])
- * @param  curr   New raw value (x[n])
- * @param  shift  Right‑shift for alpha = 1/2^shift
- * @return int32_t  Filtered output y[n]
- *
+ * @brief  Compute speed over a multi-tick window to beat count quantization.
+ * @param  enc  Pointer to the encoder state.
+ * @return int32_t  Speed in counts per second.
  * @details
- *   y[n] = y[n-1] + (x[n] - y[n-1]) >> shift
+ *   Differences the current position against the position SPEED_WINDOW_TICKS
+ *   ticks ago. Counting over a longer window yields more counts per
+ *   measurement, so the result resolves in finer steps than the 1-tick delta
+ *   (which only ever sees 0 or 1 count at low speed).
+ *   CPS = counts_in_window x (1000 / SPEED_WINDOW_TICKS).
  */
-static int32_t speed_filter_IIR(int32_t prev, int32_t curr, uint8_t shift)
+static int32_t Encoder_WindowedSpeed(encoder_t *enc)
 {
-    int32_t delta = curr - prev;
-    if (delta >= 0)
-        return prev + (delta >> shift);
-    else
-        return prev - ((-delta) >> shift);
+    uint8_t oldest_head;
+    int32_t counts_in_window;
+
+    enc->history_head = (uint8_t)((enc->history_head + 1U) % (SPEED_WINDOW_TICKS + 1U));
+    enc->position_history[enc->history_head] = enc->position;
+
+    oldest_head = (uint8_t)((enc->history_head + 1U) % (SPEED_WINDOW_TICKS + 1U));
+    counts_in_window = enc->position - enc->position_history[oldest_head];
+
+    return counts_in_window * (1000 / SPEED_WINDOW_TICKS);
 }
+
 
 /* ==========================================================================
  *   Public Functions
@@ -96,12 +103,19 @@ void Encoder_Init(void)
     /* Clear all state */
     for (uint8_t i = 0; i < 2; i++)
     {
-        enc_state[i].raw_count      = 0;
-        enc_state[i].prev_count     = 0;
-        enc_state[i].delta          = 0;
-        enc_state[i].position       = 0;
-        enc_state[i].speed_filtered = 0;
+        enc_state[i].raw_count  = 0;
+        enc_state[i].prev_count = 0;
+        enc_state[i].delta      = 0;
+        enc_state[i].position   = 0;
+        enc_state[i].speed      = 0;
+ 
+        /* Speed window */
+        enc_state[i].history_head = 0;
+        for (uint8_t j = 0; j <= SPEED_WINDOW_TICKS; j++)
+            enc_state[i].position_history[j] = 0;
     }
+
+    
 
     /* Read the current counter values to set prev_count */
     enc_state[MOTOR_LEFT].prev_count  = ENC0_ReadCount();
@@ -118,41 +132,24 @@ void Encoder_Init(void)
  */
 void Encoder_Update(void)
 {
-    int32_t raw, delta, speed_raw;
-
+    int32_t raw, delta;
+ 
     /* Left motor */
     raw = ENC0_ReadCount();
     delta = raw - enc_state[MOTOR_LEFT].prev_count;
     enc_state[MOTOR_LEFT].raw_count = raw;
     enc_state[MOTOR_LEFT].delta = delta;
     enc_state[MOTOR_LEFT].position += delta;
-
-    /* Convert delta to counts per second (tick = 1 ms) and filter */
-    speed_raw = delta * 1000;                           /* counts/s */
-    enc_state[MOTOR_LEFT].speed_filtered = speed_filter_IIR
-    (
-        enc_state[MOTOR_LEFT].speed_filtered,
-        speed_raw,
-        SPEED_FILTER_SHIFT
-    );
-
+    enc_state[MOTOR_LEFT].speed = Encoder_WindowedSpeed(&enc_state[MOTOR_LEFT]);
     enc_state[MOTOR_LEFT].prev_count = raw;
-
+ 
     /* Right motor */
     raw = ENC2_ReadCount();
     delta = raw - enc_state[MOTOR_RIGHT].prev_count;
     enc_state[MOTOR_RIGHT].raw_count = raw;
     enc_state[MOTOR_RIGHT].delta = delta;
     enc_state[MOTOR_RIGHT].position += delta;
-
-    speed_raw = delta * 1000;
-    enc_state[MOTOR_RIGHT].speed_filtered = speed_filter_IIR
-    (
-        enc_state[MOTOR_RIGHT].speed_filtered,
-        speed_raw,
-        SPEED_FILTER_SHIFT
-    );
-
+    enc_state[MOTOR_RIGHT].speed = Encoder_WindowedSpeed(&enc_state[MOTOR_RIGHT]);
     enc_state[MOTOR_RIGHT].prev_count = raw;
 }
 
@@ -165,7 +162,7 @@ int32_t Encoder_GetSpeed_CPS(motor_t motor)
 {
     if (motor != MOTOR_LEFT && motor != MOTOR_RIGHT)
         return 0;
-    return enc_state[motor].speed_filtered;
+    return enc_state[motor].speed;
 }
 
 /**

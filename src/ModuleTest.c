@@ -8,7 +8,7 @@
  * @note
  *   File structure and Doxygen formatting assisted by AI.
  *
- * Copyright (c) [Kevin Le] 2026
+ * @author [Kevin Le] 2026
  */
 
 #include "system_TMPM4KyA.h"
@@ -24,9 +24,9 @@
 /* ==========================================================================
  *   Module Defines
  * ========================================================================== */
-#define MOTOR_TEST
+//#define MOTOR_TEST
 //#define IR_TEST
-//#define MOTION_TEST
+#define MOTION_TEST
 
 
 /* ==========================================================================
@@ -233,7 +233,7 @@
  * ========================================================================== */
 #ifdef MOTION_TEST
 
-    #define MOTION_TEST_TARGET_CPS   500.0f    /* forward target */
+    #define MOTION_TEST_TARGET_CPS   1000.0f    /* forward target */
     #define MOTION_TEST_PRINT_EVERY  20U       /* decimation: 1 kHz / 20 = 50 Hz stream */
 
     /* Column order — keep in sync with the MATLAB import */
@@ -281,6 +281,10 @@
             if (Timebase_GetAndClear())
             {
                 Encoder_Update();    /* feedback must refresh before the loop reads it */
+
+                // Motor_Set(MOTOR_LEFT,  FORWARD, 30);   /* bypass PID, known-good duty */
+                // Motor_Set(MOTOR_RIGHT, FORWARD, 30);
+                
                 Motion_Update();     /* PID -> motors */
 
                 if (++tick >= MOTION_TEST_PRINT_EVERY)
