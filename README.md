@@ -1,3 +1,12 @@
+![status](https://img.shields.io/badge/status-in%20development-yellow)
+![MCU](https://img.shields.io/badge/MCU-TMPM4KNF10AFG-blue)
+![core](https://img.shields.io/badge/Arm-Cortex--M4-0091BD)
+![language](https://img.shields.io/badge/language-C-A8B9CC)
+![HAL](https://img.shields.io/badge/HAL-hand--written-brightgreen)
+![IDE](https://img.shields.io/badge/IDE-Keil%20µVision-CC0000)
+![PCB](https://img.shields.io/badge/PCB-4--layer%20KiCad-663399)
+![license](https://img.shields.io/badge/license-MIT-blue)
+
 <div align="center">
 
 # 🐭 Toshiba Micromouse - Work in Progress
