@@ -53,10 +53,10 @@ The same silicon built for industrial three-phase drives runs a smaller-scale pr
 
 <div align="center">
 
-| <img src="docs/assets/arm.png" height="40" alt="ARM"> | <img src="docs/assets/Keil.png" height="40" alt="Keil µVision"> | <img src="docs/assets/kicad.png" height="40" alt="KiCad"> | <img src="docs/assets/autodesk-fusion-360_logo_.png" height="40" alt="Fusion 360"> | <img src="docs/assets/git.png" height="40" alt="Git"> |
-|:---:|:---:|:---:|:---:|:---:|
-| **Arm Cortex-M4** | **Keil µVision** | **KiCad** | **Fusion 360** | **Git** |
-| Register-level C | IDE / Build / Flash | 4-layer PCB | Chassis CAD | Version Control |
+| <img src="docs/assets/arm.png" height="40" alt="ARM"> | <img src="docs/assets/Keil.png" height="40" alt="Keil µVision"> | <img src="docs/assets/kicad.png" height="40" alt="KiCad"> | <img src="docs/assets/autodesk-fusion-360_logo_.png" height="40" alt="Fusion 360"> | <img src="docs/assets/git.png" height="40" alt="Git"> | <img src="docs/assets/matlab.png" height="40" alt="MATLAB"> |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Arm Cortex-M4** | **Keil µVision** | **KiCad** | **Fusion 360** | **Git** | **MATLAB** |
+| Register-level C | IDE / Build / Flash | 4-layer PCB | Chassis CAD | Version Control | Data Analysis |
 
 </div>
 
