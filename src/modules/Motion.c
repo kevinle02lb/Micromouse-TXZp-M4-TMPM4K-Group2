@@ -35,6 +35,9 @@ static float target_right = 0.0f;
 static float output_left  = 0.0f;
 static float output_right = 0.0f;
 
+static const float SIGN_LEFT  = -1.0f;   /* left side mirror-mounted */
+static const float SIGN_RIGHT = +1.0f;
+
 /* ==========================================================================
  *   Private Helpers
  * ========================================================================== */
@@ -107,8 +110,8 @@ void Motion_Update(void)
     float actual_left, actual_right;
     float error_left, error_right;
 
-    actual_left = (float)Encoder_GetSpeed_CPS(MOTOR_LEFT);
-    actual_right = (float)Encoder_GetSpeed_CPS(MOTOR_RIGHT);
+    actual_left  = SIGN_LEFT  * (float)Encoder_GetSpeed_CPS(MOTOR_LEFT);
+    actual_right = SIGN_RIGHT * (float)Encoder_GetSpeed_CPS(MOTOR_RIGHT);
 
     error_left = CalculateError(target_left, actual_left);
     error_right = CalculateError(target_right, actual_right);
@@ -116,8 +119,8 @@ void Motion_Update(void)
     output_left = PID_Update(&pid_left, error_left);
     output_right = PID_Update(&pid_right, error_right);
 
-    Motion_ApplyOutput(MOTOR_LEFT, output_left);
-    Motion_ApplyOutput(MOTOR_RIGHT, output_right);
+    Motion_ApplyOutput(MOTOR_LEFT,  SIGN_LEFT  * output_left);
+    Motion_ApplyOutput(MOTOR_RIGHT, SIGN_RIGHT * output_right);
 }
 
 /* ==========================================================================

@@ -26,7 +26,9 @@
  * ========================================================================== */
 //#define MOTOR_TEST
 //#define IR_TEST
-#define MOTION_TEST
+//#define MOTION_TEST
+#define IR_EMITTER_TEST
+
 
 
 /* ==========================================================================
@@ -34,9 +36,9 @@
  * ========================================================================== */
 #ifdef MOTOR_TEST
 
-    #define TEST_DUTY_LOW           10U
+    #define TEST_DUTY_LOW           19U
     #define TEST_DUTY_MID           20U
-    #define TEST_DUTY_HIGH          30U
+    #define TEST_DUTY_HIGH          25U
 
     #define TEST_PHASE_MS           2000U   /*!< Hold time per phase */
     #define TEST_SETTLE_MS          750U    /*!< Brake gap between phases */
@@ -189,6 +191,7 @@
 #ifdef IR_TEST
 
     #define IR_TEST_PERIOD_MS   50U   /* stream ~20 Hz */
+    
 
     static void Test_HoldMS(uint32_t ms)
     {
@@ -229,11 +232,215 @@
 
 
 /* ==========================================================================
+ *   IR Emitter Lightshow Test  (all 4 emitters) - Soldered on LEDs (Not IR Emitters yet )
+ *  
+ *   Just testing the Output 
+ *
+ *   Emitters (physical left -> right):
+ *       FL = PU1   L = PU0   R = PG5   FR = PG4
+ *   Split across two ports, so this drives Port U AND Port G.
+ *
+ *
+ *   MOTORS: define EMITTER_TEST_WITH_MOTORS below to also pivot the robot
+ *           in place while the lights run (flips direction each lap). Leave
+ *           it OFF for bench testing with the debugger wires attached.
+ * ========================================================================== */
+#ifdef IR_EMITTER_TEST
+
+    /* Spin the robot in place while the lights run. Comment out for bench
+       testing with debug wires attached. */
+    #define EMITTER_TEST_WITH_MOTORS
+
+    #define SHOW_STEP_MS   90U    /* base frame time */
+    #define SHOW_GAP_MS    400U   /* dark pause between patterns */
+
+    #ifdef EMITTER_TEST_WITH_MOTORS
+        #define PIVOT_DUTY  20U   /* gentle spin; open-loop */
+
+        /* --- PIVOT DIRECTION FIX (test-only, no Motor.c changes) ---------
+         * The LEFT side is mirror-mounted on the chassis (see SIGN_LEFT in
+         * Motion.c), so its motor rotates opposite the right for the same
+         * command. This flag inverts the LEFT wheel's commanded direction
+         * INSIDE THIS TEST ONLY so a pivot actually counter-rotates.
+         * If it drives straight instead, flip it to 0.
+         * ---------------------------------------------------------------- */
+        #define PIVOT_LEFT_INVERT  1
+    #endif
+
+    /* Emitter bit map — bit0..bit3, physical left -> right */
+    #define E_FL   0x01U   /* PU1 */
+    #define E_L    0x02U   /* PU0 */
+    #define E_R    0x04U   /* PG5 */
+    #define E_FR   0x08U   /* PG4 */
+    #define E_ALL  0x0FU
+
+    static void Test_HoldMS(uint32_t ms)
+    {
+        uint32_t ticks = 0U;
+        while (ticks < ms)
+        {
+            if (Timebase_GetAndClear())
+            {
+                ++ticks;
+            }
+        }
+    }
+
+    /**
+     * @brief  Write all four emitters at once from a 4-bit pattern.
+     * @param  m  bit0=FL(PU1) bit1=L(PU0) bit2=R(PG5) bit3=FR(PG4)
+     */
+    static void Emitter_Write(uint8_t m)
+    {
+        if (m & E_FL) { GPIO_U_SetData(Px1_MASK); } else { GPIO_U_ClrData(Px1_MASK); }
+        if (m & E_L)  { GPIO_U_SetData(Px0_MASK); } else { GPIO_U_ClrData(Px0_MASK); }
+        if (m & E_R)  { GPIO_G_SetData(Px5_MASK); } else { GPIO_G_ClrData(Px5_MASK); }
+        if (m & E_FR) { GPIO_G_SetData(Px4_MASK); } else { GPIO_G_ClrData(Px4_MASK); }
+    }
+
+    /* ---- Patterns ---------------------------------------------------- */
+
+    /* Cylon / Knight-Rider: one dot bounces across the row */
+    static void Show_Cylon(uint8_t sweeps)
+    {
+        static const uint8_t seq[] = { E_FL, E_L, E_R, E_FR, E_R, E_L };
+        uint8_t s, i;
+        for (s = 0U; s < sweeps; ++s)
+        {
+            for (i = 0U; i < sizeof(seq); ++i)
+            {
+                Emitter_Write(seq[i]);
+                Test_HoldMS(SHOW_STEP_MS);
+            }
+        }
+    }
+
+    /* Fill from the left, then drain from the left */
+    static void Show_FillFlush(uint8_t cycles)
+    {
+        static const uint8_t seq[] =
+        {
+            E_FL, E_FL|E_L, E_FL|E_L|E_R, E_ALL,
+            E_L|E_R|E_FR, E_R|E_FR, E_FR, 0U
+        };
+        uint8_t c, i;
+        for (c = 0U; c < cycles; ++c)
+        {
+            for (i = 0U; i < sizeof(seq); ++i)
+            {
+                Emitter_Write(seq[i]);
+                Test_HoldMS(SHOW_STEP_MS);
+            }
+        }
+    }
+
+    /* Outer pair vs inner pair — flapping wings */
+    static void Show_Wings(uint8_t times)
+    {
+        while (times--)
+        {
+            Emitter_Write(E_FL | E_FR);
+            Test_HoldMS(SHOW_STEP_MS * 2U);
+            Emitter_Write(E_L | E_R);
+            Test_HoldMS(SHOW_STEP_MS * 2U);
+        }
+    }
+
+    /* 4-bit binary counter 0..15 — also verifies FL/L/R/FR mapping */
+    static void Show_Count(void)
+    {
+        uint8_t n;
+        for (n = 0U; n <= E_ALL; ++n)
+        {
+            Emitter_Write(n);
+            Test_HoldMS(SHOW_STEP_MS * 2U);
+        }
+    }
+
+    /* Random sparkle (xorshift32, no stdlib) */
+    static uint8_t Show_Rand4(void)
+    {
+        static uint32_t rng = 0x00C0FFEEU;
+        rng ^= rng << 13;
+        rng ^= rng >> 17;
+        rng ^= rng << 5;
+        return (uint8_t)(rng & E_ALL);
+    }
+    static void Show_Sparkle(uint8_t frames)
+    {
+        while (frames--)
+        {
+            Emitter_Write(Show_Rand4());
+            Test_HoldMS(SHOW_STEP_MS);
+        }
+    }
+
+    /* All-on strobe */
+    static void Show_Blink(uint8_t times)
+    {
+        while (times--)
+        {
+            Emitter_Write(E_ALL);
+            Test_HoldMS(SHOW_STEP_MS * 2U);
+            Emitter_Write(0U);
+            Test_HoldMS(SHOW_STEP_MS * 2U);
+        }
+    }
+
+    #ifdef EMITTER_TEST_WITH_MOTORS
+    /**
+     * @brief  Pivot in place. ccw!=0 requests counter-clockwise.
+     * @note   Right-wheel direction is optionally inverted here (test-only)
+     *         so a driver/wiring sign mismatch still produces a real pivot.
+     */
+    static void Pivot(uint8_t ccw)
+    {
+        motor_dir_t l = ccw ? FORWARD : REVERSE;
+        motor_dir_t r = ccw ? REVERSE : FORWARD;
+
+    #if PIVOT_LEFT_INVERT
+        l = (l == FORWARD) ? REVERSE : FORWARD;   /* left is mirror-mounted */
+    #endif
+
+        Motor_Set(MOTOR_LEFT,  l, PIVOT_DUTY);
+        Motor_Set(MOTOR_RIGHT, r, PIVOT_DUTY);
+    }
+    #endif
+
+    /* ---- Main show --------------------------------------------------- */
+
+    static void EmitterTest_Run(void)
+    {
+        uint8_t dir = 0U;
+
+        Emitter_Write(0U);
+
+        while (1)
+        {
+        #ifdef EMITTER_TEST_WITH_MOTORS
+            Pivot(dir);          /* flips each lap for a back-and-forth spin */
+        #endif
+
+            Show_Cylon(3U);      Emitter_Write(0U); Test_HoldMS(SHOW_GAP_MS);
+            Show_FillFlush(2U);  Emitter_Write(0U); Test_HoldMS(SHOW_GAP_MS);
+            Show_Wings(6U);      Emitter_Write(0U); Test_HoldMS(SHOW_GAP_MS);
+            Show_Count();        Emitter_Write(0U); Test_HoldMS(SHOW_GAP_MS);
+            Show_Sparkle(40U);   Emitter_Write(0U); Test_HoldMS(SHOW_GAP_MS);
+            Show_Blink(4U);      Emitter_Write(0U); Test_HoldMS(SHOW_GAP_MS);
+
+            dir ^= 1U;
+        }
+    }
+
+#endif /* IR_EMITTER_TEST */
+
+
+/* ==========================================================================
  *   Motion Test
  * ========================================================================== */
 #ifdef MOTION_TEST
 
-    #define MOTION_TEST_TARGET_CPS   1000.0f    /* forward target */
+    #define MOTION_TEST_TARGET_CPS   500.0f    /* forward target */
     #define MOTION_TEST_PRINT_EVERY  20U       /* decimation: 1 kHz / 20 = 50 Hz stream */
 
     /* Column order — keep in sync with the MATLAB import */
@@ -321,6 +528,15 @@ static void Test_Init(void)
         UART_Init();
         Timebase_Init();
     #endif
+
+    #ifdef IR_EMITTER_TEST
+        Timebase_Init();
+        PORT_G_Init();          /* Right pair  (PG4/PG5) */
+        PORT_U_Init();          /* Left pair   (PU0/PU1) */
+        #ifdef EMITTER_TEST_WITH_MOTORS
+            Motor_Init();
+        #endif
+    #endif
 }
 
 /* ==========================================================================
@@ -337,6 +553,10 @@ int main(void)
 
     #ifdef MOTION_TEST
         MotionTest_Run();
+    #endif
+
+    #ifdef IR_EMITTER_TEST
+        EmitterTest_Run();
     #endif
 
     while(1)
