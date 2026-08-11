@@ -26,8 +26,8 @@
  * ========================================================================== */
 //#define MOTOR_TEST
 //#define IR_TEST
-//#define MOTION_TEST
-#define IR_EMITTER_TEST
+#define MOTION_TEST
+//#define IR_EMITTER_TEST
 
 
 
@@ -191,7 +191,8 @@
 #ifdef IR_TEST
 
     #define IR_TEST_PERIOD_MS   50U   /* stream ~20 Hz */
-    
+
+    #define IR_TEST_FSM             /* step-based sampler instead of blocking */
 
     static void Test_HoldMS(uint32_t ms)
     {
@@ -216,16 +217,27 @@
 
     static void IRTest_Run(void)
     {
-        IR_SampleAll();  
+        #ifdef IR_TEST_FSM
+            if (!Timebase_GetAndClear())
+                return;
 
-        IRTest_PrintChannel("FL", IR_FAR_LEFT);
-        IRTest_PrintChannel("L",  IR_LEFT);
-        IRTest_PrintChannel("R",  IR_RIGHT);
-        IRTest_PrintChannel("FR", IR_FAR_RIGHT);
-        UART_CRLF();
+            if (!IR_SampleStep())           /* mid-cycle — nothing new to print */
+                return;
+        #else
+            IR_SampleAll();
+        #endif
 
-        Test_HoldMS(IR_TEST_PERIOD_MS);   /* pace the stream */
+            IRTest_PrintChannel("FL", IR_FAR_LEFT);
+            IRTest_PrintChannel("L",  IR_LEFT);
+            IRTest_PrintChannel("R",  IR_RIGHT);
+            IRTest_PrintChannel("FR", IR_FAR_RIGHT);
+            UART_CRLF();
+
+        
+            Test_HoldMS(IR_TEST_PERIOD_MS);   /* pace the stream */
+        
     }
+
 
 
 #endif /* IR_TEST */
@@ -249,7 +261,12 @@
 
     /* Spin the robot in place while the lights run. Comment out for bench
        testing with debug wires attached. */
-    #define EMITTER_TEST_WITH_MOTORS
+    //#define EMITTER_TEST_WITH_MOTORS
+
+    /* Steady DC hold — all four emitters ON, forever. For metering the
+       receiver voltage on the bench. Comment this define out to run the
+       lightshow (EmitterTest_Run) instead. */
+    #define EMITTER_DC_HOLD
 
     #define SHOW_STEP_MS   90U    /* base frame time */
     #define SHOW_GAP_MS    400U   /* dark pause between patterns */
@@ -274,6 +291,8 @@
     #define E_FR   0x08U   /* PG4 */
     #define E_ALL  0x0FU
 
+    static void Emitter_Write(uint8_t m);   /* fwd decl — defined below */
+
     static void Test_HoldMS(uint32_t ms)
     {
         uint32_t ticks = 0U;
@@ -283,6 +302,15 @@
             {
                 ++ticks;
             }
+        }
+    }
+
+    static void EmitterTest_DC(void)
+    {
+        Emitter_Write(E_ALL);      /* FL|L|R|FR on */
+        while (1)
+        {
+            /* held — put the meter on each receiver output */
         }
     }
 
@@ -556,7 +584,11 @@ int main(void)
     #endif
 
     #ifdef IR_EMITTER_TEST
-        EmitterTest_Run();
+        #ifdef EMITTER_DC_HOLD
+            EmitterTest_DC();      /* steady all-on for voltage measurement */
+        #else
+            EmitterTest_Run();     /* the lightshow */
+        #endif
     #endif
 
     while(1)

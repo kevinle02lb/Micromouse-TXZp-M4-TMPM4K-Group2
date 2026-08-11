@@ -44,6 +44,15 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+
+/**
+ * @brief  ADC result transfer mode.
+ * @note   Define ADC_USE_DMA to move results via DMAC-B (channels 16/18).
+ *         Leave undefined for polled single-conversion reads (default).
+ */
+//#define ADC_USE_DMA
+
+
 /* ==========================================================================
  *   Channel Position Constants
  * ========================================================================== */
@@ -147,9 +156,14 @@ void AINC_Init(void);
 void AINA_StartSGL(void);
 void AINC_StartSGL(void);
 
-void Start_ADC(void);
-
 uint16_t AINA_Read(uint8_t channel);
 uint16_t AINC_Read(uint8_t channel);
+
+#ifdef ADC_USE_DMA
+void Start_ADC(void);
+#else
+void AINA_ReadPair(uint16_t *p_reg0, uint16_t *p_reg1);
+void AINC_ReadPair(uint16_t *p_reg0, uint16_t *p_reg1);
+#endif
 
 #endif /* ADC_H */

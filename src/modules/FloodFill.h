@@ -54,6 +54,7 @@ typedef enum
 typedef enum 
 {
     FLOODFILL_STOP = 0,       /*!< At goal, do nothing */
+    FLOODFILL_WAIT,           /*!< IR cycle incomplete, stay put and retry */
     FLOODFILL_FORWARD,        /*!< Drive straight into next cell */
     FLOODFILL_TURN_LEFT,      /*!< Turn 90° CCW, then drive */
     FLOODFILL_TURN_RIGHT,     /*!< Turn 90° CW, then drive */

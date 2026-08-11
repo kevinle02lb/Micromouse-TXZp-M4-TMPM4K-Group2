@@ -6,8 +6,8 @@
  *
  * @details
  *   Sequenced emitter control and ADC sampling with ambient cancellation.
- *   Uses DMA channels 16 (ADC Unit A) and 18 (ADC Unit C) for automatic
- *   data transfer without CPU intervention.
+ *   Provides a blocking one-shot cycle (@ref IR_SampleAll) and a
+ *   non-blocking per-tick sampler (@ref IR_SampleStep) for the control loop.
  *
  *   Pin Map:
  *   - Emitters (GPIO):
@@ -35,30 +35,48 @@
 
 #include "IrSensor.h"
 #include "drivers/adc.h"
-#include "drivers/dma.h"
 #include "drivers/gpio.h"
 #include "drivers/systick.h"
+
+#ifdef ADC_USE_DMA
+    #include "drivers/dma.h"
+#endif
 
 /* ==========================================================================
  *   Private Types
  * ========================================================================== */
 
 /**
- * @brief  Single calibration point: ADC value -> distance.
+ * @brief  IR States for ADC Readings
  */
-typedef struct
+typedef enum {
+    IR_PHASE_IDLE = 0,
+    IR_PHASE_AMBIENT_SETTLE,   /* emitters off — let prior IR decay        */
+    IR_PHASE_AMBIENT_READ,     /* read ADC -> ambient[]                    */
+    IR_PHASE_EMITTER_ON,       /* turn emitters on, begin settle wait      */
+    IR_PHASE_SETTLE,           /* hold on — let receiver RC settle (ticks) */
+    IR_PHASE_READ,             /* read ADC -> raw[], emitters off          */
+    IR_PHASE_COMPUTE           /* ambient-cancel, filter, walls            */
+} ir_phase_t;
+
+/**
+ * @brief  Per-channel wall threshold (filtered ADC counts).
+ * @note   Each sensor can vary in distance size due to their layout/angles
+ */
+static const uint16_t ir_wall_thresh[IR_COUNT] =
 {
-    uint16_t adc;       /*!< Filtered ADC reading */
-    uint16_t dist_mm;   /*!< Measured distance at that ADC */
-} ir_calpoint_t;
+    1900U,   /* IR_FAR_LEFT  — side  */
+    2700U,   /* IR_LEFT      — front */
+    2700U,   /* IR_RIGHT     — front */
+    3327U    /* IR_FAR_RIGHT — side  */
+};
 
 /* ==========================================================================
  *   Private Function Prototypes
  * ========================================================================== */
 
-static uint16_t IR_Interpolate(uint16_t adc, const ir_calpoint_t *p0, const ir_calpoint_t *p1);
-static uint16_t IR_AdcToMm(uint16_t adc_val);
-static void     IR_UpdateDistances(void);
+static void IR_UpdateWalls(void);
+static void IR_Acquire(uint16_t out[IR_COUNT]);
 
 /* ==========================================================================
  *   Module Data
@@ -66,33 +84,20 @@ static void     IR_UpdateDistances(void);
 
 static ir_sensordata_t ir_data;
 
+
 /* ==========================================================================
- *   Calibration Data (measured and hardcoded)
+ *   Non-Blocking Sampling State
  * ========================================================================== */
 
 /**
- * @brief  Calibration table for all sensors.
- * @note   Points MUST be sorted by adc ascending (far → close).
- *         Measure with white maze wall, emitter at nominal current.
- *
- *   Measurement procedure:
- *   1. Place wall at 150 mm, record filtered ADC → write as point 0
- *   2. Place wall at 120 mm, record filtered ADC → write as point 1
- *   3. Repeat for 100, 80, 60, 40 mm
- *
- *   Default values are placeholders — replace with MEASUREMENTS
+ * @brief  Control ticks to hold emitters on before the reflected read.
+ * @note   1 tick @ 1 kHz = 1 ms, comfortably past the ~500 µs receiver RC.
+ *         Must be >= 1. Raise if you lengthen the RC or slow the tick.
  */
-static const ir_calpoint_t ir_cal[IR_CAL_POINTS] = 
-{
-    /* adc    dist_mm    */
-    {  400,   150 },    /* Far: weak reflection */
-    {  800,   120 },
-    { 1400,   100 },
-    { 2200,    80 },    /* Wall threshold region */
-    { 3200,    60 },
-    { 4000,    40 }     /* Near: strong reflection */
-};
+#define IR_SETTLE_TICKS     1U
 
+static ir_phase_t ir_phase      = IR_PHASE_IDLE;
+static uint16_t   ir_settle_cnt = 0U;
 
 
 /* ==========================================================================
@@ -107,121 +112,219 @@ static bool wall_state[IR_COUNT] = {false, false, false, false};
 
 /**
  * @brief  Initializes ADC and GPIO for IR emitters.
- * @note   Make sure DMAC is initialized first before IR related inits
+ * @note   
  */
 void IR_Init(void)
 {
-    DMAC_Init();         /* Initialize DMAC-C */
-    ADC_Init();          /* Initialize ADC-C */
+    #ifdef ADC_USE_DMA
+        DMAC_Init();         /* DMAC-B must init before ADC DMA requests */
+    #endif
+    ADC_Init();
     PORT_U_Init();       /* [1] Left emitters  */
     PORT_G_Init();       /* [2] Right emitters */
 }
 
 /* ==========================================================================
- *   Sequenced Sampling
+ *   Private Funcs
  * ========================================================================== */
 
-
 /**
- * @brief  Update distance_mm[] and wallDetected[] from filtered data.
- * @note   Call at the end of IR_SampleAll().
+ * @brief  Read one ADC sample set from all four receivers into out[].
+ * @param  out  Channel-ordered destination [IR_FAR_LEFT..IR_FAR_RIGHT].
  */
-static void IR_UpdateDistances(void)
+static void IR_Acquire(uint16_t out[IR_COUNT])
 {
-    int i;
-    uint16_t dist;
-
-    for (i = 0; i < IR_COUNT; i++)
-    {
-        /* Lookup distance from filtered value */
-        dist = IR_AdcToMm(ir_data.filtered[i]);
-        ir_data.distance_mm[i] = dist;
-
-        /* Wall detection with hysteresis */
-        if (wall_state[i]) 
-        {
-            /* Was seeing wall — need to get farther to clear */
-            wall_state[i] = (dist < (IR_WALL_THRESHOLD_MM + IR_WALL_HYSTERESIS_MM));
-        } 
-        else 
-        {
-            /* Was clear — need to get closer to detect */
-            wall_state[i] = (dist < (IR_WALL_THRESHOLD_MM - IR_WALL_HYSTERESIS_MM));
-        }
-
-        ir_data.wallDetected[i] = wall_state[i];
-    }
+#ifdef ADC_USE_DMA
+    volatile uint16_t *bufA;
+    volatile uint16_t *bufC;
+ 
+    Start_ADC();                 /* Trigger both units, DMA moves results */
+    SysTick_us(5U);              /* Wait for 2 conversions + DMA burst */
+ 
+    bufA = DMA_GetADCABuffer();
+    bufC = DMA_GetADCCBuffer();
+ 
+    /* DMA stores the raw register halfword — right-align to match polled path */
+    out[IR_FAR_LEFT]  = (uint16_t)((bufA[0] & ADxREGn_ADRn) >> 4U);   /* AINA16 */
+    out[IR_LEFT]      = (uint16_t)((bufA[1] & ADxREGn_ADRn) >> 4U);   /* AINA15 */
+    out[IR_RIGHT]     = (uint16_t)((bufC[0] & ADxREGn_ADRn) >> 4U);   /* AINC01 */
+    out[IR_FAR_RIGHT] = (uint16_t)((bufC[1] & ADxREGn_ADRn) >> 4U);   /* AINC00 */
+#else
+    uint16_t a0, a1;
+    uint16_t c0, c1;
+ 
+    AINA_ReadPair(&a0, &a1);     /* a0 = AINA16, a1 = AINA15 */
+    AINC_ReadPair(&c0, &c1);     /* c0 = AINC01, c1 = AINC00 */
+ 
+    out[IR_FAR_LEFT]  = a0;
+    out[IR_LEFT]      = a1;
+    out[IR_RIGHT]     = c0;
+    out[IR_FAR_RIGHT] = c1;
+#endif
 }
 
 /**
- * @brief  Full ON/OFF sampling cycle for all four IR sensors.
- * @details
- *   Performs ambient cancellation to reject background IR:
- *   1. Emitters OFF → sample ambient light
- *   2. Emitters ON  → sample raw (ambient + reflected)
- *   3. reflected = raw - ambient
- *
- *   Timing:
+ * @brief  Ambient-cancel raw[]/ambient[] into reflected[], then IIR filter.
+ * @note   Receiver reads DOWN with light, so reflected = ambient - raw.
  */
-void IR_SampleAll(void)
+static void IR_ComputeReflected(void)
 {
-    volatile uint16_t *bufA;
-    volatile uint16_t *bufC;
     int i;
-
-    /* [1] Ambient reading — all emitters OFF */
-    IR_AllEmittersOff();
-    SysTick_us(10U);             /* Wait for previous IR to decay */
-
-    Start_ADC();                 /* Trigger both ADC units, DMA re-armed */
-    SysTick_us(5U);              /* Wait for 2 conversions + DMA burst */
-
-    bufA = DMA_GetADCABuffer();
-    bufC = DMA_GetADCCBuffer();
-
-    ir_data.ambient[IR_FAR_LEFT]  = bufA[0];   /* AINA16 */
-    ir_data.ambient[IR_LEFT]      = bufA[1];   /* AINA15 */
-    ir_data.ambient[IR_RIGHT]     = bufC[0];   /* AINC01 */
-    ir_data.ambient[IR_FAR_RIGHT] = bufC[1];   /* AINC00 */
-
-    /* [2] Reflected reading — all emitters ON */
-    IR_AllEmittersOn();
-    SysTick_us(12U);             /* Allow IR to reach wall and reflect back */
-
-    Start_ADC();                 /* Re-arm DMA + trigger both units */
-    SysTick_us(5U);              /* Wait for conversion + DMA */
-
-    ir_data.raw[IR_FAR_LEFT]  = bufA[0];
-    ir_data.raw[IR_LEFT]      = bufA[1];
-    ir_data.raw[IR_RIGHT]     = bufC[0];
-    ir_data.raw[IR_FAR_RIGHT] = bufC[1];
-
-    /* [3] Calculate reflected values (ambient cancellation) */
+ 
+    /* [1] Calculate reflected values (ambient cancellation) */
     for (i = 0; i < IR_COUNT; i++)
     {
-        if (ir_data.raw[i] > ir_data.ambient[i])
+        if (ir_data.ambient[i] > ir_data.raw[i])
         {
-            ir_data.reflected[i] = ir_data.raw[i] - ir_data.ambient[i];
+            ir_data.reflected[i] = ir_data.ambient[i] - ir_data.raw[i];
         }
         else
         {
             ir_data.reflected[i] = 0U;
         }
     }
-
-    /* [4] IIR low-pass filter on reflected values */
+ 
+    /* [2] IIR low-pass filter on reflected values */
     for (i = 0; i < IR_COUNT; i++)
     {
         ir_data.filtered[i] = IR_FilterIIR(ir_data.filtered[i],
                                               ir_data.reflected[i],
                                               IR_FILTER_SHIFT);
     }
+}
 
-    /* [5] Power save — turn off emitters between samples */
+/**
+ * @brief  Update wallDetected[] from filtered data with hysteresis.
+ * @note   Filtered value rises as a wall gets closer.
+ */
+static void IR_UpdateWalls(void)
+{
+    int i;
+    uint16_t level;
+
+    for (i = 0; i < IR_COUNT; i++)
+    {
+        level = ir_data.filtered[i];
+
+        /* Wall detection with hysteresis */
+        if (wall_state[i]) 
+        {
+            /* Was seeing wall — needs to drop further to clear */
+            wall_state[i] = (level > (ir_wall_thresh[i] - IR_WALL_HYSTERESIS));
+        } 
+        else 
+        {
+            /* Was clear — needs to rise further to detect */
+            wall_state[i] = (level > (ir_wall_thresh[i] + IR_WALL_HYSTERESIS));
+        }
+
+        ir_data.wallDetected[i] = wall_state[i];
+    }
+}
+
+
+/* ==========================================================================
+ *   Sampling Functions
+ * ========================================================================== */
+
+/**
+ * @brief  Full ON/OFF sampling cycle for all four IR sensors.
+ * @details
+ *   Performs ambient cancellation to reject background IR:
+ *   1. Emitters OFF -> sample ambient light
+ *   2. Emitters ON  -> sample raw (ambient + reflected)
+ *   3. reflected = ambient - raw
+ *
+ *   Blocking — each ADC pair is polled to completion. Bench / calibration
+ *   use; the control loop uses @ref IR_SampleStep.
+ */
+void IR_SampleAll(void)
+{
+    /* [1] Ambient reading — all emitters OFF */
     IR_AllEmittersOff();
+    SysTick_us(20U);
+    IR_Acquire(ir_data.ambient);
+ 
+    /* [2] Reflected reading — all emitters ON */
+    IR_AllEmittersOn();
+    SysTick_us(600U);
+    IR_Acquire(ir_data.raw);
+ 
+    /* [3] Ambient cancel + IIR filter */
+    IR_ComputeReflected();
+ 
+    /* [4] Power save — turn off emitters between samples */
+    IR_AllEmittersOff();
+ 
+    /* [5] Update wall & flags from filtered data */
+    IR_UpdateWalls();
+}
 
-    /* [6] Update distances and wall flags from filtered data */
-    IR_UpdateDistances();
+/**
+ * @brief  Non-blocking sampler — advances one phase per control tick.
+ * @return true on the tick a full sample cycle completes.
+ * @details
+ *   Phase order, one tick each:
+ *     AMBIENT_SETTLE -> AMBIENT_READ -> EMITTER_ON -> SETTLE(IR_SETTLE_TICKS)
+ *     -> READ -> COMPUTE -> (loop)
+ *   Emitters are on only across EMITTER_ON..READ. The RC settle elapses in
+ *   the SETTLE phase without blocking the CPU.
+ */
+bool IR_SampleStep(void)
+{
+    bool cycle_done = false;
+ 
+    switch (ir_phase)
+    {
+    case IR_PHASE_IDLE:
+    default:
+        IR_AllEmittersOff();
+        ir_phase = IR_PHASE_AMBIENT_SETTLE;
+        break;
+ 
+    case IR_PHASE_AMBIENT_SETTLE:
+        /* [1] Emitters off — prior reflection decays this tick */
+        ir_phase = IR_PHASE_AMBIENT_READ;
+        break;
+ 
+    case IR_PHASE_AMBIENT_READ:
+        /* [2] Ambient reading — all emitters OFF */
+        IR_Acquire(ir_data.ambient);
+        ir_phase = IR_PHASE_EMITTER_ON;
+        break;
+ 
+    case IR_PHASE_EMITTER_ON:
+        /* [3] Emitters ON — arm settle counter */
+        IR_AllEmittersOn();
+        ir_settle_cnt = IR_SETTLE_TICKS;
+        ir_phase      = IR_PHASE_SETTLE;
+        break;
+ 
+    case IR_PHASE_SETTLE:
+        /* [4] Hold on — receiver RC settles across ticks */
+        if (--ir_settle_cnt == 0U)
+        {
+            ir_phase = IR_PHASE_READ;
+        }
+        break;
+ 
+    case IR_PHASE_READ:
+        /* [5] Reflected reading, then power save (Turn off emitters) */
+        IR_Acquire(ir_data.raw);
+        IR_AllEmittersOff();
+        ir_phase = IR_PHASE_COMPUTE;
+        break;
+ 
+    case IR_PHASE_COMPUTE:
+        /* [6] Ambient cancel + filter + walls */
+        IR_ComputeReflected();
+        IR_UpdateWalls();
+        cycle_done = true;
+        ir_phase   = IR_PHASE_AMBIENT_SETTLE;
+        break;
+    }
+ 
+    return cycle_done;
 }
 
 /* ==========================================================================
@@ -278,19 +381,6 @@ bool IR_IsWallDetected(ir_channel_t ch, uint16_t threshold)
     return (ir_data.reflected[ch] >= threshold);
 }
 
-/**
- * @brief  Get latest distance for a channel (mm).
- * @param  ch  Sensor channel.
- * @return uint16_t  Distance in mm, or IR_DIST_NO_WALL if none.
- */
-uint16_t IR_GetDistanceMm(ir_channel_t ch)
-{
-    if (ch >= IR_COUNT) 
-    {
-        return IR_DIST_NO_WALL;
-    }
-    return ir_data.distance_mm[ch];
-}
 
 /**
  * @brief  Check if wall is present with hysteresis.
@@ -304,73 +394,6 @@ bool IR_IsWallPresent(ir_channel_t ch)
         return false;
     }
     return wall_state[ch];
-}
-
-/* ==========================================================================
- *   Distance & Wall Detection
- * ========================================================================== */
-
-/**
- * @brief  Linear interpolation between two calibration points.
- * @param  adc   Filtered ADC value.
- * @param  p0    Lower point (adc <= target).
- * @param  p1    Upper point (adc >= target).
- * @return uint16_t  Interpolated distance in mm.
- */
-static uint16_t IR_Interpolate(uint16_t adc, const ir_calpoint_t *p0, const ir_calpoint_t *p1)
-{
-    uint32_t range_adc;
-    uint32_t offset;
-    uint32_t dist_range;
-    uint32_t result;
-
-    /* Avoid divide by zero */
-    if (p0->adc == p1->adc) 
-    {
-        return p0->dist_mm;
-    }
-
-    range_adc  = (uint32_t)(p1->adc - p0->adc);
-    offset     = (uint32_t)(adc - p0->adc);
-    dist_range = (uint32_t)(p0->dist_mm - p1->dist_mm);  /* dist decreases as adc increases */
-
-    /* result = p0.dist - (offset / range_adc) * dist_range */
-    result = (uint32_t)p0->dist_mm - ((offset * dist_range) / range_adc);
-
-    return (uint16_t)result;
-}
-
-/**
- * @brief  Convert filtered ADC to distance using calibration table.
- * @param  adc_val  Filtered 12-bit value.
- * @return uint16_t  Distance in mm, or sentinel if out of range.
- */
-static uint16_t IR_AdcToMm(uint16_t adc_val)
-{
-    uint8_t i;
-
-    /* Below first point: farther than measured → no wall */
-    if (adc_val <= ir_cal[0].adc) 
-    {
-        return IR_DIST_NO_WALL;
-    }
-
-    /* Above last point: too close / saturated */
-    if (adc_val >= ir_cal[IR_CAL_POINTS - 1U].adc) 
-    {
-        return IR_DIST_TOO_CLOSE;
-    }
-
-    /* Find bracket and interpolate */
-    for (i = 1U; i < IR_CAL_POINTS; i++)
-    {
-        if (adc_val < ir_cal[i].adc) 
-        {
-            return IR_Interpolate(adc_val, &ir_cal[i - 1U], &ir_cal[i]);
-        }
-    }
-
-    return IR_DIST_NO_WALL;  /* Should not reach */
 }
 
 
@@ -466,3 +489,4 @@ uint16_t IR_FilterIIR(uint16_t prev, uint16_t curr, uint8_t shift)
 
     return result;
 }
+

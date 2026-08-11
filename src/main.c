@@ -147,7 +147,7 @@ void ModuleInit(void)
 {
     Motion_Init();      // -> Encoder_Init() + Motor_Init()
     Odometry_Init();    // reads Encoder position
-    IR_Init();          // -> DMAC_Init() + ADC_Init() + emitter ports
+    IR_Init();          // ADC_Init() + emitter ports
     FloodFill_Init();
     Navigator_Init();
     Timebase_Init();    // start tick last

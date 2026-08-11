@@ -316,11 +316,14 @@ static void FloodFill_SetWall(uint8_t x, uint8_t y, floodfill_wall_bit_t wall_bi
  *   Stores walls using FloodFill_SetWall() which also writes
  *   symmetric walls to neighboring cells.
  */
-static void FloodFill_ScanWalls(void)
+static bool FloodFill_ScanWalls(void)
 {
     bool front, left, right;
 
-    IR_SampleAll();
+    //IR_SampleAll();
+    if (!IR_SampleStep())   
+        return false;
+
 
     front = IR_IsWallPresent(IR_LEFT) && IR_IsWallPresent(IR_RIGHT);
     left  = IR_IsWallPresent(IR_FAR_LEFT);
@@ -329,6 +332,8 @@ static void FloodFill_ScanWalls(void)
     if (front) FloodFill_SetWall(mouse_x, mouse_y, (floodfill_wall_bit_t)FloodFill_GetFrontWall(mouse_heading));
     if (left)  FloodFill_SetWall(mouse_x, mouse_y, (floodfill_wall_bit_t)FloodFill_GetLeftWall(mouse_heading));
     if (right) FloodFill_SetWall(mouse_x, mouse_y, (floodfill_wall_bit_t)FloodFill_GetRightWall(mouse_heading));
+	
+	return true;
 }
 
 /* ==========================================================================
@@ -608,7 +613,9 @@ floodfill_t FloodFill_Plan(void)
     if (FloodFill_IsAtGoal())
         return FLOODFILL_STOP;
 
-    FloodFill_ScanWalls();
+    if (!FloodFill_ScanWalls())
+        return FLOODFILL_WAIT;
+        
     FloodFill_Update();
     next_dir = FloodFill_GetNextDir();
 

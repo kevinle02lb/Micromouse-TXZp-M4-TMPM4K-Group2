@@ -6,7 +6,7 @@
  *
  * @details
  *   Provides sequenced IR emitter control and ADC sampling with ambient
- *   light cancellation. Uses DMA burst transfer from ADC Units A and C.
+ *   light cancellation.
  *
  *   Pin Map:
  *   - Emitters (GPIO):
@@ -15,13 +15,6 @@
  *   - Receivers (ADC):
  *     - Unit A: PL0 (AINA16) = Far Left, PL1 (AINA15) = Left
  *     - Unit C: PJ0 (AINC00) = Far Right, PJ1 (AINC01) = Right
- *
- *   Sampling Sequence:
- *   1. Turn all emitters OFF, wait for decay
- *   2. Trigger ADC → DMA stores ambient levels
- *   3. Turn all emitters ON, wait for propagation
- *   4. Trigger ADC → DMA stores raw (ambient + reflected)
- *   5. Subtract: reflected = raw - ambient
  *
  *   Reference Documents (Toshiba):
  *   - Product Info:  https://toshiba.semicon-storage.com/info/TXZP-PINFO-M4K(2)_en_20231225.pdf?did=70854
@@ -73,7 +66,6 @@ typedef struct
     uint16_t ambient[IR_COUNT];     /*!< Background light (emitter OFF) */
     uint16_t reflected[IR_COUNT];   /*!< True wall reflection (raw - ambient) */
     uint16_t filtered[IR_COUNT];    /*!< IIR-filtered reflected value */
-    uint16_t distance_mm[IR_COUNT]; /*!< Distance for Each IR Sensor*/
     bool     wallDetected[IR_COUNT];
 } ir_sensordata_t;
 
@@ -86,54 +78,25 @@ typedef struct
  * @brief  IIR filter shift value — alpha = 1 / 2^IR_FILTER_SHIFT.
  * @note   Shift = 3 → alpha = 0.125, ~8 sample time constant at 1 kHz.
  */
-#define IR_FILTER_SHIFT     3U
+#define IR_FILTER_SHIFT     2U
 
 /* ==========================================================================
- *   Distance Calibration
+ *   Wall Detection Thresholds (filtered ADC counts)
  * ========================================================================== */
 
 /**
- * @brief  Number of measured calibration points.
- * @note   
+ * @brief  Hysteresis band to prevent flicker at the threshold.
  */
-#define IR_CAL_POINTS       6U
+#define IR_WALL_HYSTERESIS      150U
 
-/**
- * @brief  Distance sentinels (mm).
- */
-#define IR_DIST_NO_WALL     255U    /*!< No wall detected / out of range */
-#define IR_DIST_TOO_CLOSE   30U     /*!< Below reliable minimum */
-
-/* ==========================================================================
- *   Wall Detection Thresholds (mm)
- * ========================================================================== */
-
-/**
- * @brief  Wall presence threshold.
- * @note   Typical maze half-cell is ~90 mm.
- */
-#define IR_WALL_THRESHOLD_MM    80U
-
-/**
- * @brief  Hysteresis band to prevent flicker.
- */
-#define IR_WALL_HYSTERESIS_MM   15U
 
 /* ==========================================================================
  *   Function Prototypes
  * ========================================================================== */
 
-/**
- * @brief  Initializes ADC and GPIO for IR emitters.
- * @note   DMAC must be initialized before this is called.
- */
 void IR_Init(void);
-
-/**
- * @brief  Full ON/OFF sampling cycle for all four sensors.
- * @note   Blocking — takes ~200 µs total. Call from control tick.
- */
 void IR_SampleAll(void);
+bool IR_SampleStep(void);
 
 /* Data access */
 const ir_sensordata_t* IR_GetData(void);
@@ -141,19 +104,6 @@ uint16_t IR_GetRaw(ir_channel_t ch);
 uint16_t IR_GetReflected(ir_channel_t ch);
 uint16_t IR_GetFiltered(ir_channel_t ch);
 bool IR_IsWallDetected(ir_channel_t ch, uint16_t threshold);
-
-/**
- * @brief  Get latest distance for a channel (mm).
- * @param  ch  Sensor channel.
- * @return uint16_t  Distance in mm, or IR_DIST_NO_WALL if none.
- */
-uint16_t IR_GetDistanceMm(ir_channel_t ch);
-
-/**
- * @brief  Check if wall is present with hysteresis.
- * @param  ch  Sensor channel.
- * @return bool  true if wall reliably detected.
- */
 bool IR_IsWallPresent(ir_channel_t ch);
 
 /* Emitter control */

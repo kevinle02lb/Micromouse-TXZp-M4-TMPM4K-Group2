@@ -41,12 +41,12 @@
 #define DRIVE_ACCEL_CPS2    2000.0f                         /* ramp rate — start low, raise if too slow */
 #define CELL_SIZE_COUNTS    (CELL_SIZE_MM / MM_PER_COUNT)   /* one cell in per counts */
 static float drive_target_cps;                              /* profiled setpoint, carried tick-to-tick */
-#define CONTROL_DT          0.001f      /* control tick period (1 kHz) */
+#define CONTROL_DT          0.001f                          /* control tick period (1 kHz) */
 
 #define HEADING_COUNT       4U          /* N/E/S/W grid quantization */ 
 #define HEADING_MASK        3U          /* (idx & 3) wraps 0..3 */ 
 
-#define KP_STRAIGHT   2.0f              /* start small; tune up until straight without wobble */
+#define KP_STRAIGHT   0.02f             /* start small; tune up until straight without wobble */
 
 /* ==========================================================================
  *   State Machine
@@ -171,6 +171,9 @@ void Navigator_Update(void)
                     Motion_Stop();
                     nav_state = NAV_FINISHED;
                     break;
+
+                case FLOODFILL_WAIT:    /* stay in NAV_PLANNING */
+                    break;      
 
                 case FLOODFILL_FORWARD:
                     BeginDrive();
