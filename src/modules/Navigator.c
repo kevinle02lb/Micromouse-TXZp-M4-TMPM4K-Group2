@@ -1,20 +1,32 @@
 /**
  * @file        Navigator.c
  * @brief       Cell-level motion sequencer for micromouse.
- * @version     V1.1.0
- * @date        03-07-2026
+ * @version     V1.0.0
+ * @date        15-08-2026
  *
  * @details
- *   Bridges FloodFill (planner) with Motion/Odometry (execution).
- *   Runs a 1 kHz state machine: plan -> turn -> drive -> pause -> repeat.
+ *   Bridges FloodFill (planner) with Profile and Motion (execution).
+ *   Runs a 1 kHz state machine.
  *
- *   Heading is tracked internally as an exact grid index (0..3), NOT by
- *   accumulating odometry. Each turn target is a clean multiple of 90 deg,
- *   so per-turn error never compounds across the run. Odometry is used only
- *   to CHECK arrival, never to DEFINE the next target.
+ *   Every move is one or two segments. A segment is a fixed length of wheel
+ *   path run under one profile:
+ *
+ *     drive   both wheels forward   length = CELL_SIZE_MM
+ *     turn    wheels opposed        length = theta * WHEELBASE_MM / 2
+ *
+ *   State Flow:
+ *   1. NAV_PLAN         - read walls, ask FloodFill, arm a segment
+ *   2. NAV_TURN         - pivot, only if the action needs one
+ *   3. NAV_TURN_SETTLE  - hold still
+ *   4. NAV_DRIVE        - advance one cell
+ *   5. NAV_DRIVE_SETTLE - hold still, report the move, back to 1
+ *
+ *   Heading is not tracked here. Turn size comes from encoder positions
+ *   captured at segment start; grid heading belongs to FloodFill.
  *
  * @note
- *   Call Navigator_Update() exactly once per 1 kHz control tick.
+ *   Call Navigator_Update() exactly once per 1 kHz control tick, BEFORE
+ *   Motion_Update(), so the setpoint it produces is acted on the same tick.
  *   Call Navigator_Init() after FloodFill_Init() and Motion_Init().
  *
  *   File structure and Doxygen formatting assisted by AI.
@@ -24,7 +36,9 @@
 
 #include "Navigator.h"
 #include "FloodFill.h"
+#include "IrSensor.h"
 #include "Motion.h"
+#include "Profile.h"
 #include "Odometry.h"
 #include "Encoder.h"
 #include <math.h>
@@ -33,20 +47,24 @@
  *   Tuning Constants
  * ========================================================================== */
 
-#define CELL_SIZE_MM        180.0f      /* one maze cell, center to center */ 
-#define TURN_TOLERANCE_RAD  0.05f       /* ~3 deg: "close enough" for a turn */
-#define DIST_TOLERANCE_MM   3.0f        /* stop this far before full cell */
-#define PAUSE_TICKS         50U         /* settle time between moves (50 ms @ 1 kHz) */ 
+#define CELL_SIZE_MM            180.0f      /* one maze cell, centre to centre */
+#define DRIVE_TOLERANCE_MM        2.0f      /* drive segment completion band */
+#define TURN_TOLERANCE_MM         1.0f      /* turn segment completion band, wheel arc */
 
-#define DRIVE_ACCEL_CPS2    2000.0f                         /* ramp rate — start low, raise if too slow */
-#define CELL_SIZE_COUNTS    (CELL_SIZE_MM / MM_PER_COUNT)   /* one cell in per counts */
-static float drive_target_cps;                              /* profiled setpoint, carried tick-to-tick */
-#define CONTROL_DT          0.001f                          /* control tick period (1 kHz) */
+#define DRIVE_SPEED_MM_S        300.0f      /* straight cruise ceiling */
+#define DRIVE_MIN_MM_S           40.0f      /* straight floor, clears stiction */
+#define DRIVE_ACCEL_MM_S2       800.0f      /* straight ramp and brake */
 
-#define HEADING_COUNT       4U          /* N/E/S/W grid quantization */ 
-#define HEADING_MASK        3U          /* (idx & 3) wraps 0..3 */ 
+#define TURN_SPEED_MM_S         150.0f      /* pivot cruise ceiling, per wheel */
+#define TURN_MIN_MM_S            30.0f      /* pivot floor, clears stiction */
+#define TURN_ACCEL_MM_S2        400.0f      /* pivot ramp and brake */
 
-#define KP_STRAIGHT   0.02f             /* start small; tune up until straight without wobble */
+#define KP_STRAIGHT               4.0f      /* straightness trim, (mm/s) per mm of skew */
+#define TRIM_LIMIT_MM_S          60.0f      /* ceiling on the straightness trim */
+
+#define SETTLE_TICKS            150U        /* stationary hold between segments */
+
+#define STALL_TIMEOUT_TICKS    4000U        /* segment abort if a wheel jams */
 
 /* ==========================================================================
  *   State Machine
@@ -57,10 +75,11 @@ static float drive_target_cps;                              /* profiled setpoint
  */
 typedef enum
 {
-    NAV_PLANNING,       // ask FloodFill for the next action
-    NAV_TURNING,        // rotating in place until heading matches target
-    NAV_DRIVING,        // driving forward until one cell is covered
-    NAV_PAUSED,         // brief settle, then report move done
+    NAV_PLAN,           // read walls, ask FloodFill, arm the first segment
+    NAV_TURN,           // pivot through the planned angle
+    NAV_TURN_SETTLE,    // hold still, then arm the forward segment
+    NAV_DRIVE,          // advance one cell
+    NAV_DRIVE_SETTLE,   // hold still, then commit the move to the planner
     NAV_FINISHED        // goal reached, motors held stopped
 } nav_state_t;
 
@@ -68,65 +87,166 @@ typedef enum
  *   Private Data
  * ========================================================================== */
 
-/**
- * @brief  Absolute grid heading in radians, indexed by heading_idx.
- * @note   Matches odometry convention: 0 rad forward, +CCW.
- *         idx 0 = 0 deg, 1 = +90, 2 = +180, 3 = -90.
- */
-static const float heading_rad[HEADING_COUNT] =
-{
-    0.0f,           // idx 0
-    M_PI_DIV_2,     // idx 1  (+90)
-    M_PI,           // idx 2  (+180)
-    -M_PI_DIV_2     // idx 3  (-90)
-};
-
 static nav_state_t nav_state;
 static floodfill_t current_action;
 
-static uint8_t heading_idx;             // exact grid heading, 0..3 (source of truth)
-static float   target_heading_rad;      // heading_rad[heading_idx] for the active turn
+static profile_t   segment;             // active drive or turn profile
+static int32_t     seg_start_countL;    // left encoder position at segment start
+static int32_t     seg_start_countR;    // right encoder position at segment start
+static uint16_t    seg_ticks;           // ticks elapsed in the active segment
+static float       turn_sign;           // +1 = CCW, -1 = CW
 
-static float drive_start_x_mm;          // odometry X captured at move start
-static float drive_start_y_mm;          // odometry Y captured at move start
-
-static int32_t drive_start_countL;      // encoder gets counter of Left
-static int32_t drive_start_countR;      // encoder gets counter of Right
-
-static uint16_t pause_tick_count;
+static uint16_t    settle_ticks;        // ticks elapsed in the active settle
 
 /* ==========================================================================
- *   Private Helpers
+ *   Motion Interface
  * ========================================================================== */
 
 /**
- * @brief  Fold an angle into [-pi, +pi].
- * @param  angle  Input angle (radians).
- * @return float  Equivalent angle in [-pi, +pi].
- * @note   Used on the turn ERROR, so the +180/-180 wrap resolves correctly.
+ * @brief  Command both wheel speeds in mm/s.
+ * @param  left_mm_s   Left wheel speed. Positive drives the robot forward.
+ * @param  right_mm_s  Right wheel speed. Positive drives the robot forward.
+ * @note   Motion_SetSpeed() takes counts per second. This is the only place
+ *         the segment's physical units cross into encoder units.
  */
-static float NormalizeAngle(float angle)
+static void CommandWheels(float left_mm_s, float right_mm_s)
 {
-    while (angle > M_PI)
-        angle -= M_2PI;
-    while (angle < -M_PI)
-        angle += M_2PI;
-    return angle;
+    Motion_SetSpeed(left_mm_s / MM_PER_COUNT, right_mm_s / MM_PER_COUNT);
+}
+
+/* ==========================================================================
+ *   Segment Measurement
+ * ========================================================================== */
+
+/**
+ * @brief  Latch the encoder positions that segment progress is measured from.
+ * @note   Measuring from a per-segment reference keeps the result free of
+ *         accumulated odometry drift and of the [-pi, pi] heading wrap.
+ */
+static void CaptureSegmentStart(void)
+{
+    seg_start_countL = Encoder_GetPosition(MOTOR_LEFT);
+    seg_start_countR = Encoder_GetPosition(MOTOR_RIGHT);
+    seg_ticks        = 0U;
 }
 
 /**
- * @brief  Capture current odometry position as the start of a forward move.
+ * @brief  Left wheel path since the segment started.
+ * @return float  Signed distance in mm.
  */
-static void BeginDrive(void)
+static float SegmentLeft_mm(void)
 {
-    drive_start_x_mm = Odometry_GetX_mm();
-    drive_start_y_mm = Odometry_GetY_mm();
+    return (float)(Encoder_GetPosition(MOTOR_LEFT) - seg_start_countL) * MM_PER_COUNT;
+}
 
-    drive_start_countL = Encoder_GetPosition(MOTOR_LEFT);
-    drive_start_countR = Encoder_GetPosition(MOTOR_RIGHT);  
+/**
+ * @brief  Right wheel path since the segment started.
+ * @return float  Signed distance in mm.
+ */
+static float SegmentRight_mm(void)
+{
+    return (float)(Encoder_GetPosition(MOTOR_RIGHT) - seg_start_countR) * MM_PER_COUNT;
+}
 
-    drive_target_cps  = 0.0f;         /* profile ramps from rest */
-    nav_state   = NAV_DRIVING;
+/**
+ * @brief  Forward distance advanced since the drive segment started.
+ * @return float  Mean of the two wheel paths, in mm.
+ * @note   The profile brakes against this same value, so the setpoint and the
+ *         completion test share one measure. Odometry displacement would be a
+ *         second: on a curved path its Euclidean chord falls short of the
+ *         wheel path, letting the profile reach zero speed while the
+ *         completion test never fires.
+ */
+static float SegmentDistance_mm(void)
+{
+    return 0.5f * (SegmentLeft_mm() + SegmentRight_mm());
+}
+
+/**
+ * @brief  Wheel arc swept since the turn segment started.
+ * @return float  Arc length in mm, positive in the commanded turn direction.
+ * @details
+ *   In an in-place pivot the wheels travel equal and opposite arcs, so the
+ *   arc each has covered is half their difference. Multiplying by turn_sign
+ *   makes the result count up for either direction, which lets the profile
+ *   treat a clockwise turn identically to a counter-clockwise one.
+ */
+static float SegmentArc_mm(void)
+{
+    return 0.5f * (SegmentRight_mm() - SegmentLeft_mm()) * turn_sign;
+}
+
+/**
+ * @brief  Speed differential that holds the robot on its starting heading.
+ * @return float  Trim in mm/s, added to the left wheel and subtracted from
+ *                the right.
+ * @details
+ *   Proportional control on wheel skew. Skew starts at zero each segment, so
+ *   this holds whatever heading the segment began with rather than correcting
+ *   a pre-existing error. Closed-loop time constant is 1 / (2 * KP_STRAIGHT).
+ */
+static float StraightnessTrim(void)
+{
+    float skew_mm = SegmentRight_mm() - SegmentLeft_mm();
+    float trim    = KP_STRAIGHT * skew_mm;
+
+    if (trim > TRIM_LIMIT_MM_S)
+        trim = TRIM_LIMIT_MM_S;
+    else if (trim < -TRIM_LIMIT_MM_S)
+        trim = -TRIM_LIMIT_MM_S;
+
+    return trim;
+}
+
+/* ==========================================================================
+ *   Segment Control
+ * ========================================================================== */
+
+/**
+ * @brief  Arm a straight-line segment.
+ * @param  distance_mm  Forward distance to cover.
+ */
+static void BeginDrive(float distance_mm)
+{
+    CaptureSegmentStart();
+    Profile_Begin(&segment, distance_mm,
+                  DRIVE_SPEED_MM_S, DRIVE_MIN_MM_S, DRIVE_ACCEL_MM_S2);
+    nav_state = NAV_DRIVE;
+}
+
+/**
+ * @brief  Arm an in-place pivot segment.
+ * @param  angle_rad  Signed rotation to perform. Positive is counter-clockwise.
+ * @details
+ *   The segment length is the arc each wheel traces, theta * WHEELBASE_MM / 2,
+ *   so a rotation runs through the same code path as a straight move.
+ */
+static void BeginTurn(float angle_rad)
+{
+    turn_sign = (angle_rad < 0.0f) ? -1.0f : 1.0f;
+
+    CaptureSegmentStart();
+    Profile_Begin(&segment, fabsf(angle_rad) * WHEELBASE_MM * 0.5f,
+                  TURN_SPEED_MM_S, TURN_MIN_MM_S, TURN_ACCEL_MM_S2);
+    nav_state = NAV_TURN;
+}
+
+/**
+ * @brief  Hold the wheels stopped for one tick of the settle interval.
+ * @return bool  true once SETTLE_TICKS have elapsed.
+ * @details
+ *   A segment ends the instant its encoder target is crossed, while the
+ *   wheels are still turning. Arming the next segment on that tick would fold
+ *   the residual rotation of a pivot into the following straight, where the
+ *   straightness trim cannot see it because skew is measured from each
+ *   segment's own start. The hold lets the brake take effect first.
+ */
+static bool SettleStep(void)
+{
+    CommandWheels(0.0f, 0.0f);
+    settle_ticks++;
+
+    return (settle_ticks >= SETTLE_TICKS);
 }
 
 /* ==========================================================================
@@ -135,158 +255,143 @@ static void BeginDrive(void)
 
 /**
  * @brief  Initialize the navigator state machine.
- * @note   Assumes the robot starts aligned to grid heading index 0.
+ * @note   Entry is the post-drive settle with no action pending. Reporting
+ *         FLOODFILL_STOP is a no-op in the planner, so this costs nothing and
+ *         gives the IR filter time to converge before the first wall reading.
  */
 void Navigator_Init(void)
 {
-    nav_state = NAV_PLANNING;
+    nav_state      = NAV_DRIVE_SETTLE;
     current_action = FLOODFILL_STOP;
 
-    heading_idx = 0U;
-    target_heading_rad = heading_rad[heading_idx];
+    seg_start_countL = 0;
+    seg_start_countR = 0;
+    seg_ticks        = 0U;
+    turn_sign        = 1.0f;
+    settle_ticks     = 0U;
 
-    drive_start_x_mm = 0.0f;
-    drive_start_y_mm = 0.0f;
-    pause_tick_count = 0U;
+    Profile_Begin(&segment, 0.0f,
+                  DRIVE_SPEED_MM_S, DRIVE_MIN_MM_S, DRIVE_ACCEL_MM_S2);
 }
 
 /**
  * @brief  Advance the state machine by one tick.
- * @note   Call exactly once per 1 kHz control tick, AFTER Motion_Update().
+ * @note   Call exactly once per 1 kHz control tick, before Motion_Update().
  */
 void Navigator_Update(void)
 {
     switch (nav_state)
     {
         /* ==============================================================
-         *  NAV_PLANNING — get next action, set up the turn or drive
+         *  NAV_PLAN — read walls, ask FloodFill, arm the first segment
          * ============================================================== */
-        case NAV_PLANNING:
+        case NAV_PLAN:
         {
+            FloodFill_SetWalls(IR_IsWallPresent(IR_LEFT) &&
+                               IR_IsWallPresent(IR_RIGHT),
+                               IR_IsWallPresent(IR_FAR_LEFT),
+                               IR_IsWallPresent(IR_FAR_RIGHT));
+
             current_action = FloodFill_Plan();
 
             switch (current_action)
             {
+                case FLOODFILL_FORWARD:
+                    BeginDrive(CELL_SIZE_MM);
+                    break;
+
+                case FLOODFILL_TURN_LEFT:                   // CCW
+                    BeginTurn(M_PI_DIV_2);
+                    break;
+
+                case FLOODFILL_TURN_RIGHT:                  // CW
+                    BeginTurn(-M_PI_DIV_2);
+                    break;
+
+                case FLOODFILL_TURN_AROUND:
+                    BeginTurn(M_PI);
+                    break;
+
                 case FLOODFILL_STOP:
+                default:
                     Motion_Stop();
                     nav_state = NAV_FINISHED;
                     break;
-
-                case FLOODFILL_WAIT:    /* stay in NAV_PLANNING */
-                    break;      
-
-                case FLOODFILL_FORWARD:
-                    BeginDrive();
-                    break;
-
-                case FLOODFILL_TURN_LEFT:                       // CCW: +90 on grid
-                    heading_idx = (uint8_t)((heading_idx + 1U) & HEADING_MASK);
-                    target_heading_rad = heading_rad[heading_idx];
-                    Motion_SetTurnLeftSpeed(TURN_SPEED);
-                    nav_state = NAV_TURNING;
-                    break;
-
-                case FLOODFILL_TURN_RIGHT:                      // CW: -90 == +3 mod 4
-                    heading_idx = (uint8_t)((heading_idx + 3U) & HEADING_MASK);
-                    target_heading_rad = heading_rad[heading_idx];
-                    Motion_SetTurnRightSpeed(TURN_SPEED);
-                    nav_state = NAV_TURNING;
-                    break;
-
-                case FLOODFILL_TURN_AROUND:                     // 180 == +2 mod 4
-                    heading_idx = (uint8_t)((heading_idx + 2U) & HEADING_MASK);
-                    target_heading_rad = heading_rad[heading_idx];
-                    Motion_SetTurnLeftSpeed(TURN_SPEED);        // spin CCW by convention
-                    nav_state = NAV_TURNING;
-                    break;
-
-                default:
-                    break;
             }
             break;
         }
 
         /* ==============================================================
-         *  NAV_TURNING — hold turn until heading is within tolerance
+         *  NAV_TURN — pivot until the commanded arc is covered
          * ============================================================== */
-        case NAV_TURNING:
+        case NAV_TURN:
         {
-            float error = NormalizeAngle(target_heading_rad - Odometry_GetHeading_rad());
+            float swept = SegmentArc_mm();
+            float v     = Profile_Step(&segment, swept);
 
-            if (fabsf(error) < TURN_TOLERANCE_RAD)
+            CommandWheels(-v * turn_sign, v * turn_sign);
+
+            seg_ticks++;
+
+            if (Profile_IsComplete(&segment, swept, TURN_TOLERANCE_MM) ||
+                (seg_ticks >= STALL_TIMEOUT_TICKS))
             {
-                Motion_Stop();      // kill turn spin before driving
-                BeginDrive();
+                settle_ticks = 0U;
+                nav_state    = NAV_TURN_SETTLE;
             }
             break;
         }
 
         /* ==============================================================
-         *  NAV_DRIVING — drive until one cell length is covered
+         *  NAV_TURN_SETTLE — let the pivot stop before driving out of it
          * ============================================================== */
-        case NAV_DRIVING:
+        case NAV_TURN_SETTLE:
         {
-            float dx = Odometry_GetX_mm() - drive_start_x_mm;   // delta from THIS move's start
-            float dy = Odometry_GetY_mm() - drive_start_y_mm;
-            float dist_traveled = sqrtf((dx * dx) + (dy * dy));
+            if (SettleStep())
+                BeginDrive(CELL_SIZE_MM);
 
-            /* Error calculation to travel of traveling stright */
-            int32_t dL = Encoder_GetPosition(MOTOR_LEFT)  - drive_start_countL;
-            int32_t dR = Encoder_GetPosition(MOTOR_RIGHT) - drive_start_countR;
+            break;
+        }
 
-            /* Trapezoidal Motion Profile */
-            float drive_traveled_counts  = 0.5f * (float)(dL + dR);         /* average traveled counts */
-            float drive_remaining_counts = CELL_SIZE_COUNTS - drive_traveled_counts;
-            if (drive_remaining_counts < 0.0f)
-                drive_remaining_counts = 0.0f;
+        /* ==============================================================
+         *  NAV_DRIVE — advance one cell under the straightness trim
+         * ============================================================== */
+        case NAV_DRIVE:
+        {
+            float traveled = SegmentDistance_mm();
+            float v        = Profile_Step(&segment, traveled);
+            float trim     = StraightnessTrim();
 
-            float rampup_limit_cps  = drive_target_cps + DRIVE_ACCEL_CPS2 * CONTROL_DT;
-            float brake_limit_cps = sqrtf(2.0f * DRIVE_ACCEL_CPS2 * drive_remaining_counts);
+            CommandWheels(v + trim, v - trim);
 
-            float target_cps = MOVE_SPEED;
+            seg_ticks++;
 
-            if (rampup_limit_cps < target_cps)
-                target_cps = rampup_limit_cps;
-            if (brake_limit_cps < target_cps)
-                target_cps = brake_limit_cps;
-
-            drive_target_cps = target_cps;   
-
-            /* Straightness trim rides on top of the profile */
-            float err  = (float)(dR - dL);      // >0 → right ran farther → veering LEFT
-            float corr = KP_STRAIGHT * err;
-
-            Motion_SetSpeed(target_cps + corr, target_cps - corr);
-
-            /* Distance Check */
-            if (dist_traveled >= (CELL_SIZE_MM - DIST_TOLERANCE_MM))
+            if (Profile_IsComplete(&segment, traveled, DRIVE_TOLERANCE_MM) ||
+                (seg_ticks >= STALL_TIMEOUT_TICKS))
             {
-                Motion_Stop();
-                pause_tick_count = 0U;
-                nav_state = NAV_PAUSED;
+                settle_ticks = 0U;
+                nav_state    = NAV_DRIVE_SETTLE;
             }
             break;
         }
 
         /* ==============================================================
-         *  NAV_PAUSED — Pause, then tell FloodFill the move completed
+         *  NAV_DRIVE_SETTLE — stop, then commit the move to the planner
          * ============================================================== */
-        case NAV_PAUSED:
-            pause_tick_count++;
-
-            if (pause_tick_count >= PAUSE_TICKS)
+        case NAV_DRIVE_SETTLE:
+        {
+            if (SettleStep())
             {
                 FloodFill_ReportDone(current_action);
-                nav_state = NAV_PLANNING;
+                nav_state = NAV_PLAN;
             }
             break;
+        }
 
         /* ==============================================================
-         *  NAV_FINISHED — terminal, motors stay stopped
+         *  NAV_FINISHED — terminal, bridges left in standby
          * ============================================================== */
         case NAV_FINISHED:
-            break;
-
         default:
             break;
     }

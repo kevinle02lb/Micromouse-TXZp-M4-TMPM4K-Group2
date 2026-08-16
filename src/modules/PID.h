@@ -34,7 +34,7 @@ typedef struct
  *   PID Default Gains
  * ========================================================================== */
 
-#define PID_KP               0.05f
+#define PID_KP               0.05f      //0.05f
 #define PID_KI               0.125f
 #define PID_KD               0.000f
 #define PID_DT               0.001f
@@ -43,8 +43,17 @@ typedef struct
 
 
 /* ==========================================================================
+ *   Heading PID Gains
+ * ========================================================================== */
+
+#define HEADING_KP           400.0f     /*!< rad error -> CPS */
+#define HEADING_KI           9.0f
+#define HEADING_KD           0.0f
+
+/* ==========================================================================
  *   Function Prototypes
  * ========================================================================== */
+
 void PID_Create(pid_t *pid);
 void PID_Init(pid_t *pid, float Kp, float Ki, float Kd, float dt, float out_min, float out_max);
 void PID_Reset(pid_t *pid);

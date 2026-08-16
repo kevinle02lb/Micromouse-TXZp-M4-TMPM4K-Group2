@@ -65,10 +65,10 @@ typedef enum {
  */
 static const uint16_t ir_wall_thresh[IR_COUNT] =
 {
-    1900U,   /* IR_FAR_LEFT  — side  */
-    2700U,   /* IR_LEFT      — front */
-    2700U,   /* IR_RIGHT     — front */
-    3327U    /* IR_FAR_RIGHT — side  */
+    1000U,   /* IR_FAR_LEFT  — side  */
+    1000U,   /* IR_LEFT      — front */
+    1000U,   /* IR_RIGHT     — front */
+    1000U    /* IR_FAR_RIGHT — side  */
 };
 
 /* ==========================================================================
@@ -188,8 +188,8 @@ static void IR_ComputeReflected(void)
     for (i = 0; i < IR_COUNT; i++)
     {
         ir_data.filtered[i] = IR_FilterIIR(ir_data.filtered[i],
-                                              ir_data.reflected[i],
-                                              IR_FILTER_SHIFT);
+                                           ir_data.reflected[i],
+                                           IR_FILTER_SHIFT);
     }
 }
 
@@ -199,10 +199,9 @@ static void IR_ComputeReflected(void)
  */
 static void IR_UpdateWalls(void)
 {
-    int i;
     uint16_t level;
 
-    for (i = 0; i < IR_COUNT; i++)
+    for (int i = 0; i < IR_COUNT; i++)
     {
         level = ir_data.filtered[i];
 
@@ -262,7 +261,6 @@ void IR_SampleAll(void)
 
 /**
  * @brief  Non-blocking sampler — advances one phase per control tick.
- * @return true on the tick a full sample cycle completes.
  * @details
  *   Phase order, one tick each:
  *     AMBIENT_SETTLE -> AMBIENT_READ -> EMITTER_ON -> SETTLE(IR_SETTLE_TICKS)
@@ -270,10 +268,8 @@ void IR_SampleAll(void)
  *   Emitters are on only across EMITTER_ON..READ. The RC settle elapses in
  *   the SETTLE phase without blocking the CPU.
  */
-bool IR_SampleStep(void)
+void IR_SampleStep(void)
 {
-    bool cycle_done = false;
- 
     switch (ir_phase)
     {
     case IR_PHASE_IDLE:
@@ -319,12 +315,9 @@ bool IR_SampleStep(void)
         /* [6] Ambient cancel + filter + walls */
         IR_ComputeReflected();
         IR_UpdateWalls();
-        cycle_done = true;
         ir_phase   = IR_PHASE_AMBIENT_SETTLE;
         break;
     }
- 
-    return cycle_done;
 }
 
 /* ==========================================================================

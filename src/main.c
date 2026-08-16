@@ -93,7 +93,7 @@
 #include "modules/Encoder.h"     // quadrature speed + position
 #include "modules/Odometry.h"    // pose estimate (x, y, heading)
 #include "modules/Motion.h"      // PID speed loop + motor drive
-#include "modules/IrSensor.h"    // IR wall sensing (ADC + DMA)
+#include "modules/IrSensor.h"    // IR wall sensing (ADC)
 #include "modules/FloodFill.h"   // pure maze planner (BFS)
 #include "modules/Navigator.h"   // top-level motion sequencer FSM
 #include "drivers/uart.h"		 // uart for debugging
@@ -116,10 +116,11 @@ int main(void)
 	{
 		if (Timebase_GetAndClear())     // true once per 1 ms tick
 		{
-			Encoder_Update();           // 1. read encoders, filter speed
-			Odometry_Update();          // 2. update pose from encoders
-			Motion_Update();            // 3. PID -> motor PWM (never blocks)
-			Navigator_Update();         // 4. plan/turn/drive FSM step
+			Encoder_Update();       // 1. read encoders, filter speed
+			Odometry_Update();      // 2. update pose from encoders
+			IR_SampleStep();        // 3. sample IR readings
+			Navigator_Update();     // 4. plan/turn/drive FSM step
+			Motion_Update();        // 5. PID -> motor PWM
 		}
 	}
 
@@ -138,7 +139,7 @@ int main(void)
  *   Order:
  *   1. Motion   -> Encoder + Motor (PWM T32A0/3, encoder ports) up first
  *   2. Odometry -> caches encoder position, so must follow Motion
- *   3. IR       -> DMAC + ADC + emitter ports; ADC uses SysTick_us (stateless)
+ *   3. IR       -> ADC + emitter ports; ADC uses SysTick_us (stateless)
  *   4. FloodFill-> planner; samples IR on first Plan(), so IR must precede it
  *   5. Navigator-> depends on FloodFill + Motion
  *   6. Timebase -> starts 1 kHz tick LAST

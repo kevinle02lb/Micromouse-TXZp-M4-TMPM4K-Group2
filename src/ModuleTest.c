@@ -19,6 +19,8 @@
 #include "modules/IrSensor.h"   
 #include "drivers/uart.h"
 #include "modules/Motion.h"
+#include "modules/Odometry.h"
+#include "modules/Profile.h"
 #include "gpio.h"
 
 /* ==========================================================================
@@ -26,8 +28,10 @@
  * ========================================================================== */
 //#define MOTOR_TEST
 //#define IR_TEST
-#define MOTION_TEST
+//#define MOTION_TEST
 //#define IR_EMITTER_TEST
+//#define ODOM_TEST
+#define TURN_TEST
 
 
 
@@ -221,8 +225,8 @@
             if (!Timebase_GetAndClear())
                 return;
 
-            if (!IR_SampleStep())           /* mid-cycle — nothing new to print */
-                return;
+            IR_SampleStep();           /* mid-cycle — nothing new to print */
+            
         #else
             IR_SampleAll();
         #endif
@@ -468,7 +472,7 @@
  * ========================================================================== */
 #ifdef MOTION_TEST
 
-    #define MOTION_TEST_TARGET_CPS   500.0f    /* forward target */
+    #define MOTION_TEST_TARGET_CPS   250.0f    /* target */
     #define MOTION_TEST_PRINT_EVERY  20U       /* decimation: 1 kHz / 20 = 50 Hz stream */
 
     /* Column order — keep in sync with the MATLAB import */
@@ -496,7 +500,7 @@
     }
 
     /**
-     * @brief  Closed-loop speed test: command a forward target, stream
+     * @brief  Closed-loop speed test: command a target, stream
      *         SP / PV / MV so PID convergence is visible in MATLAB.
      * @note   Runs forever. If a wheel's PV races away from SP instead of
      *         toward it, the feedback sign is inverted (runaway) — kill power.
@@ -510,6 +514,8 @@
         UART_CRLF();
 
         Motion_SetMoveForwardSpeed(MOTION_TEST_TARGET_CPS);
+
+        //Motion_SetSpeed(-MOTION_TEST_TARGET_CPS, MOTION_TEST_TARGET_CPS);
 
         while (1)
         {
@@ -531,6 +537,217 @@
         }
     }
 #endif /* MOTION_TEST */
+
+
+/* ==========================================================================
+ *   Odometry Test
+ *
+ *   Passive. Motors stay in standby so the robot can be pushed by hand.
+ *   All fractional values are sent in tenths — UART emits integers only.
+ *
+ *   diff10 = (D_right - D_left), the numerator of the heading equation in
+ *   Odometry.c. Divided by a known physical rotation it yields WHEELBASE_MM.
+ * ========================================================================== */
+#ifdef ODOM_TEST
+
+    #define ODOM_PRINT_EVERY   100U    /* 1 kHz / 100 = 10 Hz */
+
+    static void OdomTest_Run(void)
+    {
+        uint32_t tick = 0U;
+        int32_t  posL, posR;
+
+        UART_SendString("encL,encR,x10,deg10,diff10");
+        UART_CRLF();
+
+        Encoder_ResetPosition(MOTOR_LEFT);
+        Encoder_ResetPosition(MOTOR_RIGHT);
+        Odometry_Reset();
+
+        while (1)
+        {
+            if (!Timebase_GetAndClear())
+                continue;
+
+            Encoder_Update();
+            Odometry_Update();
+
+            if (++tick < ODOM_PRINT_EVERY)
+                continue;
+
+            tick = 0U;
+            posL = Encoder_GetPosition(MOTOR_LEFT);
+            posR = Encoder_GetPosition(MOTOR_RIGHT);
+
+            UART_SendInt(posL);                                          UART_SendByte(',');
+            UART_SendInt(posR);                                          UART_SendByte(',');
+            UART_SendInt((int32_t)(Odometry_GetX_mm() * 10.0f));         UART_SendByte(',');
+            UART_SendInt((int32_t)(Odometry_GetHeading_deg() * 10.0f));  UART_SendByte(',');
+            UART_SendInt((int32_t)((float)(posR - posL) * MM_PER_COUNT * 10.0f));
+            UART_CRLF();
+        }
+    }
+
+#endif /* ODOM_TEST */
+
+
+/* ==========================================================================
+ *   Turn Test
+ *
+ *   One in-place turn driven the same way the Navigator drives one: a single
+ *   trapezoidal Profile segment on the arc each wheel traces.
+ *
+ *   A pivot of theta radians gives each wheel an arc of
+ *
+ *       arc = theta * WHEELBASE_MM / 2
+ *
+ *   which at a 94 mm wheelbase is 73.8 mm for 90 degrees. The target is
+ *   printed ahead of the CSV header so the arc10 column has a reference.
+ *
+ *   Streaming continues through the hold, which is where overshoot appears.
+ *
+ *   Speed constants are local to this block. A test harness reaching into
+ *   another module's tuning would couple the two.
+ *
+ *   Columns: ms,arc10,deg10,pvL,pvR,sp10,state
+ *     ms     milliseconds since the turn was commanded
+ *     arc10  wheel arc covered, tenths of a mm
+ *     deg10  odometry heading, tenths of a degree
+ *     pvL/R  measured wheel speed, mm/s
+ *     sp10   profile setpoint, tenths of a mm/s
+ *     state  0 turning, 1 holding, 2 done
+ * ========================================================================== */
+#ifdef TURN_TEST
+
+    #define TURN_TEST_ANGLE_RAD      M_PI_DIV_2   /* magnitude, always positive */
+    #define TURN_TEST_CCW            1            /* 1 = left/CCW, 0 = right/CW */
+
+    #define TURN_TEST_SPEED_MM_S     150.0f       /* cruise ceiling, per wheel */
+    #define TURN_TEST_MIN_MM_S        30.0f       /* floor, clears stiction */
+    #define TURN_TEST_ACCEL_MM_S2    400.0f       /* ramp and brake */
+
+    #define TURN_TEST_TOLERANCE_MM     1.0f       /* completion band on the arc */
+    #define TURN_TEST_HOLD_MS        500U         /* stationary hold after the turn */
+    #define TURN_TEST_PRINT_EVERY     10U         /* 1 kHz / 10 = 100 Hz */
+
+    /**
+     * @brief  Measured wheel speed in mm/s.
+     * @param  motor  MOTOR_LEFT or MOTOR_RIGHT.
+     * @return float  Filtered speed converted from counts per second.
+     */
+    static float TurnTest_Speed_mm_s(motor_t motor)
+    {
+        return (float)Encoder_GetSpeed_CPS(motor) * MM_PER_COUNT;
+    }
+
+    /**
+     * @brief  Command both wheels in mm/s.
+     * @param  left_mm_s   Left wheel speed. Positive drives the robot forward.
+     * @param  right_mm_s  Right wheel speed. Positive drives the robot forward.
+     * @note   Motion_SetSpeed() takes counts per second.
+     */
+    static void TurnTest_Command(float left_mm_s, float right_mm_s)
+    {
+        Motion_SetSpeed(left_mm_s / MM_PER_COUNT, right_mm_s / MM_PER_COUNT);
+    }
+
+    /**
+     * @brief  Run one profiled pivot, then hold and keep streaming.
+     * @note   Runs forever. The rows after state reaches 1 carry the overshoot.
+     */
+    static void TurnTest_Run(void)
+    {
+        profile_t seg;
+        int32_t   startL, startR;
+        float     arc_target_mm;
+        float     sign;
+        float     swept = 0.0f;
+        float     v     = 0.0f;
+        uint32_t  ms    = 0U;
+        uint32_t  tick  = 0U;
+        uint32_t  hold  = 0U;
+        uint8_t   state = 0U;
+
+        sign          = (TURN_TEST_CCW) ? 1.0f : -1.0f;
+        arc_target_mm = TURN_TEST_ANGLE_RAD * WHEELBASE_MM * 0.5f;
+
+        UART_SendString("target10,");
+        UART_SendInt((int32_t)(arc_target_mm * 10.0f));
+        UART_CRLF();
+        UART_SendString("ms,arc10,deg10,pvL,pvR,sp10,state");
+        UART_CRLF();
+
+        Odometry_Reset();
+
+        startL = Encoder_GetPosition(MOTOR_LEFT);
+        startR = Encoder_GetPosition(MOTOR_RIGHT);
+
+        Profile_Begin(&seg, arc_target_mm,
+                      TURN_TEST_SPEED_MM_S,
+                      TURN_TEST_MIN_MM_S,
+                      TURN_TEST_ACCEL_MM_S2);
+
+        while (1)
+        {
+            if (!Timebase_GetAndClear())
+                continue;
+
+            Encoder_Update();
+            Odometry_Update();
+
+            /* Wheels sweep equal and opposite arcs, so each covers half the
+               difference. The sign makes it count up for either direction. */
+            swept = 0.5f * sign * MM_PER_COUNT *
+                    ((float)(Encoder_GetPosition(MOTOR_RIGHT) - startR) -
+                     (float)(Encoder_GetPosition(MOTOR_LEFT)  - startL));
+
+            switch (state)
+            {
+                case 0U:
+                    v = Profile_Step(&seg, swept);
+                    TurnTest_Command(-v * sign, v * sign);
+
+                    if (Profile_IsComplete(&seg, swept, TURN_TEST_TOLERANCE_MM))
+                    {
+                        hold  = 0U;
+                        state = 1U;
+                    }
+                    break;
+
+                case 1U:
+                    v = 0.0f;
+                    TurnTest_Command(0.0f, 0.0f);
+
+                    if (++hold >= TURN_TEST_HOLD_MS)
+                        state = 2U;
+                    break;
+
+                default:
+                    v = 0.0f;
+                    TurnTest_Command(0.0f, 0.0f);
+                    break;
+            }
+
+            Motion_Update();
+            ms++;
+
+            if (++tick < TURN_TEST_PRINT_EVERY)
+                continue;
+
+            tick = 0U;
+
+            UART_SendInt((int32_t)ms);                                      UART_SendByte(',');
+            UART_SendInt((int32_t)(swept * 10.0f));                         UART_SendByte(',');
+            UART_SendInt((int32_t)(Odometry_GetHeading_deg() * 10.0f));     UART_SendByte(',');
+            UART_SendInt((int32_t)TurnTest_Speed_mm_s(MOTOR_LEFT));         UART_SendByte(',');
+            UART_SendInt((int32_t)TurnTest_Speed_mm_s(MOTOR_RIGHT));        UART_SendByte(',');
+            UART_SendInt((int32_t)(v * 10.0f));                             UART_SendByte(',');
+            UART_SendInt((int32_t)state);
+            UART_CRLF();
+        }
+    }
+
+#endif /* TURN_TEST */
 
 
 /* ==========================================================================
@@ -565,6 +782,21 @@ static void Test_Init(void)
             Motor_Init();
         #endif
     #endif
+
+    #ifdef ODOM_TEST
+        Motor_Init();       /* bridges left in standby, wheels roll free */
+        Encoder_Init();
+        Odometry_Init();    /* caches encoder position, must follow Encoder */
+        UART_Init();
+        Timebase_Init();
+    #endif
+
+    #ifdef TURN_TEST
+        Motion_Init();      /* Encoder_Init() + Motor_Init() */
+        Odometry_Init();    /* caches encoder position, must follow Motion */
+        UART_Init();
+        Timebase_Init();
+    #endif
 }
 
 /* ==========================================================================
@@ -581,6 +813,14 @@ int main(void)
 
     #ifdef MOTION_TEST
         MotionTest_Run();
+    #endif
+
+    #ifdef ODOM_TEST
+        OdomTest_Run();
+    #endif
+
+    #ifdef TURN_TEST
+        TurnTest_Run();
     #endif
 
     #ifdef IR_EMITTER_TEST

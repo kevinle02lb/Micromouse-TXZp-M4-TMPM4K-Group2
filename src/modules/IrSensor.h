@@ -96,7 +96,7 @@ typedef struct
 
 void IR_Init(void);
 void IR_SampleAll(void);
-bool IR_SampleStep(void);
+void IR_SampleStep(void);
 
 /* Data access */
 const ir_sensordata_t* IR_GetData(void);

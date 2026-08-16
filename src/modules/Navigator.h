@@ -2,7 +2,7 @@
  * @file        Navigator.h
  * @brief       Robot behavior logic handler. combines FloodFill, optometry, & motion controls
  * @version     V1.0.0
- * @date        02-07-2026
+ * @date        15-08-2026
  *
  * @details
  * @note
@@ -13,7 +13,7 @@
 #ifndef NAVIGATOR_H
 #define NAVIGATOR_H
 
-#include "FloodFill.h"   /* for floodfill_action_t */
+#include "FloodFill.h"   /* for floodfill_t */
 
 void Navigator_Init(void);
 void Navigator_Update(void);

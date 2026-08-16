@@ -56,6 +56,14 @@
 
 static encoder_t enc_state[2];
 
+
+/* Count direction per motor, indexed by motor_t. */
+static const int32_t enc_sign[2] =
+{
+    MOTOR_SIGN_LEFT,
+    MOTOR_SIGN_RIGHT
+};
+
 /* ==========================================================================
  *   Private Helpers
  * ========================================================================== */
@@ -162,7 +170,7 @@ int32_t Encoder_GetSpeed_CPS(motor_t motor)
 {
     if (motor != MOTOR_LEFT && motor != MOTOR_RIGHT)
         return 0;
-    return enc_state[motor].speed;
+    return enc_sign[motor] * enc_state[motor].speed;
 }
 
 /**
@@ -174,7 +182,7 @@ int32_t Encoder_GetDelta(motor_t motor)
 {
     if (motor != MOTOR_LEFT && motor != MOTOR_RIGHT)
         return 0;
-    return enc_state[motor].delta;
+    return enc_sign[motor] * enc_state[motor].delta;
 }
 
 /**
@@ -186,7 +194,7 @@ int32_t Encoder_GetPosition(motor_t motor)
 {
     if (motor != MOTOR_LEFT && motor != MOTOR_RIGHT)
         return 0;
-    return enc_state[motor].position;
+    return enc_sign[motor] * enc_state[motor].position;
 }
 
 /**

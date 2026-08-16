@@ -41,6 +41,22 @@ typedef enum
     STOP           /*!< Stop/standby   (IN1=LOW,  IN2=LOW,  Hi-Z output) */
 } motor_dir_t;
 
+/* ==========================================================================
+ *   Motor Orientation
+ * ========================================================================== */
+
+/**
+ * @brief  Per-motor mounting sign. Left side is mirror-mounted.
+ * @note   Applied to both drive output and encoder counts, so a single
+ *         value defines that side's forward direction throughout.
+ */
+#define MOTOR_SIGN_LEFT     (-1)
+#define MOTOR_SIGN_RIGHT    (+1)
+
+/* ==========================================================================
+ *   Functions
+ * ========================================================================== */
+
 void Motor_Init(void);
 void Motor_Start(void);
 void Motor_Stop(void);

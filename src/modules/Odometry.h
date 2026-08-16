@@ -1,14 +1,14 @@
 /**
  * @file        Odometry.h
  * @brief       Position tracking
- * @version     V1.0.0
- * @date        18-06-2026
+ * @version     V2.1.0
+ * @date        15-08-2026
  *
  * @details
- *   Uses Encoder to find positioning
+ *   Uses Encoder to find positioning.
  *   Tracks robot position (X, Y) and heading angle using left/right
- *   encoder counts. Uses Pololu 80×10mm wheels (diameter = 80 mm).
- * 
+ *   encoder counts. Uses Pololu 80x10mm wheels (diameter = 80 mm).
+ *
  *   From Pololu Micro Metal Gearmotor Datasheet (Rev 6-2, Page 2):
  *
  *   "The two-channel Hall effect encoder senses the rotation of a 6-pole
@@ -21,10 +21,38 @@
  *
  *   Gearbox ratio: 30:1 (nominal)
  *   Exact gear ratio: 29.89:1 (from Page 3 gearbox table)
- *   Wheel CPR = 12 × 29.89 = 358.68 ≈ 359 counts per wheel revolution.
- * 
- * 
- * 
+ *   Wheel CPR = 12 x 29.89 = 358.68 ~ 359 counts per wheel revolution.
+ *
+ *   -> 4x quadrature is ALREADY included in the 12 CPR figure.
+ *   -> A-ENC32 hardware does the 4x counting automatically.
+ *   -> 360 is used as the nominal figure.
+ *
+ *   Motor datasheet:
+ *   https://www.pololu.com/file/0J1487/pololu-micro-metal-gearmotors-rev-6-2.pdf
+ *
+ * ___________________________________________________________________________
+ * Tuning:
+ *   Two constants set the scale of every distance and angle in the firmware.
+ *   Both carry their datasheet-derived values below.
+ *
+ *   WHEEL_DIAMETER_MM   Scales linear distance. Raising it makes the firmware
+ *                       believe each count covers more ground, so commanded
+ *                       moves come out physically shorter.
+ *
+ *   WHEELBASE_MM        Scales rotation only. Raising it makes a commanded
+ *                       turn come out physically larger.
+ *
+ *   Turn angle depends on the RATIO of the two, so an error common to both
+ *   cancels in rotation while remaining in distance.
+ *
+ *   Verification procedure, using ODOM_TEST with motors in standby:
+ *     - Push the robot a known distance along a ruler. Compare the printed
+ *       x10 column against the ruler; a mismatch scales WHEEL_DIAMETER_MM.
+ *     - Rotate the robot in place through ten full revolutions. Divide the
+ *       printed diff10 by ten, then by 2*pi, for the effective wheelbase.
+ *       Ten revolutions rather than one, because judging start and end
+ *       alignment by eye dominates the error on a single turn.
+ *
  * @note
  *   File structure and Doxygen formatting assisted by AI.
  *
@@ -42,30 +70,33 @@
 /* ==========================================================================
  *   DEFINES
  * ========================================================================== */
-#define M_PI                                3.1415927f                  /*!< Single precision for Float */
-#define M_2PI                               6.2831855f                  /*!< 2 * PI */
-#define M_PI_DIV_2                          (M_PI / 2.0f)               /*!< 90 Degree - [pi/2] */
-#define WHEEL_DIAMETER_MM                   80  
-#define WHEELBASE_MM                        83.9                        /*!< Distance between wheels (mm) */
+
+#define M_PI                                3.1415927f      /*!< Single precision for Float */
+#define M_2PI                               6.2831855f      /*!< 2 * PI */
+#define M_PI_DIV_2                          (M_PI / 2.0f)   /*!< 90 Degree - [pi/2] */
+
+#define WHEEL_DIAMETER_MM                   80
+#define WHEELBASE_MM                        94.0f           /*!< Distance between wheels (mm) */
 #define WHEEL_CIRCUMFERENCE_MM              (WHEEL_DIAMETER_MM * M_PI)
+
 /**
- * @brief  Counts per wheel revolution.
+ * Counts per wheel revolution.
  *
  *   Pololu micro metal gearmotor encoder (Rev 6-2, pg 2):
  *   "12 CPR of the motor shaft when counting both edges of both channels"
- *   → 4x quadrature is ALREADY included in the 12 CPR figure.
- *   → A-ENC32 hardware does the 4x counting automatically.
+ *   -> 4x quadrature is ALREADY included in the 12 CPR figure.
+ *   -> A-ENC32 hardware does the 4x counting automatically.
  *
- *   12 CPR × 29.89:1 exact gear ratio = 358.68 → use 360 nominal.
+ *   12 CPR x 29.89:1 exact gear ratio = 358.68 -> use 360 nominal.
  *   Calibrate by spinning wheel one full turn, reading raw count.
  */
-#define COUNTS_PER_REV                      360U    /*!< Motor shaft 12 CPR × 30:1 gear */
+#define COUNTS_PER_REV                      360U            /*!< Motor shaft 12 CPR x 30:1 gear */
+
 #define MM_PER_COUNT                        (WHEEL_CIRCUMFERENCE_MM / COUNTS_PER_REV)
+#define RAD_PER_COUNT                       (MM_PER_COUNT / WHEELBASE_MM)
 
-#define AVG_DIVISOR         2.0f       // denominator for averaging two wheel distances
-#define RAD_TO_DEG          (180.0f / M_PI)
-
-
+#define AVG_DIVISOR                         2.0f            /*!< Denominator for averaging two wheel distances */
+#define RAD_TO_DEG                          (180.0f / M_PI)
 
 /* ==========================================================================
  *   ODOMETRY STRUCT
@@ -73,28 +104,25 @@
 
 typedef struct
 {
-    float x_mm;                             /*!< X position in mm (forward) */
-    float y_mm;                             /*!< Y position in mm (left/right) */
-    float heading_rad;                      /*!< Heading angle in radians (0 = forward) */
-    float left_dist_mm;                     /*!< Total distance traveled by left wheel */
-    float right_dist_mm;                    /*!< Total distance traveled by right wheel */
-    int32_t prev_left_pos;                  /*!< Previous left encoder position */
-    int32_t prev_right_pos;                 /*!< Previous right encoder position */
+    float   x_mm;                   /*!< X position in mm (forward) */
+    float   y_mm;                   /*!< Y position in mm (left/right) */
+    float   heading_rad;            /*!< Heading angle in radians (0 = forward) */
+    float   left_dist_mm;           /*!< Total distance traveled by left wheel */
+    float   right_dist_mm;          /*!< Total distance traveled by right wheel */
+    int32_t prev_left_pos;          /*!< Previous left encoder position */
+    int32_t prev_right_pos;         /*!< Previous right encoder position */
 } odometry_t;
-
 
 /* ==========================================================================
  *   Function Prototypes
  * ========================================================================== */
 
-void Odometry_Init(void);
-void Odometry_Reset(void);
-void Odometry_Update(void);
+void  Odometry_Init(void);
+void  Odometry_Reset(void);
+void  Odometry_Update(void);
 float Odometry_GetX_mm(void);
 float Odometry_GetY_mm(void);
 float Odometry_GetHeading_rad(void);
 float Odometry_GetHeading_deg(void);
-
-
 
 #endif /* ODOMETRY_H */

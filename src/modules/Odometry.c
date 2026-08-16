@@ -12,7 +12,8 @@
  * 
  *   Some Help:
  *   https://aleksandarhaber.com/clear-and-detailed-explanation-of-kinematics-equations-and-geometry-of-motion-of-differential-wheeled-robot-differential-drive-robot/#google_vignette
- *
+ *   https://www.hmc.edu/lair/ARW/ARW-Lecture01-Odometry.pdf
+ * 
  *   Pololu 80x10mm wheels (diameter = 80 mm).
  *   Pololu Micro Metal Gearmotor Datasheet (Rev 6-2, Page 2):
  *   "12 CPR of the motor shaft when counting both edges of both channels"
