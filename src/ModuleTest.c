@@ -24,6 +24,17 @@
 #include "gpio.h"
 
 /* ==========================================================================
+ *   Module Defines
+ * ========================================================================== */
+//#define MOTOR_TEST
+//#define IR_TEST
+//#define MOTION_TEST
+//#define IR_EMITTER_TEST
+//#define ODOM_TEST
+//#define TURN_TEST
+#define DRIVE_TEST
+
+/* ==========================================================================
  *   Shared Helper
  * ========================================================================== */
 
@@ -51,26 +62,13 @@ static void Test_SendDecimal(float value)
 #endif
 
 /* ==========================================================================
- *   Module Defines
- * ========================================================================== */
-//#define MOTOR_TEST
-#define IR_TEST
-//#define MOTION_TEST
-//#define IR_EMITTER_TEST
-//#define ODOM_TEST
-//#define TURN_TEST
-//#define DRIVE_TEST
-
-
-
-/* ==========================================================================
  *   Motor Test
  * ========================================================================== */
 #ifdef MOTOR_TEST
 
-    #define TEST_DUTY_LOW           15U
+    #define TEST_DUTY_LOW           20U
     #define TEST_DUTY_MID           25U
-    #define TEST_DUTY_HIGH          40U
+    #define TEST_DUTY_HIGH          30U
 
     #define TEST_PHASE_MS           2000U   /*!< Hold time per phase */
     #define TEST_SETTLE_MS          750U    /*!< Brake gap between phases */
@@ -93,23 +91,23 @@ static void Test_SendDecimal(float value)
     *
     *    #  Left            Right           Expect
     *    _  ____________  ____________     ________________________________________________
-    *    1  FORWARD 15      STOP            ONLY left wheel turns, forward
-    *    2  STOP            FORWARD 15      ONLY right wheel turns, forward
-    *    3  REVERSE 15      STOP            left wheel backward, enc_left decreasing
-    *    4  STOP            REVERSE 15      right wheel backward
-    *    5  FORWARD 15      FORWARD 15      straight ahead, both counts rising
+    *    1  FORWARD L       STOP            ONLY left wheel turns, forward
+    *    2  STOP            FORWARD L       ONLY right wheel turns, forward
+    *    3  REVERSE L       STOP            left wheel backward, enc_left decreasing
+    *    4  STOP            REVERSE L       right wheel backward
+    *    5  FORWARD L       FORWARD L       straight ahead, both counts rising
     *    6  BRAKE           BRAKE           hard stop (shorted), not a coast
-    *    7  FORWARD 25      REVERSE 25      spin CCW in place (left turn)
-    *    8  REVERSE 25      FORWARD 25      spin CW in place (right turn)
+    *    7  FORWARD M       REVERSE M       spin CCW in place (left turn)
+    *    8  REVERSE M       FORWARD M       spin CW in place (right turn)
     *    9  STOP            STOP            standby
-    *   10  FOWARD  40      STOP            ONLY left wheel tuns, forward
-    *   11  STOP            FORWARD 40      ONLY right wheel turns, forward
-    *   12  REVERSE 40      STOP            left wheel backward, enc_left decreasing
-    *   13  STOP            REVERSE 40      right wheel backward
-    *   14  FORWARD 40      FORWARD 40      straight ahead, both counts rising
+    *   10  FOWARD  H       STOP            ONLY left wheel tuns, forward
+    *   11  STOP            FORWARD H       ONLY right wheel turns, forward
+    *   12  REVERSE H       STOP            left wheel backward, enc_left decreasing
+    *   13  STOP            REVERSE H       right wheel backward
+    *   14  FORWARD H       FORWARD H       straight ahead, both counts rising
     *   15  BRAKE           BRAKE           hard stop (shorted), not a coast
-    *   16  FORWARD 40      REVERSE 40      spin CCW in place (left turn)
-    *   17  REVERSE 40      FORWARD 40      spin CW in place (right turn)
+    *   16  FORWARD H       REVERSE H       spin CCW in place (left turn)
+    *   17  REVERSE H       FORWARD H       spin CW in place (right turn)
     *   18  STOP            STOP            standby
     */
     static const motor_phase_t motor_test_seq[] =
