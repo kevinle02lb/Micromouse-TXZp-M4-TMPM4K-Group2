@@ -1,36 +1,51 @@
-# Module Testing Evidence
+# Module Testing
 
-Verification log for the micromouse bring-up. Each module gets a test, a status,
-and a piece of evidence (a serial log, a photo, or a recorded clip) proving it
-works before the next layer is stacked on top.
+Each test is a `#define` at the top of `ModuleTest.c`. Uncomment one, build, run.
+One at a time. Work down the table — later tests assume earlier ones pass.
 
-**Status key:** &#9744; pending &nbsp;|&nbsp; &#128260; in progress &nbsp;|&nbsp; &#9989; pass &nbsp;|&nbsp; &#10060; fail
+**Status:** &#9744; pending &nbsp;|&nbsp; &#128260; in progress &nbsp;|&nbsp; &#9989; pass &nbsp;|&nbsp; &#10060; fail
 
-## Checklist
+| # | Define | Proves | Pass criteria | Status | Evidence |
+|---|--------|--------|---------------|:------:|----------|
+| 1 | `IR_EMITTER_TEST` | Emitters drive | All four light in the counter pattern | &#9744; | "evidence\01_IR_EMITTER_TEST.mp4" |
+| 2 | `MOTOR_TEST` | Direction and duty per wheel | 18 phases match the table comment; `test_enc_left` rises on FORWARD, falls on REVERSE | &#9744; | |
+| 3 | `IR_TEST` | Channels respond to a wall | `FL L R FR` rise as a wall nears, fall when removed | &#9744; | |
+| 4 | `MOTION_TEST` | Speed loop tracks a setpoint | `pvL`/`pvR` converge on `sp` without saturating | &#9744; | "evidence\04_MOTION_500CPS.mp4", "evidence\04_MOTION_1000CPS.pdf, "evidence\04_MOTION_1000CPS.txt"|
+| 5 | `ODOM_TEST` | Pose maths, encoder signs | Pushed straight: `encL ≈ encR`, `deg ≈ 0`. Rotated CCW: `deg` rises, `diff` positive | &#9744; | |
+| 6 | `DRIVE_TEST` | Distance calibrated | Final `dist` matches a ruler within 2 mm | &#9744; | |
+| 7 | `TURN_TEST` | Angle calibrated | Final `arc` reaches `target`; protractor reads 90&deg; | &#9744; | |
+| 8 | Full run (`main.c`) | Robot solves the maze | Reaches the 2&times;2 goal | &#9744; | |
 
-| # | Module | What it proves | Method | Status | Evidence |
-|---|--------|----------------|--------|:------:|----------|
-| 1 | UART | Serial TX works at 115200-8N1 | Print a known string, confirm in TeraTerm | &#9744; | |
-| 2 | Timebase | Control tick is a true 1 kHz | Toggle a pin each tick, scope the period | &#9744; | |
-| 3 | Motor | Direction + duty correct per wheel | `MOTOR_TEST` 18-phase sequence | &#9744; | |
-| 4 | Encoder | Counts rise on forward, sign correct, CPS sane | Spin each wheel, read `test_enc_*` / CPS | &#9744; | |
-| 5 | IR sensors | All four channels respond to a wall | `IR_TEST` stream, wave a wall past each | &#9744; | |
-| 6 | Motion / PID | PV tracks SP, MV settles, no runaway | `MOTION_TEST` on a stand, plot with `plot_pid.m` | &#9744; | |
-| 7 | Odometry | X / Y / heading match a known move | Drive one cell + a 90&deg; turn, compare pose | &#9744; | |
-| 8 | FloodFill | Planner returns correct action for a known maze | Feed a fixed wall map, check the action sequence | &#9744; | |
-| 9 | Navigator | Turn + drive one cell, heading stays gridded | Single-cell move on the floor | &#9744; | |
-| 10 | Full run | Robot reaches the goal | Timed run on a real maze | &#9744; | |
+## Watch out
 
-## Evidence files
+`deg` is computed from `arc` by a fixed constant, and `dist` from the encoder
+count. Neither can disagree with itself. **A ruler or protractor is the only
+real check on tests 6 and 7.**
 
-Drop captures next to this README (or under `../assets/` if embedded elsewhere) and
-link them from the table. Suggested naming:
+In the last rows of either, `sp` should taper toward zero. If it stops at the
+speed floor instead, the wheels are still moving when the segment ends.
 
-- `03_motor_test.mp4`, `06_pid_step_500cps.png`, `06_pid_step_500cps.txt` (raw log)
-- keep the raw serial log alongside any PID plot so a run can be re-plotted later
+## Evidence
+
+Photo or clip is fine — no write-up needed. Drop it in `evidence/` and link it
+from the table.
+
+```
+evidence/02_motor_phases.mp4
+evidence/06_drive_180mm.jpg     ruler shot
+evidence/07_turn_90deg.jpg      protractor shot
+```
+
+Keep the raw serial log next to any plot so a run can be re-plotted.
+
+## Calibration
+
+Values live in the code, not here. Re-run the test if the hardware changes.
+
+- `WHEEL_DIAMETER_MM`, `COUNTS_PER_REV` (`Odometry.h`) &rarr; `DRIVE_TEST`
+- `WHEELBASE_MM` (`Odometry.h`) &rarr; `TURN_TEST`
+- `ir_cal[][]`, `IR_SIDE_TARGET_MM`, `IR_FRONT_TARGET_MM` &rarr; `IR_TEST`
 
 ## Notes
-
-Free-form observations per test — what failed, what you changed, gain values tried, etc.
 
 -
