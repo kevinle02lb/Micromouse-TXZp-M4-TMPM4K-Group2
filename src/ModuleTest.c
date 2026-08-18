@@ -24,14 +24,42 @@
 #include "gpio.h"
 
 /* ==========================================================================
+ *   Shared Helper
+ * ========================================================================== */
+
+#if defined(ODOM_TEST) || defined(TURN_TEST) || defined(DRIVE_TEST)
+/**
+ * @brief  Send a float with one decimal place.
+ * @param  value  Value to print.
+ * @note   UART_SendInt emits integers only, so the sign, whole part and tenth
+ *         are written separately.
+ */
+static void Test_SendDecimal(float value)
+{
+    int32_t tenths = (int32_t)(value * 10.0f);
+
+    if (tenths < 0)
+    {
+        UART_SendByte('-');
+        tenths = -tenths;
+    }
+
+    UART_SendInt(tenths / 10);
+    UART_SendByte('.');
+    UART_SendInt(tenths % 10);
+}
+#endif
+
+/* ==========================================================================
  *   Module Defines
  * ========================================================================== */
 //#define MOTOR_TEST
-//#define IR_TEST
+#define IR_TEST
 //#define MOTION_TEST
 //#define IR_EMITTER_TEST
 //#define ODOM_TEST
-#define TURN_TEST
+//#define TURN_TEST
+//#define DRIVE_TEST
 
 
 
@@ -40,9 +68,9 @@
  * ========================================================================== */
 #ifdef MOTOR_TEST
 
-    #define TEST_DUTY_LOW           19U
-    #define TEST_DUTY_MID           20U
-    #define TEST_DUTY_HIGH          25U
+    #define TEST_DUTY_LOW           15U
+    #define TEST_DUTY_MID           25U
+    #define TEST_DUTY_HIGH          40U
 
     #define TEST_PHASE_MS           2000U   /*!< Hold time per phase */
     #define TEST_SETTLE_MS          750U    /*!< Brake gap between phases */
@@ -65,23 +93,23 @@
     *
     *    #  Left            Right           Expect
     *    _  ____________  ____________     ________________________________________________
-    *    1  FORWARD 25      STOP            ONLY left wheel turns, forward
-    *    2  STOP            FORWARD 25      ONLY right wheel turns, forward
-    *    3  REVERSE 25      STOP            left wheel backward, enc_left decreasing
-    *    4  STOP            REVERSE 25      right wheel backward
-    *    5  FORWARD 25      FORWARD 25      straight ahead, both counts rising
+    *    1  FORWARD 15      STOP            ONLY left wheel turns, forward
+    *    2  STOP            FORWARD 15      ONLY right wheel turns, forward
+    *    3  REVERSE 15      STOP            left wheel backward, enc_left decreasing
+    *    4  STOP            REVERSE 15      right wheel backward
+    *    5  FORWARD 15      FORWARD 15      straight ahead, both counts rising
     *    6  BRAKE           BRAKE           hard stop (shorted), not a coast
-    *    7  FORWARD 50      REVERSE 50      spin CCW in place (left turn)
-    *    8  REVERSE 50      FORWARD 50      spin CW in place (right turn)
+    *    7  FORWARD 25      REVERSE 25      spin CCW in place (left turn)
+    *    8  REVERSE 25      FORWARD 25      spin CW in place (right turn)
     *    9  STOP            STOP            standby
-    *   10  FOWARD  100     STOP            ONLY left wheel tuns, forward
-    *   11  STOP            FORWARD 100     ONLY right wheel turns, forward
-    *   12  REVERSE 100     STOP            left wheel backward, enc_left decreasing
-    *   13  STOP            REVERSE 100     right wheel backward
-    *   14  FORWARD 100     FORWARD 100     straight ahead, both counts rising
+    *   10  FOWARD  40      STOP            ONLY left wheel tuns, forward
+    *   11  STOP            FORWARD 40      ONLY right wheel turns, forward
+    *   12  REVERSE 40      STOP            left wheel backward, enc_left decreasing
+    *   13  STOP            REVERSE 40      right wheel backward
+    *   14  FORWARD 40      FORWARD 40      straight ahead, both counts rising
     *   15  BRAKE           BRAKE           hard stop (shorted), not a coast
-    *   16  FORWARD 100     REVERSE 100     spin CCW in place (left turn)
-    *   17  REVERSE 100     FORWARD 100     spin CW in place (right turn)
+    *   16  FORWARD 40      REVERSE 40      spin CCW in place (left turn)
+    *   17  REVERSE 40      FORWARD 40      spin CW in place (right turn)
     *   18  STOP            STOP            standby
     */
     static const motor_phase_t motor_test_seq[] =
@@ -97,7 +125,7 @@
         { REVERSE, TEST_DUTY_MID,  FORWARD, TEST_DUTY_MID,  TEST_PHASE_MS,   8U },
         { STOP,    0U,             STOP,    0U,             TEST_SETTLE_MS,  9U },
 
-        /*  Full duty: saturation, current draw, encoder ceiling  */
+        /*  High duty: saturation, current draw, encoder ceiling  */
         { FORWARD, TEST_DUTY_HIGH, STOP,    0U,             TEST_PHASE_MS,  10U },
         { STOP,    0U,             FORWARD, TEST_DUTY_HIGH, TEST_PHASE_MS,  11U },
         { REVERSE, TEST_DUTY_HIGH, STOP,    0U,             TEST_PHASE_MS,  12U },
@@ -543,10 +571,15 @@
  *   Odometry Test
  *
  *   Passive. Motors stay in standby so the robot can be pushed by hand.
- *   All fractional values are sent in tenths — UART emits integers only.
  *
- *   diff10 = (D_right - D_left), the numerator of the heading equation in
- *   Odometry.c. Divided by a known physical rotation it yields WHEELBASE_MM.
+ *   Columns: encL,encR,x,deg,diff
+ *     encL   left encoder position, counts
+ *     encR   right encoder position, counts
+ *     x      odometry X, mm
+ *     deg    odometry heading, degrees
+ *     diff   (D_right - D_left), mm. The numerator of the heading equation in
+ *            Odometry.c. Divided by a known physical rotation it gives
+ *            WHEELBASE_MM.
  * ========================================================================== */
 #ifdef ODOM_TEST
 
@@ -557,7 +590,7 @@
         uint32_t tick = 0U;
         int32_t  posL, posR;
 
-        UART_SendString("encL,encR,x10,deg10,diff10");
+        UART_SendString("encL,encR,x,deg,diff");
         UART_CRLF();
 
         Encoder_ResetPosition(MOTOR_LEFT);
@@ -581,9 +614,9 @@
 
             UART_SendInt(posL);                                          UART_SendByte(',');
             UART_SendInt(posR);                                          UART_SendByte(',');
-            UART_SendInt((int32_t)(Odometry_GetX_mm() * 10.0f));         UART_SendByte(',');
-            UART_SendInt((int32_t)(Odometry_GetHeading_deg() * 10.0f));  UART_SendByte(',');
-            UART_SendInt((int32_t)((float)(posR - posL) * MM_PER_COUNT * 10.0f));
+            Test_SendDecimal(Odometry_GetX_mm());                        UART_SendByte(',');
+            Test_SendDecimal(Odometry_GetHeading_deg());                 UART_SendByte(',');
+            Test_SendDecimal((float)(posR - posL) * MM_PER_COUNT);
             UART_CRLF();
         }
     }
@@ -601,20 +634,17 @@
  *
  *       arc = theta * WHEELBASE_MM / 2
  *
- *   which at a 94 mm wheelbase is 73.8 mm for 90 degrees. The target is
- *   printed ahead of the CSV header so the arc10 column has a reference.
- *
  *   Streaming continues through the hold, which is where overshoot appears.
  *
  *   Speed constants are local to this block. A test harness reaching into
  *   another module's tuning would couple the two.
  *
- *   Columns: ms,arc10,deg10,pvL,pvR,sp10,state
+ *   Columns: ms,arc,deg,pvL,pvR,sp,state
  *     ms     milliseconds since the turn was commanded
- *     arc10  wheel arc covered, tenths of a mm
- *     deg10  odometry heading, tenths of a degree
+ *     arc    wheel arc covered, mm
+ *     deg    odometry heading, degrees
  *     pvL/R  measured wheel speed, mm/s
- *     sp10   profile setpoint, tenths of a mm/s
+ *     sp     profile setpoint, mm/s
  *     state  0 turning, 1 holding, 2 done
  * ========================================================================== */
 #ifdef TURN_TEST
@@ -623,10 +653,9 @@
     #define TURN_TEST_CCW            1            /* 1 = left/CCW, 0 = right/CW */
 
     #define TURN_TEST_SPEED_MM_S     150.0f       /* cruise ceiling, per wheel */
-    #define TURN_TEST_MIN_MM_S        30.0f       /* floor, clears stiction */
-    #define TURN_TEST_ACCEL_MM_S2    400.0f       /* ramp and brake */
+    #define TURN_TEST_MIN_MM_S       0.0f       /* floor, clears stiction */
+    #define TURN_TEST_ACCEL_MM_S2    300.0f       /* ramp and brake */
 
-    #define TURN_TEST_TOLERANCE_MM     1.0f       /* completion band on the arc */
     #define TURN_TEST_HOLD_MS        500U         /* stationary hold after the turn */
     #define TURN_TEST_PRINT_EVERY     10U         /* 1 kHz / 10 = 100 Hz */
 
@@ -671,10 +700,10 @@
         sign          = (TURN_TEST_CCW) ? 1.0f : -1.0f;
         arc_target_mm = TURN_TEST_ANGLE_RAD * WHEELBASE_MM * 0.5f;
 
-        UART_SendString("target10,");
-        UART_SendInt((int32_t)(arc_target_mm * 10.0f));
+        UART_SendString("target,");
+        Test_SendDecimal(arc_target_mm);
         UART_CRLF();
-        UART_SendString("ms,arc10,deg10,pvL,pvR,sp10,state");
+        UART_SendString("ms,arc,deg,pvL,pvR,sp,state");
         UART_CRLF();
 
         Odometry_Reset();
@@ -707,7 +736,7 @@
                     v = Profile_Step(&seg, swept);
                     TurnTest_Command(-v * sign, v * sign);
 
-                    if (Profile_IsComplete(&seg, swept, TURN_TEST_TOLERANCE_MM))
+                    if (Profile_IsComplete(&seg, swept))
                     {
                         hold  = 0U;
                         state = 1U;
@@ -737,17 +766,106 @@
             tick = 0U;
 
             UART_SendInt((int32_t)ms);                                      UART_SendByte(',');
-            UART_SendInt((int32_t)(swept * 10.0f));                         UART_SendByte(',');
-            UART_SendInt((int32_t)(Odometry_GetHeading_deg() * 10.0f));     UART_SendByte(',');
+            Test_SendDecimal(swept);                                        UART_SendByte(',');
+            Test_SendDecimal(Odometry_GetHeading_deg());                    UART_SendByte(',');
             UART_SendInt((int32_t)TurnTest_Speed_mm_s(MOTOR_LEFT));         UART_SendByte(',');
             UART_SendInt((int32_t)TurnTest_Speed_mm_s(MOTOR_RIGHT));        UART_SendByte(',');
-            UART_SendInt((int32_t)(v * 10.0f));                             UART_SendByte(',');
+            Test_SendDecimal(v);                                            UART_SendByte(',');
             UART_SendInt((int32_t)state);
             UART_CRLF();
         }
     }
 
 #endif /* TURN_TEST */
+
+
+/* ==========================================================================
+ *   Drive Test
+ *
+ *   One straight move of a fixed distance, then a hold. Compare the printed
+ *   dist10 against a ruler on the floor.
+ *
+ *   Columns: ms,dist,encL,encR,sp,state
+ *     ms     milliseconds since the move was commanded
+ *     dist   distance covered, mm
+ *     encL   left encoder counts since the move started
+ *     encR   right encoder counts since the move started
+ *     sp     profile setpoint, mm/s
+ *     state  0 driving, 1 done
+ * ========================================================================== */
+#ifdef DRIVE_TEST
+
+    #define DRIVE_TEST_DISTANCE_MM   180.0f
+    #define DRIVE_TEST_SPEED_MM_S    300.0f
+    #define DRIVE_TEST_MIN_MM_S       0.0f
+    #define DRIVE_TEST_ACCEL_MM_S2   300.0f
+    #define DRIVE_TEST_PRINT_EVERY    10U
+
+    static void DriveTest_Run(void)
+    {
+        profile_t seg;
+        int32_t   startL, startR, dL, dR;
+        float     dist = 0.0f;
+        float     v    = 0.0f;
+        uint32_t  ms   = 0U;
+        uint32_t  tick = 0U;
+        uint8_t   state = 0U;
+
+        UART_SendString("target,");
+        Test_SendDecimal(DRIVE_TEST_DISTANCE_MM);
+        UART_CRLF();
+        UART_SendString("ms,dist,encL,encR,sp,state");
+        UART_CRLF();
+
+        startL = Encoder_GetPosition(MOTOR_LEFT);
+        startR = Encoder_GetPosition(MOTOR_RIGHT);
+
+        Profile_Begin(&seg, DRIVE_TEST_DISTANCE_MM,
+                      DRIVE_TEST_SPEED_MM_S, DRIVE_TEST_MIN_MM_S,
+                      DRIVE_TEST_ACCEL_MM_S2);
+
+        while (1)
+        {
+            if (!Timebase_GetAndClear())
+                continue;
+
+            Encoder_Update();
+
+            dL   = Encoder_GetPosition(MOTOR_LEFT)  - startL;
+            dR   = Encoder_GetPosition(MOTOR_RIGHT) - startR;
+            dist = 0.5f * (float)(dL + dR) * MM_PER_COUNT;
+
+            if (state == 0U)
+            {
+                v = Profile_Step(&seg, dist);
+
+                if (Profile_IsComplete(&seg, dist))
+                {
+                    v     = 0.0f;
+                    state = 1U;
+                }
+            }
+
+            Motion_SetSpeed(v / MM_PER_COUNT, v / MM_PER_COUNT);
+            Motion_Update();
+            ms++;
+
+            if (++tick < DRIVE_TEST_PRINT_EVERY)
+                continue;
+
+            tick = 0U;
+
+            UART_SendInt((int32_t)ms);                  UART_SendByte(',');
+            Test_SendDecimal(dist);                     UART_SendByte(',');
+            UART_SendInt(dL);                           UART_SendByte(',');
+            UART_SendInt(dR);                           UART_SendByte(',');
+            Test_SendDecimal(v);                        UART_SendByte(',');
+            UART_SendInt((int32_t)state);
+            UART_CRLF();
+        }
+    }
+
+#endif /* DRIVE_TEST */
 
 
 /* ==========================================================================
@@ -797,6 +915,12 @@ static void Test_Init(void)
         UART_Init();
         Timebase_Init();
     #endif
+
+    #ifdef DRIVE_TEST
+        Motion_Init();      /* Encoder_Init() + Motor_Init() */
+        UART_Init();
+        Timebase_Init();
+    #endif
 }
 
 /* ==========================================================================
@@ -821,6 +945,10 @@ int main(void)
 
     #ifdef TURN_TEST
         TurnTest_Run();
+    #endif
+
+    #ifdef DRIVE_TEST
+        DriveTest_Run();
     #endif
 
     #ifdef IR_EMITTER_TEST

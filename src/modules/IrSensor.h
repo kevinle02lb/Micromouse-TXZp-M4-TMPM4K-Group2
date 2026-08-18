@@ -87,7 +87,21 @@ typedef struct
 /**
  * @brief  Hysteresis band to prevent flicker at the threshold.
  */
-#define IR_WALL_HYSTERESIS      150U
+#define IR_WALL_HYSTERESIS_MM      8.0f
+#define IR_WALL_DISTANCE_MM      100.0f
+
+
+/* ==========================================================================
+ *   Distance Calibration
+ * ========================================================================== */
+
+#define IR_CAL_POINTS       6U
+
+typedef struct
+{
+    uint16_t adc;
+    uint16_t mm;
+} ir_cal_point_t;
 
 
 /* ==========================================================================
@@ -103,6 +117,7 @@ const ir_sensordata_t* IR_GetData(void);
 uint16_t IR_GetRaw(ir_channel_t ch);
 uint16_t IR_GetReflected(ir_channel_t ch);
 uint16_t IR_GetFiltered(ir_channel_t ch);
+float IR_GetDistance_mm(ir_channel_t ch);
 bool IR_IsWallDetected(ir_channel_t ch, uint16_t threshold);
 bool IR_IsWallPresent(ir_channel_t ch);
 

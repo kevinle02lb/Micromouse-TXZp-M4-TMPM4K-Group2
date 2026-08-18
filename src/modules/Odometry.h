@@ -25,33 +25,9 @@
  *
  *   -> 4x quadrature is ALREADY included in the 12 CPR figure.
  *   -> A-ENC32 hardware does the 4x counting automatically.
- *   -> 360 is used as the nominal figure.
  *
  *   Motor datasheet:
  *   https://www.pololu.com/file/0J1487/pololu-micro-metal-gearmotors-rev-6-2.pdf
- *
- * ___________________________________________________________________________
- * Tuning:
- *   Two constants set the scale of every distance and angle in the firmware.
- *   Both carry their datasheet-derived values below.
- *
- *   WHEEL_DIAMETER_MM   Scales linear distance. Raising it makes the firmware
- *                       believe each count covers more ground, so commanded
- *                       moves come out physically shorter.
- *
- *   WHEELBASE_MM        Scales rotation only. Raising it makes a commanded
- *                       turn come out physically larger.
- *
- *   Turn angle depends on the RATIO of the two, so an error common to both
- *   cancels in rotation while remaining in distance.
- *
- *   Verification procedure, using ODOM_TEST with motors in standby:
- *     - Push the robot a known distance along a ruler. Compare the printed
- *       x10 column against the ruler; a mismatch scales WHEEL_DIAMETER_MM.
- *     - Rotate the robot in place through ten full revolutions. Divide the
- *       printed diff10 by ten, then by 2*pi, for the effective wheelbase.
- *       Ten revolutions rather than one, because judging start and end
- *       alignment by eye dominates the error on a single turn.
  *
  * @note
  *   File structure and Doxygen formatting assisted by AI.
@@ -75,8 +51,8 @@
 #define M_2PI                               6.2831855f      /*!< 2 * PI */
 #define M_PI_DIV_2                          (M_PI / 2.0f)   /*!< 90 Degree - [pi/2] */
 
-#define WHEEL_DIAMETER_MM                   80
-#define WHEELBASE_MM                        94.0f           /*!< Distance between wheels (mm) */
+#define WHEEL_DIAMETER_MM                   80              /*!< 80mm from Datasheet */
+#define WHEELBASE_MM                        96.0f           /*!< Distance between wheels (mm) */
 #define WHEEL_CIRCUMFERENCE_MM              (WHEEL_DIAMETER_MM * M_PI)
 
 /**
@@ -87,10 +63,10 @@
  *   -> 4x quadrature is ALREADY included in the 12 CPR figure.
  *   -> A-ENC32 hardware does the 4x counting automatically.
  *
- *   12 CPR x 29.89:1 exact gear ratio = 358.68 -> use 360 nominal.
+ *   12 CPR x 29.89:1 exact gear ratio = 358.68
  *   Calibrate by spinning wheel one full turn, reading raw count.
  */
-#define COUNTS_PER_REV                      360U            /*!< Motor shaft 12 CPR x 30:1 gear */
+#define COUNTS_PER_REV                      359U            /*!< Motor shaft 12 CPR x 30:1 gear */
 
 #define MM_PER_COUNT                        (WHEEL_CIRCUMFERENCE_MM / COUNTS_PER_REV)
 #define RAD_PER_COUNT                       (MM_PER_COUNT / WHEELBASE_MM)

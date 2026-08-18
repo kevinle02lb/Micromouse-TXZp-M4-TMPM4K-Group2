@@ -50,9 +50,12 @@ void Profile_Begin(profile_t *p,
  * @param  traveled_mm   Path length covered since the segment started.
  * @return float  Velocity setpoint for this tick, mm/s, always positive.
  * @details
- *   Returns the smallest of the ramp, cruise and brake limits, then raises
- *   the result to v_min so the command stays above stiction. Once the target
- *   is reached the floor is withdrawn and the setpoint drops to zero.
+ *   Returns the smallest of the ramp, cruise and brake limits.
+ *
+ *   The v_min floor is applied to the ramp term only. Its job is to break
+ *   static friction when starting from rest; during braking the wheels are
+ *   already turning and only kinetic friction applies, so holding the command
+ *   up there would leave the segment carrying speed into its own target.
  */
 float Profile_Step(profile_t *p, float traveled_mm)
 {
@@ -70,6 +73,9 @@ float Profile_Step(profile_t *p, float traveled_mm)
     v_ramp  = p->v_now_mm_s + (p->accel_mm_s2 * PROFILE_DT);
     v_brake = sqrtf(2.0f * p->accel_mm_s2 * remaining);
 
+    if (v_ramp < p->v_min_mm_s)
+        v_ramp = p->v_min_mm_s;
+
     v = p->v_max_mm_s;
 
     if (v_ramp < v)
@@ -78,21 +84,20 @@ float Profile_Step(profile_t *p, float traveled_mm)
     if (v_brake < v)
         v = v_brake;
 
-    if (v < p->v_min_mm_s)
-        v = p->v_min_mm_s;
-
     p->v_now_mm_s = v;
     return v;
 }
 
 /**
  * @brief  Test whether the segment has covered its commanded length.
- * @param  p             Profile instance.
- * @param  traveled_mm   Path length covered since the segment started.
- * @param  tolerance_mm  Distance short of the target that still counts as done.
+ * @param  p            Profile instance.
+ * @param  traveled_mm  Path length covered since the segment started.
  * @return bool  true once the segment is complete.
+ * @note   No tolerance band. The v_min floor keeps the segment creeping until
+ *         the target is crossed, so the move arrives rather than giving up
+ *         short. A profile without a floor would need one.
  */
-bool Profile_IsComplete(const profile_t *p, float traveled_mm, float tolerance_mm)
+bool Profile_IsComplete(const profile_t *p, float traveled_mm)
 {
-    return (traveled_mm >= (p->distance_mm - tolerance_mm));
+    return (traveled_mm >= p->distance_mm);
 }

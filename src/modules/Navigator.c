@@ -15,11 +15,10 @@
  *     turn    wheels opposed        length = theta * WHEELBASE_MM / 2
  *
  *   State Flow:
- *   1. NAV_PLAN         - read walls, ask FloodFill, arm a segment
- *   2. NAV_TURN         - pivot, only if the action needs one
- *   3. NAV_TURN_SETTLE  - hold still
- *   4. NAV_DRIVE        - advance one cell
- *   5. NAV_DRIVE_SETTLE - hold still, report the move, back to 1
+ *   1. NAV_PLAN    - read walls, ask FloodFill, arm a segment
+ *   2. NAV_TURN    - pivot, only if the action needs one
+ *   3. NAV_DRIVE   - advance one cell
+ *   4. NAV_SETTLE  - hold at the cell centre, report the move, back to 1
  *
  *   Heading is not tracked here. Turn size comes from encoder positions
  *   captured at segment start; grid heading belongs to FloodFill.
@@ -48,23 +47,21 @@
  * ========================================================================== */
 
 #define CELL_SIZE_MM            180.0f      /* one maze cell, centre to centre */
-#define DRIVE_TOLERANCE_MM        2.0f      /* drive segment completion band */
-#define TURN_TOLERANCE_MM         1.0f      /* turn segment completion band, wheel arc */
 
 #define DRIVE_SPEED_MM_S        300.0f      /* straight cruise ceiling */
-#define DRIVE_MIN_MM_S           40.0f      /* straight floor, clears stiction */
+#define DRIVE_MIN_MM_S           20.0f      /* straight floor, clears stiction */
 #define DRIVE_ACCEL_MM_S2       800.0f      /* straight ramp and brake */
 
 #define TURN_SPEED_MM_S         150.0f      /* pivot cruise ceiling, per wheel */
-#define TURN_MIN_MM_S            30.0f      /* pivot floor, clears stiction */
+#define TURN_MIN_MM_S            20.0f      /* pivot floor, clears stiction */
 #define TURN_ACCEL_MM_S2        400.0f      /* pivot ramp and brake */
 
-#define KP_STRAIGHT               4.0f      /* straightness trim, (mm/s) per mm of skew */
-#define TRIM_LIMIT_MM_S          60.0f      /* ceiling on the straightness trim */
+#define KP_STRAIGHT               4.0f      /* damping trim, (mm/s) per mm of wheel skew */
+#define KP_WALL                   0.8f      /* wall trim, (mm/s) per mm of lateral error */
+#define IR_SIDE_TARGET_MM        84.0f      /* side reading when centred, measured */
+#define IR_FRONT_TARGET_MM       60.0f      /* front reading at a cell centre, measured */
 
-#define SETTLE_TICKS            150U        /* stationary hold between segments */
-
-#define STALL_TIMEOUT_TICKS    4000U        /* segment abort if a wheel jams */
+#define SETTLE_TICKS             60U        /* stationary hold at the cell centre */
 
 /* ==========================================================================
  *   State Machine
@@ -75,12 +72,11 @@
  */
 typedef enum
 {
-    NAV_PLAN,           // read walls, ask FloodFill, arm the first segment
-    NAV_TURN,           // pivot through the planned angle
-    NAV_TURN_SETTLE,    // hold still, then arm the forward segment
-    NAV_DRIVE,          // advance one cell
-    NAV_DRIVE_SETTLE,   // hold still, then commit the move to the planner
-    NAV_FINISHED        // goal reached, motors held stopped
+    NAV_PLAN,       // read walls, ask FloodFill, arm the first segment
+    NAV_TURN,       // pivot through the planned angle
+    NAV_DRIVE,      // advance one cell
+    NAV_SETTLE,     // hold at the cell centre, then commit the move
+    NAV_FINISHED    // goal reached, motors held stopped
 } nav_state_t;
 
 /* ==========================================================================
@@ -93,10 +89,9 @@ static floodfill_t current_action;
 static profile_t   segment;             // active drive or turn profile
 static int32_t     seg_start_countL;    // left encoder position at segment start
 static int32_t     seg_start_countR;    // right encoder position at segment start
-static uint16_t    seg_ticks;           // ticks elapsed in the active segment
 static float       turn_sign;           // +1 = CCW, -1 = CW
-
 static uint16_t    settle_ticks;        // ticks elapsed in the active settle
+static float       cell_offset_mm;      // longitudinal error carried into the next drive
 
 /* ==========================================================================
  *   Motion Interface
@@ -127,7 +122,6 @@ static void CaptureSegmentStart(void)
 {
     seg_start_countL = Encoder_GetPosition(MOTOR_LEFT);
     seg_start_countR = Encoder_GetPosition(MOTOR_RIGHT);
-    seg_ticks        = 0U;
 }
 
 /**
@@ -177,25 +171,58 @@ static float SegmentArc_mm(void)
 }
 
 /**
- * @brief  Speed differential that holds the robot on its starting heading.
+ * @brief  Speed differential that keeps the robot centred and straight.
  * @return float  Trim in mm/s, added to the left wheel and subtracted from
  *                the right.
  * @details
- *   Proportional control on wheel skew. Skew starts at zero each segment, so
- *   this holds whatever heading the segment began with rather than correcting
- *   a pre-existing error. Closed-loop time constant is 1 / (2 * KP_STRAIGHT).
+ *   Position comes from the side sensors, damping from wheel skew. Lateral
+ *   position sits two integrations away from the wheel differential, so a
+ *   proportional term alone weaves; skew stands in for heading and settles it.
+ *
+ *   A single wall gives half the displacement signal that two do, so its
+ *   deviation is doubled to hold the loop gain constant.
+ *
+ *   With no wall in range the skew term carries alone, holding whatever
+ *   heading the segment started with.
  */
 static float StraightnessTrim(void)
 {
-    float skew_mm = SegmentRight_mm() - SegmentLeft_mm();
-    float trim    = KP_STRAIGHT * skew_mm;
+    float skew  = SegmentRight_mm() - SegmentLeft_mm();
+    float error = 0.0f;
+    bool  left  = IR_IsWallPresent(IR_FAR_LEFT);
+    bool  right = IR_IsWallPresent(IR_FAR_RIGHT);
 
-    if (trim > TRIM_LIMIT_MM_S)
-        trim = TRIM_LIMIT_MM_S;
-    else if (trim < -TRIM_LIMIT_MM_S)
-        trim = -TRIM_LIMIT_MM_S;
+    if (left && right)
+        error = IR_GetDistance_mm(IR_FAR_RIGHT) - IR_GetDistance_mm(IR_FAR_LEFT);
+    else if (left)
+        error = 2.0f * (IR_SIDE_TARGET_MM - IR_GetDistance_mm(IR_FAR_LEFT));
+    else if (right)
+        error = 2.0f * (IR_GetDistance_mm(IR_FAR_RIGHT) - IR_SIDE_TARGET_MM);
 
-    return trim;
+    return (KP_WALL * error) + (KP_STRAIGHT * skew);
+}
+
+/**
+ * @brief  Longitudinal error against a wall ahead.
+ * @return float  Millimetres still to travel, positive when stopped short.
+ * @details
+ *   Encoder distance accumulates error with nothing to correct it. A wall
+ *   ahead is a fixed reference, so the reading at a cell centre pins the
+ *   robot's position along the cell no matter what the count has drifted to.
+ *
+ *   Both front sensors are averaged. A robot sitting at an angle reads long on
+ *   one and short on the other, and the mean cancels that.
+ *
+ *   Zero when no wall is in range, which leaves the next move on dead
+ *   reckoning alone.
+ */
+static float FrontWallOffset_mm(void)
+{
+    if (!IR_IsWallPresent(IR_LEFT) || !IR_IsWallPresent(IR_RIGHT))
+        return 0.0f;
+
+    return (0.5f * (IR_GetDistance_mm(IR_LEFT) + IR_GetDistance_mm(IR_RIGHT)))
+           - IR_FRONT_TARGET_MM;
 }
 
 /* ==========================================================================
@@ -231,44 +258,27 @@ static void BeginTurn(float angle_rad)
     nav_state = NAV_TURN;
 }
 
-/**
- * @brief  Hold the wheels stopped for one tick of the settle interval.
- * @return bool  true once SETTLE_TICKS have elapsed.
- * @details
- *   A segment ends the instant its encoder target is crossed, while the
- *   wheels are still turning. Arming the next segment on that tick would fold
- *   the residual rotation of a pivot into the following straight, where the
- *   straightness trim cannot see it because skew is measured from each
- *   segment's own start. The hold lets the brake take effect first.
- */
-static bool SettleStep(void)
-{
-    CommandWheels(0.0f, 0.0f);
-    settle_ticks++;
-
-    return (settle_ticks >= SETTLE_TICKS);
-}
-
 /* ==========================================================================
  *   Public Functions
  * ========================================================================== */
 
 /**
  * @brief  Initialize the navigator state machine.
- * @note   Entry is the post-drive settle with no action pending. Reporting
- *         FLOODFILL_STOP is a no-op in the planner, so this costs nothing and
- *         gives the IR filter time to converge before the first wall reading.
+ * @note   The wheels are commanded to a stop so the loop starts from a known
+ *         setpoint regardless of what ran before.
  */
 void Navigator_Init(void)
 {
-    nav_state      = NAV_DRIVE_SETTLE;
+    nav_state      = NAV_PLAN;
     current_action = FLOODFILL_STOP;
 
     seg_start_countL = 0;
     seg_start_countR = 0;
-    seg_ticks        = 0U;
     turn_sign        = 1.0f;
     settle_ticks     = 0U;
+    cell_offset_mm   = 0.0f;
+
+    CommandWheels(0.0f, 0.0f);
 
     Profile_Begin(&segment, 0.0f,
                   DRIVE_SPEED_MM_S, DRIVE_MIN_MM_S, DRIVE_ACCEL_MM_S2);
@@ -287,6 +297,8 @@ void Navigator_Update(void)
          * ============================================================== */
         case NAV_PLAN:
         {
+            CommandWheels(0.0f, 0.0f);
+
             FloodFill_SetWalls(IR_IsWallPresent(IR_LEFT) &&
                                IR_IsWallPresent(IR_RIGHT),
                                IR_IsWallPresent(IR_FAR_LEFT),
@@ -297,7 +309,7 @@ void Navigator_Update(void)
             switch (current_action)
             {
                 case FLOODFILL_FORWARD:
-                    BeginDrive(CELL_SIZE_MM);
+                    BeginDrive(CELL_SIZE_MM + cell_offset_mm);
                     break;
 
                 case FLOODFILL_TURN_LEFT:                   // CCW
@@ -331,25 +343,11 @@ void Navigator_Update(void)
 
             CommandWheels(-v * turn_sign, v * turn_sign);
 
-            seg_ticks++;
-
-            if (Profile_IsComplete(&segment, swept, TURN_TOLERANCE_MM) ||
-                (seg_ticks >= STALL_TIMEOUT_TICKS))
+            if (Profile_IsComplete(&segment, swept))
             {
-                settle_ticks = 0U;
-                nav_state    = NAV_TURN_SETTLE;
-            }
-            break;
-        }
-
-        /* ==============================================================
-         *  NAV_TURN_SETTLE — let the pivot stop before driving out of it
-         * ============================================================== */
-        case NAV_TURN_SETTLE:
-        {
-            if (SettleStep())
+                CommandWheels(0.0f, 0.0f);
                 BeginDrive(CELL_SIZE_MM);
-
+            }
             break;
         }
 
@@ -364,24 +362,26 @@ void Navigator_Update(void)
 
             CommandWheels(v + trim, v - trim);
 
-            seg_ticks++;
-
-            if (Profile_IsComplete(&segment, traveled, DRIVE_TOLERANCE_MM) ||
-                (seg_ticks >= STALL_TIMEOUT_TICKS))
+            if (Profile_IsComplete(&segment, traveled))
             {
+                CommandWheels(0.0f, 0.0f);
                 settle_ticks = 0U;
-                nav_state    = NAV_DRIVE_SETTLE;
+                nav_state    = NAV_SETTLE;
             }
             break;
         }
 
         /* ==============================================================
-         *  NAV_DRIVE_SETTLE — stop, then commit the move to the planner
+         *  NAV_SETTLE - hold at the cell centre, then commit the move
          * ============================================================== */
-        case NAV_DRIVE_SETTLE:
+        case NAV_SETTLE:
         {
-            if (SettleStep())
+            CommandWheels(0.0f, 0.0f);
+            settle_ticks++;
+
+            if (settle_ticks >= SETTLE_TICKS)
             {
+                cell_offset_mm = FrontWallOffset_mm();          /* Find the */
                 FloodFill_ReportDone(current_action);
                 nav_state = NAV_PLAN;
             }

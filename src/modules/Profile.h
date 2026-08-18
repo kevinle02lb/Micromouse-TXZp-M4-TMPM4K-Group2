@@ -49,6 +49,6 @@ void  Profile_Begin(profile_t *p,
 
 float Profile_Step(profile_t *p, float traveled_mm);
 
-bool  Profile_IsComplete(const profile_t *p, float traveled_mm, float tolerance_mm);
+bool  Profile_IsComplete(const profile_t *p, float traveled_mm);
 
 #endif /* PROFILE_H */

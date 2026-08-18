@@ -59,16 +59,18 @@ typedef enum {
     IR_PHASE_COMPUTE           /* ambient-cancel, filter, walls            */
 } ir_phase_t;
 
-/**
- * @brief  Per-channel wall threshold (filtered ADC counts).
- * @note   Each sensor can vary in distance size due to their layout/angles
- */
-static const uint16_t ir_wall_thresh[IR_COUNT] =
+/* Reading-to-distance curve per channel, adc descending */
+static const ir_cal_point_t ir_cal[IR_COUNT][IR_CAL_POINTS] =
 {
-    1000U,   /* IR_FAR_LEFT  — side  */
-    1000U,   /* IR_LEFT      — front */
-    1000U,   /* IR_RIGHT     — front */
-    1000U    /* IR_FAR_RIGHT — side  */
+    /* ADC, mm */
+    /* IR_FAR_LEFT */
+    { {2383U, 30U}, {1433U, 50U}, {962U, 70U}, {592U, 90U}, {424U, 120U}, {310U, 160U} },
+    /* IR_LEFT */
+    { {3286U, 30U}, {2117U, 50U}, {1366U, 70U}, {1039U, 90U}, {753U, 120U}, {568U, 160U} },
+    /* IR_RIGHT */
+    { {3344U, 30U}, {3125U, 50U}, {2019U, 70U}, {1514U, 90U}, {1030U, 120U}, {721U, 160U} },
+    /* IR_FAR_RIGHT */
+    { {3287U, 30U}, {2387U, 50U}, {1502U, 70U}, {1080U, 90U}, {659U, 120U}, {442U, 160U} }
 };
 
 /* ==========================================================================
@@ -194,28 +196,22 @@ static void IR_ComputeReflected(void)
 }
 
 /**
- * @brief  Update wallDetected[] from filtered data with hysteresis.
- * @note   Filtered value rises as a wall gets closer.
+ * @brief  Update wallDetected[] from measured distance with hysteresis.
+ * @note   Thresholding in mm rather than counts lets one limit serve all four
+ *         channels, whose raw sensitivities differ by more than 2:1.
  */
 static void IR_UpdateWalls(void)
 {
-    uint16_t level;
+    float distance;
 
     for (int i = 0; i < IR_COUNT; i++)
     {
-        level = ir_data.filtered[i];
+        distance = IR_GetDistance_mm((ir_channel_t)i);
 
-        /* Wall detection with hysteresis */
-        if (wall_state[i]) 
-        {
-            /* Was seeing wall — needs to drop further to clear */
-            wall_state[i] = (level > (ir_wall_thresh[i] - IR_WALL_HYSTERESIS));
-        } 
-        else 
-        {
-            /* Was clear — needs to rise further to detect */
-            wall_state[i] = (level > (ir_wall_thresh[i] + IR_WALL_HYSTERESIS));
-        }
+        if (wall_state[i])
+            wall_state[i] = (distance < (IR_WALL_DISTANCE_MM + IR_WALL_HYSTERESIS_MM));
+        else
+            wall_state[i] = (distance < (IR_WALL_DISTANCE_MM - IR_WALL_HYSTERESIS_MM));
 
         ir_data.wallDetected[i] = wall_state[i];
     }
@@ -364,6 +360,37 @@ uint16_t IR_GetFiltered(ir_channel_t ch)
 }
 
 /**
+ * @brief  Convert a channel's filtered reading to a distance.
+ * @param  ch  Sensor channel to read.
+ * @return float  Distance in mm, clamped to the ends of the table.
+ * @note   Table rows must be strictly descending in adc.
+ */
+float IR_GetDistance_mm(ir_channel_t ch)
+{
+    const ir_cal_point_t *cal = ir_cal[ch];
+    uint16_t value = ir_data.filtered[ch];
+    uint8_t  i;
+    float    frac;
+
+    if (value >= cal[0].adc)
+        return (float)cal[0].mm;
+
+    for (i = 0U; i < (IR_CAL_POINTS - 1U); i++)
+    {
+        if (value >= cal[i + 1U].adc)
+        {
+            frac = (float)(cal[i].adc - value) /
+                   (float)(cal[i].adc - cal[i + 1U].adc);
+
+            return (float)cal[i].mm +
+                   (frac * (float)(cal[i + 1U].mm - cal[i].mm));
+        }
+    }
+
+    return (float)cal[IR_CAL_POINTS - 1U].mm;
+}
+
+/**
  * @brief  Check if a wall is detected based on reflected threshold.
  * @param  ch         Sensor channel to check.
  * @param  threshold  Minimum reflected value to count as wall.
@@ -482,4 +509,3 @@ uint16_t IR_FilterIIR(uint16_t prev, uint16_t curr, uint8_t shift)
 
     return result;
 }
-

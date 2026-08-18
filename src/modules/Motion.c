@@ -19,7 +19,6 @@
 #include "Encoder.h"
 #include "PID.h"
 #include "Motor.h"
-#include <math.h>
 
 
 /* ==========================================================================
@@ -34,11 +33,6 @@ static float target_right = 0.0f;
 
 static float output_left  = 0.0f;
 static float output_right = 0.0f;
-
-/* Turning PID control */
-static pid_t pid_heading;
-static float target_heading = 0.0f;
-static bool  heading_mode = false;
 
 /* Last commanded direction per motor, held through the output deadzone. */
 static motor_dir_t last_dir[2] = { FORWARD, FORWARD };
@@ -91,20 +85,6 @@ static void Motion_ApplyOutput(motor_t motor, float output)
     Motor_Set(motor, dir, (uint8_t)(magnitude + MOTION_ROUND_OFFSET));
 }
 
-/**
- * @brief  Fold an angle into [-pi, +pi].
- * @param  angle  Input angle (radians).
- * @return float  Equivalent angle in [-pi, +pi].
- */
-static float NormalizeAngle(float angle)
-{
-    while (angle > M_PI)
-        angle -= M_2PI;
-    while (angle < -M_PI)
-        angle += M_2PI;
-    return angle;
-}
-
 /* ==========================================================================
  *   Initialization
  * ========================================================================== */
@@ -125,12 +105,6 @@ void Motion_Init(void)
     target_left = 0.0f;
     target_right = 0.0f;
 
-    /* PID Init for Turning */
-    PID_Init(&pid_heading, HEADING_KP, HEADING_KI, HEADING_KD,
-             PID_DT, -(float)TURN_SPEED, (float)TURN_SPEED);
-
-    target_heading = 0.0f;
-    heading_mode   = false;
 }
 
 /* ==========================================================================
@@ -144,19 +118,24 @@ void Motion_Init(void)
  *   2. Compute error = target - actual
  *   3. Run PID
  *   4. Apply to motors
+ *
  */
 void Motion_Update(void)
 {
     float actual_left, actual_right;
     float error_left, error_right;
 
-    if (heading_mode)
+    if ((target_left == 0.0f) && (target_right == 0.0f))
     {
-        float heading_error = NormalizeAngle(target_heading - Odometry_GetHeading_rad());
-        float turn_cps = PID_Update(&pid_heading, heading_error);
+        PID_Reset(&pid_left);
+        PID_Reset(&pid_right);
 
-        target_left  = -turn_cps;
-        target_right =  turn_cps;
+        output_left  = 0.0f;
+        output_right = 0.0f;
+
+        Motion_ApplyOutput(MOTOR_LEFT,  0.0f);
+        Motion_ApplyOutput(MOTOR_RIGHT, 0.0f);
+        return;
     }
 
     actual_left  = (float)Encoder_GetSpeed_CPS(MOTOR_LEFT);
@@ -165,7 +144,7 @@ void Motion_Update(void)
     error_left = CalculateError(target_left, actual_left);
     error_right = CalculateError(target_right, actual_right);
 
-    output_left = PID_Update(&pid_left, error_left);
+    output_left  = PID_Update(&pid_left,  error_left);
     output_right = PID_Update(&pid_right, error_right);
 
     Motion_ApplyOutput(MOTOR_LEFT,  (float)MOTOR_SIGN_LEFT  * output_left);
@@ -185,7 +164,6 @@ void Motion_Update(void)
  */
 void Motion_SetSpeed(float left_cps, float right_cps)
 {
-    heading_mode = false;
     target_left  = left_cps;
     target_right = right_cps;
 }
@@ -239,39 +217,8 @@ void Motion_Stop(void)
     output_left  = 0.0f;
     output_right = 0.0f;
 
-    PID_Reset(&pid_heading);
-    heading_mode = false;
-
-
     Motor_Set(MOTOR_LEFT, STOP, 0U);
     Motor_Set(MOTOR_RIGHT, STOP, 0U);
-}
-
-/**
- * @brief  Rotate in place to an absolute heading.
- * @param  target_rad  Absolute heading (radians, +CCW).
- * @note   One-shot entry into heading mode. The wheel loops are cleared
- *         here because the previous move may have left their integrators
- *         wound for a different target sign.
- */
-void Motion_SetHeading(float target_rad)
-{
-    PID_Reset(&pid_heading);
-    PID_Reset(&pid_left);
-    PID_Reset(&pid_right);
-    target_heading = target_rad;
-    heading_mode   = true;
-}
-
-/**
- * @brief  Test whether the commanded heading has been reached.
- * @return bool  true when heading error is within tolerance.
- */
-bool Motion_HeadingReached(void)
-{
-    float heading_error = NormalizeAngle(target_heading - Odometry_GetHeading_rad());
-
-    return (fabsf(heading_error) < HEADING_TOLERANCE_RAD);
 }
 
 /* ==========================================================================
