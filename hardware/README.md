@@ -2,7 +2,7 @@
 
 # Hardware
 
-**Physical design layer — mechanical + electrical**  
+**Physical design layer: mechanical + electrical**  
 *3D-printed chassis in Fusion, custom control PCB in KiCad*
 
 </div>
@@ -11,7 +11,7 @@
 
 ## Overview
 
-The `hardware/` directory holds everything physical about the micromouse. The mechanical design — chassis and overall body — lives in Fusion, while the electronics — the custom 4-layer control board — live in KiCad. Each has its own subfolder with its own design files.
+The `hardware/` directory holds everything physical about the micromouse. The mechanical design, chassis and overall body, lives in Fusion. The electronics, a custom 4-layer control board, live in KiCad. Each has its own subfolder with its own design files.
 
 ---
 
@@ -19,12 +19,12 @@ The `hardware/` directory holds everything physical about the micromouse. The me
 
 | Folder | Tool | Contents |
 |--------|------|----------|
-| [`fusion/`](fusion/) | Fusion | Chassis and mechanical model — STL for printing, STEP for CAD |
-| [`pcb/`](pcb/) | KiCad | 4-layer control board — schematic, layout, gerbers, BOM |
+| [`fusion/`](fusion/) | Fusion | Chassis and mechanical model. STL for printing, STEP for CAD |
+| [`pcb/`](pcb/) | KiCad | 4-layer control board. Schematic, layout, gerbers, BOM |
 
 ---
 
-## Mechanical — Fusion
+## Mechanical, Fusion
 
 The chassis is designed in Fusion and 3D-printed. It carries the PCB, motors, and wheels, and defines the overall footprint of the mouse.
 
@@ -69,7 +69,7 @@ The encoder feeds the odometry and speed loop in firmware.
 | Output shaft | 3 mm D, 9 mm long |
 | Gearbox | 10 &times; 12 mm cross section (N20 form factor) |
 
-Encoder cable is **not included** — 6-pin JST SH-style, ordered separately.
+Encoder cable is **not included**. It is a 6-pin JST SH-style, ordered separately.
 
 ### Wheels
 
@@ -78,7 +78,7 @@ Encoder cable is **not included** — 6-pin JST SH-style, ordered separately.
 | Part | Pololu [#3690](https://www.pololu.com/product/3690) |
 | Type | Multi-Hub Wheel with inserts, black, 2-pack |
 | Size | 80 &times; 10 mm, silicone tyre |
-| Mounting | Collet insert &mdash; 3 mm D used here (3 mm round, 4 mm D, 4 mm round also supplied) |
+| Mounting | Collet insert, 3 mm D used here (3 mm round, 4 mm D, 4 mm round also supplied) |
 
 The collet tightens as it compresses into the wheel disc, so it grips harder than
 a press-fit wheel and is less likely to slip on the shaft.
@@ -86,7 +86,7 @@ a press-fit wheel and is less likely to slip on the shaft.
 ### Brackets
 
 Generic N20 motor brackets. Any pair sized for the 10 &times; 12 mm gearbox cross
-section fits &mdash; no part number recorded, they are a commodity item.
+section fits. No part number recorded, they are a commodity item.
 
 ### Firmware link
 
@@ -98,12 +98,12 @@ The encoder resolution at the gearbox output falls out of the two specs above:
 
 That figure and the 80 mm wheel diameter set `COUNTS_PER_REV` and
 `WHEEL_DIAMETER_MM` in [`Odometry.h`](../src/modules/Odometry.h). Both are
-verified against the floor with `DRIVE_TEST` and `TURN_TEST` &mdash; see the
+verified against the floor with `DRIVE_TEST` and `TURN_TEST`. See the
 [test README](../src/README.md).
 
 ---
 
-## Electrical — PCB
+## Electrical, PCB
 
 A custom 4-layer control board designed in KiCad, carrying the MCU, dual motor drivers, IR wall sensors, and the power and debug interface on a single micromouse-sized board.
 
@@ -113,7 +113,8 @@ A custom 4-layer control board designed in KiCad, carrying the MCU, dual motor d
 | MCU | Toshiba TMPM4KNF10AFG (Cortex-M4F) |
 | Motor drivers | 2 × TB67H450AFNG H-bridge |
 | Sensing | 4 × IR emitter / receiver pairs |
-| Supply | 5 V |
+| Battery | 3S LiPo, 11.1 V nominal |
+| Logic supply | 5 V from a buck converter |
 
 Full details, schematic, and design files are in the PCB README:
 
