@@ -13,7 +13,7 @@
 **Autonomous 16×16 Maze-Solving Robot**  
 *Register-level firmware on Arm Cortex-M4*
 
-<img src="docs/assets/robot.jpg" width="520" alt="The micromouse robot">
+<img src="docs/assets/robot.JPG" width="520" alt="Micromouse">
 
 </div>
 
@@ -21,7 +21,7 @@
 
 ## Overview
 
-Micromouse is a classic robotics competition: an autonomous palm-sized robot explores a 16×16 grid maze, maps the walls, solves for the center, and then races back through the fastest route it discovered.
+Micromouse is a classic robotics competition: an autonomous palm-sized robot explores a 16×16 grid maze, maps the walls, & solves for the center.
 
 This project implements the entire stack from scratch — custom 4-layer PCB, mechanical chassis, and register-level firmware — with no reliance on external HAL libraries.
 
@@ -60,17 +60,6 @@ The same silicon built for industrial three-phase drives runs a smaller-scale pr
 
 </div>
 
----
-
-## Architecture Highlights
-
-- **Flood-fill maze solver** — pure logic, zero hardware coupling
-- **1 kHz per-wheel PID** speed control
-- **Fully hand-written HAL** from datasheets, no external libraries
-- **Relative-move navigation** — turn error never compounds across a run
-- **Custom 4-layer PCB** with integrated motor drivers & IR sensors
-
----
 
 ## Gallery
 
@@ -109,7 +98,9 @@ IDE:     Keil µVision
 Target:  TMPM4KNF10AFG (Arm Cortex-M4)
 Debug:   CMSIS-DAP
 Flash:   512 KB on-chip
+
 ```
+[`Quick Start`](docs/README.md)
 
 ---
 
