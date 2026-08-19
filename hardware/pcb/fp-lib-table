@@ -1,0 +1,11 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "20SVPG220M") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/20SVPG220M") (options "") (descr ""))
+	(lib (name "1217AS-H-4R7N_P3") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/1217AS-H-4R7N_P3") (options "") (descr ""))
+	(lib (name "SSM3K341R_LF") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/SSM3K341R_LF/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "BD9C301FJ-E2") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/ul_BD9C301FJ-E2/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "CSS-1210MC") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/ul_CSS-1210MC/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "EVQ-PBG05") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/ul_EVQ-PBG05R/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "TB67H450AFNG-EL") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/ul_TB67H450AFNG-EL/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "TMPM4KNF10AFG") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/ul_TMPM4KNF10AFG/KiCADv6/footprints.pretty") (options "") (descr ""))
+)

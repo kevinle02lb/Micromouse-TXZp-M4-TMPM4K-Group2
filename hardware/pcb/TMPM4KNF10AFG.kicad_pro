@@ -530,7 +530,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "../../../../../../../Workspace/ToshibaMicroMouse/pcb/gerber/",
+      "plot": "../../../../../../../Workspace/ToshibaMicroMouse/hardware/pcb/gerber/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",
@@ -695,7 +695,7 @@
         "uuid": "0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
       }
     ],
-    "used_designators": "",
+    "used_designators": "MOSFET1-4,D1,D3,D5,D9-10",
     "variants": []
   },
   "sheets": [

@@ -1,0 +1,11 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "20SVPG220M") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/20SVPG220M/20SVPG220M.kicad_sym") (options "") (descr ""))
+	(lib (name "1217AS-H-4R7N_P3") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/1217AS-H-4R7N_P3/1217AS-H-4R7N_P3.kicad_sym") (options "") (descr ""))
+	(lib (name "SSM3K341R_LF") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/SSM3K341R_LF/KiCADv6/2026-08-08_19-16-38.kicad_sym") (options "") (descr ""))
+	(lib (name "BD9C301FJ-E2") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/ul_BD9C301FJ-E2/KiCADv6/2025-12-22_03-49-26.kicad_sym") (options "") (descr ""))
+	(lib (name "CSS-1210MC") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/ul_CSS-1210MC/KiCADv6/2026-01-07_20-56-18.kicad_sym") (options "") (descr ""))
+	(lib (name "EVQ-PBG05R") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/ul_EVQ-PBG05R/KiCADv6/2026-01-14_01-15-09.kicad_sym") (options "") (descr ""))
+	(lib (name "TB67H450AFNG-EL") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/ul_TB67H450AFNG-EL/KiCADv6/2026-01-18_21-10-44.kicad_sym") (options "") (descr ""))
+	(lib (name "TMPM4KNF10AFG") (type "KiCad") (uri "${KIPRJMOD}/Kicad/lib/ul_TMPM4KNF10AFG/KiCADv6/2025-05-19_20-40-52.kicad_sym") (options "") (descr ""))
+)

@@ -1939,12 +1939,11 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Device:D"
+		(symbol "Device:D_Photo"
 			(pin_numbers
 				(hide yes)
 			)
 			(pin_names
-				(offset 1.016)
 				(hide yes)
 			)
 			(exclude_from_sim no)
@@ -1953,17 +1952,18 @@
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "D"
-				(at 0 2.54 0)
+				(at 0.508 1.778 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
-			(property "Value" "D"
-				(at 0 -2.54 0)
+			(property "Value" "D_Photo"
+				(at -1.016 -2.794 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -1973,7 +1973,7 @@
 				)
 			)
 			(property "Footprint" ""
-				(at 0 0 0)
+				(at -1.27 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
@@ -1984,6 +1984,17 @@
 				)
 			)
 			(property "Datasheet" ""
+				(at -1.27 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Photodiode"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1994,7 +2005,7 @@
 					)
 				)
 			)
-			(property "Description" "Diode"
+			(property "ki_keywords" "photodiode diode opto"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2005,54 +2016,10 @@
 					)
 				)
 			)
-			(property "Sim.Device" "D"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Sim.Pins" "1=K 2=A"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "diode"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "D_0_1"
+			(symbol "D_Photo_0_1"
 				(polyline
 					(pts
-						(xy -1.27 1.27) (xy -1.27 -1.27)
+						(xy -2.54 1.27) (xy -2.54 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -2064,7 +2031,43 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
+						(xy -2.032 1.778) (xy -1.524 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.508 3.302) (xy -2.032 1.778) (xy -2.032 2.286)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy -2.54 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy 0 1.27) (xy -2.54 0) (xy 0 -1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -2076,7 +2079,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 0) (xy -1.27 0)
+						(xy 0.762 3.302) (xy -0.762 1.778) (xy -0.762 2.286) (xy -0.762 1.778) (xy -0.254 1.778)
 					)
 					(stroke
 						(width 0)
@@ -2087,9 +2090,9 @@
 					)
 				)
 			)
-			(symbol "D_1_1"
+			(symbol "D_Photo_1_1"
 				(pin passive line
-					(at -3.81 0 0)
+					(at -5.08 0 0)
 					(length 2.54)
 					(name "K"
 						(effects
@@ -2107,7 +2110,7 @@
 					)
 				)
 				(pin passive line
-					(at 3.81 0 180)
+					(at 2.54 0 180)
 					(length 2.54)
 					(name "A"
 						(effects
@@ -3232,63 +3235,60 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Simulation_SPICE:NMOS"
-			(pin_numbers
-				(hide yes)
-			)
+		(symbol "SSM3K341R:SSM3K341R_LF"
 			(pin_names
-				(offset 0)
+				(offset 0.254)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "Q"
-				(at 5.08 1.27 0)
+			(property "Reference" "MOSFET"
+				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
-						(size 1.27 1.27)
+						(size 1.524 1.524)
 					)
-					(justify left)
 				)
 			)
-			(property "Value" "NMOS"
-				(at 5.08 -1.27 0)
+			(property "Value" "SSM3K341R_LF"
+				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" ""
-				(at 5.08 2.54 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
+						(size 1.524 1.524)
 					)
 				)
 			)
-			(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#cha_MOSFETs"
-				(at 0 -12.7 0)
+			(property "Footprint" "SOT-23F_TOS"
+				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
 				(effects
 					(font
 						(size 1.27 1.27)
+						(italic yes)
 					)
 				)
 			)
-			(property "Description" "N-MOSFET transistor, drain/source/gate"
+			(property "Datasheet" "https://toshiba.semicon-storage.com/info/docget.jsp?did=35713&prodName=SSM3K341R"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+				)
+			)
+			(property "Description" ""
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -3299,40 +3299,17 @@
 					)
 				)
 			)
-			(property "Sim.Device" "NMOS"
-				(at 0 -17.145 0)
+			(property "ki_locked" ""
+				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
-				(hide yes)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Sim.Type" "VDMOS"
-				(at 0 -19.05 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Sim.Pins" "1=D 2=G 3=S"
-				(at 0 -15.24 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "transistor NMOS N-MOS N-MOSFET simulation"
+			(property "ki_keywords" "SSM3K341R,LF"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -3343,178 +3320,486 @@
 					)
 				)
 			)
-			(symbol "NMOS_0_1"
-				(polyline
-					(pts
-						(xy 0.254 1.905) (xy 0.254 -1.905)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.254 0) (xy -2.54 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 2.286) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 0.508) (xy 0.762 -0.508)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 -1.27) (xy 0.762 -2.286)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 -1.778) (xy 3.302 -1.778) (xy 3.302 1.778) (xy 0.762 1.778)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.016 0) (xy 2.032 0.381) (xy 2.032 -0.381) (xy 1.016 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(circle
-					(center 1.651 0)
-					(radius 2.794)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.54 2.54) (xy 2.54 1.778)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 2.54 1.778)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(circle
-					(center 2.54 -1.778)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.54 -2.54) (xy 2.54 0) (xy 0.762 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.794 0.508) (xy 2.921 0.381) (xy 3.683 0.381) (xy 3.81 0.254)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 3.302 0.381) (xy 2.921 -0.254) (xy 3.683 -0.254) (xy 3.302 0.381)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
+			(property "ki_fp_filters" "SOT-23F_TOS SOT-23F_TOS-M SOT-23F_TOS-L"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
 					)
 				)
 			)
-			(symbol "NMOS_1_1"
-				(pin passive line
-					(at 2.54 5.08 270)
+			(symbol "SSM3K341R_LF_0_1"
+				(polyline
+					(pts
+						(xy 0 -7.62) (xy 4.572 -7.62)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -10.16) (xy 1.778 -11.43)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -10.16) (xy 1.778 -11.43) (xy 0.762 -12.7) (xy 2.794 -12.7) (xy 1.778 -11.43) (xy 2.794 -10.16)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -11.43) (xy 0.254 -11.938)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -11.43) (xy 2.794 -11.43)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -12.7) (xy 2.794 -12.7)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.778 -7.62) (xy 1.778 -10.16)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 1.778 -7.62)
+					(radius 0.254)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.778 -11.43) (xy 0.762 -12.7)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.778 -11.43) (xy 2.794 -10.16)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.778 -12.7) (xy 1.778 -13.462)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.778 -13.462) (xy 10.16 -13.462)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.794 -10.16) (xy 0.762 -10.16)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.794 -11.43) (xy 3.302 -10.922)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.794 -12.7) (xy 1.778 -11.43)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 5.08 -7.62) (xy 4.318 -7.62)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 5.08 -7.62) (xy 5.08 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 6.35 -3.302) (xy 6.35 -1.27)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 6.35 -5.08) (xy 7.62 -4.572)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 6.35 -6.096) (xy 6.35 -4.064)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 6.35 -7.874) (xy 12.7 -7.874)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 6.35 -8.89) (xy 6.35 -6.858)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -4.572) (xy 7.62 -5.588)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -4.572) (xy 6.35 -5.08) (xy 7.62 -5.588)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -5.08) (xy 10.16 -5.08)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -5.588) (xy 6.35 -5.08)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 10.16 0) (xy 10.16 -2.286)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 10.16 -2.286)
+					(radius 0.254)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 10.16 -5.08) (xy 10.16 -15.24)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 10.16 -7.874)
+					(radius 0.254)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 10.16 -13.462)
+					(radius 0.254)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 11.43 -4.318) (xy 13.97 -4.318)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 11.43 -5.588) (xy 13.97 -5.588)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 12.7 -2.286) (xy 6.35 -2.286)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 12.7 -4.318) (xy 11.43 -5.588)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 12.7 -4.318) (xy 12.7 -2.286)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 12.7 -4.318) (xy 11.43 -5.588) (xy 13.97 -5.588)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 12.7 -7.874) (xy 12.7 -5.588)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 13.97 -5.588) (xy 12.7 -4.318)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin unspecified line
+					(at -2.54 -7.62 0)
 					(length 2.54)
-					(name "D"
+					(name "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3529,10 +3814,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at -5.08 0 0)
+				(pin unspecified line
+					(at 10.16 -17.78 90)
 					(length 2.54)
-					(name "G"
+					(name "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3547,10 +3832,10 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 2.54 -5.08 90)
+				(pin unspecified line
+					(at 10.16 2.54 270)
 					(length 2.54)
-					(name "S"
+					(name "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -6516,7 +6801,7 @@
 	)
 	(rectangle
 		(start 657.86 167.64)
-		(end 871.22 294.64)
+		(end 871.22 353.06)
 		(stroke
 			(width 0.2)
 			(type solid)
@@ -6874,7 +7159,7 @@
 		(uuid "0d15491a-bafd-49dc-914e-d443a7cccebb")
 	)
 	(junction
-		(at 788.67 274.32)
+		(at 783.59 279.4)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "162f5fd6-78ce-4877-8c05-4eac76956288")
@@ -6886,7 +7171,13 @@
 		(uuid "18c82b48-7a23-430a-b05e-c61bb9503873")
 	)
 	(junction
-		(at 697.23 287.02)
+		(at 711.2 237.49)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "19d3ca25-d79f-40cc-839e-4b3160e80e4c")
+	)
+	(junction
+		(at 697.23 297.18)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1b5be4f2-973c-4850-952e-e14e5d73984d")
@@ -6916,12 +7207,6 @@
 		(uuid "23387529-0245-42a2-b6a9-29bf287812bc")
 	)
 	(junction
-		(at 812.8 219.71)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "2f3d1f3b-df3d-4251-b234-a842323e45c5")
-	)
-	(junction
 		(at 505.46 195.58)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6934,7 +7219,7 @@
 		(uuid "30c6801d-4467-49f0-a270-0f10ba223948")
 	)
 	(junction
-		(at 709.93 287.02)
+		(at 709.93 297.18)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3232b8f3-c781-48e5-8491-358c8e12921a")
@@ -6976,12 +7261,6 @@
 		(uuid "3d009ddc-6a29-4d2f-bd97-44aafdf0a173")
 	)
 	(junction
-		(at 688.34 209.55)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "456c3333-d32a-4bae-9a32-6745cac2bea8")
-	)
-	(junction
 		(at 302.26 53.34)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7000,16 +7279,22 @@
 		(uuid "5501ceaa-8e6a-4dab-b416-02d5d44ac30e")
 	)
 	(junction
+		(at 680.72 280.67)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "59cdf52b-db43-4103-8fbe-1c6e672e911f")
+	)
+	(junction
 		(at 364.49 43.18)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5e437676-cb8d-43da-b370-e7db2cd7396c")
 	)
 	(junction
-		(at 811.53 285.75)
+		(at 811.53 295.91)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "60dfc32c-aa82-49bb-9825-49b2180b07ae")
+		(uuid "619509de-53af-41cb-9cad-b6796d9a666a")
 	)
 	(junction
 		(at 453.39 45.72)
@@ -7060,12 +7345,6 @@
 		(uuid "8a03bc16-5655-42d1-b247-e560d0fc00c0")
 	)
 	(junction
-		(at 711.2 220.98)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "971ffb58-e9b1-4e26-aa8f-08cbc797971a")
-	)
-	(junction
 		(at 721.36 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7082,12 +7361,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9bb5dab6-6ea2-46f2-aacb-dadd0e75e061")
-	)
-	(junction
-		(at 687.07 275.59)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a0aa9db9-de4b-4eee-98a7-5f9777eb2e94")
 	)
 	(junction
 		(at 260.35 132.08)
@@ -7108,7 +7381,7 @@
 		(uuid "ab3b0910-568b-466c-9370-d01eff7ec08a")
 	)
 	(junction
-		(at 798.83 285.75)
+		(at 798.83 295.91)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ac0195c5-f3dd-415b-a8c9-daf5c0933190")
@@ -7126,7 +7399,13 @@
 		(uuid "acff32b7-641c-4123-9721-b410c9b2e23d")
 	)
 	(junction
-		(at 698.5 220.98)
+		(at 683.26 214.63)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ad987d77-88f9-4530-bec9-491b3e2d8d54")
+	)
+	(junction
+		(at 698.5 237.49)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c5cbe219-4364-44a9-8d13-1005aa6d08ba")
@@ -7186,7 +7465,7 @@
 		(uuid "cffd033d-9086-4f6a-9c57-2232b40fc0a1")
 	)
 	(junction
-		(at 789.94 208.28)
+		(at 787.4 213.36)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d0412cb5-8f95-4d5f-b185-05c480fa649e")
@@ -7210,7 +7489,7 @@
 		(uuid "e36a1b9b-bdab-4d10-b9a1-9713bef0d4cb")
 	)
 	(junction
-		(at 800.1 219.71)
+		(at 800.1 229.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e59efd71-d975-4128-859b-c7b7564dc1b6")
@@ -7226,6 +7505,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "fa064cbe-71b9-40e5-b9fb-7bd9052a5174")
+	)
+	(junction
+		(at 812.8 229.87)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fcf1231f-a50e-40c2-b938-68128f533b4c")
 	)
 	(no_connect
 		(at 477.52 134.62)
@@ -7276,6 +7561,16 @@
 			(type default)
 		)
 		(uuid "030460bd-b14c-4109-a91f-0cbc155e4f76")
+	)
+	(wire
+		(pts
+			(xy 811.53 295.91) (xy 824.23 295.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "04224e48-8ed5-43fc-b13e-9e04337bfed6")
 	)
 	(wire
 		(pts
@@ -7489,16 +7784,6 @@
 	)
 	(wire
 		(pts
-			(xy 825.5 209.55) (xy 825.5 219.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "194427d2-c6b7-4cc4-99c1-509ac4b73f0f")
-	)
-	(wire
-		(pts
 			(xy 495.3 193.04) (xy 513.08 193.04)
 		)
 		(stroke
@@ -7579,7 +7864,7 @@
 	)
 	(wire
 		(pts
-			(xy 773.43 274.32) (xy 777.24 274.32)
+			(xy 768.35 279.4) (xy 772.16 279.4)
 		)
 		(stroke
 			(width 0)
@@ -7699,7 +7984,7 @@
 	)
 	(wire
 		(pts
-			(xy 811.53 275.59) (xy 811.53 285.75)
+			(xy 811.53 275.59) (xy 811.53 295.91)
 		)
 		(stroke
 			(width 0)
@@ -7709,17 +7994,7 @@
 	)
 	(wire
 		(pts
-			(xy 825.5 219.71) (xy 812.8 219.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2ece8025-acc1-4a9a-a0ee-21d2a975a9d6")
-	)
-	(wire
-		(pts
-			(xy 800.1 219.71) (xy 800.1 220.98)
+			(xy 800.1 229.87) (xy 800.1 231.14)
 		)
 		(stroke
 			(width 0)
@@ -7769,7 +8044,7 @@
 	)
 	(wire
 		(pts
-			(xy 788.67 285.75) (xy 798.83 285.75)
+			(xy 783.59 295.91) (xy 798.83 295.91)
 		)
 		(stroke
 			(width 0)
@@ -7819,16 +8094,6 @@
 	)
 	(wire
 		(pts
-			(xy 812.8 209.55) (xy 812.8 219.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "33a40ac0-54e3-42d1-a4db-3a959f748e3c")
-	)
-	(wire
-		(pts
 			(xy 800.1 193.04) (xy 800.1 194.31)
 		)
 		(stroke
@@ -7869,7 +8134,7 @@
 	)
 	(wire
 		(pts
-			(xy 789.94 218.44) (xy 789.94 219.71)
+			(xy 787.4 228.6) (xy 787.4 229.87)
 		)
 		(stroke
 			(width 0)
@@ -7939,7 +8204,7 @@
 	)
 	(wire
 		(pts
-			(xy 800.1 213.36) (xy 800.1 219.71)
+			(xy 800.1 223.52) (xy 800.1 229.87)
 		)
 		(stroke
 			(width 0)
@@ -7949,7 +8214,7 @@
 	)
 	(wire
 		(pts
-			(xy 698.5 220.98) (xy 698.5 222.25)
+			(xy 698.5 237.49) (xy 698.5 238.76)
 		)
 		(stroke
 			(width 0)
@@ -7969,7 +8234,7 @@
 	)
 	(wire
 		(pts
-			(xy 798.83 285.75) (xy 811.53 285.75)
+			(xy 798.83 295.91) (xy 811.53 295.91)
 		)
 		(stroke
 			(width 0)
@@ -7989,7 +8254,17 @@
 	)
 	(wire
 		(pts
-			(xy 784.86 274.32) (xy 788.67 274.32)
+			(xy 825.5 209.55) (xy 825.5 229.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "40fdd04a-9892-465b-a55c-3603413183da")
+	)
+	(wire
+		(pts
+			(xy 779.78 279.4) (xy 783.59 279.4)
 		)
 		(stroke
 			(width 0)
@@ -8009,7 +8284,7 @@
 	)
 	(wire
 		(pts
-			(xy 722.63 276.86) (xy 722.63 287.02)
+			(xy 722.63 276.86) (xy 722.63 297.18)
 		)
 		(stroke
 			(width 0)
@@ -8029,13 +8304,13 @@
 	)
 	(wire
 		(pts
-			(xy 824.23 275.59) (xy 824.23 285.75)
+			(xy 787.4 213.36) (xy 787.4 220.98)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "43e29657-61a7-4c5c-94ca-6432ffc2d6e4")
+		(uuid "44ce264f-1c8a-4b75-a70e-0a5ca5c08623")
 	)
 	(wire
 		(pts
@@ -8089,23 +8364,13 @@
 	)
 	(wire
 		(pts
-			(xy 688.34 209.55) (xy 690.88 209.55)
+			(xy 683.26 214.63) (xy 685.8 214.63)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "49ac3189-9003-430a-bf65-f0624e9669e6")
-	)
-	(wire
-		(pts
-			(xy 788.67 274.32) (xy 788.67 276.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4a120dd9-873b-44f1-80dd-f89f20c453b4")
 	)
 	(wire
 		(pts
@@ -8119,13 +8384,13 @@
 	)
 	(wire
 		(pts
-			(xy 789.94 208.28) (xy 792.48 208.28)
+			(xy 824.23 275.59) (xy 824.23 295.91)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "4db132c5-4ed1-4781-a60a-3821a7e99534")
+		(uuid "4e3666f5-bacc-403a-b730-c30e775b0343")
 	)
 	(wire
 		(pts
@@ -8146,6 +8411,16 @@
 			(type default)
 		)
 		(uuid "51320d4c-0bc7-4937-96ad-d0563a5d619b")
+	)
+	(wire
+		(pts
+			(xy 683.26 214.63) (xy 683.26 228.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "51b5abb2-d024-48e7-9fa9-b8ddce607ca8")
 	)
 	(wire
 		(pts
@@ -8209,7 +8484,17 @@
 	)
 	(wire
 		(pts
-			(xy 774.7 208.28) (xy 778.51 208.28)
+			(xy 783.59 279.4) (xy 783.59 285.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5474d765-7bdf-46be-8697-835d2c85413d")
+	)
+	(wire
+		(pts
+			(xy 772.16 213.36) (xy 775.97 213.36)
 		)
 		(stroke
 			(width 0)
@@ -8266,16 +8551,6 @@
 			(type default)
 		)
 		(uuid "5b18689a-9ebd-4d65-bd77-c660fb7f8e9a")
-	)
-	(wire
-		(pts
-			(xy 824.23 285.75) (xy 811.53 285.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5c27e664-a307-4f9f-95d7-165cab1624b5")
 	)
 	(wire
 		(pts
@@ -8349,6 +8624,16 @@
 	)
 	(wire
 		(pts
+			(xy 711.2 210.82) (xy 711.2 237.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "62f83640-2f09-4dff-8fb0-b5a16c12ba55")
+	)
+	(wire
+		(pts
 			(xy 590.55 66.04) (xy 590.55 68.58)
 		)
 		(stroke
@@ -8359,7 +8644,7 @@
 	)
 	(wire
 		(pts
-			(xy 687.07 285.75) (xy 687.07 287.02)
+			(xy 680.72 295.91) (xy 680.72 297.18)
 		)
 		(stroke
 			(width 0)
@@ -8399,7 +8684,7 @@
 	)
 	(wire
 		(pts
-			(xy 687.07 275.59) (xy 687.07 278.13)
+			(xy 680.72 280.67) (xy 680.72 288.29)
 		)
 		(stroke
 			(width 0)
@@ -8449,16 +8734,6 @@
 	)
 	(wire
 		(pts
-			(xy 711.2 210.82) (xy 711.2 220.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "759fe93e-ce36-4349-8bce-81d60bddb2f2")
-	)
-	(wire
-		(pts
 			(xy 824.23 250.19) (xy 811.53 250.19)
 		)
 		(stroke
@@ -8499,7 +8774,7 @@
 	)
 	(wire
 		(pts
-			(xy 683.26 275.59) (xy 687.07 275.59)
+			(xy 678.18 280.67) (xy 680.72 280.67)
 		)
 		(stroke
 			(width 0)
@@ -8559,16 +8834,6 @@
 	)
 	(wire
 		(pts
-			(xy 688.34 209.55) (xy 688.34 212.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7dad90b8-a459-42ac-94f6-650ee513e03a")
-	)
-	(wire
-		(pts
 			(xy 184.15 48.26) (xy 185.42 48.26)
 		)
 		(stroke
@@ -8596,16 +8861,6 @@
 			(type default)
 		)
 		(uuid "7e81aec0-25d7-44fe-bc74-1c7f313efe3f")
-	)
-	(wire
-		(pts
-			(xy 789.94 208.28) (xy 789.94 210.82)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8062a4e9-35dc-46f6-9a70-01854619340e")
 	)
 	(wire
 		(pts
@@ -8699,16 +8954,6 @@
 	)
 	(wire
 		(pts
-			(xy 687.07 275.59) (xy 689.61 275.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8940c3fa-d4cd-4ef5-a434-89ad50d1ea2c")
-	)
-	(wire
-		(pts
 			(xy 726.44 124.46) (xy 736.6 124.46)
 		)
 		(stroke
@@ -8799,7 +9044,7 @@
 	)
 	(wire
 		(pts
-			(xy 798.83 285.75) (xy 798.83 287.02)
+			(xy 798.83 295.91) (xy 798.83 297.18)
 		)
 		(stroke
 			(width 0)
@@ -8809,7 +9054,7 @@
 	)
 	(wire
 		(pts
-			(xy 697.23 287.02) (xy 697.23 288.29)
+			(xy 697.23 297.18) (xy 697.23 298.45)
 		)
 		(stroke
 			(width 0)
@@ -8899,7 +9144,7 @@
 	)
 	(wire
 		(pts
-			(xy 788.67 274.32) (xy 791.21 274.32)
+			(xy 783.59 279.4) (xy 786.13 279.4)
 		)
 		(stroke
 			(width 0)
@@ -8949,7 +9194,7 @@
 	)
 	(wire
 		(pts
-			(xy 697.23 287.02) (xy 709.93 287.02)
+			(xy 697.23 297.18) (xy 709.93 297.18)
 		)
 		(stroke
 			(width 0)
@@ -8959,7 +9204,7 @@
 	)
 	(wire
 		(pts
-			(xy 789.94 219.71) (xy 800.1 219.71)
+			(xy 787.4 229.87) (xy 800.1 229.87)
 		)
 		(stroke
 			(width 0)
@@ -8999,13 +9244,13 @@
 	)
 	(wire
 		(pts
-			(xy 688.34 220.98) (xy 698.5 220.98)
+			(xy 711.2 237.49) (xy 723.9 237.49)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "a0d95220-f911-462e-9f41-c304b99ebf81")
+		(uuid "a111a5c3-5bbe-43bf-8029-402c0f4bdaaf")
 	)
 	(wire
 		(pts
@@ -9019,7 +9264,7 @@
 	)
 	(wire
 		(pts
-			(xy 688.34 219.71) (xy 688.34 220.98)
+			(xy 683.26 236.22) (xy 683.26 237.49)
 		)
 		(stroke
 			(width 0)
@@ -9039,6 +9284,16 @@
 	)
 	(wire
 		(pts
+			(xy 683.26 237.49) (xy 698.5 237.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a5e98eb2-eac2-4cfe-910f-e5475746063b")
+	)
+	(wire
+		(pts
 			(xy 678.18 147.32) (xy 685.8 147.32)
 		)
 		(stroke
@@ -9049,17 +9304,7 @@
 	)
 	(wire
 		(pts
-			(xy 723.9 210.82) (xy 723.9 220.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a66b1e94-9292-45be-ae3b-dab149220d9d")
-	)
-	(wire
-		(pts
-			(xy 786.13 208.28) (xy 789.94 208.28)
+			(xy 783.59 213.36) (xy 787.4 213.36)
 		)
 		(stroke
 			(width 0)
@@ -9129,7 +9374,7 @@
 	)
 	(wire
 		(pts
-			(xy 698.5 220.98) (xy 711.2 220.98)
+			(xy 698.5 237.49) (xy 711.2 237.49)
 		)
 		(stroke
 			(width 0)
@@ -9169,16 +9414,6 @@
 	)
 	(wire
 		(pts
-			(xy 709.93 276.86) (xy 709.93 287.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b05c7ca1-e0ac-4dd3-a8bd-296f5cfd45c3")
-	)
-	(wire
-		(pts
 			(xy 675.64 119.38) (xy 683.26 119.38)
 		)
 		(stroke
@@ -9209,7 +9444,7 @@
 	)
 	(wire
 		(pts
-			(xy 722.63 287.02) (xy 709.93 287.02)
+			(xy 722.63 297.18) (xy 709.93 297.18)
 		)
 		(stroke
 			(width 0)
@@ -9329,6 +9564,16 @@
 	)
 	(wire
 		(pts
+			(xy 723.9 210.82) (xy 723.9 237.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c25096f2-63bc-411f-8ca9-3cb3ea44af1a")
+	)
+	(wire
+		(pts
 			(xy 248.92 52.07) (xy 261.62 52.07)
 		)
 		(stroke
@@ -9349,6 +9594,16 @@
 	)
 	(wire
 		(pts
+			(xy 812.8 229.87) (xy 825.5 229.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c45574cb-8bbc-422b-96b0-3ccc0f7f445d")
+	)
+	(wire
+		(pts
 			(xy 350.52 55.88) (xy 350.52 62.23)
 		)
 		(stroke
@@ -9359,7 +9614,7 @@
 	)
 	(wire
 		(pts
-			(xy 673.1 209.55) (xy 676.91 209.55)
+			(xy 668.02 214.63) (xy 671.83 214.63)
 		)
 		(stroke
 			(width 0)
@@ -9389,13 +9644,33 @@
 	)
 	(wire
 		(pts
-			(xy 687.07 287.02) (xy 697.23 287.02)
+			(xy 680.72 297.18) (xy 697.23 297.18)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "cb695685-a1fb-402c-aee1-f662515b4265")
+	)
+	(wire
+		(pts
+			(xy 709.93 276.86) (xy 709.93 297.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cb983225-a19a-4789-b4c8-f31af1fa7d73")
+	)
+	(wire
+		(pts
+			(xy 812.8 209.55) (xy 812.8 229.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc3e4d9e-c170-4828-af9a-9144d1154693")
 	)
 	(wire
 		(pts
@@ -9429,7 +9704,7 @@
 	)
 	(wire
 		(pts
-			(xy 684.53 209.55) (xy 688.34 209.55)
+			(xy 679.45 214.63) (xy 683.26 214.63)
 		)
 		(stroke
 			(width 0)
@@ -9496,16 +9771,6 @@
 			(type default)
 		)
 		(uuid "d382ad58-5333-4186-8862-4f0653692d4b")
-	)
-	(wire
-		(pts
-			(xy 723.9 220.98) (xy 711.2 220.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d3cd0265-2ea7-4d6a-a8c1-4af17f4db1e9")
 	)
 	(wire
 		(pts
@@ -9579,7 +9844,7 @@
 	)
 	(wire
 		(pts
-			(xy 800.1 219.71) (xy 812.8 219.71)
+			(xy 800.1 229.87) (xy 812.8 229.87)
 		)
 		(stroke
 			(width 0)
@@ -9616,6 +9881,16 @@
 			(type default)
 		)
 		(uuid "df84f4e6-63eb-4e0b-ae88-501d14366176")
+	)
+	(wire
+		(pts
+			(xy 680.72 280.67) (xy 684.53 280.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dfa50271-d8ea-46d1-b8ab-1ad0e4c5fc46")
 	)
 	(wire
 		(pts
@@ -9699,7 +9974,7 @@
 	)
 	(wire
 		(pts
-			(xy 671.83 275.59) (xy 675.64 275.59)
+			(xy 666.75 280.67) (xy 670.56 280.67)
 		)
 		(stroke
 			(width 0)
@@ -9719,7 +9994,7 @@
 	)
 	(wire
 		(pts
-			(xy 697.23 280.67) (xy 697.23 287.02)
+			(xy 697.23 290.83) (xy 697.23 297.18)
 		)
 		(stroke
 			(width 0)
@@ -9809,7 +10084,7 @@
 	)
 	(wire
 		(pts
-			(xy 698.5 214.63) (xy 698.5 220.98)
+			(xy 698.5 224.79) (xy 698.5 237.49)
 		)
 		(stroke
 			(width 0)
@@ -9829,7 +10104,7 @@
 	)
 	(wire
 		(pts
-			(xy 798.83 279.4) (xy 798.83 285.75)
+			(xy 798.83 289.56) (xy 798.83 295.91)
 		)
 		(stroke
 			(width 0)
@@ -9899,7 +10174,7 @@
 	)
 	(wire
 		(pts
-			(xy 788.67 284.48) (xy 788.67 285.75)
+			(xy 783.59 293.37) (xy 783.59 295.91)
 		)
 		(stroke
 			(width 0)
@@ -23809,7 +24084,7 @@
 	)
 	(global_label "IR_IN0"
 		(shape input)
-		(at 673.1 209.55 180)
+		(at 668.02 214.63 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23819,7 +24094,7 @@
 		)
 		(uuid "a680c59e-dc4e-42dc-b397-dfc680076810")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 664.1276 209.55 0)
+			(at 659.0476 214.63 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24241,7 +24516,7 @@
 	)
 	(global_label "IR_IN2"
 		(shape input)
-		(at 671.83 275.59 180)
+		(at 666.75 280.67 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24251,7 +24526,7 @@
 		)
 		(uuid "d40cc00d-6823-45d1-aaf5-a73ed7c145d1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 662.8576 275.59 0)
+			(at 657.7776 280.67 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24265,7 +24540,7 @@
 	)
 	(global_label "IR_IN3"
 		(shape input)
-		(at 773.43 274.32 180)
+		(at 768.35 279.4 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24275,7 +24550,7 @@
 		)
 		(uuid "d5e2d824-96c2-4881-a0d2-c6eccb716a8c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 764.4576 274.32 0)
+			(at 759.3776 279.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24313,7 +24588,7 @@
 	)
 	(global_label "IR_IN1"
 		(shape input)
-		(at 774.7 208.28 180)
+		(at 772.16 213.36 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24323,7 +24598,7 @@
 		)
 		(uuid "d8cd70c3-bbf1-4e24-a357-83c8e1711842")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 765.7276 208.28 0)
+			(at 763.1876 213.36 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25027,7 +25302,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 781.05 274.32 270)
+		(at 775.97 279.4 270)
 		(mirror x)
 		(unit 1)
 		(body_style 1)
@@ -25038,7 +25313,7 @@
 		(dnp no)
 		(uuid "0f83e156-1bff-4aa5-a133-464e298fd63e")
 		(property "Reference" "R30"
-			(at 779.018 277.114 90)
+			(at 773.938 282.194 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -25049,7 +25324,7 @@
 			)
 		)
 		(property "Value" "220"
-			(at 779.018 279.654 90)
+			(at 773.938 284.734 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -25060,7 +25335,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 781.05 276.098 90)
+			(at 775.97 281.178 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25071,7 +25346,7 @@
 			)
 		)
 		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDM0000/AOA0000C307.pdf"
-			(at 781.05 274.32 0)
+			(at 775.97 279.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25082,7 +25357,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 781.05 274.32 0)
+			(at 775.97 279.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25351,110 +25626,6 @@
 			(project "TMPM4KNF10AFG"
 				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
 					(reference "H1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:D")
-		(at 842.01 271.78 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "146f6491-b2a3-428c-af1c-7c26cc94081e")
-		(property "Reference" "D9"
-			(at 844.55 270.5099 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "IR R"
-			(at 844.55 273.0499 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "LED_THT:LED_D5.0mm_Horizontal_O1.27mm_Z3.0mm_IRBlack"
-			(at 842.01 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 842.01 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Diode"
-			(at 842.01 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "D"
-			(at 842.01 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 842.01 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "3330b12a-4d5f-40c2-9125-c94f447f4565")
-		)
-		(pin "1"
-			(uuid "13c7cad4-2700-48fb-8530-7bae52d09d6d")
-		)
-		(instances
-			(project "TMPM4KNF10AFG"
-				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
-					(reference "D9")
 					(unit 1)
 				)
 			)
@@ -26438,7 +26609,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 798.83 287.02 0)
+		(at 798.83 297.18 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -26449,7 +26620,7 @@
 		(fields_autoplaced yes)
 		(uuid "285a0c0f-aadf-4f08-ad29-b4d6bd979051")
 		(property "Reference" "#PWR067"
-			(at 798.83 293.37 0)
+			(at 798.83 303.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26460,7 +26631,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 798.83 292.1 0)
+			(at 798.83 302.26 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26471,7 +26642,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 798.83 287.02 0)
+			(at 798.83 297.18 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26482,7 +26653,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 798.83 287.02 0)
+			(at 798.83 297.18 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26493,7 +26664,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 798.83 287.02 0)
+			(at 798.83 297.18 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28303,8 +28474,95 @@
 		)
 	)
 	(symbol
+		(lib_id "SSM3K341R:SSM3K341R_LF")
+		(at 688.34 207.01 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4938aacf-52d8-4e2a-965c-68466824aa2c")
+		(property "Reference" "Q1"
+			(at 703.58 213.3599 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SSM3K341R_LF"
+			(at 703.58 215.8999 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SSM3K341R:SOT-23F_TOS"
+			(at 688.34 207.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+		(property "Datasheet" "https://toshiba.semicon-storage.com/info/docget.jsp?did=35713&prodName=SSM3K341R"
+			(at 688.34 207.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 688.34 207.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "3"
+			(uuid "1ee50605-5d3a-4a55-b9c9-e7e265656bf7")
+		)
+		(pin "1"
+			(uuid "2f81bb92-67c6-4899-a7c3-1a282bda94a7")
+		)
+		(pin "2"
+			(uuid "5788ff3c-9820-4e67-92db-3fdf7006cbd8")
+		)
+		(instances
+			(project "TMPM4KNF10AFG"
+				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
+					(reference "Q1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
-		(at 687.07 281.94 0)
+		(at 680.72 292.1 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -28314,7 +28572,7 @@
 		(dnp no)
 		(uuid "4bd3cb8b-9c4b-4fc5-ac01-568536a268b1")
 		(property "Reference" "R27"
-			(at 689.61 280.6699 0)
+			(at 683.26 290.8299 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -28325,7 +28583,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 689.61 283.2099 0)
+			(at 683.26 293.3699 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -28336,7 +28594,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 685.292 281.94 90)
+			(at 678.942 292.1 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28347,7 +28605,7 @@
 			)
 		)
 		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDM0000/AOA0000C307.pdf"
-			(at 687.07 281.94 0)
+			(at 680.72 292.1 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28358,7 +28616,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 687.07 281.94 0)
+			(at 680.72 292.1 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28622,8 +28880,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Simulation_SPICE:NMOS")
-		(at 796.29 274.32 0)
+		(lib_id "Device:D_Photo")
+		(at 740.41 274.32 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -28632,9 +28890,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "50995b1e-6716-4cd1-afc0-36fe66e774c8")
-		(property "Reference" "Q5"
-			(at 802.64 273.0499 0)
+		(uuid "542c9d21-29bf-4c2e-963b-46aff285f964")
+		(property "Reference" "D7"
+			(at 745.49 272.0974 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -28644,8 +28902,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "NMOS"
-			(at 802.64 275.5899 0)
+		(property "Value" "D_Photo"
+			(at 745.49 274.6374 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -28655,8 +28913,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "SSM3K324R,LF:SOT-23F_TOS-M"
-			(at 801.37 271.78 0)
+		(property "Footprint" "LED_THT:LED_D5.0mm_Horizontal_O1.27mm_Z3.0mm_IRBlack"
+			(at 740.41 273.05 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28666,8 +28924,8 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://toshiba.semicon-storage.com/info/SSM3K341R_datasheet_en_20260608.pdf?did=35714&prodName=SSM3K341R"
-			(at 796.29 287.02 0)
+		(property "Datasheet" ""
+			(at 740.41 273.05 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28677,8 +28935,8 @@
 				)
 			)
 		)
-		(property "Description" "N-MOSFET transistor, drain/source/gate"
-			(at 796.29 274.32 0)
+		(property "Description" "Photodiode"
+			(at 740.41 274.32 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28687,53 +28945,17 @@
 					(size 1.27 1.27)
 				)
 			)
-		)
-		(property "Sim.Device" "NMOS"
-			(at 796.29 291.465 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Type" "VDMOS"
-			(at 796.29 293.37 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=D 2=G 3=S"
-			(at 796.29 289.56 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "3"
-			(uuid "4f3d64a4-24b9-4683-9096-d53f03876024")
 		)
 		(pin "2"
-			(uuid "a9bfd79c-f918-45a8-8361-be54d9914985")
+			(uuid "a7abe131-b240-4430-9e64-a547b592be60")
 		)
 		(pin "1"
-			(uuid "8b6ba8c2-6d7c-4da0-87f8-5f066d967cc9")
+			(uuid "bc524719-0847-4614-bf34-2ee40201899a")
 		)
 		(instances
 			(project "TMPM4KNF10AFG"
 				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
-					(reference "Q5")
+					(reference "D7")
 					(unit 1)
 				)
 			)
@@ -29477,7 +29699,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 679.45 275.59 270)
+		(at 674.37 280.67 270)
 		(mirror x)
 		(unit 1)
 		(body_style 1)
@@ -29488,7 +29710,7 @@
 		(dnp no)
 		(uuid "6261ef25-cec3-4dd6-a71d-ea40446706ea")
 		(property "Reference" "R26"
-			(at 677.418 278.384 90)
+			(at 672.338 283.464 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -29499,7 +29721,7 @@
 			)
 		)
 		(property "Value" "220"
-			(at 677.418 280.924 90)
+			(at 672.338 286.004 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -29510,7 +29732,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 679.45 277.368 90)
+			(at 674.37 282.448 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -29521,7 +29743,7 @@
 			)
 		)
 		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDM0000/AOA0000C307.pdf"
-			(at 679.45 275.59 0)
+			(at 674.37 280.67 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -29532,7 +29754,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 679.45 275.59 0)
+			(at 674.37 280.67 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -29559,7 +29781,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 789.94 214.63 0)
+		(at 787.4 224.79 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -29569,7 +29791,7 @@
 		(dnp no)
 		(uuid "632d9ab9-1e43-4d2c-9d36-27f73c8192ec")
 		(property "Reference" "R23"
-			(at 792.48 213.3599 0)
+			(at 789.94 223.5199 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -29580,7 +29802,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 792.48 215.8999 0)
+			(at 789.94 226.0599 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -29591,7 +29813,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 788.162 214.63 90)
+			(at 785.622 224.79 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -29602,7 +29824,7 @@
 			)
 		)
 		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDM0000/AOA0000C307.pdf"
-			(at 789.94 214.63 0)
+			(at 787.4 224.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -29613,7 +29835,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 789.94 214.63 0)
+			(at 787.4 224.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -29633,110 +29855,6 @@
 			(project "TMPM4KNF10AFG"
 				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
 					(reference "R23")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:D")
-		(at 843.28 205.74 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "689cf433-9b9c-4cf0-9434-40211e7aa8d1")
-		(property "Reference" "D5"
-			(at 845.82 204.4699 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "IR R"
-			(at 845.82 207.0099 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "LED_THT:LED_D5.0mm_Horizontal_O1.27mm_Z3.0mm_IRBlack"
-			(at 843.28 205.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 843.28 205.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Diode"
-			(at 843.28 205.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "D"
-			(at 843.28 205.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 843.28 205.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "670e0ef9-455c-425b-8584-0130b5f63ef4")
-		)
-		(pin "1"
-			(uuid "ebaaa626-acb3-4bea-be49-dabc8d0181b8")
-		)
-		(instances
-			(project "TMPM4KNF10AFG"
-				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
-					(reference "D5")
 					(unit 1)
 				)
 			)
@@ -30164,6 +30282,88 @@
 			(project "TMPM4KNF10AFG"
 				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
 					(reference "#PWR011")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D_Photo")
+		(at 740.41 207.01 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "72c51ce2-89bc-438e-bf43-6666671cf0ae")
+		(property "Reference" "D3"
+			(at 745.49 204.7874 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "D_Photo"
+			(at 745.49 207.3274 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "LED_THT:LED_D5.0mm_Horizontal_O1.27mm_Z3.0mm_IRBlack"
+			(at 740.41 205.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 740.41 205.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Photodiode"
+			(at 740.41 207.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "337564bd-ef1b-4d0d-b29b-b02be3898c4a")
+		)
+		(pin "1"
+			(uuid "d78599ca-2b96-470b-b17b-b2e1ad061bdc")
+		)
+		(instances
+			(project "TMPM4KNF10AFG"
+				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
+					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -30837,7 +31037,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 688.34 215.9 0)
+		(at 683.26 232.41 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -30847,7 +31047,7 @@
 		(dnp no)
 		(uuid "80953f42-1157-4e92-90d9-e70f12cac69b")
 		(property "Reference" "R20"
-			(at 690.88 214.6299 0)
+			(at 685.8 231.1399 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -30858,7 +31058,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 690.88 217.1699 0)
+			(at 685.8 233.6799 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -30869,7 +31069,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 686.562 215.9 90)
+			(at 681.482 232.41 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -30880,7 +31080,7 @@
 			)
 		)
 		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDM0000/AOA0000C307.pdf"
-			(at 688.34 215.9 0)
+			(at 683.26 232.41 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -30891,7 +31091,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 688.34 215.9 0)
+			(at 683.26 232.41 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -30918,7 +31118,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 800.1 220.98 0)
+		(at 800.1 231.14 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -30929,7 +31129,7 @@
 		(fields_autoplaced yes)
 		(uuid "811b2040-a5ef-4730-b76b-7b847c39fb23")
 		(property "Reference" "#PWR059"
-			(at 800.1 227.33 0)
+			(at 800.1 237.49 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -30940,7 +31140,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 800.1 226.06 0)
+			(at 800.1 236.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -30951,7 +31151,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 800.1 220.98 0)
+			(at 800.1 231.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -30962,7 +31162,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 800.1 220.98 0)
+			(at 800.1 231.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -30973,7 +31173,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 800.1 220.98 0)
+			(at 800.1 231.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -31636,7 +31836,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 788.67 280.67 0)
+		(at 783.59 289.56 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -31646,7 +31846,7 @@
 		(dnp no)
 		(uuid "94720ebf-8ed9-49c9-a03d-47a6a172cd40")
 		(property "Reference" "R31"
-			(at 791.21 279.3999 0)
+			(at 786.13 288.2899 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -31657,7 +31857,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 791.21 281.9399 0)
+			(at 786.13 290.8299 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -31668,7 +31868,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 786.892 280.67 90)
+			(at 781.812 289.56 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -31679,7 +31879,7 @@
 			)
 		)
 		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDM0000/AOA0000C307.pdf"
-			(at 788.67 280.67 0)
+			(at 783.59 289.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -31690,7 +31890,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 788.67 280.67 0)
+			(at 783.59 289.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -31962,7 +32162,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 698.5 222.25 0)
+		(at 698.5 238.76 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -31973,7 +32173,7 @@
 		(fields_autoplaced yes)
 		(uuid "998759be-f6d7-4fe0-bb18-a3200f34584f")
 		(property "Reference" "#PWR026"
-			(at 698.5 228.6 0)
+			(at 698.5 245.11 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -31984,7 +32184,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 698.5 227.33 0)
+			(at 698.5 243.84 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -31995,7 +32195,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 698.5 222.25 0)
+			(at 698.5 238.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -32006,7 +32206,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 698.5 222.25 0)
+			(at 698.5 238.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -32017,7 +32217,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 698.5 222.25 0)
+			(at 698.5 238.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -32034,6 +32234,175 @@
 			(project "TMPM4KNF10AFG"
 				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
 					(reference "#PWR026")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D_Photo")
+		(at 843.28 207.01 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9bd93269-7f78-4c36-92a1-f247856bfe29")
+		(property "Reference" "D5"
+			(at 848.36 204.7874 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "D_Photo"
+			(at 848.36 207.3274 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "LED_THT:LED_D5.0mm_Horizontal_O1.27mm_Z3.0mm_IRBlack"
+			(at 843.28 205.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 843.28 205.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Photodiode"
+			(at 843.28 207.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "4bb8bc15-c28a-413d-8f1e-bdf18072c877")
+		)
+		(pin "1"
+			(uuid "09a42ca1-b5a0-4e85-9da5-2ceaeca8abc1")
+		)
+		(instances
+			(project "TMPM4KNF10AFG"
+				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
+					(reference "D5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "SSM3K341R:SSM3K341R_LF")
+		(at 788.67 271.78 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9c73bd22-11dd-4514-8506-18639d896b19")
+		(property "Reference" "Q4"
+			(at 803.91 278.1299 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SSM3K341R_LF"
+			(at 803.91 280.6699 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SSM3K341R:SOT-23F_TOS"
+			(at 788.67 271.78 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+		(property "Datasheet" "https://toshiba.semicon-storage.com/info/docget.jsp?did=35713&prodName=SSM3K341R"
+			(at 788.67 271.78 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 788.67 271.78 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "3"
+			(uuid "a3c88790-83cb-4295-ae55-f1ce1ccba5c8")
+		)
+		(pin "1"
+			(uuid "e85ace98-03b0-4784-bbab-8e711beac2f4")
+		)
+		(pin "2"
+			(uuid "92e52063-06ee-4756-92cd-46d1f49cc1df")
+		)
+		(instances
+			(project "TMPM4KNF10AFG"
+				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
+					(reference "Q4")
 					(unit 1)
 				)
 			)
@@ -32550,7 +32919,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 782.32 208.28 270)
+		(at 779.78 213.36 270)
 		(mirror x)
 		(unit 1)
 		(body_style 1)
@@ -32561,7 +32930,7 @@
 		(dnp no)
 		(uuid "ae743ec9-8054-4918-9aa0-4c8c7a442cc7")
 		(property "Reference" "R22"
-			(at 780.288 211.074 90)
+			(at 777.748 216.154 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -32572,7 +32941,7 @@
 			)
 		)
 		(property "Value" "220"
-			(at 780.288 213.614 90)
+			(at 777.748 218.694 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -32583,7 +32952,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 782.32 210.058 90)
+			(at 779.78 215.138 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -32594,7 +32963,7 @@
 			)
 		)
 		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDM0000/AOA0000C307.pdf"
-			(at 782.32 208.28 0)
+			(at 779.78 213.36 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -32605,7 +32974,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 782.32 208.28 0)
+			(at 779.78 213.36 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -32878,6 +33247,93 @@
 		)
 	)
 	(symbol
+		(lib_id "SSM3K341R:SSM3K341R_LF")
+		(at 789.94 205.74 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b3f3e840-6fc2-4a1e-ad22-9c4d2f8d91f7")
+		(property "Reference" "Q2"
+			(at 805.18 212.0899 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SSM3K341R_LF"
+			(at 805.18 214.6299 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SSM3K341R:SOT-23F_TOS"
+			(at 789.94 205.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+		(property "Datasheet" "https://toshiba.semicon-storage.com/info/docget.jsp?did=35713&prodName=SSM3K341R"
+			(at 789.94 205.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 789.94 205.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "3"
+			(uuid "d3f3cc2b-5961-42c4-8f45-e1a87dbb8775")
+		)
+		(pin "1"
+			(uuid "4499a527-959f-4591-bd0b-ca26154aee30")
+		)
+		(pin "2"
+			(uuid "ca56801e-2626-467b-a252-2f5c8a15aac6")
+		)
+		(instances
+			(project "TMPM4KNF10AFG"
+				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
+					(reference "Q2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 350.52 62.23 0)
 		(mirror y)
@@ -33116,124 +33572,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Simulation_SPICE:NMOS")
-		(at 797.56 208.28 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b7eefcd8-648a-46a8-8489-106a5be60469")
-		(property "Reference" "Q3"
-			(at 803.91 207.0099 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "NMOS"
-			(at 803.91 209.5499 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "SSM3K324R,LF:SOT-23F_TOS-M"
-			(at 802.64 205.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://toshiba.semicon-storage.com/info/SSM3K341R_datasheet_en_20260608.pdf?did=35714&prodName=SSM3K341R"
-			(at 797.56 220.98 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "N-MOSFET transistor, drain/source/gate"
-			(at 797.56 208.28 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "NMOS"
-			(at 797.56 225.425 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Type" "VDMOS"
-			(at 797.56 227.33 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=D 2=G 3=S"
-			(at 797.56 223.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "3"
-			(uuid "998697e4-c662-4100-8406-4fd03494e247")
-		)
-		(pin "2"
-			(uuid "c6557c1a-238e-4097-8c1a-c8f5adf1efd0")
-		)
-		(pin "1"
-			(uuid "d529a810-4da9-4a58-8bd9-5a52da95d9e3")
-		)
-		(instances
-			(project "TMPM4KNF10AFG"
-				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
-					(reference "Q3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 523.24 50.8 0)
 		(unit 1)
@@ -33317,7 +33655,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 697.23 288.29 0)
+		(at 697.23 298.45 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -33328,7 +33666,7 @@
 		(fields_autoplaced yes)
 		(uuid "b952fb7f-04c3-4ae5-82af-96ccbd594703")
 		(property "Reference" "#PWR063"
-			(at 697.23 294.64 0)
+			(at 697.23 304.8 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -33339,7 +33677,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 697.23 293.37 0)
+			(at 697.23 303.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -33350,7 +33688,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 697.23 288.29 0)
+			(at 697.23 298.45 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -33361,7 +33699,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 697.23 288.29 0)
+			(at 697.23 298.45 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -33372,7 +33710,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 697.23 288.29 0)
+			(at 697.23 298.45 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -33630,110 +33968,6 @@
 			(project "TMPM4KNF10AFG"
 				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
 					(reference "H2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:D")
-		(at 740.41 205.74 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c0cfc4f8-b97e-4ec9-9b19-bb8bae434fae")
-		(property "Reference" "D3"
-			(at 742.95 204.4699 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "IR R"
-			(at 742.95 207.0099 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "LED_THT:LED_D5.0mm_Horizontal_O1.27mm_Z3.0mm_IRBlack"
-			(at 740.41 205.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 740.41 205.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Diode"
-			(at 740.41 205.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "D"
-			(at 740.41 205.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 740.41 205.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "9360ca6c-2018-464e-9e24-c87589e17513")
-		)
-		(pin "1"
-			(uuid "f9f1ef51-f972-4041-b576-2f426d5cce74")
-		)
-		(instances
-			(project "TMPM4KNF10AFG"
-				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
-					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -34050,124 +34284,6 @@
 			(project "TMPM4KNF10AFG"
 				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
 					(reference "#PWR036")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Simulation_SPICE:NMOS")
-		(at 694.69 275.59 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c62045e1-0560-428b-9e5f-74214ae4e619")
-		(property "Reference" "Q4"
-			(at 701.04 274.3199 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "NMOS"
-			(at 701.04 276.8599 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "SSM3K324R,LF:SOT-23F_TOS-M"
-			(at 699.77 273.05 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://toshiba.semicon-storage.com/info/SSM3K341R_datasheet_en_20260608.pdf?did=35714&prodName=SSM3K341R"
-			(at 694.69 288.29 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "N-MOSFET transistor, drain/source/gate"
-			(at 694.69 275.59 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "NMOS"
-			(at 694.69 292.735 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Type" "VDMOS"
-			(at 694.69 294.64 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=D 2=G 3=S"
-			(at 694.69 290.83 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "3"
-			(uuid "ed27f733-552b-4f04-849b-e630e71a6c60")
-		)
-		(pin "2"
-			(uuid "aec5edc3-f088-4d74-8f36-74c6530ac2d5")
-		)
-		(pin "1"
-			(uuid "7aba78e6-f1ab-49e4-bd23-4f065316f242")
-		)
-		(instances
-			(project "TMPM4KNF10AFG"
-				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
-					(reference "Q4")
 					(unit 1)
 				)
 			)
@@ -34705,6 +34821,93 @@
 			(project "TMPM4KNF10AFG"
 				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
 					(reference "U1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "SSM3K341R:SSM3K341R_LF")
+		(at 687.07 273.05 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ca014d97-5c2f-4d19-aaae-23fdcd974dc8")
+		(property "Reference" "Q3"
+			(at 702.31 279.3999 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SSM3K341R_LF"
+			(at 702.31 281.9399 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SSM3K341R:SOT-23F_TOS"
+			(at 687.07 273.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+		(property "Datasheet" "https://toshiba.semicon-storage.com/info/docget.jsp?did=35713&prodName=SSM3K341R"
+			(at 687.07 273.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 687.07 273.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "3"
+			(uuid "a09cc7a6-a50e-409e-b82a-1da079d73ae1")
+		)
+		(pin "1"
+			(uuid "21efe1e5-4a88-46e6-b072-73a397a2a059")
+		)
+		(pin "2"
+			(uuid "d8b4a1a2-ab89-4e19-992e-08129a8380de")
+		)
+		(instances
+			(project "TMPM4KNF10AFG"
+				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
+					(reference "Q3")
 					(unit 1)
 				)
 			)
@@ -35269,110 +35472,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:D")
-		(at 740.41 273.05 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d42323f7-27d5-438d-8ce7-e5ba0f226e39")
-		(property "Reference" "D7"
-			(at 742.95 271.7799 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "IR R"
-			(at 742.95 274.3199 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "LED_THT:LED_D5.0mm_Horizontal_O1.27mm_Z3.0mm_IRBlack"
-			(at 740.41 273.05 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 740.41 273.05 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Diode"
-			(at 740.41 273.05 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "D"
-			(at 740.41 273.05 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 740.41 273.05 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "014ea247-1092-4cd7-99bd-f8d4af1f7bc1")
-		)
-		(pin "1"
-			(uuid "83a0835e-cf86-42e0-b209-ae0856c7d33b")
-		)
-		(instances
-			(project "TMPM4KNF10AFG"
-				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
-					(reference "D7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+5V")
 		(at 260.35 119.38 0)
 		(unit 1)
@@ -35608,124 +35707,6 @@
 			(project "TMPM4KNF10AFG"
 				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
 					(reference "R25")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Simulation_SPICE:NMOS")
-		(at 695.96 209.55 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d9e7a1a7-01d4-4d25-845d-d23209444a60")
-		(property "Reference" "Q2"
-			(at 702.31 208.2799 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "NMOS"
-			(at 702.31 210.8199 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "SSM3K324R,LF:SOT-23F_TOS-M"
-			(at 701.04 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://toshiba.semicon-storage.com/info/SSM3K341R_datasheet_en_20260608.pdf?did=35714&prodName=SSM3K341R"
-			(at 695.96 222.25 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "N-MOSFET transistor, drain/source/gate"
-			(at 695.96 209.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "NMOS"
-			(at 695.96 226.695 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Type" "VDMOS"
-			(at 695.96 228.6 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=D 2=G 3=S"
-			(at 695.96 224.79 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "3"
-			(uuid "b02075ae-674e-4713-8dc7-a1540c1a477f")
-		)
-		(pin "2"
-			(uuid "427da155-3b44-49b9-aad4-c65844c170d9")
-		)
-		(pin "1"
-			(uuid "c5d12f03-c321-4fd0-8942-7bb79f6bbea4")
-		)
-		(instances
-			(project "TMPM4KNF10AFG"
-				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
-					(reference "Q2")
 					(unit 1)
 				)
 			)
@@ -36537,8 +36518,90 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:D_Photo")
+		(at 842.01 273.05 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f05b87dd-0f47-4442-8673-a75d02ebfb15")
+		(property "Reference" "D9"
+			(at 847.09 270.8274 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "D_Photo"
+			(at 847.09 273.3674 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "LED_THT:LED_D5.0mm_Horizontal_O1.27mm_Z3.0mm_IRBlack"
+			(at 842.01 271.78 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 842.01 271.78 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Photodiode"
+			(at 842.01 273.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "c12051da-aef7-4232-a8b0-c2af1ce8cb59")
+		)
+		(pin "1"
+			(uuid "51b3e81e-f03c-4e63-9f25-a161d3631d56")
+		)
+		(instances
+			(project "TMPM4KNF10AFG"
+				(path "/0adba3a4-bdd1-4c6d-a08c-4c1a6ee669ad"
+					(reference "D9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
-		(at 680.72 209.55 270)
+		(at 675.64 214.63 270)
 		(mirror x)
 		(unit 1)
 		(body_style 1)
@@ -36549,7 +36612,7 @@
 		(dnp no)
 		(uuid "f0bfc6f4-174b-4085-af53-8b825ce1d5ef")
 		(property "Reference" "R18"
-			(at 678.688 212.344 90)
+			(at 673.608 217.424 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -36560,7 +36623,7 @@
 			)
 		)
 		(property "Value" "220"
-			(at 678.688 214.884 90)
+			(at 673.608 219.964 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -36571,7 +36634,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 680.72 211.328 90)
+			(at 675.64 216.408 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -36582,7 +36645,7 @@
 			)
 		)
 		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDM0000/AOA0000C307.pdf"
-			(at 680.72 209.55 0)
+			(at 675.64 214.63 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -36593,7 +36656,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 680.72 209.55 0)
+			(at 675.64 214.63 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
