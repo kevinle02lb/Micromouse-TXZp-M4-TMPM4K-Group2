@@ -80,6 +80,8 @@ For a module test, also uncomment exactly one `#define` at the top of
 | Level shifter | TXB0104 between probe and target |
 | Target supply | 5 V &mdash; **required**, the ADC does not work below it |
 
+See PCB README.md for more details.
+
 Options for Target &rarr; Debug &rarr; select CMSIS-DAP, then Settings and confirm the
 device is detected before flashing.
 

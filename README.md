@@ -23,7 +23,7 @@
 
 Micromouse is a classic robotics competition: an autonomous palm-sized robot explores a 16×16 grid maze, maps the walls, & solves for the center.
 
-This project implements the entire stack from scratch — custom 4-layer PCB, mechanical chassis, and register-level firmware — with no reliance on external HAL libraries.
+This project implements the entire stack from scratch: custom 4-layer PCB, mechanical chassis, and register-level firmware, with no reliance on external HAL libraries.
 
 ---
 
@@ -33,11 +33,11 @@ This project implements the entire stack from scratch — custom 4-layer PCB, me
 
 <img src="docs/assets/Toshiba-Logo.png" height="60" alt="Toshiba">
 
-### **Toshiba TMPM4KNF10AFG** — Arm Cortex-M4 with FPU
+### **Toshiba TMPM4KNF10AFG**, Arm Cortex-M4 with FPU
 
 </div>
 
-The TMPM4KNF10AFG comes from the **[M4K Group](https://toshiba.semicon-storage.com/us/semiconductor/product/microcontrollers/txz4aplus-series/m4k-group.html)** of Toshiba's **[TXZ+™4A Series](https://toshiba.semicon-storage.com/us/semiconductor/product/microcontrollers/txz4aplus-series.html)** — 160 MHz Arm Cortex-M4 microcontrollers built for motor and inverter control. It pairs a fast floating-point core with dedicated on-chip hardware for driving motors, reading encoders, and sampling analog sensors, and is used across industrial and consumer motion systems such as BLDC/PMSM drives, HVAC compressors, power tools, and factory automation — with IEC 60730 self-diagnosis support for appliance functional safety.
+The TMPM4KNF10AFG comes from the **[M4K Group](https://toshiba.semicon-storage.com/us/semiconductor/product/microcontrollers/txz4aplus-series/m4k-group.html)** of Toshiba's **[TXZ+™4A Series](https://toshiba.semicon-storage.com/us/semiconductor/product/microcontrollers/txz4aplus-series.html)**, a line of 160 MHz Arm Cortex-M4 microcontrollers built for motor and inverter control. It pairs a fast floating-point core with dedicated on-chip hardware for driving motors, reading encoders, and sampling analog sensors. The same parts show up in BLDC/PMSM drives, HVAC compressors, power tools, and factory automation, and they carry IEC 60730 self-diagnosis support for appliance functional safety.
 
 | Capability | Role in this build |
 |-----------|--------------------|
@@ -45,7 +45,7 @@ The TMPM4KNF10AFG comes from the **[M4K Group](https://toshiba.semicon-storage.c
 | On-chip motor & encoder hardware | Wheel feedback and PPG-generated motor PWM |
 | High-speed analog sensing | IR wall detection |
 
-The same silicon built for industrial three-phase drives runs a smaller-scale problem here — a 1 kHz closed-loop PID over two brushed DC gear-motors — with dedicated hardware handling encoder counting and motor PWM so the CPU stays free for navigation and flood-fill maze solving.
+Here the same silicon runs a much smaller problem: a 1 kHz closed-loop PID over two brushed DC gear-motors. Dedicated hardware handles encoder counting and motor PWM, so the CPU stays free for navigation and flood-fill maze solving.
 
 ---
 
@@ -84,9 +84,9 @@ The same silicon built for industrial three-phase drives runs a smaller-scale pr
 | Path | Contents |
 |------|----------|
 | [`src/README.md`](src/README.md) | Firmware architecture, control loops, pin map, timer config |
-| [`hardware/README.md`](hardware/README.md) | Hardware overview — chassis (Fusion) + PCB (KiCad) |
+| [`hardware/README.md`](hardware/README.md) | Hardware overview: chassis (Fusion) + PCB (KiCad) |
 | [`hardware/pcb/README.md`](hardware/pcb/README.md) | Board specs, layout, schematic, component list |
-| [`docs/README.md`](docs/README.md) | Docs index — assets, evidence, and analysis tooling |
+| [`docs/README.md`](docs/README.md) | Docs index: assets, evidence, and analysis tooling |
 | [`docs/evidence/README.md`](docs/evidence/README.md) | Module-test checklist and captured evidence |
 
 ---
