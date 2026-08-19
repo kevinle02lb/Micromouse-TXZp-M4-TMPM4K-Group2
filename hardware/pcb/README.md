@@ -152,8 +152,8 @@ The full schematic is available as a PDF:
 
 | File | Contents |
 |------|----------|
-| [`TMPM4KNF10AFG.kicad_sch`](TMPM4KNF10AFG.kicad_sch) | Schematic source (KiCad) |
-| [`TMPM4KNF10AFG.kicad_pcb`](TMPM4KNF10AFG.kicad_pcb) | Board layout source (KiCad) |
+| [`TMPM4KNF10AFG.kicad_sch`](Kicad/TMPM4KNF10AFG.kicad_sch) | Schematic source (KiCad) |
+| [`TMPM4KNF10AFG.kicad_pcb`](Kicad/TMPM4KNF10AFG.kicad_pcb) | Board layout source (KiCad) |
 | [`Schematic.pdf`](Schematic.pdf) | Rendered schematic |
 | [`board.step`](board.step) | 3D board model (STEP) |
 | [`BOM.csv`](BOM.csv) | Bill of materials |
