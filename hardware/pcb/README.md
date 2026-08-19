@@ -33,29 +33,14 @@ The mainboard is a custom 4-layer PCB designed in KiCad that carries the full el
 
 ## Power
 
-| Rail | Source | Notes |
-|------|--------|-------|
-| Motor | 3S LiPo, direct | 12.6 V charged, 11.1 V nominal, ~9.9 V cutoff |
-| Logic | Buck converter to 5 V | The ADC needs 5 V, it does not work below it |
+| Rail | Voltage | Source |
+|------|---------|--------|
+| Battery | 11.1 V (3S LiPo) | Pack |
+| Motor | 11.1 V | Direct from pack |
+| Logic | 5 V | Buck converter |
 
-The gearmotors are the 12 V variant, so a 3S pack drives them at close to rated
-voltage with nothing in between. Only the logic rail needs converting.
-
-That conversion uses a switching regulator rather than a linear one. An LDO
-dropping 11.1 V to 5 V burns the 6.1 V difference as heat:
-
-| | LDO | Buck |
-|---|---|---|
-| Dissipation at 200 mA | 1.22 W | ~0.11 W |
-| Efficiency | 45% | ~90% |
-
-On a board this size, a watt of continuous heat is not something you want to
-design around.
-
-> Worth knowing during tuning: the pack falls from 12.6 V to about 9.9 V over a
-> run, so motor voltage swings roughly 21%. The speed loop absorbs that through
-> its integrator, but any open-loop duty figure is only valid at the charge state
-> it was measured at.
+Motors are the 12 V variant, so they run straight off the pack. Buck rather than
+LDO because 11.1 V down to 5 V is too big a drop to burn as heat.
 
 ---
 
