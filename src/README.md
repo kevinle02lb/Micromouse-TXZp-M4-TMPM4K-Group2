@@ -1,6 +1,6 @@
-# 🐭 Toshiba Micromouse — Firmware
+# 🐭 Toshiba Micromouse Firmware
 
-> **Work in Progress** — Firmware for an IEEE 16×16 micromouse
+> **Work in Progress.** Firmware for an IEEE 16×16 micromouse
 
 ```
     ╔══════════════════════════════════════════╗
@@ -30,10 +30,13 @@
 
 ## Architecture
 
-Everything is driven by a single 1 kHz control tick. Each tick runs four stages
-in order; each stage consumes the output of the one above it. The maze planner
-(`FloodFill`) is pure logic and never touches hardware — `Navigator` owns all
-motion and calls the planner for decisions.
+Everything is driven by a single 1 kHz control tick. Each tick runs five stages
+in order, and each stage consumes the output of the one above it. The maze
+planner (`FloodFill`) is pure logic and never touches hardware. `Navigator` owns
+all motion and calls the planner for decisions.
+
+`Navigator` runs before `Motion` so the setpoint it produces is acted on within
+the same tick rather than one tick late.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -42,8 +45,9 @@ motion and calls the planner for decisions.
 │     if (Timebase_GetAndClear()) {   ◄── 1 kHz tick          │
 │       Encoder_Update();    // read encoders, filter speed   │
 │       Odometry_Update();   // pose (x, y, heading)          │
-│       Motion_Update();     // PID -> motor PWM (never block)│
+│       IR_SampleStep();     // advance the IR sampler        │
 │       Navigator_Update();  // plan/turn/drive FSM step      │
+│       Motion_Update();     // PID -> motor PWM (never block)│
 │     }                                                       │
 │   }                                                         │
 └──────────────────────────┬──────────────────────────────────┘
@@ -59,7 +63,7 @@ motion and calls the planner for decisions.
     ▼          │          ▼            │            ▼
 ┌────────┐     │     ┌─────────┐       │       ┌──────────┐
 │ENC0/2  │     │     │ Motor   │       │       │ IrSensor │
-│A-ENC32 │     └────►│ TB67H450│       └──────►│ ADC+DMA  │
+│A-ENC32 │     └────►│ TB67H450│       └──────►│ ADC      │
 │quad in │  (via     │ +T32A0/3│  (checks pose │ 4× wall  │
 └────────┘  Encoder) │ PWM PPG │   for arrival)│ sensing  │
                      └─────────┘               └──────────┘
@@ -69,12 +73,13 @@ motion and calls the planner for decisions.
 
 | Stage | Module | Role |
 |-------|--------|------|
-| 1 | `Encoder` | Read A-ENC32 counters, IIR-filter wheel speed (CPS) |
+| 1 | `Encoder` | Read A-ENC32 counters, windowed wheel speed (CPS) |
 | 2 | `Odometry` | Integrate differential-drive pose from encoder deltas |
-| 3 | `Motion` | Per-wheel PID speed loop → `Motor` PWM duty |
-| 4 | `Navigator` | Non-blocking FSM; asks `FloodFill` for moves, executes them |
-| — | `FloodFill` | Pure BFS planner over discovered walls (no hardware) |
-| — | `IrSensor` | 4× IR wall detection via ADC + DMA (used by planner) |
+| 3 | `IrSensor` | Advance one phase of the ambient-cancelling sample cycle |
+| 4 | `Navigator` | Non-blocking FSM. Asks `FloodFill` for moves, executes them |
+| 5 | `Motion` | Per-wheel PID speed loop → `Motor` PWM duty |
+| .. | `Profile` | Trapezoidal velocity profile. Pure math, called by `Navigator` |
+| .. | `FloodFill` | Pure BFS planner over discovered walls (no hardware) |
 
 ---
 
@@ -87,15 +92,15 @@ toshiba-micromouse/
 ├── docs/                     # Images and documentation assets
 ├── README.md                 # Project landing page
 └── src/
-    ├── README.md             # This file — firmware architecture
+    ├── README.md             # This file. Firmware architecture
     ├── main.c                # Entry point, 1 kHz control loop
     │
     ├── drivers/              # Register-level hardware layer
-    │   ├── timer32A.c/h      # T32A: PWM (ch0/3) + 1 kHz interval (ch1)
+    │   ├── timer32A.c/h      # T32A: 20 kHz PWM (ch0/3) + 1 kHz tick (ch1)
     │   ├── gpio.c/h          # Port configuration + emitter GPIO
     │   ├── encoder32A.c/h    # A-ENC32 quadrature hardware read
     │   ├── adc.c/h           # ADC-I units A & C (IR receivers)
-    │   ├── dma.c/h           # DMAC-B burst transfer for ADC
+    │   ├── dma.c/h           # DMAC-B burst transfer for ADC (Optional)
     │   ├── uart.c/h          # UART-C serial debug output
     │   └── systick.c/h       # Blocking µs/ms delay (stateless)
     │
@@ -106,6 +111,7 @@ toshiba-micromouse/
         ├── PID.c/h           # Generic PID controller math
         ├── Motor.c/h         # TB67H450 H-bridge direction + duty
         ├── Motion.c/h        # PID speed loop bridging Encoder→Motor
+        ├── Profile.c/h       # Trapezoidal velocity profile (mm, mm/s)
         ├── IrSensor.c/h      # IR sampling, ambient cancel, distance
         ├── FloodFill.c/h     # BFS flood-fill maze planner
         └── Navigator.c/h     # Cell-level motion sequencer (FSM)
@@ -118,8 +124,8 @@ toshiba-micromouse/
 | Component | Part | Interface |
 |-----------|------|-----------|
 | **MCU** | TMPM4KNF10AFG | Arm Cortex-M4, 160 MHz, 5 V |
-| **Motors** | TB67H450AFNG + Pololu #5211 N20 30:1 | T32A PPG PWM @ 40 kHz |
-| **Encoders** | A-ENC32 (on-chip) | Quadrature, 12 CPR × 29.89 ≈ 360/rev |
+| **Motors** | TB67H450AFNG + Pololu #5211 N20 30:1 | T32A PPG PWM @ 20 kHz |
+| **Encoders** | A-ENC32 (on-chip) | Quadrature, 12 CPR × 29.89 ≈ 359/rev |
 | **IR Sensors** | IR LED + phototransistor ×4 | ADC-I + DMA |
 | **Debug** | CMSIS-DAP + Level Shifter (TXB0104) | SWD |
 
@@ -163,17 +169,17 @@ toshiba-micromouse/
 │  ─────────────────────  │  ─────────────────────             │
 │  Mode:     16-bit PPG   │  Mode:     16-bit PPG              │
 │  Prescaler: 1:1         │  Prescaler: 1:1                    │
-│  Frequency: 40 kHz      │  Frequency: 40 kHz                 │
-│  Period:   2000 counts  │  Period:   2000 counts             │
+│  Frequency: 20 kHz      │  Frequency: 20 kHz                 │
+│  Period:   4000 counts  │  Period:   4000 counts             │
 │  Pins:     PA3, PA4     │  Pins:     PC2, PC3                │
-│  Duty:     RG0 = 0-2000 │  Duty:     RG0 = 0-2000            │
+│  Duty:     RG0 = 0-4000 │  Duty:     RG0 = 0-4000            │
 ├──────────────────────────────────────────────────────────────┤
 │  T32A1 (Control Loop)                                        │
 │  ─────────────────────                                       │
 │  Mode:     32-bit Interval                                   │
 │  Prescaler: 1:1                                              │
 │  Frequency: 1 kHz                                            │
-│  Period:   80000 counts                                      │
+│  Period:   80000 counts  (80 MHz ΦT0)                        │
 │  Interrupt: INTT32A01AC (NVIC)                               │
 │  Flag:     T32A01AC_IRQ_Fire (volatile bool)                 │
 └──────────────────────────────────────────────────────────────┘
@@ -183,19 +189,50 @@ toshiba-micromouse/
 
 ## Navigation Model
 
-`FloodFill` and `Navigator` deliberately use **relative** moves at their
-boundary, so neither needs to agree on an absolute compass:
+`FloodFill` and `Navigator` use **relative** moves at their boundary, so only
+one of them needs a compass.
 
-- `FloodFill_Plan()` returns one of: `FORWARD`, `TURN_LEFT`, `TURN_RIGHT`,
-  `TURN_AROUND`, `STOP`. It tracks its own grid cell + heading in the maze.
-- `Navigator` converts each move into a target heading in radians, tracked as
-  an **exact grid index** (0/±90°/180°) — never by accumulating odometry — so
-  per-turn error does not compound across a run.
-- Odometry is used only to *check* when a turn/drive is complete, never to
-  *define* the next target.
+- `FloodFill_Plan()` returns one of `FORWARD`, `TURN_LEFT`, `TURN_RIGHT`,
+  `TURN_AROUND`, `STOP`. It owns the grid cell and heading, and it is the only
+  module that does.
+- `Navigator` holds **no heading**. Every move is a *segment*, a fixed length of
+  wheel path measured from encoder positions latched at segment start.
+- Odometry is not read by `Navigator` at all. It uses `Odometry.h` for the
+  geometry constants and nothing else.
 
-> **Invariant (load-bearing):** the N→E→S→W cycle must be clockwise in both
-> `FloodFill` and `Navigator`'s heading table. Renumbering either breaks turns.
+**Segments**
+
+| Type | Wheels | Length |
+|------|--------|--------|
+| Drive | both forward | `CELL_SIZE_MM` |
+| Turn | opposed | `θ × WHEELBASE_MM / 2` per wheel |
+
+A pivot is an arc, so it is a straight-line profile in disguise. One `Profile`
+serves both, which is why there is no separate angular controller.
+
+**FSM**
+
+```
+NAV_PLAN → NAV_TURN → NAV_DRIVE → NAV_SETTLE → NAV_PLAN
+    ↓
+NAV_FINISHED
+```
+
+`NAV_TURN` is skipped when the action is `FORWARD`. `NAV_SETTLE` holds the robot
+still so the IR filter converges on the cell it stopped in before `NAV_PLAN`
+reads walls from it.
+
+**Correction**
+
+Dead reckoning drifts, so the maze walls are the absolute reference.
+
+- Side IR keeps the robot centred in a corridor, damped by encoder skew
+- Front IR resets distance error at any cell facing a wall
+- Both fall back to encoder-only when no wall is in range
+
+> **Invariant (load-bearing):** `FloodFill`'s direction enum must stay clockwise
+> (N=0, E=1, S=2, W=3). `Dir_Right()` is `(dir + 1) & 3`. Renumbering it breaks
+> every turn.
 
 ---
 
@@ -214,12 +251,18 @@ Flash:   On-chip 512 KB
 
 Before real runs, these must be measured/tuned on the actual robot:
 
-| Where | What | Why |
-|-------|------|-----|
-| `Encoder` | Confirm forward → **increasing** position | Reversed sign turns PID into positive feedback (runaway) |
-| `Odometry.h` | `WHEELBASE_MM` (wheel-center to center) | Wrong value → every turn over/under-rotates |
-| `IrSensor.c` | `ir_cal[]` ADC→distance points | Placeholder values; wall detection unreliable until measured |
-| `PID.h` | Gains for CPS-scaled error | Error is ~thousands (CPS); default `Kp` saturates instantly |
+| Where | What | Test | Status |
+|-------|------|------|--------|
+| `Encoder` | Forward → **increasing** position | `MOTOR_TEST` | Done |
+| `Odometry.h` | `WHEEL_DIAMETER_MM`, `COUNTS_PER_REV` | `DRIVE_TEST` vs a ruler | Done |
+| `Odometry.h` | `WHEELBASE_MM` | `TURN_TEST` vs a protractor | Done |
+| `IrSensor.c` | `ir_cal[]` ADC→distance points | `IR_TEST` at known distances | Done |
+| `Navigator.c` | `IR_SIDE_TARGET_MM`, `IR_FRONT_TARGET_MM` | Robot centred in a cell | **Pending** |
+| `PID.h` | Gains for CPS-scaled error | `MOTION_TEST` | Done |
+
+Angle depends on the *ratio* `MM_PER_COUNT / WHEELBASE_MM`, distance on
+`MM_PER_COUNT` alone. Change the wheel and the wheelbase has to move with it or
+every turn shifts by the same percentage.
 
 ---
 
@@ -233,10 +276,11 @@ Before real runs, these must be measured/tuned on the actual robot:
 | `PID` | Done | Generic PID controller |
 | `Motor` | Done | H-bridge direction + duty |
 | `Motion` | Done | PID speed loop (Encoder→Motor) |
-| `IrSensor` | Done | IR sampling + distance (needs calibration) |
+| `Profile` | Done | Trapezoidal velocity profile |
+| `IrSensor` | Done | IR sampling, ambient cancel, distance |
 | `UART` | Done | Serial debug output (TX) |
 | `FloodFill` | Done | BFS flood-fill planner |
-| `Navigator` | Bring-up | Motion FSM; verify on hardware |
+| `Navigator` | Bring-up | Segment FSM + wall following; full run pending |
 
 ---
 

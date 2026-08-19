@@ -17,7 +17,8 @@
  *   State Flow:
  *   1. NAV_PLAN    - read walls, ask FloodFill, arm a segment
  *   2. NAV_TURN    - pivot, only if the action needs one
- *   3. NAV_DRIVE   - advance one cell
+ *   3. NAV_DRIVE   - advance one cell, stopping against a wall ahead if one
+ *                    comes into range
  *   4. NAV_SETTLE  - hold at the cell centre, report the move, back to 1
  *
  *   Heading is not tracked here. Turn size comes from encoder positions
@@ -57,9 +58,9 @@
 #define TURN_ACCEL_MM_S2        400.0f      /* pivot ramp and brake */
 
 #define KP_STRAIGHT               4.0f      /* damping trim, (mm/s) per mm of wheel skew */
-#define KP_WALL                   0.8f      /* wall trim, (mm/s) per mm of lateral error */
+#define KP_WALL                   0.5f      /* wall trim, (mm/s) per mm of lateral error */
 #define IR_SIDE_TARGET_MM        84.0f      /* side reading when centred, measured */
-#define IR_FRONT_TARGET_MM       60.0f      /* front reading at a cell centre, measured */
+#define IR_FRONT_TARGET_MM       55.0f      /* front reading at a cell centre, measured */
 
 #define SETTLE_TICKS             60U        /* stationary hold at the cell centre */
 
@@ -91,7 +92,6 @@ static int32_t     seg_start_countL;    // left encoder position at segment star
 static int32_t     seg_start_countR;    // right encoder position at segment start
 static float       turn_sign;           // +1 = CCW, -1 = CW
 static uint16_t    settle_ticks;        // ticks elapsed in the active settle
-static float       cell_offset_mm;      // longitudinal error carried into the next drive
 
 /* ==========================================================================
  *   Motion Interface
@@ -203,26 +203,32 @@ static float StraightnessTrim(void)
 }
 
 /**
- * @brief  Longitudinal error against a wall ahead.
- * @return float  Millimetres still to travel, positive when stopped short.
+ * @brief  Move the active drive target to sit at a fixed distance from a wall
+ *         ahead.
+ * @param  traveled_mm  Distance covered so far in this segment.
  * @details
  *   Encoder distance accumulates error with nothing to correct it. A wall
- *   ahead is a fixed reference, so the reading at a cell centre pins the
- *   robot's position along the cell no matter what the count has drifted to.
+ *   ahead is a fixed reference, so once one comes into range it defines where
+ *   the segment ends no matter what the count has drifted to.
  *
  *   Both front sensors are averaged. A robot sitting at an angle reads long on
  *   one and short on the other, and the mean cancels that.
  *
- *   Zero when no wall is in range, which leaves the next move on dead
- *   reckoning alone.
+ *   The profile recomputes its remaining distance every tick, so moving the
+ *   target mid-segment reshapes the brake curve rather than restarting it.
+ *
+ *   Does nothing when no wall is in range, leaving the move on dead reckoning.
  */
-static float FrontWallOffset_mm(void)
+static void ApplyFrontWallCorrection(float traveled_mm)
 {
-    if (!IR_IsWallPresent(IR_LEFT) || !IR_IsWallPresent(IR_RIGHT))
-        return 0.0f;
+    float front_mm;
 
-    return (0.5f * (IR_GetDistance_mm(IR_LEFT) + IR_GetDistance_mm(IR_RIGHT)))
-           - IR_FRONT_TARGET_MM;
+    if (!IR_IsWallPresent(IR_LEFT) || !IR_IsWallPresent(IR_RIGHT))
+        return;
+
+    front_mm = 0.5f * (IR_GetDistance_mm(IR_LEFT) + IR_GetDistance_mm(IR_RIGHT));
+
+    segment.distance_mm = traveled_mm + (front_mm - IR_FRONT_TARGET_MM);
 }
 
 /* ==========================================================================
@@ -276,7 +282,6 @@ void Navigator_Init(void)
     seg_start_countR = 0;
     turn_sign        = 1.0f;
     settle_ticks     = 0U;
-    cell_offset_mm   = 0.0f;
 
     CommandWheels(0.0f, 0.0f);
 
@@ -309,7 +314,7 @@ void Navigator_Update(void)
             switch (current_action)
             {
                 case FLOODFILL_FORWARD:
-                    BeginDrive(CELL_SIZE_MM + cell_offset_mm);
+                    BeginDrive(CELL_SIZE_MM);
                     break;
 
                 case FLOODFILL_TURN_LEFT:                   // CCW
@@ -357,8 +362,13 @@ void Navigator_Update(void)
         case NAV_DRIVE:
         {
             float traveled = SegmentDistance_mm();
-            float v        = Profile_Step(&segment, traveled);
-            float trim     = StraightnessTrim();
+            float v;
+            float trim;
+
+            ApplyFrontWallCorrection(traveled);
+
+            v    = Profile_Step(&segment, traveled);
+            trim = StraightnessTrim();
 
             CommandWheels(v + trim, v - trim);
 
@@ -381,7 +391,6 @@ void Navigator_Update(void)
 
             if (settle_ticks >= SETTLE_TICKS)
             {
-                cell_offset_mm = FrontWallOffset_mm();          /* Find the */
                 FloodFill_ReportDone(current_action);
                 nav_state = NAV_PLAN;
             }
