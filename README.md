@@ -8,7 +8,7 @@
 
 <div align="center">
 
-# 🐭 Toshiba Micromouse - Work in Progress
+# 🐭 Toshiba Micromouse
 
 **Autonomous 16×16 Maze-Solving Robot**  
 *Register-level firmware on Arm Cortex-M4*
