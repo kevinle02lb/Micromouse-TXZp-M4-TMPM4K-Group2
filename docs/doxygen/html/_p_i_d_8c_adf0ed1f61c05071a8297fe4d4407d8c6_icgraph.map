@@ -1,0 +1,15 @@
+<map id="CalculateError" name="CalculateError">
+<area shape="rect" id="Node000001" title="Calculates error as Setpoint &#45; Process Variable." alt="" coords="411,67,516,93"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="488,51,480,48,463,45,448,47,439,52,437,57,441,67,437,65,432,58,435,48,446,42,464,40,482,43,493,52"/>
+<area shape="rect" id="Node000002" href="$_motion_8c.html#a47cf1896361b4c623fb00a5ab7673c56" title="Run one PID control tick." alt="" coords="254,67,363,93"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="393,80,364,83,364,77,398,80"/>
+<area shape="poly" id="edge5_Node000002_Node000002" title=" " alt="" coords="333,51,326,48,309,45,293,47,284,52,282,57,287,67,282,65,277,58,280,48,291,42,309,40,327,43,339,52"/>
+<area shape="rect" id="Node000003" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="130,29,179,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="236,64,179,51,179,46,241,63"/>
+<area shape="rect" id="Node000004" href="$_module_test_8c.html#a6d3b3560cd07a79f42c26e611240121d" title="Run one profiled pivot, then hold and keep streaming." alt="" coords="103,104,206,131"/>
+<area shape="poly" id="edge6_Node000002_Node000004" title=" " alt="" coords="241,96,207,107,206,102,236,97"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="174,14,168,10,154,8,142,10,135,14,134,20,137,29,132,28,128,20,131,11,140,5,154,3,170,5,179,14"/>
+<area shape="poly" id="edge8_Node000004_Node000004" title=" " alt="" coords="174,88,168,85,154,83,142,85,135,89,134,95,137,105,132,102,128,95,131,86,140,80,154,77,170,80,179,89"/>
+<area shape="rect" id="Node000005" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,104,55,131"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="84,118,55,120,55,115,89,116"/>
+</map>

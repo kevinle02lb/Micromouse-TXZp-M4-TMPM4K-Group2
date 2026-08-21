@@ -1,0 +1,25 @@
+<map id="T32A0_Init" name="T32A0_Init">
+<area shape="rect" id="Node000001" title="Initialize T32A channel 0 for PPG output." alt="" coords="493,116,577,143"/>
+<area shape="poly" id="edge13_Node000001_Node000001" title=" " alt="" coords="555,100,549,97,535,95,522,97,515,101,513,107,517,117,512,114,508,107,511,98,520,92,535,89,551,92,560,101"/>
+<area shape="rect" id="Node000002" href="$_motor_8c.html#adb06fc7f4c3ca40cb6bab543e1a2eac5" title=" " alt="" coords="365,79,445,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="475,113,445,106,445,101,480,113"/>
+<area shape="rect" id="Node000008" href="$timer32_a_8c.html#a11fdf43212b74624e39468366d1ba618" title=" " alt="" coords="366,153,444,180"/>
+<area shape="poly" id="edge14_Node000001_Node000008" title=" " alt="" coords="480,145,444,158,443,153,475,146"/>
+<area shape="poly" id="edge11_Node000002_Node000002" title=" " alt="" coords="425,63,419,60,405,57,392,59,385,64,383,70,387,79,382,77,378,70,381,61,390,54,405,52,421,55,431,64"/>
+<area shape="rect" id="Node000003" href="$_motion_8c.html#aad8ce1070ef0837cd67c0371c32df102" title="Initialize PID controllers &amp; Motor related modules." alt="" coords="232,53,317,80"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="347,82,318,78,318,72,353,81"/>
+<area shape="rect" id="Node000006" href="$_module_test_8c.html#ac497d1b7849ac646d67a4f2986b62e15" title=" " alt="" coords="108,104,179,131"/>
+<area shape="poly" id="edge12_Node000002_Node000006" title=" " alt="" coords="348,99,180,117,179,111,352,95"/>
+<area shape="poly" id="edge7_Node000003_Node000003" title=" " alt="" coords="295,38,289,34,275,32,262,34,255,38,253,44,256,54,251,52,248,45,250,35,260,29,275,27,291,29,300,38"/>
+<area shape="rect" id="Node000004" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="103,29,184,56"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="214,57,185,53,184,47,219,55"/>
+<area shape="poly" id="edge8_Node000003_Node000006" title=" " alt="" coords="221,87,181,106,179,101,226,85"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="160,14,155,10,143,8,132,10,126,14,125,20,128,29,123,29,119,20,122,11,130,5,143,3,157,5,166,13"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,29,55,56"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="85,44,56,45,54,40,89,41"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="47,15,42,10,30,8,19,10,13,14,11,20,15,28,9,29,6,20,8,11,17,5,30,3,44,5,52,13"/>
+<area shape="poly" id="edge10_Node000006_Node000006" title=" " alt="" coords="160,88,155,85,143,83,132,85,126,89,125,95,128,104,123,103,119,95,122,86,130,80,143,77,157,80,166,88"/>
+<area shape="rect" id="Node000007" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,104,55,131"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="90,119,56,120,55,115,94,116"/>
+<area shape="poly" id="edge15_Node000008_Node000008" title=" " alt="" coords="425,137,419,134,405,132,392,134,385,138,383,144,387,154,382,152,378,145,381,135,390,129,405,127,421,129,431,139"/>
+</map>

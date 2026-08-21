@@ -1,0 +1,9 @@
+<map id="src/modules/Timebase.h" name="src/modules/Timebase.h">
+<area shape="rect" id="Node000001" title="ctrlTick in main.c to indicate when logic should update." alt="" coords="109,5,274,32"/>
+<area shape="rect" id="Node000002" href="$_module_test_8c.html" title="Module Testing." alt="" coords="5,80,127,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,40,89,82,87,77,154,40"/>
+<area shape="rect" id="Node000003" href="$main_8c.html" title="Micromouse main firmware entry point." alt="" coords="150,80,232,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,46,194,81,189,78,189,50"/>
+<area shape="rect" id="Node000004" href="$_timebase_8c.html" title="control Loop in main.c to indicate when logic should update." alt="" coords="257,80,422,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="231,37,316,79,311,80,230,42"/>
+</map>

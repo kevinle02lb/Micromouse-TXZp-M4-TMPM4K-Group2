@@ -1,0 +1,16 @@
+<map id="__DSB" name="__DSB">
+<area shape="rect" id="Node000001" title="Data Synchronization Barrier." alt="" coords="209,141,272,168"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="265,126,258,122,240,120,224,122,216,127,214,132,218,141,213,140,208,133,212,123,223,117,240,115,259,117,271,126"/>
+<area shape="rect" id="Node000002" href="$group___c_m_s_i_s___core___n_v_i_c_functions.html#gae016e4c1986312044ee768806537d52f" title="Disable Interrupt." alt="" coords="11,29,155,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="219,129,193,99,159,70,139,59,138,54,162,66,197,95,224,129"/>
+<area shape="rect" id="Node000003" href="$group___c_m_s_i_s___core___n_v_i_c_functions.html#ga0d9aa2d30fa54b41eb780c16e35b676c" title="System Reset." alt="" coords="5,104,161,131"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="191,145,142,134,142,129,196,143"/>
+<area shape="rect" id="Node000004" href="$mpu__armv7_8h.html#a61814eba4652a0fdfb76bbe222086327" title=" " alt="" coords="13,179,153,205"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="191,167,143,181,141,176,196,164"/>
+<area shape="rect" id="Node000005" href="$mpu__armv7_8h.html#a5a3f40314553baccdeea551f86d9a997" title=" " alt="" coords="15,253,151,280"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="213,177,162,219,108,255,106,250,159,215,208,180"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="108,15,100,10,83,8,67,10,58,15,56,20,61,28,55,29,51,21,54,11,65,5,83,3,102,5,113,13"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="108,90,100,85,83,83,67,85,58,89,56,95,61,103,55,104,51,95,54,86,65,80,83,77,102,80,113,88"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="108,164,100,160,83,157,67,159,58,164,56,169,61,178,55,178,51,170,54,160,65,154,83,152,102,155,113,163"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="108,238,100,234,83,232,67,234,58,239,56,244,61,253,55,252,51,245,54,235,65,229,83,227,102,229,113,238"/>
+</map>

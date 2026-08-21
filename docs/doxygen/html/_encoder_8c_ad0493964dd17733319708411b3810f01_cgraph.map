@@ -1,0 +1,13 @@
+<map id="Encoder_Update" name="Encoder_Update">
+<area shape="rect" id="Node000001" title="Read both encoders, update delta, position, and filtered speed." alt="" coords="5,104,124,131"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="31,104,25,95,30,86,43,79,65,77,88,80,101,88,96,90,86,85,64,83,44,85,33,89,31,95,36,103"/>
+<area shape="rect" id="Node000002" href="$encoder32_a_8c.html#a90e678f419a081da11ed948ca4a854f0" title=" " alt="" coords="194,29,324,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,101,171,66,194,60,189,62,173,70,94,106"/>
+<area shape="rect" id="Node000003" href="$encoder32_a_8c.html#a95f249ffdc1bdbe5e70677cb9a8a2f3e" title=" " alt="" coords="194,104,324,131"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="123,115,181,116,176,119,124,120"/>
+<area shape="rect" id="Node000004" href="$_encoder_8c.html#ac5f12636a9758cfc5b30f13e9fc2b4b9" title="Compute speed over a multi&#45;tick window to beat count quantization." alt="" coords="172,179,346,205"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="102,129,210,171,206,174,101,134"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="225,29,220,21,224,11,237,5,259,3,282,5,296,14,291,14,280,10,259,8,239,10,228,15,225,20,231,29"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="225,103,220,95,224,86,237,79,259,77,282,80,296,89,291,89,280,85,259,83,239,85,228,89,225,95,231,104"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="225,177,220,170,224,160,237,154,259,152,282,155,296,164,291,163,280,160,259,157,239,159,228,164,225,169,230,179"/>
+</map>

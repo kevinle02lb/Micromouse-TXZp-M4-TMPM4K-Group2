@@ -1,0 +1,6 @@
+<map id="Core Definitions" name="Core Definitions">
+<area shape="rect" id="Node000003" href="$group___c_m_s_i_s___core___function_interface.html" title=" " alt="" coords="359,5,534,48"/>
+<area shape="rect" id="Node000004" href="$group___c_m_s_i_s___core___n_v_i_c_functions.html" title="Functions that manage interrupts and exceptions via the NVIC." alt="" coords="389,72,504,99"/>
+<area shape="rect" id="Node000001" title="Definitions for base addresses, unions, and structures." alt="" coords="196,43,311,69"/>
+<area shape="rect" id="Node000002" href="$group___c_m_s_i_s__core__bitfield.html" title="Macros for use with bit field definitions (xxx_Pos, xxx_Msk)." alt="" coords="5,35,148,77"/>
+</map>

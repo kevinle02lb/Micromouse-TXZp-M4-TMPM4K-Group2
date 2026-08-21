@@ -1,0 +1,7 @@
+<map id="IR_SampleStep" name="IR_SampleStep">
+<area shape="rect" id="Node000001" title="Non&#45;blocking sampler — advances one phase per control tick." alt="" coords="103,29,216,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="180,14,173,10,159,8,146,10,139,14,138,20,141,30,136,28,132,21,135,11,144,5,159,3,175,5,185,15"/>
+<area shape="rect" id="Node000002" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,29,55,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="84,43,55,45,55,40,90,42"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="50,15,44,10,30,8,17,10,10,14,8,20,12,28,7,30,3,21,6,11,15,5,30,3,46,5,55,14"/>
+</map>

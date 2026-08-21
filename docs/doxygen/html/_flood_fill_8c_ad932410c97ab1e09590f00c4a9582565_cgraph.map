@@ -1,0 +1,28 @@
+<map id="FloodFill_Plan" name="FloodFill_Plan">
+<area shape="rect" id="Node000001" title="Decide the next move." alt="" coords="5,179,109,205"/>
+<area shape="poly" id="edge9_Node000001_Node000001" title=" " alt="" coords="27,179,22,170,26,160,38,154,57,152,78,155,90,162,85,164,76,160,57,157,39,159,30,164,28,169,32,178"/>
+<area shape="rect" id="Node000002" href="$_flood_fill_8c.html#a36b5163614ab80cf812a35ea1ba8d355" title="Direction 90 degrees counter&#45;clockwise from the argument." alt="" coords="195,29,262,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,177,98,124,124,93,155,66,181,54,178,58,158,70,128,97,103,127,68,180"/>
+<area shape="rect" id="Node000003" href="$_flood_fill_8c.html#a6001b2e7956607fbe3206938ecb5c85f" title="Direction 90 degrees clockwise from the argument." alt="" coords="190,104,266,131"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="82,176,156,140,178,133,174,137,158,145,86,180"/>
+<area shape="rect" id="Node000004" href="$_flood_fill_8c.html#a9e13c436e8b765e35b0c1480fb390d76" title="Select the open neighbour with the lowest distance to goal." alt="" coords="157,179,300,205"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="108,190,144,190,139,194,110,194"/>
+<area shape="rect" id="Node000005" href="$_flood_fill_8c.html#aae6f187bcf01a0840003c1b27ec0ed42" title="Test whether the mouse is inside the 2x2 goal area." alt="" coords="164,253,292,280"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="90,203,184,245,180,248,90,209"/>
+<area shape="rect" id="Node000006" href="$_flood_fill_8c.html#a10780bc47c8b58b0bd0d37e334773283" title="Recalculate the distance field from the 2x2 goal area." alt="" coords="169,328,288,355"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="70,203,110,244,158,290,195,319,190,320,155,294,106,248,70,208"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="198,29,194,21,197,11,209,5,228,3,249,5,261,13,256,15,247,10,228,8,211,10,201,15,199,20,204,29"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="198,104,194,95,197,86,209,80,228,77,249,80,261,88,256,89,247,85,228,83,211,85,201,89,199,95,204,104"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="198,178,194,170,197,160,209,154,228,152,249,155,261,163,256,164,247,160,228,157,211,159,201,164,199,169,204,178"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="198,253,194,245,197,235,209,229,228,227,249,229,261,238,256,238,247,234,228,232,211,234,201,239,199,244,204,253"/>
+<area shape="poly" id="edge11_Node000006_Node000006" title=" " alt="" coords="199,327,194,319,197,310,209,304,228,301,249,304,261,313,256,313,247,309,228,307,211,309,201,313,199,319,204,328"/>
+<area shape="rect" id="Node000007" href="$_flood_fill_8c.html#ac4434c09bcda1d10f260436798f7b917" title="Remove a cell from the front of the queue." alt="" coords="348,253,466,280"/>
+<area shape="poly" id="edge12_Node000006_Node000007" title=" " alt="" coords="261,325,357,287,362,285,263,330"/>
+<area shape="rect" id="Node000008" href="$_flood_fill_8c.html#a5772421ad1ba03e28b19a95cbc07fb40" title="Append a cell to the back of the queue." alt="" coords="348,328,466,355"/>
+<area shape="poly" id="edge14_Node000006_Node000008" title=" " alt="" coords="288,339,335,341,330,342,289,344"/>
+<area shape="rect" id="Node000009" href="$_flood_fill_8c.html#a911977c2f4e63b7081e09557aefda1f3" title="Reset the queue to empty." alt="" coords="365,403,449,429"/>
+<area shape="poly" id="edge16_Node000006_Node000009" title=" " alt="" coords="263,353,362,396,357,397,262,358"/>
+<area shape="poly" id="edge13_Node000007_Node000007" title=" " alt="" coords="376,252,371,245,375,235,387,229,407,227,429,229,441,238,436,238,427,234,407,232,389,234,379,239,376,244,381,254"/>
+<area shape="poly" id="edge15_Node000008_Node000008" title=" " alt="" coords="376,327,371,319,375,310,387,303,407,301,429,304,441,313,436,312,427,309,407,307,389,309,379,313,376,319,381,328"/>
+<area shape="poly" id="edge17_Node000009_Node000009" title=" " alt="" coords="376,401,371,394,375,384,387,378,407,376,429,379,441,388,436,387,427,384,407,381,389,383,379,388,376,393,381,403"/>
+</map>

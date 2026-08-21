@@ -1,0 +1,23 @@
+<map id="GPIO_G_SetData" name="GPIO_G_SetData">
+<area shape="rect" id="Node000001" title=" " alt="" coords="614,67,740,93"/>
+<area shape="poly" id="edge11_Node000001_Node000001" title=" " alt="" coords="705,51,696,48,677,45,659,47,649,52,646,57,651,67,646,65,641,58,645,48,657,42,677,40,698,43,711,52"/>
+<area shape="rect" id="Node000002" href="$_ir_sensor_8c.html#afaab032430d7dc67252d7beeba2c619d" title=" " alt="" coords="435,29,566,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="596,63,566,59,566,54,601,64"/>
+<area shape="rect" id="Node000007" href="$_ir_sensor_8c.html#a07ef03cb307202e9a9800e8842dd7940" title=" " alt="" coords="445,104,556,131"/>
+<area shape="poly" id="edge12_Node000001_Node000007" title=" " alt="" coords="601,96,557,108,556,103,596,97"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="529,14,520,10,500,8,482,10,473,15,470,20,475,30,470,28,465,21,469,11,481,5,501,3,522,5,534,14"/>
+<area shape="rect" id="Node000003" href="$_ir_sensor_8c.html#a329a5b0841a76cf9b15c93d2a4e9969c" title="Turn ON all four IR emitters simultaneously." alt="" coords="264,67,387,93"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="423,59,388,69,387,64,418,60"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="352,51,344,48,326,45,309,47,299,52,297,57,302,67,297,65,292,58,295,48,307,42,326,40,346,43,358,52"/>
+<area shape="rect" id="Node000004" href="$_ir_sensor_8c.html#ad81fc13827c3c82b1d53448aa629536f" title="Full ON/OFF sampling cycle for all four IR sensors." alt="" coords="109,29,210,56"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="246,63,210,57,210,51,251,62"/>
+<area shape="rect" id="Node000005" href="$_ir_sensor_8c.html#a0885e835aaf51a8551935bc6a28a03ba" title="Non&#45;blocking sampler — advances one phase per control tick." alt="" coords="103,104,216,131"/>
+<area shape="poly" id="edge7_Node000003_Node000005" title=" " alt="" coords="251,97,217,107,216,102,246,98"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="180,14,173,10,159,8,146,10,139,14,138,20,141,29,136,28,132,21,135,11,144,5,159,3,175,5,185,14"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="180,88,173,85,159,83,146,85,139,89,138,95,141,105,136,102,132,95,135,86,144,80,159,77,175,80,185,89"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,104,55,131"/>
+<area shape="poly" id="edge9_Node000005_Node000006" title=" " alt="" coords="84,118,55,120,55,115,90,117"/>
+<area shape="poly" id="edge10_Node000006_Node000006" title=" " alt="" coords="50,89,44,85,30,83,17,85,10,89,8,95,12,103,7,104,3,95,6,86,15,80,30,77,46,80,55,88"/>
+<area shape="poly" id="edge13_Node000007_Node000003" title=" " alt="" coords="427,102,388,96,388,91,432,102"/>
+<area shape="poly" id="edge14_Node000007_Node000007" title=" " alt="" coords="529,88,520,85,500,83,482,85,473,89,470,95,475,105,470,102,465,95,469,86,481,80,501,77,522,80,534,89"/>
+</map>

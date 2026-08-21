@@ -1,0 +1,42 @@
+<map id="SysTick_us" name="SysTick_us">
+<area shape="rect" id="Node000001" title="Blocking delay in microseconds." alt="" coords="685,155,775,181"/>
+<area shape="poly" id="edge27_Node000001_Node000001" title=" " alt="" coords="752,139,745,136,730,133,716,135,708,140,707,146,710,155,705,153,701,146,704,136,714,130,730,128,747,131,758,140"/>
+<area shape="rect" id="Node000002" href="$adc_8c.html#a3aa4d83411aaceb9f1fa27d686f72fb3" title="Initialize ADC Unit A (AINA15, AINA16)." alt="" coords="551,29,629,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="707,142,675,107,635,70,619,59,620,54,639,66,679,104,712,143"/>
+<area shape="rect" id="Node000009" href="$adc_8c.html#a177871896322a36c3d222b34b92620fa" title="Initialize ADC Unit C (AINC00, AINC01)." alt="" coords="550,104,630,131"/>
+<area shape="poly" id="edge14_Node000001_Node000009" title=" " alt="" coords="674,149,629,134,629,129,679,149"/>
+<area shape="rect" id="Node000010" href="$_ir_sensor_8c.html#a86760ac6a121c5bc31c9d1e1fdd102a4" title="Read one ADC sample set from all four receivers into out[]." alt="" coords="547,229,633,256"/>
+<area shape="poly" id="edge17_Node000001_Node000010" title=" " alt="" coords="693,188,618,231,616,226,688,190"/>
+<area shape="rect" id="Node000011" href="$_ir_sensor_8c.html#ad81fc13827c3c82b1d53448aa629536f" title="Full ON/OFF sampling cycle for all four IR sensors." alt="" coords="393,179,495,205"/>
+<area shape="poly" id="edge24_Node000001_Node000011" title=" " alt="" coords="667,174,495,190,495,185,672,172"/>
+<area shape="rect" id="Node000013" href="$systick_8c.html#ae7521f0fb9eae465f0a61af2371b5f0e" title="Blocking delay in milliseconds." alt="" coords="543,304,637,331"/>
+<area shape="poly" id="edge25_Node000001_Node000013" title=" " alt="" coords="709,191,639,270,605,306,603,301,635,266,704,193"/>
+<area shape="poly" id="edge13_Node000002_Node000002" title=" " alt="" coords="612,14,605,10,590,8,576,10,568,14,566,20,570,30,565,28,561,21,564,11,574,5,590,3,607,5,617,14"/>
+<area shape="rect" id="Node000003" href="$adc_8c.html#a5137b551f1b83b0f4d8df7d071a3d3a6" title="Initialize both ADC units (A and C) for single&#45;conversion DMA." alt="" coords="406,104,482,131"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="551,62,473,106,471,101,546,65"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="467,89,460,85,444,83,429,85,421,89,419,95,423,104,418,103,414,95,417,86,427,80,444,77,462,80,472,89"/>
+<area shape="rect" id="Node000004" href="$_ir_sensor_8c.html#ab5301b3aadc0a716d895ea4b52a5e7b7" title="Initializes ADC and GPIO for IR emitters." alt="" coords="258,104,319,131"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="388,118,320,120,319,115,393,116"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="312,89,304,85,289,83,274,85,266,89,264,95,268,104,263,103,259,95,262,86,272,80,289,77,306,80,317,89"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="103,179,184,205"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="245,140,172,180,170,176,249,137"/>
+<area shape="rect" id="Node000007" href="$_module_test_8c.html#ac497d1b7849ac646d67a4f2986b62e15" title=" " alt="" coords="108,104,179,131"/>
+<area shape="poly" id="edge10_Node000004_Node000007" title=" " alt="" coords="241,119,180,120,179,115,246,116"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="160,163,155,159,143,157,132,159,126,164,125,170,128,179,123,178,119,170,122,161,130,154,143,152,157,155,166,163"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,204,55,231"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="85,206,56,214,53,210,89,203"/>
+<area shape="poly" id="edge8_Node000006_Node000006" title=" " alt="" coords="47,189,42,185,30,183,19,185,13,189,11,195,15,203,9,204,6,195,8,186,17,180,30,177,44,180,52,187"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="161,89,155,85,143,83,132,85,126,89,125,95,128,104,123,103,119,95,122,86,130,80,143,77,157,80,166,88"/>
+<area shape="rect" id="Node000008" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,104,55,131"/>
+<area shape="poly" id="edge11_Node000007_Node000008" title=" " alt="" coords="90,119,57,120,54,115,94,116"/>
+<area shape="poly" id="edge15_Node000009_Node000003" title=" " alt="" coords="532,118,483,120,482,115,537,117"/>
+<area shape="poly" id="edge16_Node000009_Node000009" title=" " alt="" coords="612,88,605,85,590,83,576,85,568,89,566,95,570,104,565,103,561,95,564,86,574,80,590,77,607,80,617,89"/>
+<area shape="poly" id="edge18_Node000010_Node000010" title=" " alt="" coords="612,214,605,210,590,208,576,210,568,214,566,220,570,230,565,228,561,221,564,211,574,205,590,203,607,205,617,215"/>
+<area shape="poly" id="edge19_Node000010_Node000011" title=" " alt="" coords="532,224,484,209,485,203,538,224"/>
+<area shape="rect" id="Node000012" href="$_ir_sensor_8c.html#a0885e835aaf51a8551935bc6a28a03ba" title="Non&#45;blocking sampler — advances one phase per control tick." alt="" coords="232,229,345,256"/>
+<area shape="poly" id="edge21_Node000010_Node000012" title=" " alt="" coords="529,243,346,245,345,240,534,242"/>
+<area shape="poly" id="edge20_Node000011_Node000011" title=" " alt="" coords="467,163,460,160,444,157,429,159,421,164,419,170,423,179,418,177,414,170,417,160,427,154,444,152,462,155,472,164"/>
+<area shape="poly" id="edge23_Node000012_Node000006" title=" " alt="" coords="215,238,55,222,55,217,218,233"/>
+<area shape="poly" id="edge22_Node000012_Node000012" title=" " alt="" coords="312,214,304,210,289,208,274,210,266,214,264,220,268,230,263,228,259,221,262,211,272,205,289,203,306,205,317,214"/>
+<area shape="poly" id="edge26_Node000013_Node000013" title=" " alt="" coords="612,288,605,285,590,283,576,285,568,289,566,295,570,305,565,302,561,295,564,286,574,280,590,277,607,280,617,289"/>
+</map>

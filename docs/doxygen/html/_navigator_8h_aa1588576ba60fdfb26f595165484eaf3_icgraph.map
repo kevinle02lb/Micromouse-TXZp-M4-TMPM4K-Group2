@@ -1,0 +1,10 @@
+<map id="Navigator_Init" name="Navigator_Init">
+<area shape="rect" id="Node000001" title="Initialize the navigator state machine." alt="" coords="232,29,334,56"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="305,13,298,10,283,8,269,10,261,14,260,20,263,30,259,28,254,21,257,11,267,5,283,3,300,5,310,15"/>
+<area shape="rect" id="Node000002" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="103,29,184,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,43,185,45,185,40,219,43"/>
+<area shape="poly" id="edge4_Node000002_Node000002" title=" " alt="" coords="161,13,155,10,143,8,132,10,126,14,125,20,128,30,123,28,119,20,122,11,130,5,143,3,157,5,166,14"/>
+<area shape="rect" id="Node000003" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,29,55,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="84,44,55,45,55,40,89,42"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="47,14,42,10,30,8,19,10,13,14,11,20,15,28,9,29,6,20,8,11,17,5,30,3,44,5,52,13"/>
+</map>

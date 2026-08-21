@@ -1,0 +1,7 @@
+<map id="__NVIC_SystemReset" name="__NVIC_SystemReset">
+<area shape="rect" id="Node000001" title="System Reset." alt="" coords="5,29,161,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="55,28,51,21,54,11,65,5,83,3,102,5,113,14,108,14,100,10,83,8,67,10,58,15,56,20,61,29"/>
+<area shape="rect" id="Node000002" href="$group___c_m_s_i_s___core___instruction_interface.html#ga7fe277f5385d23b9c44b2cbda1577ce9" title="Data Synchronization Barrier." alt="" coords="209,29,272,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,40,196,43,191,43,161,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="213,28,208,21,212,11,223,5,240,3,259,5,271,15,266,14,258,10,240,8,224,10,216,15,214,20,218,30"/>
+</map>

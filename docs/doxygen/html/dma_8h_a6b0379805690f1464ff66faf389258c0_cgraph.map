@@ -1,0 +1,17 @@
+<map id="DMAC_Init" name="DMAC_Init">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,96,92,123"/>
+<area shape="poly" id="edge10_Node000001_Node000001" title=" " alt="" coords="19,96,15,88,18,78,30,72,49,70,69,72,81,80,76,82,67,77,48,75,31,77,22,82,20,87,25,95"/>
+<area shape="rect" id="Node000002" href="$dma_8c.html#a7d03298470d608de3283b5a143b3a581" title="Write a single channel&#39;s primary control data." alt="" coords="340,96,484,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="57,94,89,55,112,36,139,21,180,7,215,3,250,8,293,20,321,33,347,49,390,86,385,85,344,53,318,37,291,25,249,13,215,8,181,12,141,25,115,40,93,59,61,97"/>
+<area shape="rect" id="Node000003" href="$dma_8c.html#a325481bdc955de0cfb6e44763d933ed6" title="Get pointer to ADC Unit A DMA result buffer." alt="" coords="140,59,292,86"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="91,98,140,88,136,91,93,102"/>
+<area shape="rect" id="Node000004" href="$dma_8c.html#a77b002b98eecc600caee51ed6432a6a3" title="Get pointer to ADC Unit C DMA result buffer." alt="" coords="140,134,292,160"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="92,117,140,128,136,131,93,122"/>
+<area shape="rect" id="Node000005" href="$dma_8c.html#ad5643fac5910645e6ff61ac1d2a82400" title="Re&#45;arm DMA channels 16 and 18 for ADC transfer." alt="" coords="146,208,286,235"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="70,121,141,170,183,199,178,200,138,175,69,126"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="378,95,373,88,377,78,390,72,412,70,436,72,450,81,444,81,434,77,412,75,392,77,381,82,378,87,384,97"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="187,58,182,50,185,41,197,34,216,32,236,35,248,43,243,44,234,40,216,38,199,40,189,44,187,50,192,59"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="187,133,182,125,185,115,197,109,216,107,236,110,248,118,243,118,234,115,216,112,199,114,189,119,187,124,192,134"/>
+<area shape="poly" id="edge8_Node000005_Node000002" title=" " alt="" coords="240,205,372,131,377,131,242,210"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="187,207,182,200,185,190,197,184,216,182,236,184,248,193,243,193,234,189,216,187,199,189,189,194,187,199,192,209"/>
+</map>

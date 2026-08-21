@@ -1,0 +1,10 @@
+<map id="AINC_Init" name="AINC_Init">
+<area shape="rect" id="Node000001" title="Initialize ADC Unit C (AINC00, AINC01)." alt="" coords="5,67,85,93"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="21,67,17,58,20,49,29,42,45,40,62,43,72,51,66,52,60,48,45,45,31,47,24,52,22,58,26,66"/>
+<area shape="rect" id="Node000002" href="$gpio_8c.html#afc5a02b244f93ceaa5e6f6fafd7468f2" title=" " alt="" coords="133,29,229,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="84,67,120,59,116,61,86,72"/>
+<area shape="rect" id="Node000003" href="$systick_8c.html#ad9af3d080726acc5f1003de96ee90bb5" title="Blocking delay in microseconds." alt="" coords="136,104,226,131"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="85,88,123,100,118,102,85,94"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="157,28,153,21,156,11,165,5,181,3,198,5,208,14,202,14,195,10,181,8,167,10,160,14,158,20,162,29"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="157,102,153,95,156,86,165,80,181,77,198,80,207,89,202,88,195,85,181,83,167,85,160,89,158,95,162,105"/>
+</map>

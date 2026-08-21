@@ -1,0 +1,9 @@
+<map id="src/modules/Profile.c" name="src/modules/Profile.c">
+<area shape="rect" id="Node000001" title="One&#45;dimensional trapezoidal motion profile implementation." alt="" coords="14,5,159,32"/>
+<area shape="rect" id="Node000002" href="$_profile_8h.html" title="One&#45;dimensional trapezoidal motion profile." alt="" coords="8,80,77,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,35,60,68,56,65,80,30"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="101,80,162,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="95,30,119,66,113,67,94,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,155,80,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="44,105,45,139,40,139,41,109"/>
+</map>

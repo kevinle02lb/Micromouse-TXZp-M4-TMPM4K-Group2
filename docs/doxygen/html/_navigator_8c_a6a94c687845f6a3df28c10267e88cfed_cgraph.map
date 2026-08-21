@@ -1,0 +1,14 @@
+<map id="SegmentArc_mm" name="SegmentArc_mm">
+<area shape="rect" id="Node000001" title="Wheel arc swept since the turn segment started." alt="" coords="5,67,128,93"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="36,67,31,58,35,48,47,42,67,40,88,43,100,51,95,52,86,48,66,45,48,47,39,52,36,57,41,66"/>
+<area shape="rect" id="Node000002" href="$_navigator_8c.html#a51f364e4b8eb86343c9f850e09a452da" title="Left wheel path since the segment started." alt="" coords="180,29,304,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="127,64,167,58,162,60,129,70"/>
+<area shape="rect" id="Node000004" href="$_navigator_8c.html#a04b6d7b2dd0b06a35f89604186d39240" title="Right wheel path since the segment started." alt="" coords="176,104,309,131"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="128,90,164,100,159,101,128,96"/>
+<area shape="poly" id="edge5_Node000002_Node000002" title=" " alt="" coords="212,28,207,21,210,11,223,5,242,3,263,5,276,14,271,14,262,10,242,8,224,10,214,15,212,20,217,30"/>
+<area shape="rect" id="Node000003" href="$_encoder_8c.html#ad92861cad0fe5e13d90aae6d3ffdc503" title="Get the accumulated position for a motor." alt="" coords="357,67,501,93"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="305,52,347,63,342,63,305,58"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="397,65,392,58,395,48,408,42,429,40,452,43,465,52,460,51,450,48,429,45,410,47,399,52,397,57,402,67"/>
+<area shape="poly" id="edge7_Node000004_Node000003" title=" " alt="" coords="309,101,342,97,347,97,310,107"/>
+<area shape="poly" id="edge8_Node000004_Node000004" title=" " alt="" coords="212,102,207,95,210,86,223,79,242,77,263,80,276,89,271,88,262,85,242,83,224,85,214,89,212,95,217,105"/>
+</map>

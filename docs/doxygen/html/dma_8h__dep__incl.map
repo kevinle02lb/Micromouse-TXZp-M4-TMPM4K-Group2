@@ -1,0 +1,5 @@
+<map id="src/drivers/dma.h" name="src/drivers/dma.h">
+<area shape="rect" id="Node000001" title="DMAC&#45;B driver for TMPM4Ky RISC microcontrollers." alt="" coords="5,5,128,32"/>
+<area shape="rect" id="Node000002" href="$dma_8c.html" title="DMAC&#45;B driver implementation for TMPM4Ky RISC microcontrollers." alt="" coords="5,80,128,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,46,69,80,64,79,65,50"/>
+</map>

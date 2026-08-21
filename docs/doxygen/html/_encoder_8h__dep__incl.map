@@ -1,0 +1,20 @@
+<map id="src/modules/Encoder.h" name="src/modules/Encoder.h">
+<area shape="rect" id="Node000001" title="Encoder control module – speed and position from quadrature encoders." alt="" coords="291,5,446,32"/>
+<area shape="rect" id="Node000002" href="$_module_test_8c.html" title="Module Testing." alt="" coords="5,155,127,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="306,38,254,58,198,82,133,121,84,156,81,152,130,116,195,78,252,53,311,36"/>
+<area shape="rect" id="Node000003" href="$main_8c.html" title="Micromouse main firmware entry point." alt="" coords="150,155,232,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="284,38,250,57,219,82,207,99,200,119,194,156,189,153,195,118,202,97,215,78,248,52,289,36"/>
+<area shape="rect" id="Node000004" href="$_encoder_8c.html" title="Encoder control module implementation." alt="" coords="466,80,621,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="413,36,515,79,510,80,413,41"/>
+<area shape="rect" id="Node000005" href="$_motion_8c.html" title="Speed control for the Micromouse." alt="" coords="645,80,791,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="445,33,659,79,654,80,444,38"/>
+<area shape="rect" id="Node000006" href="$_navigator_8c.html" title="Cell&#45;level motion sequencer for micromouse." alt="" coords="444,155,608,181"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="391,41,456,105,513,155,508,154,452,109,389,46"/>
+<area shape="rect" id="Node000007" href="$_odometry_8h.html" title="Position tracking." alt="" coords="228,80,392,107"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="351,43,322,82,318,77,347,46"/>
+<area shape="poly" id="edge7_Node000007_Node000002" title=" " alt="" coords="254,114,110,157,108,151,252,109"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="279,114,213,156,211,152,274,116"/>
+<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="362,109,491,154,485,154,361,115"/>
+<area shape="rect" id="Node000008" href="$_odometry_8c.html" title="Wheel odometry for differential drive robot." alt="" coords="256,155,420,181"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="322,119,336,155,331,153,319,124"/>
+</map>

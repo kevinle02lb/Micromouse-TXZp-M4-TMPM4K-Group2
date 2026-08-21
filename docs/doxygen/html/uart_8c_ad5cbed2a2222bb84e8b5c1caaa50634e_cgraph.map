@@ -1,0 +1,10 @@
+<map id="UART_Init" name="UART_Init">
+<area shape="rect" id="Node000001" title="Initializes UART channel 0 for 115200 Bd 8&#45;N&#45;1 transmission." alt="" coords="5,29,88,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="18,29,14,21,17,11,28,5,47,3,66,5,77,14,72,14,64,10,46,8,30,10,21,15,19,20,24,28"/>
+<area shape="rect" id="Node000002" href="$uart_8c.html#a5a438092d0c241c298ca854de6ad5bd5" title="Configures PC0/PC1 for the UART channel 0 function." alt="" coords="136,29,278,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="88,40,123,42,117,43,88,45"/>
+<area shape="poly" id="edge5_Node000002_Node000002" title=" " alt="" coords="179,28,174,21,178,11,189,5,207,3,226,5,238,14,233,14,224,10,207,8,190,10,182,15,179,20,184,30"/>
+<area shape="rect" id="Node000003" href="$gpio_8c.html#a5e974b2a990be5db710da9b382cc2cf8" title=" " alt="" coords="326,29,436,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="278,40,313,43,308,43,279,45"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="351,28,346,21,350,11,362,5,381,3,402,5,415,15,409,14,400,10,381,8,363,10,353,15,351,20,356,30"/>
+</map>

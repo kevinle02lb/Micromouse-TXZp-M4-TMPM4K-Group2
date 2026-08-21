@@ -1,0 +1,15 @@
+<map id="UART_SendInt" name="UART_SendInt">
+<area shape="rect" id="Node000001" title="Transmits a signed value as decimal ASCII text (blocking)." alt="" coords="5,29,115,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="32,29,27,21,30,11,42,5,60,3,80,5,91,13,86,15,78,10,60,8,43,10,34,15,32,20,37,28"/>
+<area shape="rect" id="Node000002" href="$uart_8c.html#a3863dd104ea16c4f4c369657edf48993" title="Transmits one byte over UART (blocking)." alt="" coords="505,43,627,69"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,33,163,28,251,26,339,29,492,45,487,46,339,35,251,31,163,33,116,38"/>
+<area shape="rect" id="Node000003" href="$uart_8c.html#a40d4b3a4875e8d00631ff0bff5e1f176" title="Transmits an unsigned 16&#45;bit value as decimal ASCII (blocking)." alt="" coords="163,67,281,93"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="115,53,150,62,145,64,115,58"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="536,41,531,34,535,24,547,18,566,16,587,19,599,28,594,27,585,24,566,21,548,23,539,28,536,33,541,43"/>
+<area shape="poly" id="edge5_Node000003_Node000002" title=" " alt="" coords="281,73,492,60,487,62,282,79"/>
+<area shape="poly" id="edge9_Node000003_Node000003" title=" " alt="" coords="194,65,189,58,192,48,204,42,222,40,241,43,253,52,248,51,240,48,222,45,205,47,196,52,194,57,199,67"/>
+<area shape="rect" id="Node000004" href="$uart_8c.html#a3d54817ce5409ef5576568ca41cce6ed" title="Transmits a NUL&#45;terminated string (blocking)." alt="" coords="329,117,457,144"/>
+<area shape="poly" id="edge6_Node000003_Node000004" title=" " alt="" coords="270,91,334,112,328,112,269,97"/>
+<area shape="poly" id="edge7_Node000004_Node000002" title=" " alt="" coords="425,114,517,76,522,75,427,119"/>
+<area shape="poly" id="edge8_Node000004_Node000004" title=" " alt="" coords="364,116,358,109,362,99,374,93,393,91,414,93,426,103,421,102,412,98,393,96,375,98,366,103,364,108,368,118"/>
+</map>

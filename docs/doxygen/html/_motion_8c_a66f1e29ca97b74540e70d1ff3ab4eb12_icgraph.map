@@ -1,0 +1,40 @@
+<map id="Motion_SetSpeed" name="Motion_SetSpeed">
+<area shape="rect" id="Node000001" title="Set target wheel speeds." alt="" coords="692,252,816,279"/>
+<area shape="poly" id="edge16_Node000001_Node000001" title=" " alt="" coords="790,237,778,233,754,231,731,233,719,237,716,243,722,252,717,251,711,243,715,233,730,227,754,225,780,228,795,237"/>
+<area shape="rect" id="Node000002" href="$_navigator_8c.html#aa6657d84ec450f18e3d3449afe2e0414" title="Command both wheel speeds in mm/s." alt="" coords="474,65,599,92"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="739,237,724,208,703,171,675,136,642,106,621,95,600,88,599,83,623,90,645,102,679,132,707,168,729,205,744,239"/>
+<area shape="rect" id="Node000007" href="$_motion_8c.html#ad466dafea1aefea527d3bd27961de52c" title="Sets both wheels backward at the same speed." alt="" coords="429,140,644,167"/>
+<area shape="poly" id="edge12_Node000001_Node000007" title=" " alt="" coords="726,240,689,210,642,181,614,170,614,165,645,176,692,206,731,241"/>
+<area shape="rect" id="Node000008" href="$_motion_8c.html#ac458eee9aca6929661e55535f890a3d1" title="Sets both wheels forward at the same speed." alt="" coords="435,215,638,241"/>
+<area shape="poly" id="edge14_Node000001_Node000008" title=" " alt="" coords="674,252,618,245,618,239,679,252"/>
+<area shape="rect" id="Node000009" href="$_motion_8c.html#a1ea38cf7a29a2abd78ecf10eb8440c01" title="Sets Turn left (CCW) Speed." alt="" coords="450,289,623,316"/>
+<area shape="poly" id="edge17_Node000001_Node000009" title=" " alt="" coords="674,279,619,291,618,286,679,278"/>
+<area shape="rect" id="Node000010" href="$_motion_8c.html#a56e5d17e7b40be6445bdf6626a6b544e" title="Sets Turn right (CW) Speed." alt="" coords="446,364,627,391"/>
+<area shape="poly" id="edge19_Node000001_Node000010" title=" " alt="" coords="720,286,645,330,571,366,569,361,642,326,715,288"/>
+<area shape="rect" id="Node000011" href="$_module_test_8c.html#a3e1cd34e172f504894cc568912e87b1a" title="Command both wheels in mm/s." alt="" coords="467,439,606,465"/>
+<area shape="poly" id="edge21_Node000001_Node000011" title=" " alt="" coords="739,291,700,348,674,378,645,405,613,425,579,441,578,436,610,421,642,401,671,374,696,345,735,293"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="570,50,560,46,536,44,515,46,503,51,500,56,506,65,501,65,495,57,499,47,514,41,537,39,561,41,576,50"/>
+<area shape="rect" id="Node000003" href="$_navigator_8c.html#aa1588576ba60fdfb26f595165484eaf3" title="Initialize the navigator state machine." alt="" coords="279,35,381,61"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="456,68,382,58,380,53,461,66"/>
+<area shape="rect" id="Node000006" href="$_navigator_8c.html#a9b3a0072f38ba40f05861eb358e087cb" title="Advance the state machine by one tick." alt="" coords="104,104,230,131"/>
+<area shape="poly" id="edge9_Node000002_Node000006" title=" " alt="" coords="456,89,231,113,229,108,460,85"/>
+<area shape="poly" id="edge8_Node000003_Node000003" title=" " alt="" coords="356,20,348,16,330,13,313,15,304,20,302,25,306,34,301,34,297,26,300,16,311,10,330,8,349,11,361,19"/>
+<area shape="rect" id="Node000004" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="126,29,208,56"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="261,47,209,46,207,42,265,44"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="188,15,181,10,167,8,153,10,146,14,144,20,148,29,143,29,139,21,142,11,151,5,167,3,184,5,193,13"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="6,67,56,93"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="110,60,58,75,54,71,113,56"/>
+<area shape="poly" id="edge6_Node000005_Node000005" title=" " alt="" coords="53,53,46,48,31,45,17,47,10,52,8,58,12,66,7,67,3,58,6,49,15,42,31,40,48,43,57,50"/>
+<area shape="poly" id="edge10_Node000006_Node000005" title=" " alt="" coords="99,101,57,89,55,84,103,98"/>
+<area shape="poly" id="edge11_Node000006_Node000006" title=" " alt="" coords="188,89,181,85,167,83,153,85,146,89,144,95,148,103,143,104,139,95,142,86,151,80,167,77,184,80,193,88"/>
+<area shape="poly" id="edge13_Node000007_Node000007" title=" " alt="" coords="570,125,560,121,536,119,515,121,503,125,500,131,506,140,501,139,495,131,499,122,514,115,537,113,561,116,576,125"/>
+<area shape="poly" id="edge15_Node000008_Node000008" title=" " alt="" coords="570,199,560,196,536,193,515,195,503,200,500,205,506,215,501,214,495,206,499,196,514,190,537,188,561,191,576,199"/>
+<area shape="poly" id="edge18_Node000009_Node000009" title=" " alt="" coords="570,274,560,270,536,268,515,270,503,275,500,280,506,290,501,288,495,281,499,271,514,265,537,263,561,265,576,274"/>
+<area shape="poly" id="edge20_Node000010_Node000010" title=" " alt="" coords="570,348,560,345,536,343,515,345,503,349,500,355,506,365,501,363,495,355,499,346,514,339,537,337,561,340,576,349"/>
+<area shape="poly" id="edge22_Node000011_Node000011" title=" " alt="" coords="570,423,560,420,536,417,515,419,503,424,500,429,506,439,501,437,495,430,499,420,514,414,537,412,561,415,576,424"/>
+<area shape="rect" id="Node000012" href="$_module_test_8c.html#a6d3b3560cd07a79f42c26e611240121d" title="Run one profiled pivot, then hold and keep streaming." alt="" coords="278,439,381,465"/>
+<area shape="poly" id="edge23_Node000011_Node000012" title=" " alt="" coords="449,452,382,455,382,449,454,452"/>
+<area shape="poly" id="edge25_Node000012_Node000012" title=" " alt="" coords="356,423,348,420,330,417,313,419,304,424,302,429,306,439,301,437,297,430,300,420,311,414,330,412,349,415,361,424"/>
+<area shape="rect" id="Node000013" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="142,439,192,465"/>
+<area shape="poly" id="edge24_Node000012_Node000013" title=" " alt="" coords="260,452,192,455,192,449,265,452"/>
+</map>

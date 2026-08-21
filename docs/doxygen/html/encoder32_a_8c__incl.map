@@ -1,0 +1,15 @@
+<map id="src/drivers/encoder32A.c" name="src/drivers/encoder32A.c">
+<area shape="rect" id="Node000001" title="A&#45;ENC32 driver implementation for TMPM4Ky microcontrollers." alt="" coords="10,5,177,32"/>
+<area shape="rect" id="Node000002" href="$encoder32_a_8h.html" title="A&#45;ENC32 driver for TMPM4Ky microcontrollers." alt="" coords="95,80,196,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,30,130,67,125,68,102,35"/>
+<area shape="rect" id="Node000006" href="$gpio_8h.html" title="GPIO driver for TMPM4Ky microcontrollers." alt="" coords="15,80,71,107"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="83,35,62,69,58,66,86,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="94,155,197,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="147,105,148,140,143,138,144,109"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,155,70,181"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="129,107,71,148,68,143,124,107"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="222,155,296,181"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="166,105,229,146,224,146,164,110"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="62,105,117,144,113,146,60,110"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="44,105,42,140,37,138,40,109"/>
+</map>

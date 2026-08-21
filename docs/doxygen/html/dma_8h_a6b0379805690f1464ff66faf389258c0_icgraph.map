@@ -1,0 +1,20 @@
+<map id="DMAC_Init" name="DMAC_Init">
+<area shape="rect" id="Node000001" title=" " alt="" coords="376,43,463,69"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="441,27,435,24,419,21,405,23,398,28,396,34,400,43,395,41,391,34,394,24,404,18,420,16,437,19,447,28"/>
+<area shape="rect" id="Node000002" href="$dma_8c.html#a447560182e5b9ca172067ede4aa4aba2" title="Primary + alternate control table (32 channels × 2 = 64 entries)." alt="" coords="232,5,328,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="358,41,329,34,329,29,364,40"/>
+<area shape="rect" id="Node000003" href="$_ir_sensor_8c.html#ab5301b3aadc0a716d895ea4b52a5e7b7" title="Initializes ADC and GPIO for IR emitters." alt="" coords="250,80,310,107"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="364,71,312,88,310,83,358,72"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="302,64,295,61,280,59,266,61,259,65,257,71,261,81,256,78,252,71,255,62,265,56,280,53,297,56,307,65"/>
+<area shape="rect" id="Node000004" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="103,43,184,69"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="233,82,184,70,185,64,238,81"/>
+<area shape="rect" id="Node000006" href="$_module_test_8c.html#ac497d1b7849ac646d67a4f2986b62e15" title=" " alt="" coords="108,117,179,144"/>
+<area shape="poly" id="edge9_Node000003_Node000006" title=" " alt="" coords="238,105,180,124,179,118,233,106"/>
+<area shape="poly" id="edge8_Node000004_Node000004" title=" " alt="" coords="160,27,155,23,143,21,132,23,126,28,125,34,128,43,123,42,119,34,122,25,130,18,143,16,157,19,166,27"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,43,55,69"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="85,58,56,59,54,53,89,54"/>
+<area shape="poly" id="edge7_Node000005_Node000005" title=" " alt="" coords="47,28,42,23,30,21,19,23,13,28,11,34,15,42,9,43,6,34,8,25,17,18,30,16,44,19,52,26"/>
+<area shape="poly" id="edge11_Node000006_Node000006" title=" " alt="" coords="161,101,155,98,143,96,132,98,126,102,125,108,128,118,123,116,119,108,122,99,130,93,143,91,157,93,166,102"/>
+<area shape="rect" id="Node000007" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,117,55,144"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="90,132,55,133,55,128,95,130"/>
+</map>

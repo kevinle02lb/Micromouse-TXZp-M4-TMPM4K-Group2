@@ -1,0 +1,41 @@
+<map id="PC_FRn_Clear" name="PC_FRn_Clear">
+<area shape="rect" id="Node000001" title=" " alt="" coords="815,129,926,156"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="899,114,890,110,870,108,852,110,843,115,841,120,845,130,840,128,835,121,839,111,851,105,871,103,891,105,904,115"/>
+<area shape="rect" id="Node000002" href="$gpio_8c.html#aafb2ced3d95d7d778fd614e2869252dc" title=" " alt="" coords="646,92,746,119"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="797,128,746,119,746,113,803,128"/>
+<area shape="rect" id="Node000012" href="$uart_8c.html#a5a438092d0c241c298ca854de6ad5bd5" title="Configures PC0/PC1 for the UART channel 0 function." alt="" coords="625,167,767,193"/>
+<area shape="poly" id="edge22_Node000001_Node000012" title=" " alt="" coords="803,157,762,169,761,163,798,158"/>
+<area shape="poly" id="edge5_Node000002_Node000002" title=" " alt="" coords="722,76,714,73,696,71,680,73,671,77,669,83,673,93,668,90,663,83,667,74,678,68,696,65,716,68,727,77"/>
+<area shape="rect" id="Node000003" href="$gpio_8c.html#a90363099dc984eccffd2a7ad34def32d" title=" " alt="" coords="495,29,574,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="643,86,571,59,572,54,648,86"/>
+<area shape="rect" id="Node000004" href="$timer32_a_8c.html#ad73430cab10981ae08585cca88749142" title="Initialize T32A channel 3 for PPG output." alt="" coords="493,104,577,131"/>
+<area shape="poly" id="edge6_Node000002_Node000004" title=" " alt="" coords="628,110,577,117,577,112,634,110"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="555,14,549,10,535,8,522,10,515,14,513,20,517,30,512,28,508,21,511,11,520,5,535,3,551,5,560,15"/>
+<area shape="poly" id="edge19_Node000004_Node000004" title=" " alt="" coords="555,88,549,85,535,83,522,85,515,89,513,95,517,105,512,102,508,95,511,86,520,80,535,77,551,80,560,89"/>
+<area shape="rect" id="Node000005" href="$_motor_8c.html#adb06fc7f4c3ca40cb6bab543e1a2eac5" title=" " alt="" coords="365,41,445,68"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="489,97,434,71,435,66,494,97"/>
+<area shape="rect" id="Node000011" href="$timer32_a_8c.html#a11fdf43212b74624e39468366d1ba618" title=" " alt="" coords="366,116,444,143"/>
+<area shape="poly" id="edge20_Node000004_Node000011" title=" " alt="" coords="475,123,444,128,444,123,480,122"/>
+<area shape="poly" id="edge17_Node000005_Node000005" title=" " alt="" coords="425,26,419,22,405,20,392,22,385,26,383,32,387,42,382,40,378,33,381,23,390,17,405,15,421,17,431,26"/>
+<area shape="rect" id="Node000006" href="$_motion_8c.html#aad8ce1070ef0837cd67c0371c32df102" title="Initialize PID controllers &amp; Motor related modules." alt="" coords="232,41,317,68"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="347,55,318,57,317,52,352,54"/>
+<area shape="rect" id="Node000009" href="$_module_test_8c.html#ac497d1b7849ac646d67a4f2986b62e15" title=" " alt="" coords="108,104,179,131"/>
+<area shape="poly" id="edge18_Node000005_Node000009" title=" " alt="" coords="348,72,318,83,180,113,179,108,317,77,353,70"/>
+<area shape="poly" id="edge13_Node000006_Node000006" title=" " alt="" coords="295,26,289,22,275,20,262,22,255,26,253,32,257,42,251,40,248,33,250,23,260,17,275,15,291,17,300,26"/>
+<area shape="rect" id="Node000007" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="103,29,184,56"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="214,50,185,49,184,44,219,48"/>
+<area shape="poly" id="edge14_Node000006_Node000009" title=" " alt="" coords="229,76,174,106,172,101,234,74"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="160,14,155,10,143,8,132,10,126,14,125,20,128,29,123,29,119,20,122,11,130,5,143,3,157,5,166,13"/>
+<area shape="rect" id="Node000008" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,29,55,56"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="85,44,56,45,54,40,89,41"/>
+<area shape="poly" id="edge11_Node000008_Node000008" title=" " alt="" coords="47,15,42,10,30,8,19,10,13,14,11,20,15,28,9,29,6,20,8,11,17,5,30,3,44,5,52,13"/>
+<area shape="poly" id="edge16_Node000009_Node000009" title=" " alt="" coords="160,88,155,85,143,83,132,85,126,89,125,95,128,104,123,103,119,95,122,86,130,80,143,77,157,80,166,88"/>
+<area shape="rect" id="Node000010" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,104,55,131"/>
+<area shape="poly" id="edge15_Node000009_Node000010" title=" " alt="" coords="90,119,56,120,54,115,94,116"/>
+<area shape="poly" id="edge21_Node000011_Node000011" title=" " alt="" coords="425,100,419,97,405,95,392,97,385,101,383,107,387,117,382,114,378,107,381,98,390,92,405,89,421,92,431,101"/>
+<area shape="poly" id="edge26_Node000012_Node000012" title=" " alt="" coords="722,151,714,148,696,145,680,147,671,152,669,157,673,168,668,165,663,158,667,148,678,142,696,140,716,143,727,152"/>
+<area shape="rect" id="Node000013" href="$uart_8c.html#ad5cbed2a2222bb84e8b5c1caaa50634e" title="Initializes UART channel 0 for 115200 Bd 8&#45;N&#45;1 transmission." alt="" coords="234,167,316,193"/>
+<area shape="poly" id="edge23_Node000012_Node000013" title=" " alt="" coords="607,181,316,183,316,177,612,179"/>
+<area shape="poly" id="edge24_Node000013_Node000009" title=" " alt="" coords="229,160,173,134,174,129,234,159"/>
+<area shape="poly" id="edge25_Node000013_Node000013" title=" " alt="" coords="295,151,289,148,275,145,262,147,255,152,253,158,256,167,252,165,248,158,250,149,260,142,275,140,291,143,300,152"/>
+</map>

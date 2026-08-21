@@ -1,0 +1,7 @@
+<map id="CaptureSegmentStart" name="CaptureSegmentStart">
+<area shape="rect" id="Node000001" title="Latch the encoder positions that segment progress is measured from." alt="" coords="5,29,153,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="46,29,40,21,44,11,57,5,79,3,102,5,116,14,111,14,101,10,79,8,59,10,48,15,45,20,51,29"/>
+<area shape="rect" id="Node000002" href="$_encoder_8c.html#ad92861cad0fe5e13d90aae6d3ffdc503" title="Get the accumulated position for a motor." alt="" coords="201,29,345,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="153,40,187,43,182,43,153,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="240,28,234,21,238,11,251,5,273,3,296,5,310,14,304,14,294,10,273,8,253,10,242,15,239,20,244,30"/>
+</map>

@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['intadasgl_5firqhandler_0',['INTADASGL_IRQHandler',['../adc_8c.html#a4d3b258e94f398fd1e33b30b3c19bb30',1,'adc.c']]],
+  ['intadcsgl_5firqhandler_1',['INTADCSGL_IRQHandler',['../adc_8c.html#ad3f976308b23418f3a937298df88a35d',1,'adc.c']]],
+  ['intt32a01ac_5firqhandler_2',['INTT32A01AC_IRQHandler',['../timer32_a_8c.html#abb642cabc61b4baf7460a954767354b1',1,'timer32A.c']]],
+  ['ir_5facquire_3',['IR_Acquire',['../_ir_sensor_8c.html#a86760ac6a121c5bc31c9d1e1fdd102a4',1,'IrSensor.c']]],
+  ['ir_5fallemittersoff_4',['IR_AllEmittersOff',['../_ir_sensor_8c.html#a2b512a484fa28b250fe4cdc03d2384ce',1,'IR_AllEmittersOff(void):&#160;IrSensor.c'],['../_ir_sensor_8h.html#a2b512a484fa28b250fe4cdc03d2384ce',1,'IR_AllEmittersOff(void):&#160;IrSensor.c']]],
+  ['ir_5fallemitterson_5',['IR_AllEmittersOn',['../_ir_sensor_8c.html#a329a5b0841a76cf9b15c93d2a4e9969c',1,'IR_AllEmittersOn(void):&#160;IrSensor.c'],['../_ir_sensor_8h.html#a329a5b0841a76cf9b15c93d2a4e9969c',1,'IR_AllEmittersOn(void):&#160;IrSensor.c']]],
+  ['ir_5fcomputereflected_6',['IR_ComputeReflected',['../_ir_sensor_8c.html#abb1cfe80b1245ad0fa71b4b473e73ff7',1,'IrSensor.c']]],
+  ['ir_5ffilteriir_7',['IR_FilterIIR',['../_ir_sensor_8c.html#a832ae54046399bfb7cd3cecac748d263',1,'IR_FilterIIR(uint16_t prev, uint16_t curr, uint8_t shift):&#160;IrSensor.c'],['../_ir_sensor_8h.html#a832ae54046399bfb7cd3cecac748d263',1,'IR_FilterIIR(uint16_t prev, uint16_t curr, uint8_t shift):&#160;IrSensor.c']]],
+  ['ir_5fgetdata_8',['IR_GetData',['../_ir_sensor_8c.html#a2eae20d5a4e82e4d0c90290e274c068b',1,'IR_GetData(void):&#160;IrSensor.c'],['../_ir_sensor_8h.html#a2eae20d5a4e82e4d0c90290e274c068b',1,'IR_GetData(void):&#160;IrSensor.c']]],
+  ['ir_5fgetdistance_5fmm_9',['IR_GetDistance_mm',['../_ir_sensor_8c.html#ad9dcb8ec155d72a5f2823c083a2481e6',1,'IR_GetDistance_mm(ir_channel_t ch):&#160;IrSensor.c'],['../_ir_sensor_8h.html#ad9dcb8ec155d72a5f2823c083a2481e6',1,'IR_GetDistance_mm(ir_channel_t ch):&#160;IrSensor.c']]],
+  ['ir_5fgetfiltered_10',['IR_GetFiltered',['../_ir_sensor_8c.html#a42a7264d13838fe53da4fa1cf39d1483',1,'IR_GetFiltered(ir_channel_t ch):&#160;IrSensor.c'],['../_ir_sensor_8h.html#a42a7264d13838fe53da4fa1cf39d1483',1,'IR_GetFiltered(ir_channel_t ch):&#160;IrSensor.c']]],
+  ['ir_5fgetraw_11',['IR_GetRaw',['../_ir_sensor_8c.html#a4c34b5d2ca220b7686bb8cdaecbe1242',1,'IR_GetRaw(ir_channel_t ch):&#160;IrSensor.c'],['../_ir_sensor_8h.html#a4c34b5d2ca220b7686bb8cdaecbe1242',1,'IR_GetRaw(ir_channel_t ch):&#160;IrSensor.c']]],
+  ['ir_5fgetreflected_12',['IR_GetReflected',['../_ir_sensor_8c.html#aaf8e74c21fc7d185a09211b49a3dc01f',1,'IR_GetReflected(ir_channel_t ch):&#160;IrSensor.c'],['../_ir_sensor_8h.html#aaf8e74c21fc7d185a09211b49a3dc01f',1,'IR_GetReflected(ir_channel_t ch):&#160;IrSensor.c']]],
+  ['ir_5finit_13',['IR_Init',['../_ir_sensor_8c.html#ab5301b3aadc0a716d895ea4b52a5e7b7',1,'IR_Init(void):&#160;IrSensor.c'],['../_ir_sensor_8h.html#ab5301b3aadc0a716d895ea4b52a5e7b7',1,'IR_Init(void):&#160;IrSensor.c']]],
+  ['ir_5fiswalldetected_14',['IR_IsWallDetected',['../_ir_sensor_8c.html#ac51b83ab2e1f165dfcf21040c0c14e0a',1,'IR_IsWallDetected(ir_channel_t ch, uint16_t threshold):&#160;IrSensor.c'],['../_ir_sensor_8h.html#ac51b83ab2e1f165dfcf21040c0c14e0a',1,'IR_IsWallDetected(ir_channel_t ch, uint16_t threshold):&#160;IrSensor.c']]],
+  ['ir_5fiswallpresent_15',['IR_IsWallPresent',['../_ir_sensor_8c.html#a0b9ad1c889a088b7f9bd88de4298ec21',1,'IR_IsWallPresent(ir_channel_t ch):&#160;IrSensor.c'],['../_ir_sensor_8h.html#a0b9ad1c889a088b7f9bd88de4298ec21',1,'IR_IsWallPresent(ir_channel_t ch):&#160;IrSensor.c']]],
+  ['ir_5fsampleall_16',['IR_SampleAll',['../_ir_sensor_8c.html#ad81fc13827c3c82b1d53448aa629536f',1,'IR_SampleAll(void):&#160;IrSensor.c'],['../_ir_sensor_8h.html#ad81fc13827c3c82b1d53448aa629536f',1,'IR_SampleAll(void):&#160;IrSensor.c']]],
+  ['ir_5fsamplestep_17',['IR_SampleStep',['../_ir_sensor_8c.html#a0885e835aaf51a8551935bc6a28a03ba',1,'IR_SampleStep(void):&#160;IrSensor.c'],['../_ir_sensor_8h.html#a0885e835aaf51a8551935bc6a28a03ba',1,'IR_SampleStep(void):&#160;IrSensor.c']]],
+  ['ir_5fupdatewalls_18',['IR_UpdateWalls',['../_ir_sensor_8c.html#ae797c9f2155d963b83b6624703808cb3',1,'IrSensor.c']]],
+  ['itm_5fcheckchar_19',['ITM_CheckChar',['../group___c_m_s_i_s__core___debug_functions.html#gae61ce9ca5917735325cd93b0fb21dd29',1,'core_cm4.h']]],
+  ['itm_5freceivechar_20',['ITM_ReceiveChar',['../group___c_m_s_i_s__core___debug_functions.html#gac3ee2c30a1ac4ed34c8a866a17decd53',1,'core_cm4.h']]],
+  ['itm_5fsendchar_21',['ITM_SendChar',['../group___c_m_s_i_s__core___debug_functions.html#gac90a497bd64286b84552c2c553d3419e',1,'core_cm4.h']]]
+];

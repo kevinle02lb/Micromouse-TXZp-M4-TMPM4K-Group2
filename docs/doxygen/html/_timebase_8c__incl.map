@@ -1,0 +1,14 @@
+<map id="src/modules/Timebase.c" name="src/modules/Timebase.c">
+<area shape="rect" id="Node000001" title="control Loop in main.c to indicate when logic should update." alt="" coords="33,5,198,32"/>
+<area shape="rect" id="Node000002" href="$_timebase_8h.html" title="ctrlTick in main.c to indicate when logic should update." alt="" coords="5,80,95,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,35,73,70,69,67,105,30"/>
+<area shape="rect" id="Node000004" href="$timer32_a_8h.html" title="Timer32A driver for TMPM4Ky microcontrollers." alt="" coords="118,80,246,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="128,30,163,68,158,69,126,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="22,155,96,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="53,105,58,140,53,139,50,109"/>
+<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="163,107,95,149,93,144,158,108"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="125,155,228,181"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="183,105,181,140,176,138,179,109"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="252,155,317,181"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="201,105,257,145,251,145,199,110"/>
+</map>

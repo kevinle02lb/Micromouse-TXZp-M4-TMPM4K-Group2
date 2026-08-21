@@ -1,0 +1,15 @@
+<map id="Encoder_WindowedSpeed" name="Encoder_WindowedSpeed">
+<area shape="rect" id="Node000001" title="Compute speed over a multi&#45;tick window to beat count quantization." alt="" coords="420,67,595,93"/>
+<area shape="poly" id="edge8_Node000001_Node000001" title=" " alt="" coords="539,51,529,48,507,45,487,47,476,52,474,57,479,67,474,65,468,58,473,48,486,42,508,40,531,43,544,52"/>
+<area shape="rect" id="Node000002" href="$_encoder_8c.html#ad0493964dd17733319708411b3810f01" title="Read both encoders, update delta, position, and filtered speed." alt="" coords="254,67,372,93"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="402,80,373,83,373,77,407,80"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="339,51,331,48,313,45,297,47,288,52,286,57,290,67,285,65,281,58,284,48,295,42,313,40,332,43,344,52"/>
+<area shape="rect" id="Node000003" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="130,29,179,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="236,63,180,51,180,46,242,62"/>
+<area shape="rect" id="Node000004" href="$_module_test_8c.html#a6d3b3560cd07a79f42c26e611240121d" title="Run one profiled pivot, then hold and keep streaming." alt="" coords="103,104,206,131"/>
+<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="241,97,207,108,206,103,236,98"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="174,14,168,10,154,8,142,10,135,14,134,20,137,29,132,28,128,20,131,11,140,5,154,3,170,5,179,14"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="174,88,168,85,154,83,142,85,135,89,134,95,137,105,132,102,128,95,131,86,140,80,154,77,170,80,179,89"/>
+<area shape="rect" id="Node000005" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,104,55,131"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="84,118,55,120,55,115,89,116"/>
+</map>

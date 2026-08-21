@@ -1,0 +1,9 @@
+<map id="src/modules/Navigator.h" name="src/modules/Navigator.h">
+<area shape="rect" id="Node000001" title="Robot behavior logic handler. combines FloodFill, optometry, &amp; motion controls." alt="" coords="5,5,169,32"/>
+<area shape="rect" id="Node000002" href="$_flood_fill_8h.html" title="Flood fill path planner for a micromouse maze." alt="" coords="46,80,128,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,30,90,65,84,64,86,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="8,155,72,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="81,106,59,143,54,140,77,109"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="96,155,171,181"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="96,105,120,142,115,142,94,110"/>
+</map>

@@ -1,0 +1,24 @@
+<map id="IR_AllEmittersOff" name="IR_AllEmittersOff">
+<area shape="rect" id="Node000001" title="Turn OFF all four IR emitters simultaneously." alt="" coords="5,141,129,168"/>
+<area shape="poly" id="edge9_Node000001_Node000001" title=" " alt="" coords="37,141,32,133,35,123,47,117,67,115,88,117,100,125,95,127,86,122,67,120,49,122,39,127,37,132,42,140"/>
+<area shape="rect" id="Node000002" href="$_ir_sensor_8c.html#a66e013e395900c2e2bac9e832a4053d0" title=" " alt="" coords="181,29,302,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,139,122,103,175,66,188,61,184,65,178,70,125,108,85,143"/>
+<area shape="rect" id="Node000004" href="$_ir_sensor_8c.html#a1c0392e186a4c874ef49108f4cdfab62" title=" " alt="" coords="177,179,307,205"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="129,165,164,174,159,176,129,170"/>
+<area shape="rect" id="Node000006" href="$_ir_sensor_8c.html#ab3554d4b94cea7f692032e42076f16ab" title=" " alt="" coords="191,104,293,131"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="128,139,177,130,173,133,130,144"/>
+<area shape="rect" id="Node000007" href="$_ir_sensor_8c.html#a8771fec05f31ff8125c7f3d1cb86c928" title=" " alt="" coords="186,253,298,280"/>
+<area shape="poly" id="edge13_Node000001_Node000007" title=" " alt="" coords="91,166,209,243,204,246,89,171"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="211,29,206,21,210,11,222,5,242,3,263,5,275,14,270,14,261,10,242,8,224,10,214,15,212,20,217,29"/>
+<area shape="rect" id="Node000003" href="$gpio_8c.html#a694a507b6b042f1ba3d8e3065f0d4873" title=" " alt="" coords="355,67,478,93"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="303,53,342,63,337,64,303,58"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="386,66,381,58,385,48,397,42,417,40,438,43,450,51,445,51,436,48,417,45,399,47,389,52,387,57,391,67"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="211,178,206,170,210,160,222,154,242,152,263,155,275,163,270,163,261,160,242,157,224,159,214,164,212,169,217,179"/>
+<area shape="rect" id="Node000005" href="$gpio_8c.html#a83514de474566a7b7e24daf983e23da1" title=" " alt="" coords="355,216,478,243"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="307,203,343,213,337,213,307,209"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="386,214,381,207,385,198,397,192,417,189,438,192,450,201,445,200,436,197,417,195,399,197,389,201,387,207,391,217"/>
+<area shape="poly" id="edge11_Node000006_Node000003" title=" " alt="" coords="293,104,343,95,338,97,294,109"/>
+<area shape="poly" id="edge12_Node000006_Node000006" title=" " alt="" coords="211,103,206,95,210,86,222,80,242,77,263,80,275,89,270,89,261,85,242,83,224,85,214,89,212,95,217,104"/>
+<area shape="poly" id="edge14_Node000007_Node000005" title=" " alt="" coords="298,252,337,246,342,245,299,257"/>
+<area shape="poly" id="edge15_Node000007_Node000007" title=" " alt="" coords="212,252,206,245,210,235,222,229,242,227,263,229,275,238,270,238,261,234,242,232,224,234,214,239,212,244,216,254"/>
+</map>

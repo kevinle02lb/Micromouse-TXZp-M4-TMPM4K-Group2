@@ -1,0 +1,7 @@
+<map id="PORT_A_Init" name="PORT_A_Init">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,104,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="28,29,24,21,27,11,37,5,55,3,73,5,84,14,79,14,71,10,54,8,39,10,31,14,29,20,33,29"/>
+<area shape="rect" id="Node000002" href="$gpio_8c.html#ac9e07708f887ee8e2308da60d3df2e26" title=" " alt="" coords="152,29,260,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,40,139,42,134,43,104,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="179,28,175,21,178,11,189,5,206,3,224,5,235,15,230,14,222,10,206,8,190,10,182,14,180,20,184,30"/>
+</map>

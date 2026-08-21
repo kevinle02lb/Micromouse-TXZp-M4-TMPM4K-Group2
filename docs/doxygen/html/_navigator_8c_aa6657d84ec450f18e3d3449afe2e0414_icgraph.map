@@ -1,0 +1,17 @@
+<map id="CommandWheels" name="CommandWheels">
+<area shape="rect" id="Node000001" title="Command both wheel speeds in mm/s." alt="" coords="428,67,554,93"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="517,51,509,48,491,45,474,47,465,52,463,57,468,67,463,65,458,58,461,48,473,42,491,40,511,43,522,52"/>
+<area shape="rect" id="Node000002" href="$_navigator_8c.html#aa1588576ba60fdfb26f595165484eaf3" title="Initialize the navigator state machine." alt="" coords="278,36,380,63"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="410,65,381,62,381,56,416,65"/>
+<area shape="rect" id="Node000005" href="$_navigator_8c.html#a9b3a0072f38ba40f05861eb358e087cb" title="Advance the state machine by one tick." alt="" coords="104,104,230,131"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="415,89,231,113,230,107,410,89"/>
+<area shape="poly" id="edge7_Node000002_Node000002" title=" " alt="" coords="355,20,347,17,329,15,313,17,304,21,302,27,306,36,301,35,296,27,300,18,311,12,329,9,349,12,360,21"/>
+<area shape="rect" id="Node000003" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="126,29,208,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="260,47,208,47,208,42,265,46"/>
+<area shape="poly" id="edge6_Node000003_Node000003" title=" " alt="" coords="188,14,181,10,167,8,153,10,146,14,144,20,148,29,143,28,139,21,142,11,151,5,167,3,184,5,194,14"/>
+<area shape="rect" id="Node000004" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="6,67,56,93"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="110,60,57,76,55,71,113,56"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="52,52,46,48,31,45,17,47,10,52,8,58,12,66,7,67,3,58,6,49,15,42,31,40,48,43,58,51"/>
+<area shape="poly" id="edge9_Node000005_Node000004" title=" " alt="" coords="99,101,56,89,56,84,104,98"/>
+<area shape="poly" id="edge10_Node000005_Node000005" title=" " alt="" coords="188,88,181,85,167,83,153,85,146,89,144,95,148,105,143,102,139,95,142,86,151,80,167,77,184,80,193,89"/>
+</map>

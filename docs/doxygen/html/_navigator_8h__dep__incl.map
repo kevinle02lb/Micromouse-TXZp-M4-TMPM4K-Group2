@@ -1,0 +1,7 @@
+<map id="src/modules/Navigator.h" name="src/modules/Navigator.h">
+<area shape="rect" id="Node000001" title="Robot behavior logic handler. combines FloodFill, optometry, &amp; motion controls." alt="" coords="38,5,202,32"/>
+<area shape="rect" id="Node000002" href="$main_8c.html" title="Micromouse main firmware entry point." alt="" coords="5,80,88,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,43,61,82,57,78,94,44"/>
+<area shape="rect" id="Node000003" href="$_navigator_8c.html" title="Cell&#45;level motion sequencer for micromouse." alt="" coords="112,80,275,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="145,41,183,80,178,80,142,46"/>
+</map>

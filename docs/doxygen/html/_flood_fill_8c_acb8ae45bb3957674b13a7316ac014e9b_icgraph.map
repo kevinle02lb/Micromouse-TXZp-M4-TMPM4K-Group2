@@ -1,0 +1,16 @@
+<map id="Dir_ToWallBit" name="Dir_ToWallBit">
+<area shape="rect" id="Node000001" title="Wall bit corresponding to an absolute direction." alt="" coords="626,29,726,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="701,13,693,10,676,8,659,10,651,15,649,20,653,30,648,28,643,21,647,11,658,5,676,3,695,5,707,15"/>
+<area shape="rect" id="Node000002" href="$_flood_fill_8c.html#a6e4d83d800ec3777847811f75f824d8f" title="Record a wall in a cell and mirror it into the neighbour." alt="" coords="455,29,578,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="607,43,578,45,578,40,613,43"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="542,13,534,10,516,8,500,10,491,15,489,20,494,30,489,28,484,21,487,11,499,5,517,3,536,5,547,15"/>
+<area shape="rect" id="Node000003" href="$_flood_fill_8c.html#a624015c2950644057b5f00e15742b49f" title="Record the walls observed from the current cell." alt="" coords="278,29,407,56"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="437,43,408,45,408,40,442,43"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="371,14,362,10,343,8,325,10,315,15,313,20,317,30,313,28,307,21,311,11,323,5,343,3,364,5,376,15"/>
+<area shape="rect" id="Node000004" href="$_navigator_8c.html#a9b3a0072f38ba40f05861eb358e087cb" title="Advance the state machine by one tick." alt="" coords="104,29,230,56"/>
+<area shape="poly" id="edge6_Node000003_Node000004" title=" " alt="" coords="260,43,230,45,230,40,265,43"/>
+<area shape="poly" id="edge9_Node000004_Node000004" title=" " alt="" coords="188,14,181,10,167,8,153,10,146,14,144,20,148,30,143,28,139,21,142,11,151,5,167,3,184,5,193,15"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="6,29,56,56"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="85,43,56,45,56,40,90,42"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="52,15,46,10,31,8,17,10,10,14,8,20,12,28,7,30,3,21,6,11,15,5,31,3,48,5,58,14"/>
+</map>

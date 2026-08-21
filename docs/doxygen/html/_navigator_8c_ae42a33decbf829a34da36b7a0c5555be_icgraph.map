@@ -1,0 +1,10 @@
+<map id="SegmentDistance_mm" name="SegmentDistance_mm">
+<area shape="rect" id="Node000001" title="Forward distance advanced since the drive segment started." alt="" coords="278,29,432,56"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="386,14,376,10,355,8,336,10,325,15,323,20,328,30,323,28,317,21,321,11,334,5,355,3,378,5,391,15"/>
+<area shape="rect" id="Node000002" href="$_navigator_8c.html#a9b3a0072f38ba40f05861eb358e087cb" title="Advance the state machine by one tick." alt="" coords="104,29,230,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="260,43,230,45,230,40,265,43"/>
+<area shape="poly" id="edge4_Node000002_Node000002" title=" " alt="" coords="188,14,181,10,167,8,153,10,146,14,144,20,148,30,143,28,139,21,142,11,151,5,167,3,184,5,193,15"/>
+<area shape="rect" id="Node000003" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="6,29,56,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="85,43,56,45,56,40,90,42"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="52,15,46,10,31,8,17,10,10,14,8,20,12,28,7,30,3,21,6,11,15,5,31,3,48,5,58,14"/>
+</map>

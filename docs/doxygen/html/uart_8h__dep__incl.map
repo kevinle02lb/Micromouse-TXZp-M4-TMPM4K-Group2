@@ -1,0 +1,9 @@
+<map id="src/drivers/uart.h" name="src/drivers/uart.h">
+<area shape="rect" id="Node000001" title="Asynchronous Serial Communication driver (UART&#45;C) Header file." alt="" coords="150,5,270,32"/>
+<area shape="rect" id="Node000002" href="$_module_test_8c.html" title="Module Testing." alt="" coords="5,80,127,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="174,40,92,82,90,77,169,38"/>
+<area shape="rect" id="Node000003" href="$uart_8c.html" title="Asynchronous Serial Communication driver (UART&#45;C)." alt="" coords="150,80,270,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="212,46,212,81,208,78,208,50"/>
+<area shape="rect" id="Node000004" href="$main_8c.html" title="Micromouse main firmware entry point." alt="" coords="294,80,376,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="245,37,316,79,311,79,244,42"/>
+</map>

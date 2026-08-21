@@ -1,0 +1,25 @@
+<map id="Motor_SetRight" name="Motor_SetRight">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,253,118,280"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="31,253,26,245,30,235,42,229,62,227,83,229,95,237,90,239,81,234,61,232,43,234,34,239,31,244,36,252"/>
+<area shape="rect" id="Node000002" href="$_motor_8c.html#afaa0ddceb8a902b5cd9ae1abc1823c27" title="Convert a speed/duty percentage to a timer compare value (RGx0)." alt="" coords="176,29,299,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="64,252,75,216,94,166,124,113,142,88,164,66,172,62,169,67,167,70,147,91,128,116,99,168,80,217,69,254"/>
+<area shape="rect" id="Node000003" href="$timer32_a_8c.html#a021cb3dd69f1c88d5401a93882281cbf" title=" " alt="" coords="166,104,309,131"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="69,251,106,198,133,167,164,141,175,136,171,140,167,145,136,171,110,201,73,254"/>
+<area shape="rect" id="Node000004" href="$timer32_a_8c.html#abd1af52e8a8f7b98a99380de05b35af3" title=" " alt="" coords="166,179,309,205"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="88,251,165,215,183,209,179,213,167,220,92,255"/>
+<area shape="rect" id="Node000005" href="$timer32_a_8c.html#aaa15b48443c29fde734baa52f5ce4769" title=" " alt="" coords="170,253,305,280"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="117,264,156,265,152,268,119,269"/>
+<area shape="rect" id="Node000006" href="$timer32_a_8c.html#adb058298cc8693f00280d68b39340fc0" title=" " alt="" coords="170,328,305,355"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="95,278,192,320,188,323,95,283"/>
+<area shape="rect" id="Node000007" href="$timer32_a_8c.html#a2c165e0c7889f458a5695dc53e6b52e4" title=" " alt="" coords="190,403,284,429"/>
+<area shape="poly" id="edge12_Node000001_Node000007" title=" " alt="" coords="76,278,117,319,167,365,204,393,199,394,164,369,113,322,76,283"/>
+<area shape="rect" id="Node000008" href="$timer32_a_8c.html#a5bc18e60f141f42976aef5e69e7da301" title=" " alt="" coords="191,477,284,504"/>
+<area shape="poly" id="edge14_Node000001_Node000008" title=" " alt="" coords="69,278,107,352,134,397,168,439,201,469,196,469,164,443,130,400,102,355,68,283"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="207,29,202,21,205,11,218,5,237,3,258,5,271,13,266,15,257,10,237,8,219,10,209,15,207,20,212,29"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="207,104,202,95,205,86,218,79,237,77,258,80,271,88,266,89,257,85,237,83,219,85,209,89,207,95,212,103"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="207,178,202,170,205,160,218,154,237,152,258,155,271,163,266,164,257,160,237,157,219,159,209,164,207,169,212,178"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="207,253,202,245,205,235,218,229,237,227,258,229,271,238,266,239,257,234,237,232,219,234,209,239,207,244,212,253"/>
+<area shape="poly" id="edge11_Node000006_Node000006" title=" " alt="" coords="207,327,202,319,205,310,218,303,237,301,258,304,271,313,266,313,257,309,237,307,219,309,209,313,207,319,212,328"/>
+<area shape="poly" id="edge13_Node000007_Node000007" title=" " alt="" coords="207,402,202,394,205,384,218,378,237,376,258,379,271,387,266,387,257,384,237,381,219,383,209,388,207,393,212,403"/>
+<area shape="poly" id="edge15_Node000008_Node000008" title=" " alt="" coords="207,476,202,469,205,459,218,453,237,451,258,453,271,462,266,462,257,458,237,456,219,458,209,463,207,468,212,478"/>
+</map>

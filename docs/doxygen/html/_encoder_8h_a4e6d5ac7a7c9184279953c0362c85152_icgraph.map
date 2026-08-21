@@ -1,0 +1,19 @@
+<map id="Encoder_GetSpeed_CPS" name="Encoder_GetSpeed_CPS">
+<area shape="rect" id="Node000001" title="Get the filtered speed for a motor." alt="" coords="461,67,631,93"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="581,51,570,48,546,45,524,47,512,52,509,57,515,67,510,65,504,58,508,48,523,42,546,40,571,43,586,52"/>
+<area shape="rect" id="Node000002" href="$_motion_8c.html#a47cf1896361b4c623fb00a5ab7673c56" title="Run one PID control tick." alt="" coords="279,29,388,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="449,64,389,55,389,50,455,63"/>
+<area shape="rect" id="Node000006" href="$_module_test_8c.html#af12f433154dce072861087252a971ca7" title="Measured wheel speed in mm/s." alt="" coords="254,104,413,131"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="454,96,414,106,413,101,449,97"/>
+<area shape="poly" id="edge5_Node000002_Node000002" title=" " alt="" coords="363,14,354,10,334,8,315,10,305,15,303,20,308,30,303,28,297,21,301,11,314,5,334,3,355,5,368,14"/>
+<area shape="rect" id="Node000003" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="130,29,179,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="261,44,180,45,179,40,266,42"/>
+<area shape="rect" id="Node000004" href="$_module_test_8c.html#a6d3b3560cd07a79f42c26e611240121d" title="Run one profiled pivot, then hold and keep streaming." alt="" coords="103,104,206,131"/>
+<area shape="poly" id="edge6_Node000002_Node000004" title=" " alt="" coords="273,61,255,70,182,106,180,101,253,66,268,62"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="174,14,168,10,154,8,142,10,135,14,134,20,137,29,132,28,128,20,131,11,140,5,154,3,170,5,179,14"/>
+<area shape="poly" id="edge8_Node000004_Node000004" title=" " alt="" coords="174,88,168,85,154,83,142,85,135,89,134,95,137,105,132,102,128,95,131,86,140,80,154,77,170,80,179,89"/>
+<area shape="rect" id="Node000005" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,104,55,131"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="84,118,55,120,55,115,89,116"/>
+<area shape="poly" id="edge10_Node000006_Node000004" title=" " alt="" coords="236,117,207,120,206,115,241,117"/>
+<area shape="poly" id="edge11_Node000006_Node000006" title=" " alt="" coords="363,88,354,85,334,83,315,85,305,89,303,95,308,105,303,102,297,95,301,86,314,79,334,77,355,80,368,89"/>
+</map>

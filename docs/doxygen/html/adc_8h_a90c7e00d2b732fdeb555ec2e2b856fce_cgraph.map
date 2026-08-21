@@ -1,0 +1,7 @@
+<map id="AINA_Read" name="AINA_Read">
+<area shape="rect" id="Node000001" title="Start a paired ADC conversion with DMA re&#45;arm." alt="" coords="5,29,97,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="24,29,20,21,23,11,34,5,51,3,69,5,80,14,75,14,67,10,51,8,36,10,27,14,25,20,30,29"/>
+<area shape="rect" id="Node000002" href="$adc_8c.html#a91204ebbe08efacf68979f3a47f85223" title="Trigger a single conversion on ADC Unit A." alt="" coords="145,29,259,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="97,40,132,42,126,43,97,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="175,28,171,21,174,11,185,5,202,3,220,5,231,15,226,14,218,10,202,8,186,10,178,14,176,20,180,30"/>
+</map>

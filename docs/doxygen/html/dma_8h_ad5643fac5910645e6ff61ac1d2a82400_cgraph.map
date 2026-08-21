@@ -1,0 +1,7 @@
+<map id="DMA_SetupForADC" name="DMA_SetupForADC">
+<area shape="rect" id="Node000001" title="Re&#45;arm DMA channels 16 and 18 for ADC transfer." alt="" coords="5,29,146,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="43,29,37,21,41,11,54,5,76,3,98,5,112,14,106,14,97,10,75,8,56,10,45,15,43,20,48,29"/>
+<area shape="rect" id="Node000002" href="$dma_8c.html#a7d03298470d608de3283b5a143b3a581" title="Write a single channel&#39;s primary control data." alt="" coords="194,29,338,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,40,181,43,176,43,146,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="233,28,228,21,232,11,245,5,266,3,289,5,302,14,297,14,287,10,266,8,246,10,235,15,233,20,238,30"/>
+</map>

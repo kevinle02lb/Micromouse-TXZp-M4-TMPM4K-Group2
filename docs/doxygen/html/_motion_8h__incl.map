@@ -1,0 +1,10 @@
+<map id="src/modules/Motion.h" name="src/modules/Motion.h">
+<area shape="rect" id="Node000001" title="Speed control for the Micromouse." alt="" coords="5,5,152,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="56,155,120,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="62,35,50,49,37,66,30,86,32,106,44,126,61,144,56,145,40,129,27,108,24,85,33,64,46,45,64,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="41,80,116,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="79,30,81,65,76,64,78,35"/>
+<area shape="rect" id="Node000004" href="$_motor_8h.html" title="Motor control API for TB67H450AFNG H&#45;bridge drivers." alt="" coords="139,80,204,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="95,30,146,69,141,71,94,35"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="160,106,115,147,112,142,155,108"/>
+</map>
