@@ -49,18 +49,18 @@
 
 #define CELL_SIZE_MM            180.0f      /* one maze cell, centre to centre */
 
-#define DRIVE_SPEED_MM_S        300.0f      /* straight cruise ceiling */
-#define DRIVE_MIN_MM_S           20.0f      /* straight floor, clears stiction */
-#define DRIVE_ACCEL_MM_S2       800.0f      /* straight ramp and brake */
+#define DRIVE_SPEED_MM_S        600.0f      /* straight cruise ceiling */
+#define DRIVE_MIN_MM_S           0.0f      /* straight floor, clears stiction */
+#define DRIVE_ACCEL_MM_S2       600.0f      /* straight ramp and brake */
 
-#define TURN_SPEED_MM_S         150.0f      /* pivot cruise ceiling, per wheel */
-#define TURN_MIN_MM_S            20.0f      /* pivot floor, clears stiction */
-#define TURN_ACCEL_MM_S2        400.0f      /* pivot ramp and brake */
+#define TURN_SPEED_MM_S         3000.0f      /* pivot cruise ceiling, per wheel */
+#define TURN_MIN_MM_S            0.0f      /* pivot floor, clears stiction */
+#define TURN_ACCEL_MM_S2        4500.0f      /* pivot ramp and brake */
 
 #define KP_STRAIGHT               4.0f      /* damping trim, (mm/s) per mm of wheel skew */
-#define KP_WALL                   0.5f      /* wall trim, (mm/s) per mm of lateral error */
-#define IR_SIDE_TARGET_MM        84.0f      /* side reading when centred, measured */
-#define IR_FRONT_TARGET_MM       55.0f      /* front reading at a cell centre, measured */
+#define KP_WALL                   0.8f      /* wall trim, (mm/s) per mm of lateral error */
+#define IR_SIDE_TARGET_MM        31.5f      /* side reading when centred, measured */
+#define IR_FRONT_TARGET_MM       32.0f      /* front reading at a cell centre, measured */
 
 #define SETTLE_TICKS             60U        /* stationary hold at the cell centre */
 
@@ -177,7 +177,7 @@ static float SegmentArc_mm(void)
  * @details
  *   Position comes from the side sensors, damping from wheel skew. Lateral
  *   position sits two integrations away from the wheel differential, so a
- *   proportional term alone weaves; skew stands in for heading and settles it.
+ *   proportional term alone weaves. Skew stands in for heading and settles it.
  *
  *   A single wall gives half the displacement signal that two do, so its
  *   deviation is doubled to hold the loop gain constant.
@@ -192,6 +192,7 @@ static float StraightnessTrim(void)
     bool  left  = IR_IsWallPresent(IR_FAR_LEFT);
     bool  right = IR_IsWallPresent(IR_FAR_RIGHT);
 
+    /* Referenced Displacement on Right. Distance from IR sensor to wall */
     if (left && right)
         error = IR_GetDistance_mm(IR_FAR_RIGHT) - IR_GetDistance_mm(IR_FAR_LEFT);
     else if (left)
@@ -259,8 +260,7 @@ static void BeginTurn(float angle_rad)
     turn_sign = (angle_rad < 0.0f) ? -1.0f : 1.0f;
 
     CaptureSegmentStart();
-    Profile_Begin(&segment, fabsf(angle_rad) * WHEELBASE_MM * 0.5f,
-                  TURN_SPEED_MM_S, TURN_MIN_MM_S, TURN_ACCEL_MM_S2);
+    Profile_Begin(&segment, fabsf(angle_rad) * WHEELBASE_MM * 0.5f, TURN_SPEED_MM_S, TURN_MIN_MM_S, TURN_ACCEL_MM_S2);
     nav_state = NAV_TURN;
 }
 
@@ -285,8 +285,7 @@ void Navigator_Init(void)
 
     CommandWheels(0.0f, 0.0f);
 
-    Profile_Begin(&segment, 0.0f,
-                  DRIVE_SPEED_MM_S, DRIVE_MIN_MM_S, DRIVE_ACCEL_MM_S2);
+    Profile_Begin(&segment, 0.0f, DRIVE_SPEED_MM_S, DRIVE_MIN_MM_S, DRIVE_ACCEL_MM_S2);
 }
 
 /**

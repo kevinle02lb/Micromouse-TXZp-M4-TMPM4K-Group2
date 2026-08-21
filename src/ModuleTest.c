@@ -31,8 +31,8 @@
 //#define MOTION_TEST
 //#define IR_EMITTER_TEST
 //#define ODOM_TEST
-//#define TURN_TEST
-#define DRIVE_TEST
+#define TURN_TEST
+//#define DRIVE_TEST
 
 /* ==========================================================================
  *   Shared Helper
@@ -261,8 +261,19 @@ static void Test_SendDecimal(float value)
             IRTest_PrintChannel("L",  IR_LEFT);
             IRTest_PrintChannel("R",  IR_RIGHT);
             IRTest_PrintChannel("FR", IR_FAR_RIGHT);
-            UART_CRLF();
 
+            UART_CRLF();
+            /* Distance in mm */
+            UART_SendString("Distance:");
+            UART_SendString("FL:");
+            UART_SendUint(IR_GetDistance_mm(IR_FAR_LEFT));
+            UART_SendString("L:");
+            UART_SendUint(IR_GetDistance_mm(IR_LEFT));
+            UART_SendString("R:");
+            UART_SendUint(IR_GetDistance_mm(IR_RIGHT));
+            UART_SendString("FR:");
+            UART_SendUint(IR_GetDistance_mm(IR_FAR_RIGHT));
+            UART_CRLF();
         
             Test_HoldMS(IR_TEST_PERIOD_MS);   /* pace the stream */
         
@@ -650,9 +661,9 @@ static void Test_SendDecimal(float value)
     #define TURN_TEST_ANGLE_RAD      M_PI_DIV_2   /* magnitude, always positive */
     #define TURN_TEST_CCW            1            /* 1 = left/CCW, 0 = right/CW */
 
-    #define TURN_TEST_SPEED_MM_S     150.0f       /* cruise ceiling, per wheel */
+    #define TURN_TEST_SPEED_MM_S     300.0f       /* cruise ceiling, per wheel */
     #define TURN_TEST_MIN_MM_S       0.0f       /* floor, clears stiction */
-    #define TURN_TEST_ACCEL_MM_S2    300.0f       /* ramp and brake */
+    #define TURN_TEST_ACCEL_MM_S2    500.0f       /* ramp and brake */
 
     #define TURN_TEST_HOLD_MS        500U         /* stationary hold after the turn */
     #define TURN_TEST_PRINT_EVERY     10U         /* 1 kHz / 10 = 100 Hz */

@@ -51,8 +51,8 @@
 #define M_2PI                               6.2831855f      /*!< 2 * PI */
 #define M_PI_DIV_2                          (M_PI / 2.0f)   /*!< 90 Degree - [pi/2] */
 
-#define WHEEL_DIAMETER_MM                   80              /*!< 80mm from Datasheet */
-#define WHEELBASE_MM                        96.0f           /*!< Distance between wheels (mm) */
+#define WHEEL_DIAMETER_MM                   82              /*!< 80mm from Datasheet */
+#define WHEELBASE_MM                        100.0f           /*!< Distance between wheels (mm) */
 #define WHEEL_CIRCUMFERENCE_MM              (WHEEL_DIAMETER_MM * M_PI)
 
 /**
