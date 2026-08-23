@@ -40,55 +40,13 @@
 #include "adc.h"
 #include "systick.h"
 #include "gpio.h"
-
-#ifdef ADC_USE_DMA
-    #include "dma.h"
-#endif  
-
-/* TSET1 interrupt-enable bit: raises the DMA request in DMA builds,
- * unused (ADRFn is polled) in polled builds. */
-#ifdef ADC_USE_DMA
-    #define ADC_TSET1_INT   ADxTSETn_ENINTn_MASK
-#else
-    #define ADC_TSET1_INT   0U
-#endif
-
-/* ==========================================================================
- *   INTERRUPT NOTES (Read this first)
- * ==========================================================================
- *
- *   ADC single-conversion interrupts:
- *     INTADASGL = IRQ #44  (ADC Unit A done)
- *     INTADCSGL = IRQ #58  (ADC Unit C done)
- *
- *   These are "direct" interrupts (Route H in Toshiba §4.3.1).
- *   They bypass INTIF and go straight to the NVIC.
- *
- *   To enable an interrupt manually (without CMSIS):
- *     NVIC_ISER[IRQn >> 5] = (1UL << (IRQn & 0x1F));
- *
- *   NVIC base address: 0xE000E100 (ARM standard, not in Toshiba doc)
- *   ISER offset: +0x000, ICER: +0x080, ICPR: +0x180, IPR: +0x300
- *
- *   To enable with CMSIS (recommended):
- *     __NVIC_SetPriority(INTADASGL_IRQn, 5);
- *     __NVIC_ClearPendingIRQ(INTADASGL_IRQn);
- *     __NVIC_EnableIRQ(INTADASGL_IRQn);
- *
- *   CURRENTLY: DMA handles data movement. These interrupts are NOT enabled
- *   in the NVIC, so the CPU never enters the handlers below.
- *   The handlers are stubs for future use.
- * ========================================================================== */
-
  
 /* ==========================================================================
  *   Initialization
  * ========================================================================== */
 
 /**
- * @brief  Initialize both ADC units (A and C) for single-conversion DMA.
- * @note   DMA channel control data is re-armed inside @ref Start_ADC() before
- *         each conversion pair. Do not call @ref DMA_SetupForADC() here.
+ * @brief  Initialize both ADC units (A and C) for single conversion.
  */
 void ADC_Init(void)
 {
@@ -101,7 +59,7 @@ void ADC_Init(void)
  * @details
  *   Follows Section 3.2.2 of the ADC-I RM for single-conversion setup.
  *   Steps: clock enable → disable ADEN → set prescaler → configure sampling
- *   time → set mode → program TSET registers → enable DMA request → enable ADC.
+ *   time → set mode → program TSET registers → enable ADC.
  * 
  *   Setup sequence per ADC-I Reference Manual:
  *   1. Enable peripheral clock in CG->FSYSMENB
@@ -112,12 +70,11 @@ void ADC_Init(void)
  *   6. Wait 3 us for stabilization
  *   7. Set MOD1/MOD2 for conversion timing
  *   8. Configure TSET0/TSET1 — which channel goes to which result register
- *   9. Enable DMA request (SGLDMEN)
- *   10. Re-enable ADC (ADEN=1)
+ *   9. Re-enable ADC (ADEN=1)
  *
  *   Result routing:
  *     TSET0: AINA16 -> REG0
- *     TSET1: AINA15 -> REG1, with interrupt flag (ENINTn)
+ *     TSET1: AINA15 -> REG1
  */
 void AINA_Init(void)
 {
@@ -154,17 +111,13 @@ void AINA_Init(void)
 
     /* [9] Program conversion sequence:
      *   TSET0: AINA16 -> REG0
-     *   TSET1: AINA15 -> REG1 (ENINT set only in DMA builds)
+     *   TSET1: AINA15 -> REG1
      */
     TSB_ADA->TSET0 = (ADxTSETn_TRGSn_SGL | ADxTSETn_AINSTn_AINx16);
-    TSB_ADA->TSET1 = (ADxTSETn_TRGSn_SGL | ADxTSETn_AINSTn_AINx15 | ADC_TSET1_INT);
+    TSB_ADA->TSET1 = (ADxTSETn_TRGSn_SGL | ADxTSETn_AINSTn_AINx15);
 
-    /* [10] DMA request on single conversion (DMA build) / none (polled) */
-    #ifdef ADC_USE_DMA
-        TSB_ADA->CR1 = ADxCR1_SGLDMEN;
-    #else
-        TSB_ADA->CR1 = 0U;
-    #endif
+    /* [10] No transfer request. Results are read by the CPU. */
+    TSB_ADA->CR1 = 0U;
 
     /* [11] Re-enable ADC to start operation */
     TSB_ADA->CR0 |= ADxCR0_ADEN;
@@ -208,17 +161,13 @@ void AINC_Init(void)
 
     /* [9] Program conversion sequence:
      *   TSET0: AINC01 -> REG0
-     *   TSET1: AINC00 -> REG1 (ENINT set only in DMA builds)
+     *   TSET1: AINC00 -> REG1
      */
     TSB_ADC->TSET0 = (ADxTSETn_TRGSn_SGL | ADxTSETn_AINSTn_AINx01);
-    TSB_ADC->TSET1 = (ADxTSETn_TRGSn_SGL | ADxTSETn_AINSTn_AINx00 | ADC_TSET1_INT);
+    TSB_ADC->TSET1 = (ADxTSETn_TRGSn_SGL | ADxTSETn_AINSTn_AINx00);
 
-    /* [10] DMA request on single conversion (DMA build) / none (polled) */
-    #ifdef ADC_USE_DMA
-        TSB_ADC->CR1 = ADxCR1_SGLDMEN;
-    #else
-        TSB_ADC->CR1 = 0U;
-    #endif
+    /* [10] No transfer request. Results are read by the CPU. */
+    TSB_ADC->CR1 = 0U;
 
     /* [11] Re-enable ADC to start operation */
     TSB_ADC->CR0 |= ADxCR0_ADEN;
@@ -248,38 +197,15 @@ void AINC_StartSGL(void)
     while (  TSB_ADC->ST & ADxST_SNGF ) { ; }   /* then wait for it to clear = done */
 }
 
-/**
- * @brief  Start a paired ADC conversion with DMA re-arm.
- * @details
- *   Must be called every time fresh samples are needed.
- *   The PL230/DMAC-B controller invalidates (sets cycle_ctrl = 0) the channel
- *   control structure after each transfer completes. Therefore,
- *   @ref DMA_SetupForADC() must be called first to restore the descriptors.
- *
- *   Flow:
- *   1. DMA_SetupForADC() restores cycle_ctrl for channels 16 & 18
- *   2. AINA_StartSGL() triggers Unit A conversion
- *   3. AINC_StartSGL() triggers Unit C conversion
- *   4. DMA moves results to adc_a_buffer[] and adc_c_buffer[] without CPU
- */
-#ifdef ADC_USE_DMA
-    void Start_ADC(void)
-    {
-        DMA_SetupForADC();   /* Re-arm DMA channels (restore cycle_ctrl) */
-        AINA_StartSGL();
-        AINC_StartSGL();
-    }
-#endif
-
 /* ==========================================================================
- *   Blocking Read (DMA bypass / debug fallback)
+ *   Blocking Read
  * ========================================================================== */
 
 /**
- * @brief  Blocking read from ADC Unit A (no DMA).
+ * @brief  Blocking read of one channel from ADC Unit A.
  * @param  channel  15 for AINA15, 16 for AINA16.
  * @return 12-bit result right-aligned in a 16-bit word.
- * @note   Polls ADxST.SNGF; do not use while DMA is active on the same unit.
+ * @note   Polls ADxST.SNGF.
  */
 uint16_t AINA_Read(uint8_t channel)
 {
@@ -300,10 +226,10 @@ uint16_t AINA_Read(uint8_t channel)
 }
 
 /**
- * @brief  Blocking read from ADC Unit C (no DMA).
+ * @brief  Blocking read of one channel from ADC Unit C.
  * @param  channel  0 for AINC00, 1 for AINC01.
  * @return 12-bit result right-aligned in a 16-bit word.
- * @note   Polls ADxST.SNGF; do not use while DMA is active on the same unit.
+ * @note   Polls ADxST.SNGF.
  */
 uint16_t AINC_Read(uint8_t channel)
 {
@@ -323,13 +249,12 @@ uint16_t AINC_Read(uint8_t channel)
     return result;
 }
 
-#ifndef ADC_USE_DMA
 /**
  * @brief  Trigger a single-conversion pair on ADC Unit A and read both results.
  * @param  p_reg0  Destination for REG0 (AINA16), right-aligned 12-bit.
  * @param  p_reg1  Destination for REG1 (AINA15), right-aligned 12-bit.
- * @note   Polls ADxREGn.ADRFn on REG1 — the ENINT channel, which converts
- *         last — so both results are valid before readout. No DMA.
+ * @note   Polls ADxREGn.ADRFn on REG1, which converts last, so both results
+ *         are valid before readout.
  */
 void AINA_ReadPair(uint16_t *p_reg0, uint16_t *p_reg1)
 {
@@ -345,8 +270,8 @@ void AINA_ReadPair(uint16_t *p_reg0, uint16_t *p_reg1)
  * @brief  Trigger a single-conversion pair on ADC Unit C and read both results.
  * @param  p_reg0  Destination for REG0 (AINC01), right-aligned 12-bit.
  * @param  p_reg1  Destination for REG1 (AINC00), right-aligned 12-bit.
- * @note   Polls ADxREGn.ADRFn on REG1 — the ENINT channel, which converts
- *         last — so both results are valid before readout. No DMA.
+ * @note   Polls ADxREGn.ADRFn on REG1, which converts last, so both results
+ *         are valid before readout.
  */
 void AINC_ReadPair(uint16_t *p_reg0, uint16_t *p_reg1)
 {
@@ -355,52 +280,4 @@ void AINC_ReadPair(uint16_t *p_reg0, uint16_t *p_reg1)
 
     *p_reg0 = (uint16_t)((TSB_ADC->REG0 & ADxREGn_ADRn) >> 4U);
     *p_reg1 = (uint16_t)((TSB_ADC->REG1 & ADxREGn_ADRn) >> 4U);
-}
-
-#endif
-
-/* ==========================================================================
- *   Interrupt Handlers
- * ========================================================================== */
-
-/**
- * @brief  ADC Unit A single-conversion interrupt handler (IRQ #44).
- * @note   STUB — not currently enabled in NVIC.
- *
- *   To enable this interrupt:
- *     __disable_irq();
- *     __NVIC_SetPriority(INTADASGL_IRQn, 5);     // Priority 5 (0 = highest)
- *     __NVIC_ClearPendingIRQ(INTADASGL_IRQn);    // Clear any stale pending
- *     __NVIC_EnableIRQ(INTADASGL_IRQn);          // Set NVIC ISER bit 12
- *     __enable_irq();
- *
- *   INTADASGL is a "direct" interrupt (Route H, §4.3.1) — no INTIF config needed.
- *   If using DMA, the DMA controller handles data movement; this ISR is optional.
- *   If NOT using DMA, read REG0/REG1 here and clear ADC status flags.
- */
-void INTADASGL_IRQHandler(void)
-{
-    /* TODO: Add application logic if interrupt is enabled */
-    /* If using DMA: DMA already moved data to adc_a_buffer[] */
-    /* If NOT using DMA: read TSB_ADA->REG0/REG1 here, then clear flags */
-}
-
-/**
- * @brief  ADC Unit C single-conversion interrupt handler (IRQ #58).
- * @note   STUB — not currently enabled in NVIC.
- *
- *   To enable this interrupt:
- *     __disable_irq();
- *     __NVIC_SetPriority(INTADCSGL_IRQn, 5);
- *     __NVIC_ClearPendingIRQ(INTADCSGL_IRQn);
- *     __NVIC_EnableIRQ(INTADCSGL_IRQn);          // Set NVIC ISER bit 26
- *     __enable_irq();
- *
- *   INTADCSGL is a "direct" interrupt (Route H, §4.3.1) — no INTIF config needed.
- */
-void INTADCSGL_IRQHandler(void)
-{
-    /* TODO: Add application logic if interrupt is enabled */
-    /* If using DMA: DMA already moved data to adc_c_buffer[] */
-    /* If NOT using DMA: read TSB_ADC->REG0/REG1 here, then clear flags */
 }

@@ -30,6 +30,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "Motor.h"      /* for motor_t */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define SPEED_WINDOW_TICKS  20U
 
@@ -58,4 +61,7 @@ int32_t Encoder_GetPosition(motor_t motor);
 void Encoder_ResetPosition(motor_t motor);
 int32_t Encoder_GetRawCount(motor_t motor);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* ENCODER_H */

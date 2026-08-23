@@ -27,11 +27,11 @@
  *   Module Defines
  * ========================================================================== */
 //#define MOTOR_TEST
-//#define IR_TEST
+#define IR_TEST
 //#define MOTION_TEST
 //#define IR_EMITTER_TEST
 //#define ODOM_TEST
-#define TURN_TEST
+//#define TURN_TEST
 //#define DRIVE_TEST
 
 /* ==========================================================================
@@ -264,14 +264,14 @@ static void Test_SendDecimal(float value)
 
             UART_CRLF();
             /* Distance in mm */
-            UART_SendString("Distance:");
-            UART_SendString("FL:");
+            UART_SendString("Distance: ");
+            UART_SendString(" FL:");
             UART_SendUint(IR_GetDistance_mm(IR_FAR_LEFT));
-            UART_SendString("L:");
+            UART_SendString(" L:");
             UART_SendUint(IR_GetDistance_mm(IR_LEFT));
-            UART_SendString("R:");
+            UART_SendString(" R:");
             UART_SendUint(IR_GetDistance_mm(IR_RIGHT));
-            UART_SendString("FR:");
+            UART_SendString(" FR:");
             UART_SendUint(IR_GetDistance_mm(IR_FAR_RIGHT));
             UART_CRLF();
         

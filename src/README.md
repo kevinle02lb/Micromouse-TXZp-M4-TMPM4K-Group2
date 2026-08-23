@@ -37,33 +37,33 @@ all motion and calls the planner for decisions.
 the same tick rather than one tick late.
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                          main.c                             │
-│   while(1) {                                                │
-│     if (Timebase_GetAndClear()) {   ◄── 1 kHz tick          │
-│       Encoder_Update();    // read encoders, filter speed   │
-│       Odometry_Update();   // pose (x, y, heading)          │
-│       IR_SampleStep();     // advance the IR sampler        │
-│       Navigator_Update();  // plan/turn/drive FSM step      │
-│       Motion_Update();     // PID -> motor PWM (never block)│
-│     }                                                       │
-│   }                                                         │
-└──────────────────────────┬──────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│                          main.c                              │
+│   while(1) {                                                 │
+│     if (Timebase_GetAndClear()) {   ◄── 1 kHz tick           │
+│       Encoder_Update();    // read encoders, filter speed    │
+│       Odometry_Update();   // pose (x, y, heading)           │
+│       IR_SampleStep();     // advance the IR sampler         │
+│       Navigator_Update();  // plan/turn/drive FSM step       │
+│       Motion_Update();     // PID -> motor PWM (non-blocking)│
+│     }                                                        │
+│   }                                                          │
+└──────────────────────────┬───────────────────────────────────┘
                            │  once per tick
    ┌───────────┬───────────┼───────────┬────────────┐
    ▼           ▼           ▼           ▼            ▼
 ┌────────┐ ┌────────┐ ┌────────┐ ┌───────────┐ ┌──────────┐
 │Encoder │ │Odometry│ │ Motion │ │ Navigator │ │ FloodFill│
-│speed + │ │pose    │ │PID +   │ │ FSM:      │◄┤ pure BFS │
-│position│ │x,y,θ   │ │motor   │ │ plan→turn │ │ planner  │
+│speed + │ │pose    │ │PID +   │ │ FSM:      │◄┤   BFS    │
+│position│ │x,y,θ   │ │motor   │ │ plan→turn │ │ Algorithm│
 └───┬────┘ └───┬────┘ └───┬────┘ │ →drive    │ └────┬─────┘
     │          │          │      └─────┬─────┘      │
     ▼          │          ▼            │            ▼
 ┌────────┐     │     ┌─────────┐       │       ┌──────────┐
 │ENC0/2  │     │     │ Motor   │       │       │ IrSensor │
 │A-ENC32 │     └────►│ TB67H450│       └──────►│ ADC      │
-│quad in │  (via     │ +T32A0/3│  (checks pose │ 4× wall  │
-└────────┘  Encoder) │ PWM PPG │   for arrival)│ sensing  │
+│quad in │           │ +T32A0/3│               │ 4× wall  │
+└────────┘           │ PWM PPG │               │ sensing  │
                      └─────────┘               └──────────┘
 ```
 
@@ -71,12 +71,12 @@ the same tick rather than one tick late.
 
 | Stage | Module | Role |
 |-------|--------|------|
-| 1 | `Encoder` | Read A-ENC32 counters, windowed wheel speed (CPS) |
+| 1 | `Encoder` | Read A-ENC32 counters(CPS) |
 | 2 | `Odometry` | Integrate differential-drive pose from encoder deltas |
 | 3 | `IrSensor` | Advance one phase of the ambient-cancelling sample cycle |
 | 4 | `Navigator` | Non-blocking FSM. Asks `FloodFill` for moves, executes them |
 | 5 | `Motion` | Per-wheel PID speed loop → `Motor` PWM duty |
-| .. | `Profile` | Trapezoidal velocity profile. Pure math, called by `Navigator` |
+| .. | `Profile` | Trapezoidal velocity profile. Called in `Navigator` |
 | .. | `FloodFill` | Pure BFS planner over discovered walls (no hardware) |
 
 ---

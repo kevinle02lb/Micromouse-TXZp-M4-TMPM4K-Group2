@@ -18,8 +18,14 @@
 #define TIMEBASE_H
 
 #include <stdbool.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void Timebase_Init(void);
 bool Timebase_GetAndClear(void);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* TIMEBASE_H */

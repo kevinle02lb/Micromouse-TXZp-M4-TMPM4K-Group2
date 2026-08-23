@@ -26,6 +26,9 @@
 #define MOTOR_H
 
 #include <stdint.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef enum
 {
@@ -65,4 +68,7 @@ void Motor_Set(motor_t motor, motor_dir_t dir, uint8_t speed);
 void Motor_SetLeft(motor_dir_t dir, uint8_t speed);
 void Motor_SetRight(motor_dir_t dir, uint8_t speed);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* MOTOR_H */

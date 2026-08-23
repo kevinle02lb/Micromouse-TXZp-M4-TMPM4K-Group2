@@ -17,15 +17,8 @@
  *     - Unit A: PL0 (AINA16) = Far Left, PL1 (AINA15) = Left
  *     - Unit C: PJ0 (AINC00) = Far Right, PJ1 (AINC01) = Right
  *
- *   DMA Buffer Layout:
- *   - adc_a_buffer[0] = AINA16 (Far Left)
- *   - adc_a_buffer[1] = AINA15 (Left)
- *   - adc_c_buffer[0] = AINC01 (Right)
- *   - adc_c_buffer[1] = AINC00 (Far Right)
- *
  *   Reference Documents (Toshiba):
  *   - ADC-I RM:     https://toshiba.semicon-storage.com/info/RM-ADC-I_en_20251205.pdf?did=166835
- *   - DMAC-B RM:    https://toshiba.semicon-storage.com/info/RM-DMAC-B_en_20241031.pdf?did=160537
  *
  * @note
  *   File structure and Doxygen formatting assisted by AI.
@@ -37,10 +30,6 @@
 #include "drivers/adc.h"
 #include "drivers/gpio.h"
 #include "drivers/systick.h"
-
-#ifdef ADC_USE_DMA
-    #include "drivers/dma.h"
-#endif
 
 /* ==========================================================================
  *   Private Types
@@ -118,9 +107,6 @@ static bool wall_state[IR_COUNT] = {false, false, false, false};
  */
 void IR_Init(void)
 {
-    #ifdef ADC_USE_DMA
-        DMAC_Init();         /* DMAC-B must init before ADC DMA requests */
-    #endif
     ADC_Init();
     PORT_U_Init();       /* [1] Left emitters  */
     PORT_G_Init();       /* [2] Right emitters */
@@ -136,33 +122,16 @@ void IR_Init(void)
  */
 static void IR_Acquire(uint16_t out[IR_COUNT])
 {
-#ifdef ADC_USE_DMA
-    volatile uint16_t *bufA;
-    volatile uint16_t *bufC;
- 
-    Start_ADC();                 /* Trigger both units, DMA moves results */
-    SysTick_us(5U);              /* Wait for 2 conversions + DMA burst */
- 
-    bufA = DMA_GetADCABuffer();
-    bufC = DMA_GetADCCBuffer();
- 
-    /* DMA stores the raw register halfword — right-align to match polled path */
-    out[IR_FAR_LEFT]  = (uint16_t)((bufA[0] & ADxREGn_ADRn) >> 4U);   /* AINA16 */
-    out[IR_LEFT]      = (uint16_t)((bufA[1] & ADxREGn_ADRn) >> 4U);   /* AINA15 */
-    out[IR_RIGHT]     = (uint16_t)((bufC[0] & ADxREGn_ADRn) >> 4U);   /* AINC01 */
-    out[IR_FAR_RIGHT] = (uint16_t)((bufC[1] & ADxREGn_ADRn) >> 4U);   /* AINC00 */
-#else
     uint16_t a0, a1;
     uint16_t c0, c1;
- 
+
     AINA_ReadPair(&a0, &a1);     /* a0 = AINA16, a1 = AINA15 */
     AINC_ReadPair(&c0, &c1);     /* c0 = AINC01, c1 = AINC00 */
- 
+
     out[IR_FAR_LEFT]  = a0;
     out[IR_LEFT]      = a1;
     out[IR_RIGHT]     = c0;
     out[IR_FAR_RIGHT] = c1;
-#endif
 }
 
 /**

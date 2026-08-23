@@ -42,6 +42,9 @@
 #include <stdbool.h>
 #include <math.h>
 #include "Encoder.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* ==========================================================================
  *   DEFINES
@@ -101,4 +104,7 @@ float Odometry_GetY_mm(void);
 float Odometry_GetHeading_rad(void);
 float Odometry_GetHeading_deg(void);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* ODOMETRY_H */

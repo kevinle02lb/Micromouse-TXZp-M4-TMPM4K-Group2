@@ -15,6 +15,9 @@
 
 #ifndef PID_H
 #define PID_H
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 
 typedef struct 
@@ -53,4 +56,7 @@ float PID_Update(pid_t *pid, float error);
 float CalculateError(float SP, float PV);
 
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* PID_H */

@@ -14,8 +14,14 @@
 #define NAVIGATOR_H
 
 #include "FloodFill.h"   /* for floodfill_t */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void Navigator_Init(void);
 void Navigator_Update(void);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* NAVIGATOR_H */

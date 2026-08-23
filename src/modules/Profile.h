@@ -25,6 +25,9 @@
 #define PROFILE_H
 
 #include <stdbool.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define PROFILE_DT      0.001f      /*!< Control tick period in seconds, 1 kHz */
 
@@ -51,4 +54,7 @@ float Profile_Step(profile_t *p, float traveled_mm);
 
 bool  Profile_IsComplete(const profile_t *p, float traveled_mm);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* PROFILE_H */

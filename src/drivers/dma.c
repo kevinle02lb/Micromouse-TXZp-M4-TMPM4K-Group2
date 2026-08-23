@@ -33,6 +33,10 @@ __attribute__((aligned(1024))) static DMA_ChnlCtrlData_t DMA_CtrlTable[DMA_CHANN
 
 /* ==========================================================================
  *   ADC Result Buffers
+ *
+ *   Each transfer is a verbatim halfword copy of ADxREGn, so the 12-bit result
+ *   arrives in bits [15:4] with the ADRFn and ADOVRFn flags below it. Callers
+ *   mask and shift before use.
  * ========================================================================== */
 static volatile uint16_t adc_a_buffer[2];   /*!< AINA16 [0], AINA15 [1] */
 static volatile uint16_t adc_c_buffer[2];   /*!< AINC01 [0], AINC00 [1] */
@@ -44,11 +48,14 @@ static volatile uint16_t adc_c_buffer[2];   /*!< AINC01 [0], AINC00 [1] */
 /**
  * @brief  Initialize the DMAC-B controller.
  * @details
- *   1. Enable peripheral clock.
- *   2. Point CTRLBASEPTR to the aligned control table.
- *   3. Enable DMA master, mask all channels, then enable all channels.
- *   4. Unmask ADC request lines (ch16, ch18).
- *   5. Force burst mode for ADC channels.
+ *   1. Enable the peripheral clock.
+ *   2. Point CTRLBASEPTR at the aligned control table.
+ *   3. Common register initialization per DMAC-B RM 3.3.3: master enable,
+ *      mask all requests, enable all channels.
+ *   4. Force burst mode on the ADC channels.
+ *
+ *   Request masks are left set. DMA_SetupForADC() releases them once a
+ *   descriptor exists, so an early request cannot hit an empty channel.
  */
 void DMAC_Init(void)
 {
@@ -63,13 +70,10 @@ void DMAC_Init(void)
     TSB_DMAA->CHNLREQMASKSET = DMAxChnlReqMaskSet_MASK;
     TSB_DMAA->CHNLENABLESET = DMAxChnlEnableSet_MASK;
 
-    /* [4] Unmask ADC DMA requests */
-    TSB_DMAA->CHNLREQMASKCLR = (DMA_CHANNEL_MASK(DMA_ADASLG_DMAREQ) |
-                                DMA_CHANNEL_MASK(DMA_ADCSLG_DMAREQ));
-
-    /* [5] Force burst for ADC channels */
-    TSB_DMAA->CHNLUSEBURSTSET = (DMA_CHANNEL_MASK(DMA_ADASLG_DMAREQ) |
-                                 DMA_CHANNEL_MASK(DMA_ADCSLG_DMAREQ));
+    /* [4] Force burst for ADC channels. Channels 16 and 18 have no single
+     *     transfer request, only burst. PINFO-M4K(2) Table 2.28. */
+    TSB_DMAA->CHNLUSEBURSTSET = (DMA_CHANNEL_MASK(DMA_ADASGL_DMAREQ) |
+                                 DMA_CHANNEL_MASK(DMA_ADCSGL_DMAREQ));
 }
 
 /* ==========================================================================
@@ -77,47 +81,67 @@ void DMAC_Init(void)
  * ========================================================================== */
 
 /**
- * @brief  Re-arm DMA channels 16 and 18 for ADC transfer.
+ * @brief  Re-arm DMA channels 16 and 18 for one ADC conversion pair.
  * @details
- *   Must be called before every ADC sample because the PL230 controller
- *   auto-clears cycle_ctrl to 0b000 (Invalid/Stop) after each cycle.
+ *   Called before every ADC sample. The controller clears cycle_ctrl to 0b000
+ *   and drops the channel enable bit at the end of each cycle, so both are
+ *   restored here.
  *
  *   Transfer configuration:
- *   - Source: ADC result registers (REG0, REG1) — 32-bit apart, 16-bit read.
- *   - Dest:   uint16_t buffers — 16-bit apart, 16-bit write.
- *   - Mode:   Auto-request (CNT), 2 transfers, arbitrate every 2.
+ *   - Source: ADC result registers REG0 and REG1, 4 bytes apart, 16-bit reads.
+ *   - Dest:   uint16_t buffer, 2 bytes apart, 16-bit writes.
+ *   - Mode:   continuous normal, 2 transfers, arbitrate after each transfer.
  *
- *   End-pointer arithmetic (PL230):
- *   - 2 transfers, src_end = &REG1, src_inc = WORD (+4):
+ *   End-pointer arithmetic (DMAC-B RM 3.2.2.1):
+ *   - src_end = &REG1, src_inc = +4:
  *       xfer 1: &REG1 - (1 × 4) = &REG0
  *       xfer 2: &REG1 - (0 × 4) = &REG1
- *   - 2 transfers, dst_end = &buffer[1], dst_inc = HWORD (+2):
+ *   - dst_end = &buffer[1], dst_inc = +2:
  *       xfer 1: &buffer[1] - (1 × 2) = &buffer[0]
  *       xfer 2: &buffer[1] - (0 × 2) = &buffer[1]
  */
 void DMA_SetupForADC(void)
 {
+    const uint32_t ch_mask = DMA_CHANNEL_MASK(DMA_ADASGL_DMAREQ) |
+                             DMA_CHANNEL_MASK(DMA_ADCSGL_DMAREQ);
+
+    /* Route the ADC single-conversion requests to channels 16 and 18, enable
+     * edge detection, and open the trigger outputs. Written here rather than in
+     * DMAC_Init() because TSEL16 and TSEL18 run off the ADC unit clock gates,
+     * which ADC_Init() turns on. The register also carries channels 17 and 19,
+     * which this project does not use. */
+    TSB_TSEL0->CR0 = TSEL_ADC_DMA_ROUTE;
+
+    /* Hold off requests while the descriptors are rewritten */
+    TSB_DMAA->CHNLREQMASKSET = ch_mask;
+
     /* Common ChnlCfg for both ADC units */
     uint32_t chnl_cfg = DMA_DST_INC_HWORD      /* dest: +2 bytes per transfer */
                       | DMA_DST_SIZE_HWORD     /* dest: 16-bit writes */
                       | DMA_SRC_INC_WORD       /* src: +4 bytes (REG0 → REG1) */
                       | DMA_SRC_SIZE_HWORD     /* src: 16-bit reads (lower half of 32-bit reg) */
-                      | DMA_R_POWER_2          /* arbitrate after 2 transfers */
+                      | DMA_R_POWER_1          /* arbitrate after each transfer */
                       | DMA_N_MINUS_1(2)       /* 2 transfers total */
-                      | DMA_NEXT_USEBURST      /* bit 3 = 1: force burst */
-                      | DMA_CYCLE_CTRL_CNT;    /* cycle_ctrl = 010: Auto-request / Continuous Normal */
+                      | DMA_CYCLE_CTRL_CNT;    /* cycle_ctrl = 010: continuous normal */
 
     /* Channel 16: ADC Unit A → adc_a_buffer */
-    DMA_ConfigChannel(DMA_ADASLG_DMAREQ,
+    DMA_ConfigChannel(DMA_ADASGL_DMAREQ,
                       (uint32_t)&TSB_ADA->REG1,
                       (uint32_t)&adc_a_buffer[1],
                       chnl_cfg);
 
     /* Channel 18: ADC Unit C → adc_c_buffer */
-    DMA_ConfigChannel(DMA_ADCSLG_DMAREQ,
+    DMA_ConfigChannel(DMA_ADCSGL_DMAREQ,
                       (uint32_t)&TSB_ADC->REG1,
                       (uint32_t)&adc_c_buffer[1],
                       chnl_cfg);
+
+    /* Primary descriptor, release the mask, then enable. The controller clears
+     * the enable bit at the end of every cycle, so it is set again each time.
+     * DMAC-B RM 5.1 puts the enable last. */
+    TSB_DMAA->CHNLPRIALTCLR  = ch_mask;
+    TSB_DMAA->CHNLREQMASKCLR = ch_mask;
+    TSB_DMAA->CHNLENABLESET  = ch_mask;
 }
 
 /* ==========================================================================
@@ -126,21 +150,37 @@ void DMA_SetupForADC(void)
 
 /**
  * @brief  Write a single channel's primary control data.
- * @param  channel   DMA channel number (0–31).
+ * @param  channel   DMA channel number (0-31).
  * @param  src_end   Source end address (used for end-pointer arithmetic).
  * @param  dst_end   Destination end address.
  * @param  chnl_cfg  32-bit DMAChnlCfg word.
- * @note   Does NOT write the RESERVED word at offset +12.
+ * @note   Does not write the RESERVED word at offset +12.
  */
 void DMA_ConfigChannel(uint8_t channel, uint32_t src_end, uint32_t dst_end, uint32_t chnl_cfg)
 {
-    if (channel >= DMA_CHANNEL_COUNT) {
+    if (channel >= DMA_CHANNEL_COUNT)
         return;
-    }
+
 
     DMA_CtrlTable[channel].SrcEndPtr = src_end;
     DMA_CtrlTable[channel].DstEndPtr = dst_end;
     DMA_CtrlTable[channel].ChnlCfg   = chnl_cfg;
+}
+
+/* ==========================================================================
+ *   Transfer Status
+ * ========================================================================== */
+
+/**
+ * @brief  Report whether both ADC channels have finished their transfer cycle.
+ * @return true once cycle_ctrl has returned to 0b000 on channels 16 and 18.
+ * @note   The controller writes cycle_ctrl back into the control table when a
+ *         cycle completes, so this reads RAM rather than a peripheral register.
+ */
+bool DMA_ADCTransferDone(void)
+{
+    return ((DMA_CtrlTable[DMA_ADASGL_DMAREQ].ChnlCfg & DMA_CYCLE_CTRL_MASK) == 0U) &&
+           ((DMA_CtrlTable[DMA_ADCSGL_DMAREQ].ChnlCfg & DMA_CYCLE_CTRL_MASK) == 0U);
 }
 
 /* ==========================================================================
@@ -149,7 +189,7 @@ void DMA_ConfigChannel(uint8_t channel, uint32_t src_end, uint32_t dst_end, uint
 
 /**
  * @brief  Get pointer to ADC Unit A DMA result buffer.
- * @return volatile uint16_t*  Layout: [0]=AINA16, [1]=AINA15.
+ * @return volatile uint16_t*  Layout: [0]=AINA16, [1]=AINA15, raw ADxREGn format.
  */
 volatile uint16_t* DMA_GetADCABuffer(void)
 {
@@ -158,7 +198,7 @@ volatile uint16_t* DMA_GetADCABuffer(void)
 
 /**
  * @brief  Get pointer to ADC Unit C DMA result buffer.
- * @return volatile uint16_t*  Layout: [0]=AINC01, [1]=AINC00.
+ * @return volatile uint16_t*  Layout: [0]=AINC01, [1]=AINC00, raw ADxREGn format.
  */
 volatile uint16_t* DMA_GetADCCBuffer(void)
 {
