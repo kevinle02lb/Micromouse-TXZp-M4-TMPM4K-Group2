@@ -45,7 +45,7 @@ The TMPM4KNF10AFG comes from the **[M4K Group](https://toshiba.semicon-storage.c
 | On-chip motor & encoder hardware | Wheel feedback and PPG-generated motor PWM |
 | High-speed analog sensing | IR wall detection |
 
-Here the same silicon runs a much smaller problem: a 1 kHz closed-loop PID over two brushed DC gear-motors. Dedicated hardware handles encoder counting and motor PWM, so the CPU stays free for navigation and flood-fill maze solving.
+Here the same silicon runs a much smaller problem: a 1 kHz driven by an interrupt and closed-loop PID over two brushed DC gear-motors. Dedicated hardware handles encoder counting and motor PWM, so the CPU stays free for navigation and flood-fill maze solving.
 
 ---
 
