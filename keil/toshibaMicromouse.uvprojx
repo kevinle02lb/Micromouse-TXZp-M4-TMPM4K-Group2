@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>TMPM4KNA</Define>
               <Undefine></Undefine>
-              <IncludePath>..\src\modules;..\src\drivers;..\src</IncludePath>
+              <IncludePath>..\src\modules;..\src\drivers;..\src;..\vendor\cmsis\Include;..\vendor\toshiba\Include;..\vendor\toshiba\Source</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
