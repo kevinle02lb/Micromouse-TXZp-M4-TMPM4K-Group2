@@ -12,7 +12,7 @@ LR_IROM1 0x00000000 0x00008000  {    ; load region size_region
 
   FLASH_CODE_RAM   0x20000000
   {
-   system_TMPM4Ky.o(FLASH_ROM)
+   system_TMPM4KyA.o(FLASH_ROM)
   }
 
   RW_IRAM1     0x20003000 0x00009000  {  ; RW data
