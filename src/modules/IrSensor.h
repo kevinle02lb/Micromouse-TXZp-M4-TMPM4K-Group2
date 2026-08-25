@@ -88,14 +88,14 @@ typedef struct
  * @brief  Hysteresis band to prevent flicker at the threshold.
  */
 #define IR_WALL_HYSTERESIS_MM      8.0f
-#define IR_WALL_DISTANCE_MM      100.0f
+#define IR_WALL_DISTANCE_MM        80.0f
 
 
 /* ==========================================================================
  *   Distance Calibration
  * ========================================================================== */
 
-#define IR_CAL_POINTS       6U
+#define IR_CAL_POINTS       9U
 
 typedef struct
 {

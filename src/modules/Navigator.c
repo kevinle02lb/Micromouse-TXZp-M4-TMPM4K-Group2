@@ -49,18 +49,18 @@
 
 #define CELL_SIZE_MM            180.0f      /* one maze cell, centre to centre */
 
-#define DRIVE_SPEED_MM_S        1000.0f      /* straight cruise ceiling */
+#define DRIVE_SPEED_MM_S        500.0f      /* straight cruise ceiling */
 #define DRIVE_MIN_MM_S           0.0f      /* straight floor, clears stiction */
-#define DRIVE_ACCEL_MM_S2       1600.0f      /* straight ramp and brake */
+#define DRIVE_ACCEL_MM_S2       500.0f      /* straight ramp and brake */
 
-#define TURN_SPEED_MM_S         3000.0f      /* pivot cruise ceiling, per wheel */
-#define TURN_MIN_MM_S            0.0f      /* pivot floor, clears stiction */
-#define TURN_ACCEL_MM_S2        4500.0f      /* pivot ramp and brake */
+#define TURN_SPEED_MM_S         600.0f      /* pivot cruise ceiling, per wheel 3000*/
+#define TURN_MIN_MM_S            0.0f       /* pivot floor, clears stiction */
+#define TURN_ACCEL_MM_S2        600.0f      /* pivot ramp and brake  4500 */
 
-#define KP_STRAIGHT               4.0f      /* damping trim, (mm/s) per mm of wheel skew */
-#define KP_WALL                   0.8f      /* wall trim, (mm/s) per mm of lateral error */
-#define IR_SIDE_TARGET_MM        31.5f      /* side reading when centred, measured */
-#define IR_FRONT_TARGET_MM       32.0f      /* front reading at a cell centre, measured */
+#define KP_STRAIGHT               3.0f      /* damping trim, (mm/s) per mm of wheel skew */
+#define KP_WALL                   0.1f      /* wall trim, (mm/s) per mm of lateral error */
+#define IR_SIDE_TARGET_MM        30.0f      /* side reading when centred, measured */
+#define IR_FRONT_TARGET_MM       20.0f      /* front reading at a cell centre, measured */
 
 #define SETTLE_TICKS             60U        /* stationary hold at the cell centre */
 

@@ -50,6 +50,7 @@ extern "C" {
  *   DEFINES
  * ========================================================================== */
 
+#undef M_PI
 #define M_PI                                3.1415927f      /*!< Single precision for Float */
 #define M_2PI                               6.2831855f      /*!< 2 * PI */
 #define M_PI_DIV_2                          (M_PI / 2.0f)   /*!< 90 Degree - [pi/2] */
