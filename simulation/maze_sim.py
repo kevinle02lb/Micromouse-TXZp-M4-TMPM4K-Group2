@@ -5,8 +5,8 @@ Loads the compiled planner through ctypes and drives it against generated
 mazes, so the code under test is the same object code that runs on the robot
 rather than a Python reimplementation.
 
-Build the library first:
-    cmake -S tools -B build && cmake --build build
+FloodFill.c is compiled on demand by a direct compiler call, so the only
+requirement is gcc, clang, or MinGW-w64 on PATH.
 
 Examples:
     python3 tools/maze_sim.py --seed 7 --render
@@ -17,8 +17,12 @@ from __future__ import annotations
 
 import argparse
 import ctypes
+import platform
 import random
 import re
+import shutil
+import struct
+import subprocess
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -65,17 +69,29 @@ def parse_enum(header: Path, name: str) -> dict:
     return values
 
 
-def find_header() -> Path:
+def find_sources() -> tuple[Path, Path]:
+    """Locate FloodFill.h and FloodFill.c relative to this script.
+
+    The script directory and its first three parents are searched, each with a
+    short list of common source subdirectories, so the tool runs unchanged
+    whether it sits beside the firmware or in a tools subdirectory.
+    """
     here = Path(__file__).resolve().parent
-    for candidate in (here / "../src/modules/FloodFill.h",
-                      here / "../src/FloodFill.h",
-                      here / "_stage/FloodFill.h"):
-        if candidate.exists():
-            return candidate.resolve()
-    sys.exit("FloodFill.h not found; checked ../src/modules, ../src, tools/_stage")
+    roots = [here, *list(here.parents)[:3]]
+    subdirs = ("", "src", "src/modules", "Core/Src", "firmware")
+
+    for root in roots:
+        for sub in subdirs:
+            base = root / sub if sub else root
+            header, source = base / "FloodFill.h", base / "FloodFill.c"
+            if header.exists() and source.exists():
+                return header.resolve(), source.resolve()
+
+    sys.exit(f"FloodFill.h and FloodFill.c not found at or above {here}")
 
 
-ACTION = parse_enum(find_header(), "floodfill_t")
+HEADER, SOURCE = find_sources()
+ACTION = parse_enum(HEADER, "floodfill_t")
 STOP = ACTION["FLOODFILL_STOP"]
 FORWARD = ACTION["FLOODFILL_FORWARD"]
 TURN_LEFT = ACTION["FLOODFILL_TURN_LEFT"]
@@ -83,24 +99,109 @@ TURN_RIGHT = ACTION["FLOODFILL_TURN_RIGHT"]
 TURN_AROUND = ACTION["FLOODFILL_TURN_AROUND"]
 
 
-def load_planner() -> ctypes.CDLL:
-    """Locate and load the host build of the planner."""
-    names = ("libmicromouse_sim.so", "libmicromouse_sim.dylib", "micromouse_sim.dll")
-    here = Path(__file__).resolve().parent
-    roots = (Path("build"), here.parent / "build", here / "build")
+def compiler_target(compiler: str) -> str:
+    """Return the target triple a compiler emits code for, empty if unknown."""
+    try:
+        done = subprocess.run([compiler, "-dumpmachine"],
+                              capture_output=True, text=True, timeout=15)
+    except (OSError, subprocess.SubprocessError):
+        return ""
+    return done.stdout.strip() if done.returncode == 0 else ""
 
-    for root in roots:
-        for name in names:
-            candidate = root / name
-            if candidate.exists():
-                lib = ctypes.CDLL(str(candidate.resolve()))
-                break
-        else:
-            continue
-        break
+
+def host_tokens() -> tuple[tuple[str, ...], tuple[str, ...]]:
+    """Return the architecture and platform tokens a host triple must contain.
+
+    Bitness comes from the running interpreter rather than the operating
+    system, because a 32-bit interpreter cannot load a 64-bit library even on
+    a 64-bit machine.
+    """
+    machine = platform.machine().lower()
+    sixty_four = struct.calcsize("P") == 8
+
+    if machine.startswith(("arm", "aarch")):
+        arch = ("aarch64", "arm64") if sixty_four else ("arm",)
+    elif sixty_four:
+        arch = ("x86_64", "amd64")
     else:
-        sys.exit("libmicromouse_sim not found. "
-                 "Run: cmake -S tools -B build && cmake --build build")
+        arch = ("i386", "i486", "i586", "i686")
+
+    system = {"win32": ("mingw", "windows", "cygwin", "msvc"),
+              "darwin": ("darwin", "apple")}.get(sys.platform, ("linux", "gnu"))
+    return arch, system
+
+
+def find_compiler(preferred: str | None = None) -> tuple[str, str]:
+    """Select a compiler that targets this host.
+
+    A cross compiler builds without error and produces a library the loader
+    then rejects, so the target triple is checked here rather than leaving the
+    failure to ctypes. Every candidate found is reported when none qualifies.
+    """
+    arch, system = host_tokens()
+    names = [preferred] if preferred else [
+        "cc", "gcc", "clang", "x86_64-w64-mingw32-gcc", "i686-w64-mingw32-gcc"]
+
+    seen = []
+    for name in names:
+        path = shutil.which(name)
+        if path is None:
+            continue
+        triple = compiler_target(path).lower()
+        seen.append(f"    {path}\n        targets {triple or 'unknown'}")
+        if any(a in triple for a in arch) and any(s in triple for s in system):
+            return path, triple
+
+    if not seen:
+        sys.exit("No C compiler on PATH. Install MinGW-w64, gcc, or clang, "
+                 "or pass --cc with a full path.")
+
+    sys.exit("No compiler on PATH targets this host.\n"
+             f"  need a triple containing one of {arch} and one of {system}\n"
+             "  found:\n" + "\n".join(seen) +
+             "\n  pass --cc with the path to a host compiler.")
+
+
+def build_planner(force: bool = False, cc: str | None = None) -> Path:
+    """Compile the planner into a shared library beside this script.
+
+    FloodFill.c is one translation unit that includes only stdint.h and
+    stdbool.h, so a single compiler call is enough and no build system is
+    involved. The library is rebuilt only when the source is newer than it.
+    """
+    suffix = {"win32": ".dll", "darwin": ".dylib"}.get(sys.platform, ".so")
+    out = Path(__file__).resolve().parent / ("libmicromouse_sim" + suffix)
+
+    fresh = out.exists() and out.stat().st_mtime >= SOURCE.stat().st_mtime
+    if fresh and not force and cc is None:
+        return out
+
+    compiler, triple = find_compiler(cc)
+    cmd = [compiler, "-O2", "-std=c11", "-Wall", "-shared"]
+    if sys.platform != "win32":
+        cmd.append("-fPIC")
+    cmd += [str(SOURCE), "-o", str(out)]
+
+    done = subprocess.run(cmd, capture_output=True, text=True)
+    if done.returncode != 0:
+        sys.exit(f"Build failed using {compiler} ({triple}):\n{done.stderr}")
+    if done.stderr:
+        print(done.stderr, file=sys.stderr)
+
+    print(f"built {out.name} with {compiler} ({triple})")
+    return out
+
+
+def load_planner(force: bool = False, cc: str | None = None) -> ctypes.CDLL:
+    """Build the planner if needed, then load it and declare its signatures."""
+    library = build_planner(force, cc)
+    try:
+        lib = ctypes.CDLL(str(library))
+    except OSError as error:
+        sys.exit(f"{library.name} did not load: {error}\n"
+                 "  The library does not match this interpreter. Rebuild with "
+                 "a host compiler:\n"
+                 "    python maze_sim.py --rebuild --cc <path to gcc>")
 
     lib.FloodFill_Init.restype = None
     lib.FloodFill_SetWalls.argtypes = (ctypes.c_bool,) * 3
@@ -266,9 +367,13 @@ def main() -> int:
                         help="draw the maze and path")
     parser.add_argument("--sweep", type=int, metavar="N",
                         help="run seeds 1..N and summarise")
+    parser.add_argument("--rebuild", action="store_true",
+                        help="force a recompile of the planner")
+    parser.add_argument("--cc", metavar="PATH",
+                        help="C compiler to build the planner with")
     args = parser.parse_args()
 
-    lib = load_planner()
+    lib = load_planner(args.rebuild, args.cc)
 
     if args.sweep:
         reached = 0
