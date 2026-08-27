@@ -27,8 +27,8 @@
  *   Module Defines
  * ========================================================================== */
 //#define MOTOR_TEST
-#define IR_TEST
-//#define MOTION_TEST
+//#define IR_TEST
+#define MOTION_TEST
 //#define IR_EMITTER_TEST
 //#define ODOM_TEST
 //#define TURN_TEST
@@ -550,9 +550,9 @@ static void Test_SendDecimal(float value)
         UART_SendString(MOTION_TEST_HEADER);   /* one-time header; MATLAB skips it */
         UART_CRLF();
 
-        Motion_SetMoveForwardSpeed(MOTION_TEST_TARGET_CPS);
+        //Motion_SetMoveForwardSpeed(MOTION_TEST_TARGET_CPS);
 
-        //Motion_SetSpeed(-MOTION_TEST_TARGET_CPS, MOTION_TEST_TARGET_CPS);
+        Motion_SetSpeed(-MOTION_TEST_TARGET_CPS, MOTION_TEST_TARGET_CPS);
 
         while (1)
         {
