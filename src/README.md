@@ -313,7 +313,7 @@ Which test measures each value, and whether it has been done, is tracked in
 | `IrSensor` | Done | IR sampling, ambient cancel, distance |
 | `UART` | Done | Serial debug output (TX) |
 | `FloodFill` | Done | BFS flood-fill planner |
-| `Navigator` | Bring-up | Segment FSM + wall following; full run pending |
+| `Navigator` | Done | Segment FSM + wall following; full run pending |
 
 ---
 
