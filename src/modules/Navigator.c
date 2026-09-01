@@ -49,9 +49,9 @@
 
 #define CELL_SIZE_MM            180.0f      /* one maze cell, centre to centre */
 
-#define DRIVE_SPEED_MM_S        500.0f      /* straight cruise ceiling */
+#define DRIVE_SPEED_MM_S        600.0f      /* straight cruise ceiling */
 #define DRIVE_MIN_MM_S           0.0f      /* straight floor, clears stiction */
-#define DRIVE_ACCEL_MM_S2       500.0f      /* straight ramp and brake */
+#define DRIVE_ACCEL_MM_S2       650.0f      /* straight ramp and brake */
 
 #define TURN_SPEED_MM_S         3000.0f      /* pivot cruise ceiling, per wheel */
 #define TURN_MIN_MM_S            0.0f       /* pivot floor, clears stiction */
