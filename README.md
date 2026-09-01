@@ -73,7 +73,7 @@ Here the same silicon runs a much smaller problem: a 1 kHz driven by an interrup
 
 <img src="docs/assets/micromouse_fusion.gif" width="480" alt="Fusion 360 Robot Render (Outdated Version)">
 
-*Fusion 360 render of the full mechanical assembly*
+*(Outdated Version) Fusion 360 render of the full mechanical assembly*
 
 </div>
 
