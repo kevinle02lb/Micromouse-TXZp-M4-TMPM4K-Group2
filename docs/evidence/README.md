@@ -10,11 +10,11 @@ One at a time. Work down the table — later tests assume earlier ones pass.
 | 1 | `IR_EMITTER_TEST` | Emitters drive | All four light in the counter pattern | &#9989;  | "evidence\01_IR_EMITTER_TEST.mp4" |
 | 2 | `MOTOR_TEST` | Direction and duty per wheel | 18 phases match the table comment; `test_enc_left` rises on FORWARD, falls on REVERSE | &#9989; | "evidence\02_MOTOR_TEST.mp4" |
 | 3 | `IR_TEST` | Channels respond to a wall | `FL L R FR` rise as a wall nears, fall when removed | &#9989; | "evidence\03_IR_TEST.mp4" |
-| 4 | `MOTION_TEST` | Speed loop tracks a setpoint | `pvL`/`pvR` converge on `sp` without saturating | &#9989; | "evidence\04_MOTION_500CPS.mp4", "evidence\04_MOTION_1000CPS.pdf, "evidence\04_MOTION_1000CPS.txt"|
+| 4 | `MOTION_TEST` | Speed loop tracks a setpoint | `pvL`/`pvR` converge on `sp` | &#9989; | "evidence\04_MOTION_500CPS.mp4", "evidence\04_MOTION_1000CPS.pdf, "evidence\04_MOTION_1000CPS.txt"|
 | 5 | `ODOM_TEST` | Pose maths, encoder signs | Pushed straight: `encL ≈ encR`, `deg ≈ 0`. Rotated CCW: `deg` rises, `diff` positive | &#9989; | "evidence\05_ODOM_TEST.mp4" |
 | 6 | `DRIVE_TEST` | Distance calibrated | Final `dist` matches a ruler within 2 mm | &#9989; | "evidence\06_DRIVE.mp4" , "evidence\06_DRIVE.txt"|
 | 7 | `TURN_TEST` | Angle calibrated | Final `arc` reaches `target`; protractor reads 90&deg; | &#9989; | "evidence\07_TURN_TEST.mp4" , "evidence\07_TURN_DATA.txt" |
-| 8 | Full run (`main.c`) | Robot solves the maze | Reaches the 2&times;2 goal | &#128260; | |
+| 8 | Full run (`main.c`) | Robot solves the maze | Reaches the 2&times;2 goal | &#9989; | "evidence\08_MAIN_TEST.mp4" |
 
 ## Watch out
 
@@ -29,12 +29,6 @@ speed floor instead, the wheels are still moving when the segment ends.
 
 Photo or clip is fine — no write-up needed. Drop it in `evidence/` and link it
 from the table.
-
-```
-evidence/02_motor_phases.mp4
-evidence/06_drive_180mm.jpg     ruler shot
-evidence/07_turn_90deg.jpg      protractor shot
-```
 
 Keep the raw serial log next to any plot so a run can be re-plotted.
 

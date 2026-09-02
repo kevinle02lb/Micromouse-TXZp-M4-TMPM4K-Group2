@@ -1,0 +1,7 @@
+<map id="PID_Create" name="PID_Create">
+<area shape="rect" id="Node000001" title="Create and initialize a PID controller with default gains." alt="" coords="5,29,96,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="28,29,24,21,27,11,36,5,51,3,66,5,76,14,70,14,64,10,50,8,38,10,31,14,29,20,33,29"/>
+<area shape="rect" id="Node000002" href="$_p_i_d_8c.html#a070bdaa4f57fe9fcb8c2430091fcf003" title="Initialize a PID controller with gains and output limits." alt="" coords="144,29,213,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="96,40,131,42,125,43,96,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="156,28,152,21,154,11,164,5,178,3,194,5,204,15,198,14,192,10,178,8,166,10,159,14,157,20,160,30"/>
+</map>

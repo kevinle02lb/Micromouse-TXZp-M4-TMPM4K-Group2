@@ -1,0 +1,18 @@
+<map id="src/modules/Encoder.c" name="src/modules/Encoder.c">
+<area shape="rect" id="Node000001" title="Encoder control module implementation." alt="" coords="60,5,215,32"/>
+<area shape="rect" id="Node000002" href="$_encoder_8h.html" title="Encoder control module – speed and position from quadrature encoders." alt="" coords="30,80,110,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,35,94,70,90,67,127,30"/>
+<area shape="rect" id="Node000006" href="$encoder32_a_8h.html" title="A&#45;ENC32 driver for TMPM4Ky microcontrollers." alt="" coords="142,80,286,107"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="151,30,192,69,187,70,151,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="22,229,86,256"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="49,110,29,129,11,156,8,171,12,187,32,217,27,219,7,189,3,172,6,154,25,126,51,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="110,155,184,181"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="84,105,125,143,120,145,83,110"/>
+<area shape="rect" id="Node000005" href="$_motor_8h.html" title="Motor control API for TB67H450AFNG H&#45;bridge drivers." alt="" coords="21,155,86,181"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="68,105,62,140,57,139,66,110"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="55,180,56,214,51,213,52,184"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="216,105,215,143,209,164,199,183,178,203,153,218,102,236,100,231,151,213,174,198,194,180,204,162,210,142,213,109"/>
+<area shape="poly" id="edge9_Node000006_Node000004" title=" " alt="" coords="204,106,171,145,167,141,200,109"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="259,155,363,181"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="231,105,285,145,280,146,230,110"/>
+</map>

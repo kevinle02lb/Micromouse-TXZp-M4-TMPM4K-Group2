@@ -18,6 +18,9 @@
 
 #include "TMPM4KyA.h"
 #include <stdint.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 
 
@@ -70,4 +73,7 @@ void GPIO_U_ClrData(uint8_t data);
 void GPIO_G_ToggleData(uint8_t data);
 void GPIO_U_ToggleData(uint8_t data);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* GPIO_H */

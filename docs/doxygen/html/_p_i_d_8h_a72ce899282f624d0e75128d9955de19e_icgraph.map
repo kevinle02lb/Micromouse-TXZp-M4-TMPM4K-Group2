@@ -1,0 +1,22 @@
+<map id="PID_Reset" name="PID_Reset">
+<area shape="rect" id="Node000001" title="Reset the PID controller state." alt="" coords="435,67,522,93"/>
+<area shape="poly" id="edge13_Node000001_Node000001" title=" " alt="" coords="502,51,494,48,478,45,464,47,456,52,454,58,458,67,453,65,449,58,452,48,462,42,479,40,496,43,507,52"/>
+<area shape="rect" id="Node000002" href="$_motion_8c.html#a4fcf5068d6c04dbe566eb8e92b76f909" title="Stop immediately." alt="" coords="286,29,380,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="418,65,380,57,380,52,423,65"/>
+<area shape="rect" id="Node000005" href="$_motion_8c.html#a47cf1896361b4c623fb00a5ab7673c56" title="Run one PID control tick." alt="" coords="278,104,387,131"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="423,94,388,106,387,101,418,95"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="356,14,349,10,333,8,318,10,310,14,308,20,312,30,307,28,303,21,306,11,316,5,333,3,351,5,361,14"/>
+<area shape="rect" id="Node000003" href="$_navigator_8c.html#a9b3a0072f38ba40f05861eb358e087cb" title="Advance the state machine by one tick." alt="" coords="104,29,230,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="267,44,231,45,230,40,272,42"/>
+<area shape="poly" id="edge6_Node000003_Node000003" title=" " alt="" coords="188,14,181,10,167,8,153,10,146,14,144,20,148,29,143,29,139,21,142,11,151,5,167,3,184,5,194,14"/>
+<area shape="rect" id="Node000004" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="6,55,56,81"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="86,59,57,66,55,61,90,55"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="53,40,46,36,31,33,17,35,10,40,8,46,12,54,7,55,3,46,6,37,15,30,31,28,48,31,58,38"/>
+<area shape="poly" id="edge8_Node000005_Node000004" title=" " alt="" coords="262,108,56,75,56,69,264,104"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="356,88,349,85,333,83,318,85,310,89,308,95,312,105,307,102,303,95,306,86,316,80,333,77,351,80,361,89"/>
+<area shape="rect" id="Node000006" href="$_module_test_8c.html#a6d3b3560cd07a79f42c26e611240121d" title="Run one profiled pivot, then hold and keep streaming." alt="" coords="115,155,219,181"/>
+<area shape="poly" id="edge10_Node000005_Node000006" title=" " alt="" coords="275,135,214,157,212,151,269,136"/>
+<area shape="poly" id="edge12_Node000006_Node000006" title=" " alt="" coords="188,139,181,136,167,133,153,135,146,140,144,146,148,155,143,153,139,146,142,137,151,130,167,128,184,131,193,140"/>
+<area shape="rect" id="Node000007" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="6,155,56,181"/>
+<area shape="poly" id="edge11_Node000006_Node000007" title=" " alt="" coords="98,169,56,171,56,165,102,167"/>
+</map>

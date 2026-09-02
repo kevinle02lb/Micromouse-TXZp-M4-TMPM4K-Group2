@@ -1,0 +1,9 @@
+<map id="src/modules/Profile.h" name="src/modules/Profile.h">
+<area shape="rect" id="Node000001" title="One&#45;dimensional trapezoidal motion profile." alt="" coords="160,5,305,32"/>
+<area shape="rect" id="Node000002" href="$_module_test_8c.html" title="Module Testing." alt="" coords="5,80,127,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,40,96,82,94,77,188,37"/>
+<area shape="rect" id="Node000003" href="$_navigator_8c.html" title="Cell&#45;level motion sequencer for micromouse." alt="" coords="151,80,314,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="235,46,235,81,230,78,231,50"/>
+<area shape="rect" id="Node000004" href="$_profile_8c.html" title="One&#45;dimensional trapezoidal motion profile implementation." alt="" coords="338,80,482,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="278,36,382,79,376,80,277,41"/>
+</map>

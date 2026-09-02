@@ -1,0 +1,15 @@
+<map id="Profile_IsComplete" name="Profile_IsComplete">
+<area shape="rect" id="Node000001" title="Test whether the segment has covered its commanded length." alt="" coords="278,67,410,93"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="373,51,364,48,344,45,326,47,316,52,314,57,318,67,314,65,308,58,312,48,324,42,344,40,365,43,378,52"/>
+<area shape="rect" id="Node000002" href="$_navigator_8c.html#a9b3a0072f38ba40f05861eb358e087cb" title="Advance the state machine by one tick." alt="" coords="104,29,230,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="260,63,230,59,230,53,266,63"/>
+<area shape="rect" id="Node000004" href="$_module_test_8c.html#a6d3b3560cd07a79f42c26e611240121d" title="Run one profiled pivot, then hold and keep streaming." alt="" coords="115,104,219,131"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="266,97,220,109,219,104,260,97"/>
+<area shape="poly" id="edge4_Node000002_Node000002" title=" " alt="" coords="188,14,181,10,167,8,153,10,146,14,144,20,148,29,143,28,139,21,142,11,151,5,167,3,184,5,194,14"/>
+<area shape="rect" id="Node000003" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="6,29,56,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="86,44,57,45,55,40,90,41"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="52,15,46,10,31,8,17,10,10,14,8,20,12,28,7,29,3,21,6,11,15,5,31,3,48,5,58,13"/>
+<area shape="poly" id="edge8_Node000004_Node000004" title=" " alt="" coords="188,88,181,85,167,83,153,85,146,89,144,95,148,105,143,102,139,95,142,86,151,80,167,77,184,80,193,89"/>
+<area shape="rect" id="Node000005" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="6,104,56,131"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="98,119,56,120,56,115,102,116"/>
+</map>

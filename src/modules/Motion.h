@@ -20,6 +20,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "Motor.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define MOTION_DEADZONE         0.5f
 #define MOTION_ROUND_OFFSET     0.5f
@@ -37,4 +40,7 @@ void Motion_Stop(void);
 float Motion_GetTarget(motor_t motor);      /*!< Commanded speed for a wheel (CPS) */
 float Motion_GetOutput(motor_t motor);      /*!< Last PID output for a wheel, [-100, +100] */
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* MOTION_H */

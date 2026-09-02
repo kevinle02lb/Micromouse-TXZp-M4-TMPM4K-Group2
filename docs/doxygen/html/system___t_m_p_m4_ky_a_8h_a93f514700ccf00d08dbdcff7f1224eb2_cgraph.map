@@ -1,0 +1,6 @@
+<map id="SystemInit" name="SystemInit">
+<area shape="rect" id="Node000001" title="Setup the microcontroller system. Initialize the System and update the SystemCoreClock variable." alt="" coords="5,29,90,56"/>
+<area shape="rect" id="Node000002" href="$_include_2system___t_m_p_m4_ky_a_8h.html#a93f514700ccf00d08dbdcff7f1224eb2" title="Setup the microcontroller system. Initialize the System and update the SystemCoreClock variable." alt="" coords="138,29,222,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,40,124,42,119,43,90,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="156,28,152,21,155,11,165,5,180,3,196,5,206,15,201,14,194,10,180,8,167,10,159,14,158,20,161,30"/>
+</map>

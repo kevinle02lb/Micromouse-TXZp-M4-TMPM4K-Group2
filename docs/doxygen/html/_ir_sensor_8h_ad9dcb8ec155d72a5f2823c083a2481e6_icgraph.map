@@ -1,0 +1,27 @@
+<map id="IR_GetDistance_mm" name="IR_GetDistance_mm">
+<area shape="rect" id="Node000001" title="Convert a channel&#39;s filtered reading to a distance." alt="" coords="495,104,640,131"/>
+<area shape="poly" id="edge7_Node000001_Node000001" title=" " alt="" coords="601,89,590,85,567,83,546,85,535,89,532,95,537,104,532,103,527,95,531,86,545,79,568,77,592,80,606,89"/>
+<area shape="rect" id="Node000002" href="$_navigator_8c.html#a1775061d6f8f0f2df7e0245ad8a54abd" title="Move the active drive target to sit at a fixed distance from a wall ahead." alt="" coords="278,29,447,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="519,98,446,71,413,59,413,54,448,65,524,97"/>
+<area shape="rect" id="Node000005" href="$_ir_sensor_8c.html#ae797c9f2155d963b83b6624703808cb3" title="Update wallDetected[] from measured distance with hysteresis." alt="" coords="305,179,421,205"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="517,136,402,181,401,176,512,137"/>
+<area shape="rect" id="Node000008" href="$_navigator_8c.html#a19b7a5ba5657589c834aa8fa09d58f37" title="Speed differential that keeps the robot centred and straight." alt="" coords="303,104,423,131"/>
+<area shape="poly" id="edge15_Node000001_Node000008" title=" " alt="" coords="477,118,424,120,423,115,482,117"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="395,14,385,10,363,8,342,10,331,15,329,20,334,29,329,28,323,21,327,11,341,5,363,3,386,5,400,14"/>
+<area shape="rect" id="Node000003" href="$_navigator_8c.html#a9b3a0072f38ba40f05861eb358e087cb" title="Advance the state machine by one tick." alt="" coords="104,67,230,93"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="272,61,232,70,230,65,277,58"/>
+<area shape="poly" id="edge6_Node000003_Node000003" title=" " alt="" coords="188,52,181,48,167,45,153,47,146,52,144,58,148,66,143,66,139,58,142,49,151,42,167,40,184,43,193,51"/>
+<area shape="rect" id="Node000004" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="6,141,56,168"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="113,102,105,108,52,143,48,139,102,103,117,98"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="52,127,46,122,31,120,17,122,10,126,8,132,12,140,7,141,3,133,6,123,15,117,31,115,48,117,58,125"/>
+<area shape="poly" id="edge14_Node000005_Node000005" title=" " alt="" coords="395,163,385,160,363,157,342,159,331,164,329,169,334,179,329,177,323,170,327,160,341,154,363,152,386,155,400,164"/>
+<area shape="rect" id="Node000006" href="$_ir_sensor_8c.html#ad81fc13827c3c82b1d53448aa629536f" title="Full ON/OFF sampling cycle for all four IR sensors." alt="" coords="116,141,218,168"/>
+<area shape="poly" id="edge9_Node000005_Node000006" title=" " alt="" coords="286,179,218,167,218,162,292,178"/>
+<area shape="rect" id="Node000007" href="$_ir_sensor_8c.html#a0885e835aaf51a8551935bc6a28a03ba" title="Non&#45;blocking sampler — advances one phase per control tick." alt="" coords="110,216,224,243"/>
+<area shape="poly" id="edge11_Node000005_Node000007" title=" " alt="" coords="292,206,224,221,223,216,287,206"/>
+<area shape="poly" id="edge10_Node000006_Node000006" title=" " alt="" coords="188,126,181,122,167,120,153,122,146,126,144,132,148,141,143,140,139,133,142,123,151,117,167,115,184,117,194,126"/>
+<area shape="poly" id="edge13_Node000007_Node000004" title=" " alt="" coords="126,210,55,171,57,165,130,207"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="188,200,181,197,167,195,153,197,146,201,144,207,148,217,143,214,139,207,142,198,151,192,167,189,184,192,193,201"/>
+<area shape="poly" id="edge16_Node000008_Node000003" title=" " alt="" coords="285,104,231,95,230,89,290,102"/>
+<area shape="poly" id="edge17_Node000008_Node000008" title=" " alt="" coords="395,89,385,85,363,83,342,85,331,89,329,95,334,104,329,103,323,95,327,86,341,79,363,77,386,80,400,89"/>
+</map>

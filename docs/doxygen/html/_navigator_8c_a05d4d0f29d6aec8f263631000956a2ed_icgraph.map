@@ -1,0 +1,17 @@
+<map id="CaptureSegmentStart" name="CaptureSegmentStart">
+<area shape="rect" id="Node000001" title="Latch the encoder positions that segment progress is measured from." alt="" coords="411,67,559,93"/>
+<area shape="poly" id="edge10_Node000001_Node000001" title=" " alt="" coords="511,51,503,48,485,45,468,47,459,52,457,57,461,67,456,65,452,58,455,48,467,42,485,40,505,43,517,52"/>
+<area shape="rect" id="Node000002" href="$_navigator_8c.html#ae7b1e32587c572aca6b01e5a11bbcfac" title="Arm a straight&#45;line segment." alt="" coords="278,29,363,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="406,63,363,55,364,50,411,63"/>
+<area shape="rect" id="Node000005" href="$_navigator_8c.html#a9aad9a873e7f925b24999c4b3a8a2200" title="Arm an in&#45;place pivot segment." alt="" coords="281,104,361,131"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="411,97,362,111,361,106,406,98"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="345,14,337,10,321,8,305,10,297,14,295,20,299,30,294,28,289,21,292,11,303,5,321,3,339,5,351,14"/>
+<area shape="rect" id="Node000003" href="$_navigator_8c.html#a9b3a0072f38ba40f05861eb358e087cb" title="Advance the state machine by one tick." alt="" coords="104,67,230,93"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="260,57,225,69,224,64,265,56"/>
+<area shape="poly" id="edge6_Node000003_Node000003" title=" " alt="" coords="188,51,181,48,167,45,153,47,146,52,144,58,148,67,143,65,139,58,142,49,151,42,167,40,184,43,194,52"/>
+<area shape="rect" id="Node000004" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="6,67,56,93"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="86,82,57,83,55,77,90,78"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="52,52,46,48,31,45,17,47,10,52,8,58,12,66,7,67,3,58,6,49,15,42,31,40,48,43,58,51"/>
+<area shape="poly" id="edge9_Node000005_Node000003" title=" " alt="" coords="263,104,224,97,225,91,268,104"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="345,88,337,85,321,83,305,85,297,89,295,95,299,105,294,102,289,95,292,86,303,80,321,77,339,80,350,89"/>
+</map>

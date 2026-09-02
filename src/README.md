@@ -1,7 +1,5 @@
 # 🐭 Toshiba Micromouse Firmware
 
-> **Work in Progress.** Firmware for an IEEE 16×16 micromouse
-
 ```
     ╔══════════════════════════════════════════╗
     ║  ┌─────────┐    ┌─────────┐              ║
@@ -39,33 +37,33 @@ all motion and calls the planner for decisions.
 the same tick rather than one tick late.
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                          main.c                             │
-│   while(1) {                                                │
-│     if (Timebase_GetAndClear()) {   ◄── 1 kHz tick          │
-│       Encoder_Update();    // read encoders, filter speed   │
-│       Odometry_Update();   // pose (x, y, heading)          │
-│       IR_SampleStep();     // advance the IR sampler        │
-│       Navigator_Update();  // plan/turn/drive FSM step      │
-│       Motion_Update();     // PID -> motor PWM (never block)│
-│     }                                                       │
-│   }                                                         │
-└──────────────────────────┬──────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│                          main.c                              │
+│   while(1) {                                                 │
+│     if (Timebase_GetAndClear()) {   ◄── 1 kHz tick           │
+│       Encoder_Update();    // read encoders, filter speed    │
+│       Odometry_Update();   // pose (x, y, heading)           │
+│       IR_SampleStep();     // advance the IR sampler         │
+│       Navigator_Update();  // plan/turn/drive FSM step       │
+│       Motion_Update();     // PID -> motor PWM (non-blocking)│
+│     }                                                        │
+│   }                                                          │
+└──────────────────────────┬───────────────────────────────────┘
                            │  once per tick
    ┌───────────┬───────────┼───────────┬────────────┐
    ▼           ▼           ▼           ▼            ▼
 ┌────────┐ ┌────────┐ ┌────────┐ ┌───────────┐ ┌──────────┐
 │Encoder │ │Odometry│ │ Motion │ │ Navigator │ │ FloodFill│
-│speed + │ │pose    │ │PID +   │ │ FSM:      │◄┤ pure BFS │
-│position│ │x,y,θ   │ │motor   │ │ plan→turn │ │ planner  │
+│speed + │ │pose    │ │PID +   │ │ FSM:      │◄┤   BFS    │
+│position│ │x,y,θ   │ │motor   │ │ plan→turn │ │ Algorithm│
 └───┬────┘ └───┬────┘ └───┬────┘ │ →drive    │ └────┬─────┘
     │          │          │      └─────┬─────┘      │
     ▼          │          ▼            │            ▼
 ┌────────┐     │     ┌─────────┐       │       ┌──────────┐
 │ENC0/2  │     │     │ Motor   │       │       │ IrSensor │
 │A-ENC32 │     └────►│ TB67H450│       └──────►│ ADC      │
-│quad in │  (via     │ +T32A0/3│  (checks pose │ 4× wall  │
-└────────┘  Encoder) │ PWM PPG │   for arrival)│ sensing  │
+│quad in │           │ +T32A0/3│               │ 4× wall  │
+└────────┘           │ PWM PPG │               │ sensing  │
                      └─────────┘               └──────────┘
 ```
 
@@ -73,12 +71,12 @@ the same tick rather than one tick late.
 
 | Stage | Module | Role |
 |-------|--------|------|
-| 1 | `Encoder` | Read A-ENC32 counters, windowed wheel speed (CPS) |
+| 1 | `Encoder` | Read A-ENC32 counters(CPS) |
 | 2 | `Odometry` | Integrate differential-drive pose from encoder deltas |
 | 3 | `IrSensor` | Advance one phase of the ambient-cancelling sample cycle |
 | 4 | `Navigator` | Non-blocking FSM. Asks `FloodFill` for moves, executes them |
 | 5 | `Motion` | Per-wheel PID speed loop → `Motor` PWM duty |
-| .. | `Profile` | Trapezoidal velocity profile. Pure math, called by `Navigator` |
+| .. | `Profile` | Trapezoidal velocity profile. Called in `Navigator` |
 | .. | `FloodFill` | Pure BFS planner over discovered walls (no hardware) |
 
 ---
@@ -88,12 +86,13 @@ the same tick rather than one tick late.
 ```
 toshiba-micromouse/
 ├── keil/                     # Keil µVision project files
-├── pcb/                      # 4-layer KiCad PCB design files
+├── hardware/                 # Hardware overview for Mouse
 ├── docs/                     # Images and documentation assets
 ├── README.md                 # Project landing page
 └── src/
     ├── README.md             # This file. Firmware architecture
     ├── main.c                # Entry point, 1 kHz control loop
+    ├── ModuleTest.C          # Testing file 
     │
     ├── drivers/              # Register-level hardware layer
     │   ├── timer32A.c/h      # T32A: 20 kHz PWM (ch0/3) + 1 kHz tick (ch1)
@@ -126,7 +125,7 @@ toshiba-micromouse/
 | **MCU** | TMPM4KNF10AFG | Arm Cortex-M4, 160 MHz, 5 V |
 | **Motors** | TB67H450AFNG + Pololu #5211 N20 30:1 | T32A PPG PWM @ 20 kHz |
 | **Encoders** | A-ENC32 (on-chip) | Quadrature, 12 CPR × 29.89 ≈ 359/rev |
-| **IR Sensors** | IR LED + phototransistor ×4 | ADC-I + DMA |
+| **IR Sensors** | IR LED + phototransistor ×4 | ADC-I |
 | **Debug** | CMSIS-DAP + Level Shifter (TXB0104) | SWD |
 
 ### Pin Map
@@ -236,6 +235,36 @@ Dead reckoning drifts, so the maze walls are the absolute reference.
 
 ---
 
+## Call Graphs
+
+Generated with [Doxygen](https://www.doxygen.nl/) and rendered by
+[Graphviz](https://graphviz.org/). Doxygen parses the source comments and emits
+the browsable API docs; Graphviz draws the call and caller graphs.
+
+Full documentation, with every function, its callers, and cross-referenced
+source, opens at:
+
+**[`docs/doxygen/html/index.html`](../docs/doxygen/html/index.html)**
+
+Regenerate after changing the source:
+
+```
+doxygen Doxyfile
+```
+
+**`main()`**
+
+<img src="../docs/assets/graphs/main_calls.svg" width="560" alt="main call graph">
+
+**`Navigator_Update()`**
+
+<img src="../docs/assets/graphs/Navigator_Update_calls.svg" width="560" alt="Navigator_Update call graph">
+
+The graph shows every call the function can make, not which state makes it.
+The FSM order is in [Navigation Model](#navigation-model).
+
+---
+
 ## Build & Flash
 
 ```text
@@ -251,18 +280,22 @@ Flash:   On-chip 512 KB
 
 Before real runs, these must be measured/tuned on the actual robot:
 
-| Where | What | Test | Status |
-|-------|------|------|--------|
-| `Encoder` | Forward → **increasing** position | `MOTOR_TEST` | Done |
-| `Odometry.h` | `WHEEL_DIAMETER_MM`, `COUNTS_PER_REV` | `DRIVE_TEST` vs a ruler | Done |
-| `Odometry.h` | `WHEELBASE_MM` | `TURN_TEST` vs a protractor | Done |
-| `IrSensor.c` | `ir_cal[]` ADC→distance points | `IR_TEST` at known distances | Done |
-| `Navigator.c` | `IR_SIDE_TARGET_MM`, `IR_FRONT_TARGET_MM` | Robot centred in a cell | **Pending** |
-| `PID.h` | Gains for CPS-scaled error | `MOTION_TEST` | Done |
+| Where | What | Why |
+|-------|------|-----|
+| `Encoder` | Forward → **increasing** position | Reversed sign turns PID into positive feedback (runaway) |
+| `Odometry.h` | `WHEEL_DIAMETER_MM`, `COUNTS_PER_REV` | Sets `MM_PER_COUNT`. Wrong value scales every distance |
+| `Odometry.h` | `WHEELBASE_MM` | Sets the arc length of a turn. Wrong value over or under rotates |
+| `IrSensor.c` | `ir_cal[]` ADC→distance points | One table per channel. Wall detection and wall following both read it |
+| `Navigator.c` | `IR_SIDE_TARGET_MM` | Side reading when centred. Only used when one wall is visible |
+| `Navigator.c` | `IR_FRONT_TARGET_MM` | Front reading at a cell centre. Sets where a drive stops against a wall |
+| `PID.h` | Gains for CPS-scaled error | Error is ~thousands (CPS); default `Kp` saturates instantly |
 
 Angle depends on the *ratio* `MM_PER_COUNT / WHEELBASE_MM`, distance on
 `MM_PER_COUNT` alone. Change the wheel and the wheelbase has to move with it or
 every turn shifts by the same percentage.
+
+Which test measures each value, and whether it has been done, is tracked in
+[`docs/evidence/README.md`](../docs/evidence/README.md).
 
 ---
 
@@ -280,7 +313,7 @@ every turn shifts by the same percentage.
 | `IrSensor` | Done | IR sampling, ambient cancel, distance |
 | `UART` | Done | Serial debug output (TX) |
 | `FloodFill` | Done | BFS flood-fill planner |
-| `Navigator` | Bring-up | Segment FSM + wall following; full run pending |
+| `Navigator` | Done | Segment FSM + wall following |
 
 ---
 
@@ -292,6 +325,8 @@ every turn shifts by the same percentage.
 - [RM-ADC-I Reference](https://toshiba.semicon-storage.com/info/RM-ADC-I_en_20251205.pdf)
 - [RM-DMAC-B DMA Reference](https://toshiba.semicon-storage.com/info/RM-DMAC-B_en_20241031.pdf)
 - [Pololu #5211 Motor Datasheet](https://www.pololu.com/file/0J1487/pololu-micro-metal-gearmotors-rev-6-2.pdf)
+- [Doxygen](https://www.doxygen.nl/) by Dimitri van Heesch, GPL-2.0
+- [Graphviz](https://graphviz.org/), EPL-1.0
 
 ---
 

@@ -44,6 +44,9 @@
 
 #include "TMPM4KyA.h"
 #include <stdint.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 
 /* ==========================================================================
@@ -121,4 +124,7 @@ void UART_SendString(const char *str);
 void UART_Flush(void);
 void UART_CRLF(void);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* UART_H */

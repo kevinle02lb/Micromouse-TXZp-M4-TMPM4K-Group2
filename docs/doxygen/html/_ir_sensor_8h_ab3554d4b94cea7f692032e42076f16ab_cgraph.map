@@ -1,0 +1,7 @@
+<map id="LeftEmitterOff" name="LeftEmitterOff">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,108,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="28,29,24,21,27,11,38,5,57,3,76,5,88,14,82,14,74,10,56,8,40,10,31,15,29,20,34,29"/>
+<area shape="rect" id="Node000002" href="$gpio_8c.html#a694a507b6b042f1ba3d8e3065f0d4873" title=" " alt="" coords="156,29,279,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,40,143,42,138,43,108,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="189,28,185,21,188,11,199,5,217,3,237,5,248,15,243,14,235,10,217,8,201,10,192,15,190,20,194,30"/>
+</map>

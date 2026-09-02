@@ -1,0 +1,20 @@
+<map id="StraightnessTrim" name="StraightnessTrim">
+<area shape="rect" id="Node000001" title="Speed differential that keeps the robot centred and straight." alt="" coords="5,141,126,168"/>
+<area shape="poly" id="edge12_Node000001_Node000001" title=" " alt="" coords="34,141,29,133,33,123,45,117,66,115,87,117,100,125,95,127,85,122,65,120,47,122,37,127,34,132,39,140"/>
+<area shape="rect" id="Node000002" href="$_ir_sensor_8c.html#ad9dcb8ec155d72a5f2823c083a2481e6" title="Convert a channel&#39;s filtered reading to a distance." alt="" coords="174,29,318,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,139,119,103,172,66,187,61,183,64,175,70,122,108,82,143"/>
+<area shape="rect" id="Node000003" href="$_ir_sensor_8c.html#a0b9ad1c889a088b7f9bd88de4298ec21" title="Check if wall is present with hysteresis." alt="" coords="184,104,308,131"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="125,140,171,132,167,135,127,145"/>
+<area shape="rect" id="Node000004" href="$_navigator_8c.html#a51f364e4b8eb86343c9f850e09a452da" title="Left wheel path since the segment started." alt="" coords="184,179,308,205"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="126,164,171,175,166,177,126,170"/>
+<area shape="rect" id="Node000006" href="$_navigator_8c.html#a04b6d7b2dd0b06a35f89604186d39240" title="Right wheel path since the segment started." alt="" coords="179,253,312,280"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="90,166,212,243,208,246,88,171"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="215,29,209,21,213,11,226,5,246,3,267,5,280,14,275,15,266,10,246,8,227,10,217,15,215,20,220,29"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="215,103,209,95,213,86,226,79,246,77,267,80,280,89,275,89,266,85,246,83,227,85,217,89,215,95,220,104"/>
+<area shape="poly" id="edge8_Node000004_Node000004" title=" " alt="" coords="215,178,209,170,213,160,226,154,246,152,267,155,280,163,275,163,266,160,246,157,227,159,217,164,215,169,220,179"/>
+<area shape="rect" id="Node000005" href="$_encoder_8c.html#ad92861cad0fe5e13d90aae6d3ffdc503" title="Get the accumulated position for a motor." alt="" coords="366,216,510,243"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="308,201,354,212,348,213,308,207"/>
+<area shape="poly" id="edge7_Node000005_Node000005" title=" " alt="" coords="405,215,400,207,404,198,417,191,438,189,461,192,475,201,470,200,460,197,438,195,418,197,407,201,405,207,410,217"/>
+<area shape="poly" id="edge10_Node000006_Node000005" title=" " alt="" coords="313,251,348,247,354,246,313,256"/>
+<area shape="poly" id="edge11_Node000006_Node000006" title=" " alt="" coords="215,252,209,245,213,235,226,229,246,227,267,229,280,238,275,238,266,234,246,232,227,234,217,239,215,244,220,254"/>
+</map>

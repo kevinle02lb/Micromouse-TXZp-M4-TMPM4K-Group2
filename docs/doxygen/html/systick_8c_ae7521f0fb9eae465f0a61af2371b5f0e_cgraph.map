@@ -1,0 +1,7 @@
+<map id="SysTick_ms" name="SysTick_ms">
+<area shape="rect" id="Node000001" title="Blocking delay in milliseconds." alt="" coords="5,29,100,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="28,29,24,21,27,11,36,5,53,3,70,5,80,14,75,14,68,10,52,8,38,10,31,14,29,20,33,29"/>
+<area shape="rect" id="Node000002" href="$systick_8c.html#ad9af3d080726acc5f1003de96ee90bb5" title="Blocking delay in microseconds." alt="" coords="148,29,238,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="100,40,134,42,129,43,100,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="168,28,164,21,167,11,177,5,193,3,210,5,220,15,215,14,208,10,193,8,179,10,171,14,169,20,173,30"/>
+</map>

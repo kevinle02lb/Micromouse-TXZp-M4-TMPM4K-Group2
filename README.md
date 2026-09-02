@@ -1,4 +1,4 @@
-![status](https://img.shields.io/badge/status-in%20development-yellow)
+![status](https://img.shields.io/badge/status-complete-brightgreen)
 ![MCU](https://img.shields.io/badge/MCU-TMPM4KNF10AFG-blue)
 ![core](https://img.shields.io/badge/Arm-Cortex--M4-0091BD)
 ![language](https://img.shields.io/badge/language-C-A8B9CC)
@@ -45,7 +45,7 @@ The TMPM4KNF10AFG comes from the **[M4K Group](https://toshiba.semicon-storage.c
 | On-chip motor & encoder hardware | Wheel feedback and PPG-generated motor PWM |
 | High-speed analog sensing | IR wall detection |
 
-Here the same silicon runs a much smaller problem: a 1 kHz closed-loop PID over two brushed DC gear-motors. Dedicated hardware handles encoder counting and motor PWM, so the CPU stays free for navigation and flood-fill maze solving.
+Here the same silicon runs a much smaller problem: a 1 kHz driven by an interrupt and closed-loop PID over two brushed DC gear-motors. Dedicated hardware handles encoder counting and motor PWM, so the CPU stays free for navigation and flood-fill maze solving.
 
 ---
 
@@ -65,15 +65,15 @@ Here the same silicon runs a much smaller problem: a 1 kHz closed-loop PID over 
 
 <div align="center">
 
-<img src="docs/assets/pcb-3d.png" width="300" alt="Custom PCB"> &nbsp;&nbsp; <img src="docs/assets/maze.jpg" width="300" alt="Test maze run">
+<img src="docs/assets/pcb-3d.png" width="300" alt="Custom PCB"> &nbsp;&nbsp;
 
-*Custom PCB and test maze run*
+*Custom PCB*
 
 <br>
 
-<img src="docs/assets/micromouse_fusion.gif" width="480" alt="Fusion 360 Robot Render">
+<img src="docs/assets/micromouse_fusion.gif" width="480" alt="Fusion 360 Robot Render (Outdated Version)">
 
-*Fusion 360 render of the full mechanical assembly*
+*(Outdated Version) Fusion 360 render of the full mechanical assembly*
 
 </div>
 

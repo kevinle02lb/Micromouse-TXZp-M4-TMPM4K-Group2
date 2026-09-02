@@ -26,6 +26,9 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* ==========================================================================
  *   Defines
@@ -83,4 +86,7 @@ bool        FloodFill_IsAtGoal(void);
 uint8_t     FloodFill_GetX(void);
 uint8_t     FloodFill_GetY(void);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* FLOODFILL_H */

@@ -1,0 +1,16 @@
+<map id="FloodFill_SetWalls" name="FloodFill_SetWalls">
+<area shape="rect" id="Node000001" title="Record the walls observed from the current cell." alt="" coords="5,104,135,131"/>
+<area shape="poly" id="edge9_Node000001_Node000001" title=" " alt="" coords="40,104,35,95,38,86,51,80,70,77,91,80,103,88,98,89,89,85,70,83,52,85,42,89,40,95,45,103"/>
+<area shape="rect" id="Node000002" href="$_flood_fill_8c.html#a36b5163614ab80cf812a35ea1ba8d355" title="Direction 90 degrees counter&#45;clockwise from the argument." alt="" coords="210,29,278,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,101,182,66,198,61,193,64,184,70,104,106"/>
+<area shape="rect" id="Node000003" href="$_flood_fill_8c.html#a6001b2e7956607fbe3206938ecb5c85f" title="Direction 90 degrees clockwise from the argument." alt="" coords="206,104,282,131"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="135,115,192,116,187,118,136,120"/>
+<area shape="rect" id="Node000004" href="$_flood_fill_8c.html#a6e4d83d800ec3777847811f75f824d8f" title="Record a wall in a cell and mirror it into the neighbour." alt="" coords="183,179,305,205"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="104,129,199,171,195,174,103,134"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="216,28,211,21,215,11,226,5,244,3,263,5,275,14,269,14,261,10,244,8,227,10,219,15,217,20,221,29"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="216,103,211,95,215,86,226,80,244,77,263,80,275,89,269,89,261,85,244,83,227,85,219,89,217,95,221,104"/>
+<area shape="poly" id="edge8_Node000004_Node000004" title=" " alt="" coords="216,177,211,170,215,160,226,154,244,152,263,155,275,164,269,163,261,160,244,157,227,159,219,164,217,169,221,179"/>
+<area shape="rect" id="Node000005" href="$_flood_fill_8c.html#acb8ae45bb3957674b13a7316ac014e9b" title="Wall bit corresponding to an absolute direction." alt="" coords="353,179,453,205"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="305,189,340,192,335,192,305,195"/>
+<area shape="poly" id="edge7_Node000005_Node000005" title=" " alt="" coords="375,177,371,170,374,160,385,154,403,152,422,155,434,164,429,163,421,160,403,157,387,159,378,164,376,169,380,179"/>
+</map>

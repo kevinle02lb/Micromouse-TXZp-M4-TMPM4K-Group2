@@ -1,0 +1,80 @@
+<map id="IR_SampleStep" name="IR_SampleStep">
+<area shape="rect" id="Node000001" title="Non&#45;blocking sampler — advances one phase per control tick." alt="" coords="5,813,119,840"/>
+<area shape="poly" id="edge49_Node000001_Node000001" title=" " alt="" coords="31,814,26,805,29,795,42,789,62,787,84,789,96,797,91,799,82,794,62,792,43,794,33,799,31,804,36,812"/>
+<area shape="rect" id="Node000002" href="$_ir_sensor_8c.html#a86760ac6a121c5bc31c9d1e1fdd102a4" title="Read one ADC sample set from all four receivers into out[]." alt="" coords="199,216,286,243"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,812,230,256,235,258,70,814"/>
+<area shape="rect" id="Node000008" href="$_ir_sensor_8c.html#a2b512a484fa28b250fe4cdc03d2384ce" title="Turn OFF all four IR emitters simultaneously." alt="" coords="181,552,304,579"/>
+<area shape="poly" id="edge13_Node000001_Node000008" title=" " alt="" coords="70,812,223,589,224,594,75,814"/>
+<area shape="rect" id="Node000015" href="$_ir_sensor_8c.html#a329a5b0841a76cf9b15c93d2a4e9969c" title="Turn ON all four IR emitters simultaneously." alt="" coords="181,813,304,840"/>
+<area shape="poly" id="edge29_Node000001_Node000015" title=" " alt="" coords="118,824,167,825,163,828,120,829"/>
+<area shape="rect" id="Node000022" href="$_ir_sensor_8c.html#abb1cfe80b1245ad0fa71b4b473e73ff7" title="Ambient&#45;cancel raw[]/ambient[] into reflected[], then IIR filter." alt="" coords="167,925,318,952"/>
+<area shape="poly" id="edge45_Node000001_Node000022" title=" " alt="" coords="86,838,209,915,204,918,85,843"/>
+<area shape="rect" id="Node000024" href="$_ir_sensor_8c.html#ae797c9f2155d963b83b6624703808cb3" title="Update wallDetected[] from measured distance with hysteresis." alt="" coords="184,1019,300,1045"/>
+<area shape="poly" id="edge50_Node000001_Node000024" title=" " alt="" coords="73,838,114,894,169,962,216,1008,210,1009,165,966,110,898,72,843"/>
+<area shape="poly" id="edge10_Node000002_Node000002" title=" " alt="" coords="211,216,206,207,210,198,222,191,242,189,264,192,277,200,272,202,262,197,242,195,224,197,214,201,211,207,216,215"/>
+<area shape="rect" id="Node000003" href="$adc_8c.html#a0a1ab6bb2c7dae03cc9cb78909774a47" title="Trigger a single&#45;conversion pair on ADC Unit A and read both results." alt="" coords="385,29,499,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="248,214,291,144,324,102,364,66,375,61,372,65,368,70,328,106,295,147,253,217"/>
+<area shape="rect" id="Node000004" href="$adc_8c.html#ab67f251f0a347c9873708d94f76a4b2a" title="Trigger a single&#45;conversion pair on ADC Unit C and read both results." alt="" coords="384,104,500,131"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="258,214,304,178,365,140,381,135,377,139,367,145,307,182,262,217"/>
+<area shape="rect" id="Node000005" href="$dma_8c.html#a325481bdc955de0cfb6e44763d933ed6" title="Get pointer to ADC Unit A DMA result buffer." alt="" coords="366,179,518,205"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="284,219,354,207,350,211,288,223"/>
+<area shape="rect" id="Node000006" href="$dma_8c.html#a77b002b98eecc600caee51ed6432a6a3" title="Get pointer to ADC Unit C DMA result buffer." alt="" coords="366,253,518,280"/>
+<area shape="poly" id="edge8_Node000002_Node000006" title=" " alt="" coords="285,235,354,248,350,251,287,240"/>
+<area shape="rect" id="Node000007" href="$systick_8c.html#ad9af3d080726acc5f1003de96ee90bb5" title="Blocking delay in microseconds." alt="" coords="397,328,487,355"/>
+<area shape="poly" id="edge11_Node000002_Node000007" title=" " alt="" coords="268,241,406,319,401,321,269,246"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="410,29,404,21,408,11,421,5,442,3,465,5,478,13,473,15,463,10,442,8,423,10,412,15,410,20,415,29"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="410,104,404,95,408,86,421,79,442,77,465,80,478,88,473,90,463,85,442,83,423,85,412,89,410,95,415,103"/>
+<area shape="poly" id="edge7_Node000005_Node000005" title=" " alt="" coords="410,178,404,170,408,160,421,154,442,152,465,155,478,163,473,164,463,160,442,157,423,159,412,164,410,169,415,178"/>
+<area shape="poly" id="edge9_Node000006_Node000006" title=" " alt="" coords="410,253,404,245,408,235,421,229,442,227,465,229,478,237,473,239,463,234,442,232,423,234,412,239,410,244,415,253"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="410,328,404,319,408,310,421,303,442,301,465,304,478,312,473,313,463,309,442,307,423,309,412,313,410,319,415,327"/>
+<area shape="poly" id="edge22_Node000008_Node000008" title=" " alt="" coords="211,552,206,543,210,534,222,527,242,525,264,528,277,536,272,538,262,533,242,531,224,533,214,537,211,543,216,551"/>
+<area shape="rect" id="Node000009" href="$_ir_sensor_8c.html#a66e013e395900c2e2bac9e832a4053d0" title=" " alt="" coords="382,403,503,429"/>
+<area shape="poly" id="edge14_Node000008_Node000009" title=" " alt="" coords="252,550,297,496,329,466,365,439,377,434,374,438,367,444,332,470,301,500,256,553"/>
+<area shape="rect" id="Node000011" href="$_ir_sensor_8c.html#a1c0392e186a4c874ef49108f4cdfab62" title=" " alt="" coords="377,552,507,579"/>
+<area shape="poly" id="edge18_Node000008_Node000011" title=" " alt="" coords="303,563,364,564,359,567,306,568"/>
+<area shape="rect" id="Node000013" href="$_ir_sensor_8c.html#ab3554d4b94cea7f692032e42076f16ab" title=" " alt="" coords="391,477,493,504"/>
+<area shape="poly" id="edge23_Node000008_Node000013" title=" " alt="" coords="275,549,365,514,386,508,382,511,367,518,278,554"/>
+<area shape="rect" id="Node000014" href="$_ir_sensor_8c.html#a8771fec05f31ff8125c7f3d1cb86c928" title=" " alt="" coords="386,627,498,653"/>
+<area shape="poly" id="edge26_Node000008_Node000014" title=" " alt="" coords="280,577,392,620,388,622,281,582"/>
+<area shape="poly" id="edge15_Node000009_Node000009" title=" " alt="" coords="410,402,404,394,408,384,421,378,442,376,465,379,478,387,473,388,463,384,442,381,423,383,412,388,410,393,415,402"/>
+<area shape="rect" id="Node000010" href="$gpio_8c.html#a694a507b6b042f1ba3d8e3065f0d4873" title=" " alt="" coords="568,440,691,467"/>
+<area shape="poly" id="edge16_Node000009_Node000010" title=" " alt="" coords="503,426,555,437,550,439,504,431"/>
+<area shape="poly" id="edge17_Node000010_Node000010" title=" " alt="" coords="597,439,592,431,596,422,609,415,630,413,652,416,665,424,660,425,650,421,629,419,610,421,600,425,597,431,602,440"/>
+<area shape="poly" id="edge19_Node000011_Node000011" title=" " alt="" coords="410,551,404,543,408,534,421,527,442,525,465,528,478,536,473,537,463,533,442,531,423,533,412,537,410,543,415,552"/>
+<area shape="rect" id="Node000012" href="$gpio_8c.html#a83514de474566a7b7e24daf983e23da1" title=" " alt="" coords="568,589,691,616"/>
+<area shape="poly" id="edge20_Node000011_Node000012" title=" " alt="" coords="507,576,555,587,550,588,508,581"/>
+<area shape="poly" id="edge21_Node000012_Node000012" title=" " alt="" coords="597,589,592,581,596,571,609,565,630,563,652,565,665,574,660,574,650,570,629,568,610,570,600,575,597,580,602,589"/>
+<area shape="poly" id="edge24_Node000013_Node000010" title=" " alt="" coords="493,478,555,467,550,470,495,483"/>
+<area shape="poly" id="edge25_Node000013_Node000013" title=" " alt="" coords="410,477,404,469,408,459,421,453,442,451,465,453,478,461,473,463,463,458,442,456,423,458,412,463,410,468,415,477"/>
+<area shape="poly" id="edge27_Node000014_Node000012" title=" " alt="" coords="497,626,555,617,550,619,500,631"/>
+<area shape="poly" id="edge28_Node000014_Node000014" title=" " alt="" coords="410,626,404,618,408,608,421,602,442,600,465,603,478,611,473,612,463,608,442,605,423,607,412,612,410,617,415,626"/>
+<area shape="poly" id="edge38_Node000015_Node000015" title=" " alt="" coords="211,813,206,805,210,795,222,789,242,787,264,789,277,798,272,799,262,794,242,792,224,794,214,799,211,804,216,813"/>
+<area shape="rect" id="Node000016" href="$_ir_sensor_8c.html#a8c9810373057617ad181b3e724b3c1a2" title="Control functions to toggle data outpins for IR emitters." alt="" coords="382,701,503,728"/>
+<area shape="poly" id="edge30_Node000015_Node000016" title=" " alt="" coords="258,811,304,775,365,738,381,733,377,736,367,742,307,780,261,815"/>
+<area shape="rect" id="Node000018" href="$_ir_sensor_8c.html#afaab032430d7dc67252d7beeba2c619d" title=" " alt="" coords="377,851,507,877"/>
+<area shape="poly" id="edge34_Node000015_Node000018" title=" " alt="" coords="304,836,364,848,359,850,305,841"/>
+<area shape="rect" id="Node000020" href="$_ir_sensor_8c.html#ac8dca3832bd770bf436fb182d8683109" title=" " alt="" coords="391,776,493,803"/>
+<area shape="poly" id="edge39_Node000015_Node000020" title=" " alt="" coords="303,813,378,800,374,803,305,818"/>
+<area shape="rect" id="Node000021" href="$_ir_sensor_8c.html#a07ef03cb307202e9a9800e8842dd7940" title=" " alt="" coords="386,925,498,952"/>
+<area shape="poly" id="edge42_Node000015_Node000021" title=" " alt="" coords="269,838,406,917,401,918,268,843"/>
+<area shape="poly" id="edge31_Node000016_Node000016" title=" " alt="" coords="410,701,404,693,408,683,421,677,442,675,465,677,478,686,473,686,463,682,442,680,423,682,412,687,410,692,415,701"/>
+<area shape="rect" id="Node000017" href="$gpio_8c.html#a39655c6345b4ef3aa67c14b21b997a73" title=" " alt="" coords="566,739,693,765"/>
+<area shape="poly" id="edge32_Node000016_Node000017" title=" " alt="" coords="503,724,554,736,548,737,504,729"/>
+<area shape="poly" id="edge33_Node000017_Node000017" title=" " alt="" coords="597,738,592,730,596,720,609,714,630,712,652,715,665,723,660,723,650,720,629,717,610,719,600,724,597,729,602,739"/>
+<area shape="poly" id="edge35_Node000018_Node000018" title=" " alt="" coords="410,850,404,842,408,832,421,826,442,824,465,827,478,835,473,835,463,832,442,829,423,831,412,836,410,841,415,851"/>
+<area shape="rect" id="Node000019" href="$gpio_8c.html#a5de0efff186e9e630aa4534fcf15a877" title=" " alt="" coords="566,888,693,915"/>
+<area shape="poly" id="edge36_Node000018_Node000019" title=" " alt="" coords="507,874,554,885,549,886,508,880"/>
+<area shape="poly" id="edge37_Node000019_Node000019" title=" " alt="" coords="597,887,592,879,596,870,609,863,630,861,652,864,665,873,660,873,650,869,629,867,610,869,600,873,597,879,602,888"/>
+<area shape="poly" id="edge40_Node000020_Node000017" title=" " alt="" coords="493,777,554,766,549,769,495,782"/>
+<area shape="poly" id="edge41_Node000020_Node000020" title=" " alt="" coords="410,775,404,767,408,758,421,751,442,749,465,752,478,761,473,761,463,757,442,755,423,757,412,761,410,767,415,776"/>
+<area shape="poly" id="edge43_Node000021_Node000019" title=" " alt="" coords="498,925,554,916,549,918,499,930"/>
+<area shape="poly" id="edge44_Node000021_Node000021" title=" " alt="" coords="410,924,404,917,408,907,421,901,442,899,465,901,478,910,473,910,463,906,442,904,423,906,412,911,410,916,415,926"/>
+<area shape="poly" id="edge46_Node000022_Node000022" title=" " alt="" coords="211,925,206,917,210,907,222,901,242,899,264,901,277,910,272,910,262,906,242,904,224,906,214,911,211,916,216,925"/>
+<area shape="rect" id="Node000023" href="$_ir_sensor_8c.html#a832ae54046399bfb7cd3cecac748d263" title="Apply IIR low&#45;pass filter to a single ADC channel." alt="" coords="398,1000,487,1027"/>
+<area shape="poly" id="edge47_Node000022_Node000023" title=" " alt="" coords="281,950,393,993,387,995,280,955"/>
+<area shape="poly" id="edge48_Node000023_Node000023" title=" " alt="" coords="410,999,404,991,408,982,421,975,442,973,465,976,478,985,473,984,463,981,442,979,423,981,412,985,410,991,415,1000"/>
+<area shape="poly" id="edge53_Node000024_Node000024" title=" " alt="" coords="211,1017,206,1010,210,1000,222,994,242,992,264,995,277,1004,272,1003,262,1000,242,997,224,999,214,1004,211,1009,216,1019"/>
+<area shape="rect" id="Node000025" href="$_ir_sensor_8c.html#ad9dcb8ec155d72a5f2823c083a2481e6" title="Convert a channel&#39;s filtered reading to a distance." alt="" coords="370,1075,514,1101"/>
+<area shape="poly" id="edge51_Node000024_Node000025" title=" " alt="" coords="293,1043,380,1070,375,1070,293,1049"/>
+<area shape="poly" id="edge52_Node000025_Node000025" title=" " alt="" coords="410,1073,404,1066,408,1056,421,1050,442,1048,465,1051,478,1060,473,1059,463,1056,442,1053,423,1055,412,1060,410,1065,415,1075"/>
+</map>

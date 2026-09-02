@@ -1,0 +1,18 @@
+<map id="T32A1_Start" name="T32A1_Start">
+<area shape="rect" id="Node000001" title=" " alt="" coords="383,67,478,93"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="454,51,446,48,430,45,416,47,408,52,406,58,410,67,405,65,400,58,403,48,414,42,431,40,448,43,459,52"/>
+<area shape="rect" id="Node000002" href="$_timebase_8c.html#a8dcefc964c6cd029e4afc3db5de2a00a" title="Starts T32A1 Timer." alt="" coords="232,67,335,93"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="365,80,336,83,336,77,370,80"/>
+<area shape="poly" id="edge10_Node000002_Node000002" title=" " alt="" coords="306,51,299,48,284,45,269,47,262,52,260,58,264,67,259,65,255,58,258,48,268,42,284,40,301,43,311,52"/>
+<area shape="rect" id="Node000003" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="103,29,184,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="214,63,185,56,185,51,219,62"/>
+<area shape="rect" id="Node000005" href="$_module_test_8c.html#ac497d1b7849ac646d67a4f2986b62e15" title=" " alt="" coords="108,104,179,131"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="220,97,180,111,179,105,214,98"/>
+<area shape="poly" id="edge6_Node000003_Node000003" title=" " alt="" coords="160,14,155,10,143,8,132,10,126,14,125,20,128,29,123,28,119,20,122,11,130,5,143,3,157,5,166,14"/>
+<area shape="rect" id="Node000004" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,29,55,56"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="85,44,56,45,54,40,89,41"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="47,14,42,10,30,8,19,10,13,14,11,20,15,28,9,29,6,20,8,11,17,5,30,3,44,5,52,13"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="161,88,155,85,143,83,132,85,126,89,125,95,128,105,123,102,119,95,122,86,130,80,143,77,157,80,166,89"/>
+<area shape="rect" id="Node000006" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,104,55,131"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="90,118,55,120,55,115,95,116"/>
+</map>

@@ -19,6 +19,9 @@
 #include "TMPM4KyA.h"
 #include <stdint.h>
 #include <stdbool.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 extern volatile bool T32A01AC_IRQ_Fire;  
 
@@ -136,4 +139,7 @@ void T32A3_SetOutCRB1(uint32_t mode);
 /* Interrupt */
 void T32A1_Interrupt_Enable(void);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* TIMER32A_H */

@@ -1,0 +1,7 @@
+<map id="src/modules/IrSensor.h" name="src/modules/IrSensor.h">
+<area shape="rect" id="Node000001" title="IR Sensor driver for TMPM4Ky micromouse." alt="" coords="6,5,162,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,70,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,31,56,69,52,65,74,34"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="94,80,168,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="94,30,117,67,112,67,91,35"/>
+</map>

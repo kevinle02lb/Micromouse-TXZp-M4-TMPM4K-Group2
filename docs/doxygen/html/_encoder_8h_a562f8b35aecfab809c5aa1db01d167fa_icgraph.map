@@ -1,0 +1,4 @@
+<map id="Encoder_GetDelta" name="Encoder_GetDelta">
+<area shape="rect" id="Node000001" title="Get the raw delta (counts since last tick) for a motor." alt="" coords="5,29,134,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="90,14,83,10,69,8,57,10,50,14,48,20,52,29,46,28,43,21,46,11,55,5,70,3,85,5,95,14"/>
+</map>

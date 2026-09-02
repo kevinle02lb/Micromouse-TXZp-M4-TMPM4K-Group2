@@ -1,11 +1,11 @@
 /**
- * @file        adc.c
- * @brief       ADC-I driver implementation for TMPM4Ky RISC microcontrollers.
+ * @file        adc.h
+ * @brief       ADC-I driver for TMPM4Ky RISC microcontrollers.
  * @version     V1.0.0
  * @date        29-05-2026
  *
  * @details
- *   Configures ADC Units A and C for single-conversion mode with DMA.
+ *   Configures ADC Units A and C for polled single-conversion reads.
  *   ADCLK = 160 MHz raw; SCLK = 40 MHz after /4 prescaler.
  *
  *   Pin Assignments:
@@ -43,14 +43,9 @@
 #include "TMPM4KyA.h"
 #include <stdint.h>
 #include <stdbool.h>
-
-
-/**
- * @brief  ADC result transfer mode.
- * @note   Define ADC_USE_DMA to move results via DMAC-B (channels 16/18).
- *         Leave undefined for polled single-conversion reads (default).
- */
-//#define ADC_USE_DMA
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 
 /* ==========================================================================
@@ -97,6 +92,7 @@
 #define ADxCR1_TRGDMEN                          ((uint32_t)0x01 << 4U)   /*!< General-purpose trigger DMA request */
 #define ADxCR1_SGLDMEN                          ((uint32_t)0x01 << 5U)   /*!< Single conversion DMA request */
 #define ADxCR1_CNTDMEN                          ((uint32_t)0x01 << 6U)   /*!< Continuous conversion DMA request */
+/* None of the above are set. Results are read by the CPU. */
 
 /* ==========================================================================
  *   ADxST — Status Register
@@ -159,11 +155,10 @@ void AINC_StartSGL(void);
 uint16_t AINA_Read(uint8_t channel);
 uint16_t AINC_Read(uint8_t channel);
 
-#ifdef ADC_USE_DMA
-void Start_ADC(void);
-#else
 void AINA_ReadPair(uint16_t *p_reg0, uint16_t *p_reg1);
 void AINC_ReadPair(uint16_t *p_reg0, uint16_t *p_reg1);
-#endif
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* ADC_H */

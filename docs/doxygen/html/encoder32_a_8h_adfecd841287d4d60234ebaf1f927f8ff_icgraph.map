@@ -1,0 +1,25 @@
+<map id="ENC2_Init" name="ENC2_Init">
+<area shape="rect" id="Node000001" title=" " alt="" coords="654,79,736,105"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="717,63,710,60,695,57,681,59,674,64,672,70,676,80,671,77,667,70,670,60,679,54,695,52,712,55,722,64"/>
+<area shape="rect" id="Node000002" href="$encoder32_a_8c.html#a936c7aac1c810f4d7e3faa05b7f006e6" title="Initialise all encoder modules." alt="" coords="508,79,606,105"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="636,92,606,95,606,89,641,92"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="579,63,572,60,557,57,543,59,535,64,534,70,537,80,533,77,528,70,531,60,541,54,557,52,574,55,584,64"/>
+<area shape="rect" id="Node000003" href="$_encoder_8c.html#a1c8318d644fc2e61cc1ef9cb0710feb6" title="Initialise encoder hardware and internal state." alt="" coords="365,79,460,105"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="489,92,460,95,460,89,495,92"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="434,63,427,60,412,57,399,59,391,64,389,70,393,79,388,77,384,70,387,60,397,54,413,52,429,55,439,64"/>
+<area shape="rect" id="Node000004" href="$_motion_8c.html#aad8ce1070ef0837cd67c0371c32df102" title="Initialize PID controllers &amp; Motor related modules." alt="" coords="232,53,317,80"/>
+<area shape="poly" id="edge6_Node000003_Node000004" title=" " alt="" coords="347,81,318,77,318,72,353,80"/>
+<area shape="rect" id="Node000007" href="$_module_test_8c.html#ac497d1b7849ac646d67a4f2986b62e15" title=" " alt="" coords="108,104,179,131"/>
+<area shape="poly" id="edge15_Node000003_Node000007" title=" " alt="" coords="347,98,180,117,179,111,352,98"/>
+<area shape="poly" id="edge11_Node000004_Node000004" title=" " alt="" coords="295,38,289,34,275,32,261,34,254,38,253,44,256,54,251,52,247,45,250,35,260,29,275,27,291,29,301,38"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="103,29,184,56"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="214,57,185,53,184,47,219,56"/>
+<area shape="poly" id="edge12_Node000004_Node000007" title=" " alt="" coords="226,86,180,106,179,101,221,87"/>
+<area shape="poly" id="edge10_Node000005_Node000005" title=" " alt="" coords="160,14,155,10,143,8,132,10,126,14,125,20,128,29,123,28,119,20,122,11,130,5,143,3,157,5,166,14"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,29,55,56"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="85,44,56,45,54,40,89,41"/>
+<area shape="poly" id="edge9_Node000006_Node000006" title=" " alt="" coords="47,14,42,10,30,8,19,10,13,14,11,20,15,28,9,29,6,20,8,11,17,5,30,3,44,5,52,13"/>
+<area shape="poly" id="edge14_Node000007_Node000007" title=" " alt="" coords="161,88,155,85,143,83,132,85,126,89,125,95,128,105,123,102,119,95,122,86,130,80,143,77,157,80,166,89"/>
+<area shape="rect" id="Node000008" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,104,55,131"/>
+<area shape="poly" id="edge13_Node000007_Node000008" title=" " alt="" coords="90,118,55,120,55,115,95,116"/>
+</map>

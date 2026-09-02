@@ -1,0 +1,156 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="10,1251,59,1277"/>
+<area shape="poly" id="edge35_Node000001_Node000001" title=" " alt="" coords="7,1251,3,1242,6,1232,17,1226,34,1224,53,1227,64,1234,59,1237,51,1232,34,1229,19,1231,10,1236,8,1241,13,1250"/>
+<area shape="rect" id="Node000002" href="$_encoder_8c.html#ad0493964dd17733319708411b3810f01" title="Read both encoders, update delta, position, and filtered speed." alt="" coords="128,141,246,168"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="33,1250,35,1131,44,923,65,667,82,534,104,403,119,340,138,279,175,180,174,185,143,280,124,342,110,405,87,535,70,668,49,924,40,1131,38,1250"/>
+<area shape="rect" id="Node000006" href="$_ir_sensor_8c.html#a0885e835aaf51a8551935bc6a28a03ba" title="Non&#45;blocking sampler — advances one phase per control tick." alt="" coords="130,440,244,467"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="35,1250,60,1076,104,814,144,624,179,479,179,484,149,625,110,815,66,1077,40,1251"/>
+<area shape="rect" id="Node000031" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="146,851,228,877"/>
+<area shape="poly" id="edge36_Node000001_Node000031" title=" " alt="" coords="38,1250,176,889,175,894,43,1251"/>
+<area shape="rect" id="Node000085" href="$_motion_8c.html#a47cf1896361b4c623fb00a5ab7673c56" title="Run one PID control tick." alt="" coords="132,2148,242,2175"/>
+<area shape="poly" id="edge54_Node000001_Node000085" title=" " alt="" coords="40,1277,184,2132,178,2133,35,1279"/>
+<area shape="rect" id="Node000103" href="$_navigator_8c.html#a9b3a0072f38ba40f05861eb358e087cb" title="Advance the state machine by one tick." alt="" coords="124,1525,250,1552"/>
+<area shape="poly" id="edge66_Node000001_Node000103" title=" " alt="" coords="43,1275,173,1511,168,1512,43,1281"/>
+<area shape="rect" id="Node000131" href="$_odometry_8c.html#a1592e8db0e26db1d11b64f6e1e5ac642" title="Update robot pose from encoder data." alt="" coords="123,1113,251,1140"/>
+<area shape="poly" id="edge98_Node000001_Node000131" title=" " alt="" coords="48,1249,161,1148,159,1153,53,1252"/>
+<area shape="rect" id="Node000132" href="$_include_2system___t_m_p_m4_ky_a_8h.html#a93f514700ccf00d08dbdcff7f1224eb2" title="Setup the microcontroller system. Initialize the System and update the SystemCoreClock variable." alt="" coords="145,2223,229,2249"/>
+<area shape="poly" id="edge101_Node000001_Node000132" title=" " alt="" coords="36,1275,44,1454,57,1742,78,2025,92,2128,101,2163,109,2185,122,2200,138,2214,133,2215,118,2204,105,2188,95,2165,87,2129,73,2026,51,1743,39,1454,36,1280"/>
+<area shape="rect" id="Node000133" href="$_timebase_8c.html#a754d23c8d1f8fa4a3ae8919e1b132c01" title=" " alt="" coords="107,2297,267,2324"/>
+<area shape="poly" id="edge103_Node000001_Node000133" title=" " alt="" coords="36,1275,43,1467,55,1779,64,1941,76,2086,91,2198,100,2236,109,2260,121,2275,138,2289,133,2290,118,2279,105,2263,95,2238,86,2199,71,2087,59,1942,50,1779,38,1467,36,1281"/>
+<area shape="poly" id="edge6_Node000002_Node000002" title=" " alt="" coords="160,141,156,133,159,123,170,117,187,115,206,117,216,125,212,127,204,122,187,120,171,122,163,126,161,132,165,140"/>
+<area shape="rect" id="Node000003" href="$encoder32_a_8c.html#a90e678f419a081da11ed948ca4a854f0" title=" " alt="" coords="337,104,468,131"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="245,143,324,129,320,133,248,146"/>
+<area shape="rect" id="Node000004" href="$encoder32_a_8c.html#a95f249ffdc1bdbe5e70677cb9a8a2f3e" title=" " alt="" coords="337,179,468,205"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="245,163,324,176,320,180,248,167"/>
+<area shape="rect" id="Node000005" href="$_encoder_8c.html#ac5f12636a9758cfc5b30f13e9fc2b4b9" title="Compute speed over a multi&#45;tick window to beat count quantization." alt="" coords="315,29,490,56"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="203,139,251,103,314,66,332,59,329,64,316,70,254,107,207,142"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="366,104,360,95,365,86,379,79,402,77,428,80,442,88,437,90,426,85,402,83,380,85,368,89,365,95,371,103"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="366,179,360,170,365,160,379,154,402,152,428,155,442,162,437,165,426,160,402,157,380,159,368,164,365,169,371,178"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="366,29,360,21,365,11,379,5,402,3,428,5,442,13,437,15,426,10,402,8,380,10,368,15,365,20,371,28"/>
+<area shape="poly" id="edge32_Node000006_Node000006" title=" " alt="" coords="160,440,156,431,159,422,170,416,187,413,206,416,216,424,212,426,204,421,187,419,171,421,163,425,161,431,165,439"/>
+<area shape="rect" id="Node000007" href="$_ir_sensor_8c.html#a86760ac6a121c5bc31c9d1e1fdd102a4" title="Read one ADC sample set from all four receivers into out[]." alt="" coords="359,328,446,355"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="203,438,251,401,314,364,346,353,342,358,316,369,254,406,207,441"/>
+<area shape="rect" id="Node000013" href="$_ir_sensor_8c.html#a2b512a484fa28b250fe4cdc03d2384ce" title="Turn OFF all four IR emitters simultaneously." alt="" coords="341,403,464,429"/>
+<area shape="poly" id="edge22_Node000006_Node000013" title=" " alt="" coords="242,442,327,427,324,431,246,445"/>
+<area shape="rect" id="Node000020" href="$_ir_sensor_8c.html#a329a5b0841a76cf9b15c93d2a4e9969c" title="Turn ON all four IR emitters simultaneously." alt="" coords="341,477,464,504"/>
+<area shape="poly" id="edge28_Node000006_Node000020" title=" " alt="" coords="243,461,327,476,323,479,246,465"/>
+<area shape="rect" id="Node000027" href="$_ir_sensor_8c.html#abb1cfe80b1245ad0fa71b4b473e73ff7" title="Ambient&#45;cancel raw[]/ambient[] into reflected[], then IIR filter." alt="" coords="327,552,478,579"/>
+<area shape="poly" id="edge30_Node000006_Node000027" title=" " alt="" coords="214,465,363,543,359,546,216,470"/>
+<area shape="rect" id="Node000029" href="$_ir_sensor_8c.html#ae797c9f2155d963b83b6624703808cb3" title="Update wallDetected[] from measured distance with hysteresis." alt="" coords="344,253,461,280"/>
+<area shape="poly" id="edge33_Node000006_Node000029" title=" " alt="" coords="193,439,237,368,272,326,314,290,331,282,328,286,317,294,276,330,241,371,198,441"/>
+<area shape="poly" id="edge19_Node000007_Node000007" title=" " alt="" coords="366,328,360,319,365,310,379,303,402,301,428,304,442,312,437,314,426,309,402,307,380,309,368,313,365,319,371,327"/>
+<area shape="rect" id="Node000008" href="$adc_8c.html#a0a1ab6bb2c7dae03cc9cb78909774a47" title="Trigger a single&#45;conversion pair on ADC Unit A and read both results." alt="" coords="557,253,671,280"/>
+<area shape="poly" id="edge11_Node000007_Node000008" title=" " alt="" coords="439,326,537,289,559,283,555,287,538,295,442,329"/>
+<area shape="rect" id="Node000009" href="$adc_8c.html#ab67f251f0a347c9873708d94f76a4b2a" title="Trigger a single&#45;conversion pair on ADC Unit C and read both results." alt="" coords="556,328,671,355"/>
+<area shape="poly" id="edge13_Node000007_Node000009" title=" " alt="" coords="444,339,543,340,538,343,448,343"/>
+<area shape="rect" id="Node000010" href="$dma_8c.html#a325481bdc955de0cfb6e44763d933ed6" title="Get pointer to ADC Unit A DMA result buffer." alt="" coords="538,403,689,429"/>
+<area shape="poly" id="edge15_Node000007_Node000010" title=" " alt="" coords="445,351,490,364,569,395,565,398,489,369,447,355"/>
+<area shape="rect" id="Node000011" href="$dma_8c.html#a77b002b98eecc600caee51ed6432a6a3" title="Get pointer to ADC Unit C DMA result buffer." alt="" coords="538,104,690,131"/>
+<area shape="poly" id="edge17_Node000007_Node000011" title=" " alt="" coords="438,326,465,310,488,290,500,271,506,252,509,215,513,179,521,160,536,141,542,137,539,142,540,144,526,162,518,180,514,216,511,253,505,273,492,294,468,315,443,329"/>
+<area shape="rect" id="Node000012" href="$systick_8c.html#ad9af3d080726acc5f1003de96ee90bb5" title="Blocking delay in microseconds." alt="" coords="569,179,659,205"/>
+<area shape="poly" id="edge20_Node000007_Node000012" title=" " alt="" coords="434,326,462,310,488,290,502,271,510,252,519,234,536,215,556,205,552,209,539,219,523,237,515,255,507,274,491,294,465,314,438,329"/>
+<area shape="poly" id="edge12_Node000008_Node000008" title=" " alt="" coords="578,253,572,245,576,235,590,229,614,227,639,229,654,237,649,239,637,234,614,232,592,234,580,239,577,244,583,252"/>
+<area shape="poly" id="edge14_Node000009_Node000009" title=" " alt="" coords="578,328,572,319,576,310,590,303,614,301,639,304,654,312,649,314,637,309,614,307,592,309,580,313,577,319,583,327"/>
+<area shape="poly" id="edge16_Node000010_Node000010" title=" " alt="" coords="578,403,572,394,576,384,590,378,614,376,639,379,654,386,649,388,637,384,614,381,592,383,580,388,577,393,583,402"/>
+<area shape="poly" id="edge18_Node000011_Node000011" title=" " alt="" coords="578,104,572,95,576,86,590,79,614,77,639,80,653,88,649,90,637,85,614,83,592,85,580,89,577,95,583,103"/>
+<area shape="poly" id="edge21_Node000012_Node000012" title=" " alt="" coords="578,179,572,170,576,160,590,154,614,152,639,155,654,162,649,165,637,160,614,157,592,159,580,164,577,169,583,178"/>
+<area shape="poly" id="edge27_Node000013_Node000013" title=" " alt="" coords="366,403,360,394,365,384,379,378,402,376,428,379,442,386,437,389,426,384,402,381,380,383,368,388,365,393,371,402"/>
+<area shape="rect" id="Node000014" href="$_ir_sensor_8c.html#a66e013e395900c2e2bac9e832a4053d0" title=" " alt="" coords="553,552,674,579"/>
+<area shape="poly" id="edge23_Node000013_Node000014" title=" " alt="" coords="463,426,491,439,509,458,517,476,525,495,539,514,576,543,571,545,536,518,520,497,513,478,504,461,488,443,466,430"/>
+<area shape="rect" id="Node000016" href="$_ir_sensor_8c.html#a1c0392e186a4c874ef49108f4cdfab62" title=" " alt="" coords="549,477,679,504"/>
+<area shape="poly" id="edge25_Node000013_Node000016" title=" " alt="" coords="453,428,490,439,569,470,565,472,489,444,455,432"/>
+<area shape="poly" id="edge24_Node000014_Node000014" title=" " alt="" coords="578,552,572,543,576,534,590,527,614,525,639,528,654,536,649,538,637,533,614,531,592,533,580,537,577,543,583,551"/>
+<area shape="poly" id="edge26_Node000016_Node000016" title=" " alt="" coords="578,477,572,469,576,459,590,453,614,451,639,453,654,461,649,463,637,458,614,456,592,458,580,463,577,468,583,476"/>
+<area shape="poly" id="edge29_Node000020_Node000020" title=" " alt="" coords="366,477,360,469,365,459,379,453,402,451,428,453,442,461,437,463,426,458,402,456,380,458,368,463,365,468,371,476"/>
+<area shape="poly" id="edge31_Node000027_Node000027" title=" " alt="" coords="366,552,360,543,365,534,379,527,402,525,428,528,442,536,437,538,426,533,402,531,380,533,368,537,365,543,371,551"/>
+<area shape="poly" id="edge34_Node000029_Node000029" title=" " alt="" coords="366,253,360,245,365,235,379,229,402,227,428,229,442,237,437,239,426,234,402,232,380,234,368,239,365,244,371,252"/>
+<area shape="poly" id="edge41_Node000031_Node000031" title=" " alt="" coords="160,851,156,842,159,832,170,826,187,824,206,827,216,834,212,837,204,832,187,829,171,831,163,836,161,841,165,850"/>
+<area shape="rect" id="Node000032" href="$_flood_fill_8c.html#a911c32185f0727c51cf3a5c0be4bd574" title="Clear the map and seed the distance field with Manhattan estimates." alt="" coords="355,776,450,803"/>
+<area shape="poly" id="edge37_Node000031_Node000032" title=" " alt="" coords="220,848,314,812,341,805,338,809,316,817,224,852"/>
+<area shape="rect" id="Node000033" href="$_ir_sensor_8c.html#ab5301b3aadc0a716d895ea4b52a5e7b7" title="Initializes ADC and GPIO for IR emitters." alt="" coords="372,925,433,952"/>
+<area shape="poly" id="edge39_Node000031_Node000033" title=" " alt="" coords="227,875,360,922,356,925,229,880"/>
+<area shape="rect" id="Node000046" href="$_motion_8c.html#aad8ce1070ef0837cd67c0371c32df102" title="Initialize PID controllers &amp; Motor related modules." alt="" coords="360,627,445,653"/>
+<area shape="poly" id="edge42_Node000031_Node000046" title=" " alt="" coords="191,849,206,812,232,762,268,709,289,684,314,663,346,648,343,652,317,668,293,688,272,712,236,764,211,814,196,851"/>
+<area shape="rect" id="Node000070" href="$_navigator_8c.html#aa1588576ba60fdfb26f595165484eaf3" title="Initialize the navigator state machine." alt="" coords="351,1051,454,1077"/>
+<area shape="poly" id="edge44_Node000031_Node000070" title=" " alt="" coords="202,875,378,1039,373,1041,204,880"/>
+<area shape="rect" id="Node000074" href="$_odometry_8c.html#a7937737adfdd0c82fa1f649c6c930205" title=" " alt="" coords="351,851,454,877"/>
+<area shape="poly" id="edge48_Node000031_Node000074" title=" " alt="" coords="226,862,337,862,333,866,230,866"/>
+<area shape="rect" id="Node000076" href="$_timebase_8c.html#a8dcefc964c6cd029e4afc3db5de2a00a" title="Starts T32A1 Timer." alt="" coords="351,701,454,728"/>
+<area shape="poly" id="edge52_Node000031_Node000076" title=" " alt="" coords="196,849,243,795,277,764,314,738,338,728,335,732,317,742,280,768,247,799,201,851"/>
+<area shape="poly" id="edge38_Node000032_Node000032" title=" " alt="" coords="366,776,360,767,365,758,379,751,402,749,428,752,442,760,437,762,426,757,402,755,380,757,368,761,365,767,371,775"/>
+<area shape="poly" id="edge40_Node000033_Node000033" title=" " alt="" coords="369,928,361,919,363,908,378,901,402,899,433,903,441,908,445,915,439,915,438,912,431,908,402,904,379,906,367,911,366,917,375,926"/>
+<area shape="poly" id="edge43_Node000046_Node000046" title=" " alt="" coords="366,627,360,618,365,608,379,602,402,600,428,603,442,610,437,613,426,608,402,605,380,607,368,612,365,617,371,626"/>
+<area shape="poly" id="edge47_Node000070_Node000070" title=" " alt="" coords="366,1051,360,1042,365,1032,379,1026,402,1024,428,1027,442,1034,437,1036,426,1032,402,1029,380,1031,368,1036,365,1041,371,1050"/>
+<area shape="rect" id="Node000071" href="$_navigator_8c.html#aa6657d84ec450f18e3d3449afe2e0414" title="Command both wheel speeds in mm/s." alt="" coords="551,1151,676,1177"/>
+<area shape="poly" id="edge45_Node000070_Node000071" title=" " alt="" coords="453,1074,491,1087,540,1112,583,1141,578,1142,537,1117,488,1092,455,1079"/>
+<area shape="poly" id="edge46_Node000071_Node000071" title=" " alt="" coords="577,1150,572,1142,576,1132,590,1126,614,1124,639,1127,654,1135,649,1136,637,1132,614,1129,592,1131,580,1136,577,1141,583,1150"/>
+<area shape="poly" id="edge51_Node000074_Node000074" title=" " alt="" coords="366,851,360,842,365,832,379,826,402,824,428,827,442,834,437,837,426,832,402,829,380,831,368,836,365,841,371,850"/>
+<area shape="rect" id="Node000075" href="$_encoder_8c.html#ad92861cad0fe5e13d90aae6d3ffdc503" title="Get the accumulated position for a motor." alt="" coords="542,913,686,940"/>
+<area shape="poly" id="edge49_Node000074_Node000075" title=" " alt="" coords="450,875,490,887,555,907,550,910,489,892,452,880"/>
+<area shape="poly" id="edge50_Node000075_Node000075" title=" " alt="" coords="577,913,572,905,576,895,590,889,614,887,639,889,654,897,649,899,637,894,614,892,592,894,580,899,577,904,583,913"/>
+<area shape="poly" id="edge53_Node000076_Node000076" title=" " alt="" coords="366,701,360,693,365,683,379,677,402,675,428,677,442,685,437,687,426,682,402,680,380,682,368,687,365,692,371,700"/>
+<area shape="poly" id="edge61_Node000085_Node000085" title=" " alt="" coords="160,2148,156,2139,159,2130,170,2124,187,2121,206,2124,217,2132,211,2133,204,2129,187,2127,171,2129,163,2133,161,2139,165,2148"/>
+<area shape="rect" id="Node000086" href="$_p_i_d_8c.html#adf0ed1f61c05071a8297fe4d4407d8c6" title="Calculates error as Setpoint &#45; Process Variable." alt="" coords="350,2397,455,2424"/>
+<area shape="poly" id="edge55_Node000085_Node000086" title=" " alt="" coords="242,2168,269,2185,286,2207,294,2229,296,2272,297,2315,304,2337,317,2360,333,2375,352,2390,347,2389,329,2379,313,2363,299,2339,292,2316,291,2272,289,2230,281,2210,265,2189,242,2173"/>
+<area shape="rect" id="Node000087" href="$_encoder_8c.html#a4e6d5ac7a7c9184279953c0362c85152" title="Get the filtered speed for a motor." alt="" coords="318,2123,487,2149"/>
+<area shape="poly" id="edge57_Node000085_Node000087" title=" " alt="" coords="241,2152,304,2146,300,2149,243,2157"/>
+<area shape="rect" id="Node000088" href="$_motion_8c.html#aa20083cfa17fb2ab40a445c13b855966" title="Convert PID output to motor direction and duty." alt="" coords="333,2248,472,2275"/>
+<area shape="poly" id="edge59_Node000085_Node000088" title=" " alt="" coords="236,2173,268,2184,321,2211,369,2239,364,2240,319,2215,266,2189,237,2178"/>
+<area shape="rect" id="Node000101" href="$_p_i_d_8c.html#a72ce899282f624d0e75128d9955de19e" title="Reset the PID controller state." alt="" coords="571,2036,657,2063"/>
+<area shape="poly" id="edge62_Node000085_Node000101" title=" " alt="" coords="242,2170,296,2177,358,2180,425,2175,489,2159,520,2142,548,2120,592,2077,596,2074,552,2124,523,2147,491,2164,426,2181,359,2185,295,2182,243,2175"/>
+<area shape="rect" id="Node000102" href="$_p_i_d_8c.html#a82d02847aa54cc947ed3ec2326f72877" title=" " alt="" coords="356,2323,449,2349"/>
+<area shape="poly" id="edge64_Node000085_Node000102" title=" " alt="" coords="242,2170,269,2185,288,2210,295,2235,301,2259,317,2285,335,2300,356,2315,351,2315,332,2305,313,2288,296,2261,290,2236,283,2212,265,2189,243,2175"/>
+<area shape="poly" id="edge56_Node000086_Node000086" title=" " alt="" coords="366,2396,360,2389,365,2379,379,2373,402,2371,428,2373,442,2383,437,2382,426,2378,402,2376,380,2378,368,2383,365,2388,371,2398"/>
+<area shape="poly" id="edge58_Node000087_Node000087" title=" " alt="" coords="366,2122,360,2114,365,2104,379,2098,402,2096,428,2099,442,2107,437,2108,426,2104,402,2101,380,2103,368,2108,365,2113,371,2123"/>
+<area shape="poly" id="edge60_Node000088_Node000088" title=" " alt="" coords="366,2247,360,2239,365,2230,379,2223,402,2221,428,2224,442,2233,437,2233,426,2229,402,2227,380,2229,368,2233,365,2239,371,2248"/>
+<area shape="poly" id="edge63_Node000101_Node000101" title=" " alt="" coords="578,2035,572,2027,576,2018,590,2011,614,2009,639,2012,654,2021,648,2021,637,2017,614,2015,592,2017,580,2021,577,2027,583,2036"/>
+<area shape="poly" id="edge65_Node000102_Node000102" title=" " alt="" coords="366,2321,360,2314,365,2304,379,2298,402,2296,428,2299,442,2308,437,2307,426,2304,402,2301,380,2303,368,2308,365,2313,371,2323"/>
+<area shape="poly" id="edge75_Node000103_Node000071" title=" " alt="" coords="189,1524,201,1479,225,1415,262,1346,286,1315,314,1287,336,1271,357,1262,398,1254,439,1250,489,1236,537,1211,582,1184,579,1189,540,1216,491,1241,440,1256,398,1260,359,1267,339,1276,317,1291,290,1318,266,1349,230,1417,206,1480,194,1526"/>
+<area shape="poly" id="edge86_Node000103_Node000103" title=" " alt="" coords="160,1525,156,1517,159,1507,170,1501,187,1499,206,1501,217,1509,212,1511,204,1506,187,1504,171,1506,163,1510,161,1516,165,1524"/>
+<area shape="rect" id="Node000104" href="$_navigator_8c.html#a1775061d6f8f0f2df7e0245ad8a54abd" title="Move the active drive target to sit at a fixed distance from a wall ahead." alt="" coords="318,1400,487,1427"/>
+<area shape="poly" id="edge67_Node000103_Node000104" title=" " alt="" coords="200,1524,248,1481,280,1457,314,1436,330,1431,327,1435,316,1441,283,1461,251,1485,204,1526"/>
+<area shape="rect" id="Node000105" href="$_ir_sensor_8c.html#a0b9ad1c889a088b7f9bd88de4298ec21" title="Check if wall is present with hysteresis." alt="" coords="552,1475,675,1501"/>
+<area shape="poly" id="edge82_Node000103_Node000105" title=" " alt="" coords="249,1533,362,1525,489,1511,539,1503,535,1507,490,1516,362,1530,252,1538"/>
+<area shape="rect" id="Node000106" href="$_navigator_8c.html#ae7b1e32587c572aca6b01e5a11bbcfac" title="Arm a straight&#45;line segment." alt="" coords="360,1824,445,1851"/>
+<area shape="poly" id="edge71_Node000103_Node000106" title=" " alt="" coords="192,1550,209,1595,234,1656,270,1724,292,1757,317,1786,335,1802,356,1816,351,1817,332,1806,313,1790,288,1760,266,1727,229,1658,204,1597,192,1555"/>
+<area shape="rect" id="Node000108" href="$_navigator_8c.html#a9aad9a873e7f925b24999c4b3a8a2200" title="Arm an in&#45;place pivot segment." alt="" coords="362,1973,443,2000"/>
+<area shape="poly" id="edge73_Node000103_Node000108" title=" " alt="" coords="189,1550,199,1618,219,1718,235,1774,256,1831,283,1886,317,1936,333,1951,353,1965,348,1966,330,1955,313,1939,279,1889,251,1833,230,1776,213,1719,194,1618,189,1555"/>
+<area shape="rect" id="Node000109" href="$_flood_fill_8c.html#ad932410c97ab1e09590f00c4a9582565" title="Decide the next move." alt="" coords="351,2048,454,2075"/>
+<area shape="poly" id="edge76_Node000103_Node000109" title=" " alt="" coords="189,1550,195,1628,211,1748,227,1816,249,1884,279,1950,317,2010,333,2026,352,2040,347,2041,329,2030,313,2014,274,1953,244,1886,222,1817,206,1749,190,1629,188,1555"/>
+<area shape="rect" id="Node000118" href="$_flood_fill_8c.html#a30c0bd76192a247d425888c5c50b8671" title="Apply a completed move to the planner state." alt="" coords="329,1125,476,1152"/>
+<area shape="poly" id="edge78_Node000103_Node000118" title=" " alt="" coords="186,1524,191,1460,209,1363,225,1309,247,1256,276,1206,313,1162,320,1158,318,1163,317,1166,281,1209,252,1258,230,1311,215,1364,197,1460,191,1525"/>
+<area shape="rect" id="Node000120" href="$_flood_fill_8c.html#a624015c2950644057b5f00e15742b49f" title="Record the walls observed from the current cell." alt="" coords="338,1200,467,1227"/>
+<area shape="poly" id="edge80_Node000103_Node000120" title=" " alt="" coords="188,1524,198,1473,221,1398,237,1357,258,1316,283,1277,313,1243,332,1232,329,1236,317,1247,287,1281,263,1318,242,1359,226,1399,204,1474,193,1525"/>
+<area shape="rect" id="Node000123" href="$_motion_8c.html#a4fcf5068d6c04dbe566eb8e92b76f909" title="Stop immediately." alt="" coords="355,1899,450,1925"/>
+<area shape="poly" id="edge83_Node000103_Node000123" title=" " alt="" coords="190,1549,204,1606,226,1687,263,1778,288,1821,317,1861,334,1876,354,1890,349,1892,331,1880,313,1864,283,1824,258,1780,221,1689,198,1607,190,1555"/>
+<area shape="rect" id="Node000124" href="$_profile_8c.html#a167957495d2cb410e7523c2d420f87f5" title="Test whether the segment has covered its commanded length." alt="" coords="336,1675,469,1701"/>
+<area shape="poly" id="edge87_Node000103_Node000124" title=" " alt="" coords="204,1550,254,1590,317,1636,364,1666,359,1668,314,1641,251,1595,205,1555"/>
+<area shape="rect" id="Node000125" href="$_profile_8c.html#a2d9cc0583f0fd41c1aba38e9924e94fc" title="Advance the profile by one control tick." alt="" coords="356,1749,449,1776"/>
+<area shape="poly" id="edge89_Node000103_Node000125" title=" " alt="" coords="195,1550,243,1624,277,1670,317,1711,359,1741,354,1742,313,1715,273,1673,239,1627,196,1555"/>
+<area shape="rect" id="Node000126" href="$_navigator_8c.html#a6a94c687845f6a3df28c10267e88cfed" title="Wheel arc swept since the turn segment started." alt="" coords="341,1325,464,1352"/>
+<area shape="poly" id="edge91_Node000103_Node000126" title=" " alt="" coords="192,1524,209,1491,235,1447,270,1401,314,1362,329,1355,326,1359,317,1366,274,1405,239,1450,213,1493,197,1526"/>
+<area shape="rect" id="Node000129" href="$_navigator_8c.html#ae42a33decbf829a34da36b7a0c5555be" title="Forward distance advanced since the drive segment started." alt="" coords="325,1600,480,1627"/>
+<area shape="poly" id="edge93_Node000103_Node000129" title=" " alt="" coords="227,1550,350,1593,345,1596,229,1555"/>
+<area shape="rect" id="Node000130" href="$_navigator_8c.html#a19b7a5ba5657589c834aa8fa09d58f37" title="Speed differential that keeps the robot centred and straight." alt="" coords="342,1475,463,1501"/>
+<area shape="poly" id="edge95_Node000103_Node000130" title=" " alt="" coords="245,1523,330,1504,326,1507,249,1527"/>
+<area shape="poly" id="edge68_Node000104_Node000104" title=" " alt="" coords="366,1400,360,1391,365,1382,379,1375,402,1373,428,1376,442,1384,437,1386,426,1381,402,1379,380,1381,368,1385,365,1391,371,1399"/>
+<area shape="poly" id="edge69_Node000104_Node000105" title=" " alt="" coords="453,1425,490,1436,569,1467,564,1470,489,1441,455,1430"/>
+<area shape="poly" id="edge70_Node000105_Node000105" title=" " alt="" coords="577,1474,572,1466,576,1456,590,1450,614,1448,639,1451,654,1459,649,1460,637,1456,614,1453,592,1455,580,1460,577,1465,583,1474"/>
+<area shape="poly" id="edge72_Node000106_Node000106" title=" " alt="" coords="366,1824,360,1815,365,1806,379,1799,402,1797,428,1800,442,1808,437,1809,426,1805,402,1803,380,1805,368,1809,365,1815,371,1823"/>
+<area shape="poly" id="edge74_Node000108_Node000108" title=" " alt="" coords="366,1973,360,1965,365,1955,379,1949,402,1947,428,1949,442,1958,437,1959,426,1954,402,1952,380,1954,368,1959,365,1964,371,1973"/>
+<area shape="poly" id="edge77_Node000109_Node000109" title=" " alt="" coords="366,2047,360,2039,365,2030,379,2023,402,2021,428,2024,442,2032,437,2033,426,2029,402,2027,380,2029,368,2033,365,2039,371,2048"/>
+<area shape="poly" id="edge79_Node000118_Node000118" title=" " alt="" coords="366,1125,360,1117,365,1107,379,1101,402,1099,428,1101,442,1109,437,1111,426,1106,402,1104,380,1106,368,1111,365,1116,371,1124"/>
+<area shape="poly" id="edge81_Node000120_Node000120" title=" " alt="" coords="366,1200,360,1191,365,1182,379,1175,402,1173,428,1176,442,1184,437,1186,426,1181,402,1179,380,1181,368,1185,365,1191,371,1199"/>
+<area shape="poly" id="edge85_Node000123_Node000101" title=" " alt="" coords="449,1919,491,1935,521,1955,549,1978,594,2024,588,2024,545,1982,518,1959,488,1940,450,1924"/>
+<area shape="poly" id="edge84_Node000123_Node000123" title=" " alt="" coords="366,1898,360,1890,365,1880,379,1874,402,1872,428,1875,442,1883,437,1884,426,1880,402,1877,380,1879,368,1884,365,1889,371,1898"/>
+<area shape="poly" id="edge88_Node000124_Node000124" title=" " alt="" coords="366,1674,360,1666,365,1656,379,1650,402,1648,428,1651,442,1659,437,1660,426,1656,402,1653,380,1655,368,1660,365,1665,371,1674"/>
+<area shape="poly" id="edge90_Node000125_Node000125" title=" " alt="" coords="366,1749,360,1741,365,1731,379,1725,402,1723,428,1725,442,1733,437,1735,426,1730,402,1728,380,1730,368,1735,365,1740,371,1749"/>
+<area shape="poly" id="edge92_Node000126_Node000126" title=" " alt="" coords="366,1325,360,1317,365,1307,379,1301,402,1299,428,1301,442,1309,437,1311,426,1306,402,1304,380,1306,368,1311,365,1316,371,1324"/>
+<area shape="poly" id="edge94_Node000129_Node000129" title=" " alt="" coords="366,1600,360,1591,365,1582,379,1575,402,1573,428,1576,442,1584,437,1586,426,1581,402,1579,380,1581,368,1585,365,1591,371,1599"/>
+<area shape="poly" id="edge96_Node000130_Node000105" title=" " alt="" coords="462,1486,539,1487,534,1489,464,1490"/>
+<area shape="poly" id="edge97_Node000130_Node000130" title=" " alt="" coords="366,1475,360,1466,365,1456,379,1450,402,1448,428,1451,442,1458,437,1460,426,1456,402,1453,380,1455,368,1460,365,1465,371,1474"/>
+<area shape="poly" id="edge99_Node000131_Node000075" title=" " alt="" coords="198,1112,246,1063,278,1036,314,1012,361,991,399,981,439,974,489,961,555,943,551,947,490,967,440,979,400,986,362,996,317,1017,281,1040,249,1067,203,1114"/>
+<area shape="poly" id="edge100_Node000131_Node000131" title=" " alt="" coords="160,1113,156,1105,159,1095,170,1089,187,1087,206,1089,217,1097,212,1099,204,1094,187,1092,171,1094,163,1098,161,1104,165,1112"/>
+<area shape="poly" id="edge102_Node000132_Node000132" title=" " alt="" coords="160,2222,156,2214,159,2204,170,2198,187,2196,206,2199,217,2207,211,2208,204,2204,187,2201,171,2203,163,2208,161,2213,165,2222"/>
+<area shape="poly" id="edge104_Node000133_Node000133" title=" " alt="" coords="160,2296,156,2289,159,2279,170,2273,187,2271,206,2273,217,2282,211,2282,204,2278,187,2276,171,2278,163,2282,161,2288,165,2297"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="SegmentLeft_mm" name="SegmentLeft_mm">
+<area shape="rect" id="Node000001" title="Left wheel path since the segment started." alt="" coords="5,29,130,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="36,29,31,21,35,11,47,5,68,3,89,5,102,14,97,14,88,10,67,8,49,10,38,15,36,20,41,29"/>
+<area shape="rect" id="Node000002" href="$_encoder_8c.html#ad92861cad0fe5e13d90aae6d3ffdc503" title="Get the accumulated position for a motor." alt="" coords="178,29,322,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,40,165,42,160,43,130,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="218,28,213,21,217,11,229,5,250,3,272,5,285,14,279,14,270,10,250,8,231,10,221,15,218,20,223,30"/>
+</map>

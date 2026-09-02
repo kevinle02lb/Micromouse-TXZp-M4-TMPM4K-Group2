@@ -1,0 +1,10 @@
+<map id="T32A0_Init" name="T32A0_Init">
+<area shape="rect" id="Node000001" title="Initialize T32A channel 0 for PPG output." alt="" coords="5,29,90,56"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="23,29,19,21,22,11,32,5,48,3,65,5,75,14,69,14,63,10,47,8,33,10,26,14,24,20,28,29"/>
+<area shape="rect" id="Node000002" href="$gpio_8c.html#ab356f85781eced67a60ea833a8d18ba7" title=" " alt="" coords="138,29,236,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,40,125,42,119,43,90,45"/>
+<area shape="poly" id="edge4_Node000002_Node000002" title=" " alt="" coords="162,28,158,21,161,11,171,5,187,3,204,5,214,15,209,14,202,10,187,8,173,10,165,14,163,20,167,30"/>
+<area shape="rect" id="Node000003" href="$gpio_8c.html#ac9e07708f887ee8e2308da60d3df2e26" title=" " alt="" coords="284,29,392,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="236,40,271,43,266,43,236,45"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="312,28,307,21,310,11,321,5,338,3,357,5,368,15,362,13,355,10,338,8,323,10,314,14,313,20,316,30"/>
+</map>

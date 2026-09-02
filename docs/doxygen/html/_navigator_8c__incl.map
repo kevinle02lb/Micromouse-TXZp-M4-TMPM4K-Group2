@@ -1,0 +1,39 @@
+<map id="src/modules/Navigator.c" name="src/modules/Navigator.c">
+<area shape="rect" id="Node000001" title="Cell&#45;level motion sequencer for micromouse." alt="" coords="229,5,393,32"/>
+<area shape="rect" id="Node000002" href="$_navigator_8h.html" title="Robot behavior logic handler. combines FloodFill, optometry, &amp; motion controls." alt="" coords="456,80,544,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="344,30,455,73,450,75,344,35"/>
+<area shape="rect" id="Node000003" href="$_flood_fill_8h.html" title="Flood fill path planner for a micromouse maze." alt="" coords="409,155,490,181"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="333,30,365,51,395,78,420,109,439,142,434,141,416,112,392,82,361,55,333,35"/>
+<area shape="rect" id="Node000006" href="$_ir_sensor_8h.html" title="IR Sensor driver for TMPM4Ky micromouse." alt="" coords="514,155,596,181"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="393,27,491,46,532,60,558,78,566,93,569,109,566,141,561,138,564,109,561,95,554,82,530,65,490,51,393,32"/>
+<area shape="rect" id="Node000007" href="$_motion_8h.html" title="Speed control for the Micromouse." alt="" coords="126,155,197,181"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="296,34,187,146,183,142,300,31"/>
+<area shape="rect" id="Node000009" href="$_profile_8h.html" title="One&#45;dimensional trapezoidal motion profile." alt="" coords="312,80,382,107"/>
+<area shape="poly" id="edge14_Node000001_Node000009" title=" " alt="" coords="318,30,336,66,331,66,316,35"/>
+<area shape="rect" id="Node000010" href="$_odometry_8h.html" title="Position tracking." alt="" coords="99,80,187,107"/>
+<area shape="poly" id="edge16_Node000001_Node000010" title=" " alt="" coords="280,34,188,76,185,71,283,31"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="272,155,334,181"/>
+<area shape="poly" id="edge25_Node000001_Node000011" title=" " alt="" coords="309,30,303,80,303,140,298,138,298,80,307,35"/>
+<area shape="rect" id="Node000012" href="$_encoder_8h.html" title="Encoder control module – speed and position from quadrature encoders." alt="" coords="21,155,102,181"/>
+<area shape="poly" id="edge24_Node000001_Node000012" title=" " alt="" coords="227,24,192,32,155,42,120,59,89,82,79,94,72,109,65,140,60,139,67,107,74,92,85,78,117,54,153,37,191,26,231,21"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="494,106,469,144,465,140,489,109"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="135,304,199,331"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="444,181,417,220,397,241,375,258,335,279,293,295,215,313,214,307,291,289,333,274,372,254,394,237,413,217,440,183"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="287,229,361,256"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="430,181,360,224,358,219,425,183"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="540,181,483,221,409,258,358,277,306,291,215,311,214,306,305,286,357,272,407,254,480,216,535,183"/>
+<area shape="poly" id="edge8_Node000006_Node000005" title=" " alt="" coords="517,181,377,228,376,222,512,183"/>
+<area shape="poly" id="edge10_Node000007_Node000004" title=" " alt="" coords="167,179,180,229,181,261,176,291,171,288,175,260,175,230,164,184"/>
+<area shape="poly" id="edge11_Node000007_Node000005" title=" " alt="" coords="190,179,284,222,279,223,190,185"/>
+<area shape="rect" id="Node000008" href="$_motor_8h.html" title="Motor control API for TB67H450AFNG H&#45;bridge drivers." alt="" coords="100,229,165,256"/>
+<area shape="poly" id="edge12_Node000007_Node000008" title=" " alt="" coords="158,180,145,216,141,213,155,184"/>
+<area shape="poly" id="edge13_Node000008_Node000004" title=" " alt="" coords="140,254,157,290,152,289,137,259"/>
+<area shape="poly" id="edge15_Node000009_Node000005" title=" " alt="" coords="349,105,352,141,348,182,338,217,334,213,343,181,346,141,347,109"/>
+<area shape="poly" id="edge17_Node000010_Node000004" title=" " alt="" coords="97,104,51,122,29,137,12,156,8,168,12,180,32,218,62,249,95,275,129,296,123,297,92,279,58,253,28,221,7,182,3,168,7,153,26,133,48,117,100,100"/>
+<area shape="poly" id="edge18_Node000010_Node000005" title=" " alt="" coords="159,105,299,218,295,220,157,110"/>
+<area shape="poly" id="edge19_Node000010_Node000011" title=" " alt="" coords="171,105,264,147,259,149,171,110"/>
+<area shape="poly" id="edge20_Node000010_Node000012" title=" " alt="" coords="127,109,89,146,85,143,130,105"/>
+<area shape="poly" id="edge21_Node000012_Node000004" title=" " alt="" coords="64,179,73,216,90,255,110,276,133,295,128,296,106,280,86,257,68,218,62,184"/>
+<area shape="poly" id="edge22_Node000012_Node000005" title=" " alt="" coords="102,178,274,225,270,229,102,183"/>
+<area shape="poly" id="edge23_Node000012_Node000008" title=" " alt="" coords="74,179,112,217,107,219,73,185"/>
+</map>

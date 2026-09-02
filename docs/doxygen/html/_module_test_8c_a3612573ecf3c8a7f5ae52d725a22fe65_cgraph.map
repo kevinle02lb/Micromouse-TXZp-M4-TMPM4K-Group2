@@ -1,0 +1,19 @@
+<map id="Test_SendDecimal" name="Test_SendDecimal">
+<area shape="rect" id="Node000001" title="Send a float with one decimal place." alt="" coords="5,29,137,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="42,29,37,21,40,11,52,5,71,3,91,5,103,13,98,15,90,10,71,8,54,10,44,15,42,20,47,28"/>
+<area shape="rect" id="Node000002" href="$uart_8c.html#a3863dd104ea16c4f4c369657edf48993" title="Transmits one byte over UART (blocking)." alt="" coords="685,68,806,95"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="136,32,185,28,319,27,452,36,573,50,672,67,666,68,572,56,452,42,318,33,185,33,138,37"/>
+<area shape="rect" id="Node000003" href="$uart_8c.html#a32d4ca8ffcd8bd5de3fb7087e12a9f65" title="Transmits a signed value as decimal ASCII text (blocking)." alt="" coords="185,67,294,93"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="134,54,172,64,167,66,134,59"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="715,66,710,59,714,50,726,44,745,41,766,44,779,53,773,52,764,49,745,47,727,49,718,53,716,59,720,69"/>
+<area shape="poly" id="edge5_Node000003_Node000002" title=" " alt="" coords="294,77,670,79,668,84,295,83"/>
+<area shape="poly" id="edge6_Node000003_Node000003" title=" " alt="" coords="211,66,206,58,210,48,221,42,239,40,259,43,271,51,265,51,257,48,239,45,223,47,214,52,212,57,216,67"/>
+<area shape="rect" id="Node000004" href="$uart_8c.html#a40d4b3a4875e8d00631ff0bff5e1f176" title="Transmits an unsigned 16&#45;bit value as decimal ASCII (blocking)." alt="" coords="342,117,460,144"/>
+<area shape="poly" id="edge7_Node000003_Node000004" title=" " alt="" coords="285,91,344,112,339,112,284,97"/>
+<area shape="poly" id="edge8_Node000004_Node000002" title=" " alt="" coords="460,120,672,92,667,93,461,125"/>
+<area shape="poly" id="edge12_Node000004_Node000004" title=" " alt="" coords="373,116,368,109,372,99,383,93,401,91,421,93,432,102,427,102,419,98,401,96,385,98,376,103,374,108,378,118"/>
+<area shape="rect" id="Node000005" href="$uart_8c.html#a3d54817ce5409ef5576568ca41cce6ed" title="Transmits a NUL&#45;terminated string (blocking)." alt="" coords="508,168,637,195"/>
+<area shape="poly" id="edge9_Node000004_Node000005" title=" " alt="" coords="449,142,513,163,508,163,449,147"/>
+<area shape="poly" id="edge10_Node000005_Node000002" title=" " alt="" coords="597,165,705,103,710,102,598,170"/>
+<area shape="poly" id="edge11_Node000005_Node000005" title=" " alt="" coords="543,166,538,159,541,150,553,144,573,141,593,144,605,153,600,152,591,149,572,147,555,149,545,153,543,159,548,169"/>
+</map>

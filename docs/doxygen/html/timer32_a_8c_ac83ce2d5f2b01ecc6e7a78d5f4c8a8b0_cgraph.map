@@ -1,0 +1,22 @@
+<map id="T32A1_Init" name="T32A1_Init">
+<area shape="rect" id="Node000001" title="T32A1 — 1 kHz Control Loop Timer (Interval Timer, no output). Timer C (32&#45;bit)." alt="" coords="5,179,90,205"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="18,179,13,170,16,160,28,154,48,152,68,155,80,162,75,164,66,160,47,157,30,159,20,164,18,169,23,178"/>
+<area shape="rect" id="Node000002" href="$timer32_a_8c.html#ac5cb4ffdd0358dff0feca516bf16f932" title="Handles interrupt for T32A1 Timer C." alt="" coords="138,179,299,205"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="89,190,124,190,120,194,91,194"/>
+<area shape="poly" id="edge13_Node000002_Node000002" title=" " alt="" coords="189,178,184,170,187,160,199,154,218,152,239,155,251,163,246,164,237,160,218,157,201,159,191,164,189,169,194,179"/>
+<area shape="rect" id="Node000003" href="$group___c_m_s_i_s___core___reg_acc_functions.html#ga2299877e4ba3e162ca9dbabd6e0abef6" title="Disable IRQ Interrupts." alt="" coords="387,29,484,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="228,176,275,123,308,92,346,66,374,55,370,58,348,70,312,96,279,127,232,180"/>
+<area shape="rect" id="Node000004" href="$group___c_m_s_i_s___core___reg_acc_functions.html#gae84bf4e95944e61937f4ed2453e5ef23" title="Enable IRQ Interrupts." alt="" coords="388,104,483,131"/>
+<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="252,176,346,140,376,133,371,135,348,145,254,181"/>
+<area shape="rect" id="Node000005" href="$group___c_m_s_i_s___core___n_v_i_c_functions.html#ga562a86dbdf14827d0fee8fdafb04d191" title="Clear Pending Interrupt." alt="" coords="347,179,524,205"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="299,189,334,191,329,193,300,195"/>
+<area shape="rect" id="Node000006" href="$group___c_m_s_i_s___core___n_v_i_c_functions.html#ga71227e1376cde11eda03fcb62f1b33ea" title="Enable Interrupt." alt="" coords="366,253,505,280"/>
+<area shape="poly" id="edge9_Node000002_Node000006" title=" " alt="" coords="260,203,383,247,378,249,259,209"/>
+<area shape="rect" id="Node000007" href="$group___c_m_s_i_s___core___n_v_i_c_functions.html#ga505338e23563a9c074910fb14e7d45fd" title="Set Interrupt Priority." alt="" coords="368,328,504,355"/>
+<area shape="poly" id="edge11_Node000002_Node000007" title=" " alt="" coords="236,203,286,244,348,290,397,321,392,320,346,294,283,248,235,208"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="398,29,392,21,397,11,412,5,436,3,461,5,477,14,471,14,460,10,436,8,413,10,401,15,398,20,404,29"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="399,103,392,95,397,85,412,79,436,77,461,80,477,89,471,89,460,85,436,83,413,85,401,89,398,95,404,104"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="399,178,392,170,397,160,412,154,436,152,461,155,477,163,471,163,460,160,436,157,413,159,401,164,398,169,404,179"/>
+<area shape="poly" id="edge10_Node000006_Node000006" title=" " alt="" coords="399,252,392,245,397,235,412,229,436,227,461,229,477,238,471,238,460,234,436,232,413,234,401,239,398,244,404,254"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="399,326,392,319,397,309,412,303,436,301,461,304,477,313,471,312,460,309,436,307,413,309,401,313,398,319,404,329"/>
+</map>

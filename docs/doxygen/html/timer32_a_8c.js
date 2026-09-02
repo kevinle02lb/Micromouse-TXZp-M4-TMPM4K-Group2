@@ -1,0 +1,28 @@
+var timer32_a_8c =
+[
+    [ "INTT32A01AC_IRQHandler", "timer32_a_8c.html#abb642cabc61b4baf7460a954767354b1", null ],
+    [ "T32A0_Init", "timer32_a_8c.html#a085d0026c5e918e5f0ec1db26c771fcc", null ],
+    [ "T32A0_SetOutCRA1", "timer32_a_8c.html#a4c5f21620b9497ffedcf758bbaa5e753", null ],
+    [ "T32A0_SetOutCRB1", "timer32_a_8c.html#a7053ac84f9fc1bfda289d66d15ddbbc7", null ],
+    [ "T32A0_SetTimerA0", "timer32_a_8c.html#ab0fa24c32178d7a923654b2aad7440fd", null ],
+    [ "T32A0_SetTimerA1", "timer32_a_8c.html#a8e9a4104b572f723230ad44afede146d", null ],
+    [ "T32A0_SetTimerB0", "timer32_a_8c.html#a51e7be842ec53bb1efeb5af633207224", null ],
+    [ "T32A0_SetTimerB1", "timer32_a_8c.html#ae291d8e71406c606d8a4b6948c00e403", null ],
+    [ "T32A0_Start", "timer32_a_8c.html#a6543bbf3b12345ca0f40be167c1a38f5", null ],
+    [ "T32A0_Stop", "timer32_a_8c.html#a619ea005d50afdf3f8c429fa4be3863e", null ],
+    [ "T32A1_Init", "timer32_a_8c.html#ac83ce2d5f2b01ecc6e7a78d5f4c8a8b0", null ],
+    [ "T32A1_Interrupt_Enable", "timer32_a_8c.html#ac5cb4ffdd0358dff0feca516bf16f932", null ],
+    [ "T32A1_Start", "timer32_a_8c.html#ad581689297fbedaf9620cb9790f0d535", null ],
+    [ "T32A1_Stop", "timer32_a_8c.html#ab477a3725286c3a96d797ca90b9b5949", null ],
+    [ "T32A3_Init", "timer32_a_8c.html#ad73430cab10981ae08585cca88749142", null ],
+    [ "T32A3_SetOutCRA1", "timer32_a_8c.html#a021cb3dd69f1c88d5401a93882281cbf", null ],
+    [ "T32A3_SetOutCRB1", "timer32_a_8c.html#abd1af52e8a8f7b98a99380de05b35af3", null ],
+    [ "T32A3_SetTimerA0", "timer32_a_8c.html#aaa15b48443c29fde734baa52f5ce4769", null ],
+    [ "T32A3_SetTimerA1", "timer32_a_8c.html#aadc0f67fe2930b9e2e44e142bdb1b9fb", null ],
+    [ "T32A3_SetTimerB0", "timer32_a_8c.html#adb058298cc8693f00280d68b39340fc0", null ],
+    [ "T32A3_SetTimerB1", "timer32_a_8c.html#a828a04457f0b0e6d2049d941e94c698b", null ],
+    [ "T32A3_Start", "timer32_a_8c.html#a2c165e0c7889f458a5695dc53e6b52e4", null ],
+    [ "T32A3_Stop", "timer32_a_8c.html#a5bc18e60f141f42976aef5e69e7da301", null ],
+    [ "T32A_Init", "timer32_a_8c.html#a11fdf43212b74624e39468366d1ba618", null ],
+    [ "T32A01AC_IRQ_Fire", "timer32_a_8c.html#a5fd187148649f2e99660bbc2aaac683f", null ]
+];

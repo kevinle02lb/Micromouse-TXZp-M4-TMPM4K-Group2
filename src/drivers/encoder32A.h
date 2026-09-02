@@ -19,6 +19,9 @@
 #include "TMPM4KyA.h"
 #include <stdint.h>
 #include <stdbool.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* ==========================================================================
  *   Clock Gating
@@ -80,4 +83,7 @@ bool ENC2_GetStatus(void);
 int32_t ENC0_ReadCount(void);
 int32_t ENC2_ReadCount(void);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* ENCODER32A_H */

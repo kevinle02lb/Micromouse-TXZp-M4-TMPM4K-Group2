@@ -1,0 +1,27 @@
+<map id="__NVIC_EnableIRQ" name="__NVIC_EnableIRQ">
+<area shape="rect" id="Node000001" title="Enable Interrupt." alt="" coords="725,67,864,93"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="827,51,817,48,795,45,774,47,763,52,760,57,766,67,761,65,755,58,759,48,773,42,795,40,818,43,832,52"/>
+<area shape="rect" id="Node000002" href="$timer32_a_8c.html#ac5cb4ffdd0358dff0feca516bf16f932" title="Handles interrupt for T32A1 Timer C." alt="" coords="516,67,677,93"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="706,80,678,83,677,77,712,80"/>
+<area shape="poly" id="edge16_Node000002_Node000002" title=" " alt="" coords="624,51,615,48,596,45,579,47,569,52,567,57,572,67,567,65,562,58,565,48,577,42,596,40,617,43,629,52"/>
+<area shape="rect" id="Node000003" href="$timer32_a_8c.html#ac83ce2d5f2b01ecc6e7a78d5f4c8a8b0" title="T32A1 — 1 kHz Control Loop Timer (Interval Timer, no output). Timer C (32&#45;bit)." alt="" coords="383,67,468,93"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="497,80,468,83,468,77,503,80"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="448,51,441,48,425,45,411,47,403,52,402,58,405,67,401,65,396,58,399,48,409,42,426,40,443,43,453,52"/>
+<area shape="rect" id="Node000004" href="$timer32_a_8c.html#a11fdf43212b74624e39468366d1ba618" title=" " alt="" coords="245,29,322,56"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="365,65,323,55,323,50,371,65"/>
+<area shape="rect" id="Node000005" href="$_timebase_8c.html#a8dcefc964c6cd029e4afc3db5de2a00a" title="Starts T32A1 Timer." alt="" coords="232,104,335,131"/>
+<area shape="poly" id="edge7_Node000003_Node000005" title=" " alt="" coords="371,94,336,106,335,101,366,96"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="306,14,299,10,284,8,269,10,262,14,260,20,264,30,259,28,255,21,258,11,268,5,284,3,301,5,311,14"/>
+<area shape="poly" id="edge15_Node000005_Node000005" title=" " alt="" coords="306,88,299,85,284,83,269,85,262,89,260,95,264,105,259,102,255,95,258,86,268,80,284,77,301,80,311,89"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="103,67,184,93"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="214,100,185,93,185,88,219,99"/>
+<area shape="rect" id="Node000008" href="$_module_test_8c.html#ac497d1b7849ac646d67a4f2986b62e15" title=" " alt="" coords="108,141,179,168"/>
+<area shape="poly" id="edge12_Node000005_Node000008" title=" " alt="" coords="220,135,180,148,179,143,214,136"/>
+<area shape="poly" id="edge11_Node000006_Node000006" title=" " alt="" coords="160,51,155,47,143,45,132,47,126,52,125,58,128,67,123,66,119,58,122,49,130,42,143,40,157,43,166,51"/>
+<area shape="rect" id="Node000007" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,67,55,93"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="85,82,56,83,54,77,89,78"/>
+<area shape="poly" id="edge10_Node000007_Node000007" title=" " alt="" coords="47,52,42,47,30,45,19,47,13,52,11,58,15,66,9,67,6,58,8,49,17,42,30,40,44,43,52,50"/>
+<area shape="poly" id="edge14_Node000008_Node000008" title=" " alt="" coords="161,125,155,122,143,120,132,122,126,126,125,132,128,142,123,140,119,132,122,123,130,117,143,115,157,117,166,126"/>
+<area shape="rect" id="Node000009" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,141,55,168"/>
+<area shape="poly" id="edge13_Node000008_Node000009" title=" " alt="" coords="90,156,55,157,55,152,95,154"/>
+</map>

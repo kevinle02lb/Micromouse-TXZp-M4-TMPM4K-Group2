@@ -1,0 +1,18 @@
+<map id="src/modules/Odometry.c" name="src/modules/Odometry.c">
+<area shape="rect" id="Node000001" title="Wheel odometry for differential drive robot." alt="" coords="5,5,169,32"/>
+<area shape="rect" id="Node000002" href="$_odometry_8h.html" title="Position tracking." alt="" coords="43,80,131,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,30,90,65,84,64,87,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="120,304,184,331"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="74,110,55,137,33,174,25,195,21,216,23,236,31,255,45,272,64,286,108,305,103,308,61,290,42,276,26,257,18,237,16,215,20,193,28,172,51,134,76,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="40,229,115,256"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="86,104,82,155,80,214,75,214,76,154,84,110"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="91,155,152,181"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="93,105,112,140,106,141,93,110"/>
+<area shape="rect" id="Node000006" href="$_encoder_8h.html" title="Encoder control module – speed and position from quadrature encoders." alt="" coords="176,155,256,181"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="109,105,183,145,178,148,110,110"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="209,180,181,230,161,291,156,288,177,228,205,183"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="190,184,117,224,114,219,194,180"/>
+<area shape="rect" id="Node000007" href="$_motor_8h.html" title="Motor control API for TB67H450AFNG H&#45;bridge drivers." alt="" coords="190,229,256,256"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="219,180,223,215,218,213,216,184"/>
+<area shape="poly" id="edge9_Node000007_Node000003" title=" " alt="" coords="213,255,177,295,173,291,208,258"/>
+</map>

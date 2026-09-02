@@ -1,0 +1,10 @@
+<map id="GPIO_U_ToggleData" name="GPIO_U_ToggleData">
+<area shape="rect" id="Node000001" title=" " alt="" coords="196,67,340,93"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="299,51,289,48,268,45,248,47,237,52,235,57,240,67,235,65,229,58,233,48,247,42,268,40,291,43,304,52"/>
+<area shape="rect" id="Node000002" href="$_ir_sensor_8c.html#abb86f927a2cf2d5229c87a76fb46b5d0" title=" " alt="" coords="5,29,148,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,64,148,59,148,54,184,63"/>
+<area shape="rect" id="Node000003" href="$_ir_sensor_8c.html#a9b690372ac4f806fe46f48f87a2360ce" title=" " alt="" coords="15,104,138,131"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="184,96,139,108,138,103,179,97"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="108,15,98,10,76,8,57,10,46,15,43,20,49,28,43,29,38,21,42,11,55,5,77,3,99,5,113,13"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="108,89,98,85,76,83,57,85,46,89,43,95,49,104,43,104,38,95,42,86,55,79,77,77,99,80,113,89"/>
+</map>

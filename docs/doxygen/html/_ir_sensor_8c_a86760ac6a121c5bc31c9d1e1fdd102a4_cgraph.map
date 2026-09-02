@@ -1,0 +1,19 @@
+<map id="IR_Acquire" name="IR_Acquire">
+<area shape="rect" id="Node000001" title="Read one ADC sample set from all four receivers into out[]." alt="" coords="5,179,92,205"/>
+<area shape="poly" id="edge9_Node000001_Node000001" title=" " alt="" coords="19,179,15,170,18,160,30,154,49,152,69,155,81,162,76,164,67,160,48,157,31,159,22,164,20,169,25,178"/>
+<area shape="rect" id="Node000002" href="$adc_8c.html#a0a1ab6bb2c7dae03cc9cb78909774a47" title="Trigger a single&#45;conversion pair on ADC Unit A and read both results." alt="" coords="159,29,273,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="54,177,85,123,109,93,138,66,149,61,145,65,141,70,113,96,89,126,59,179"/>
+<area shape="rect" id="Node000003" href="$adc_8c.html#ab67f251f0a347c9873708d94f76a4b2a" title="Trigger a single&#45;conversion pair on ADC Unit C and read both results." alt="" coords="158,104,274,131"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="71,176,139,140,157,135,153,138,141,145,74,180"/>
+<area shape="rect" id="Node000004" href="$dma_8c.html#a325481bdc955de0cfb6e44763d933ed6" title="Get pointer to ADC Unit A DMA result buffer." alt="" coords="140,179,292,205"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="91,190,127,190,122,194,93,194"/>
+<area shape="rect" id="Node000005" href="$dma_8c.html#a77b002b98eecc600caee51ed6432a6a3" title="Get pointer to ADC Unit C DMA result buffer." alt="" coords="140,253,292,280"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="81,203,173,245,168,248,80,209"/>
+<area shape="rect" id="Node000006" href="$systick_8c.html#ad9af3d080726acc5f1003de96ee90bb5" title="Blocking delay in microseconds." alt="" coords="171,328,261,355"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="61,203,96,245,141,290,180,319,175,320,138,294,92,248,60,209"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="187,29,182,21,185,11,197,5,216,3,236,5,248,13,243,15,234,10,216,8,199,10,189,15,187,20,192,29"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="187,103,182,95,185,86,197,80,216,77,236,80,248,88,243,89,234,85,216,83,199,85,189,89,187,95,192,104"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="187,178,182,170,185,160,197,154,216,152,236,155,248,163,243,164,234,160,216,157,199,159,189,164,187,169,192,179"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="187,252,182,245,185,235,197,229,216,227,236,229,248,238,243,238,234,234,216,232,199,234,189,239,187,244,192,253"/>
+<area shape="poly" id="edge11_Node000006_Node000006" title=" " alt="" coords="187,326,182,319,185,310,197,304,216,301,236,304,248,313,243,312,234,309,216,307,199,309,189,313,187,319,192,329"/>
+</map>

@@ -1,0 +1,28 @@
+<map id="Timebase_Init" name="Timebase_Init">
+<area shape="rect" id="Node000001" title="Starts T32A1 Timer." alt="" coords="5,216,109,243"/>
+<area shape="poly" id="edge17_Node000001_Node000001" title=" " alt="" coords="31,216,27,207,30,198,40,192,57,189,75,192,85,200,80,202,73,197,57,195,42,197,34,201,32,207,36,215"/>
+<area shape="rect" id="Node000002" href="$timer32_a_8c.html#ac83ce2d5f2b01ecc6e7a78d5f4c8a8b0" title="T32A1 — 1 kHz Control Loop Timer (Interval Timer, no output). Timer C (32&#45;bit)." alt="" coords="162,179,246,205"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,214,149,205,144,208,110,219"/>
+<area shape="rect" id="Node000009" href="$timer32_a_8c.html#ad581689297fbedaf9620cb9790f0d535" title=" " alt="" coords="157,253,251,280"/>
+<area shape="poly" id="edge15_Node000001_Node000009" title=" " alt="" coords="109,240,144,250,139,252,110,245"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="178,178,174,170,177,160,187,154,204,152,222,155,232,163,227,164,220,160,204,157,189,159,181,164,179,170,183,179"/>
+<area shape="rect" id="Node000003" href="$timer32_a_8c.html#ac5cb4ffdd0358dff0feca516bf16f932" title="Handles interrupt for T32A1 Timer C." alt="" coords="299,179,460,205"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="246,189,286,191,281,193,247,195"/>
+<area shape="poly" id="edge14_Node000003_Node000003" title=" " alt="" coords="349,178,344,170,348,160,360,154,380,152,401,155,413,163,408,163,399,160,380,157,361,159,352,164,349,169,354,179"/>
+<area shape="rect" id="Node000004" href="$group___c_m_s_i_s___core___reg_acc_functions.html#ga2299877e4ba3e162ca9dbabd6e0abef6" title="Disable IRQ Interrupts." alt="" coords="548,29,646,56"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="390,176,436,123,470,92,507,66,536,55,531,58,510,70,473,96,440,127,393,180"/>
+<area shape="rect" id="Node000005" href="$group___c_m_s_i_s___core___reg_acc_functions.html#gae84bf4e95944e61937f4ed2453e5ef23" title="Enable IRQ Interrupts." alt="" coords="550,104,644,131"/>
+<area shape="poly" id="edge6_Node000003_Node000005" title=" " alt="" coords="413,176,507,140,537,133,532,135,509,145,415,181"/>
+<area shape="rect" id="Node000006" href="$group___c_m_s_i_s___core___n_v_i_c_functions.html#ga562a86dbdf14827d0fee8fdafb04d191" title="Clear Pending Interrupt." alt="" coords="508,179,686,205"/>
+<area shape="poly" id="edge8_Node000003_Node000006" title=" " alt="" coords="461,189,495,192,490,192,461,195"/>
+<area shape="rect" id="Node000007" href="$group___c_m_s_i_s___core___n_v_i_c_functions.html#ga71227e1376cde11eda03fcb62f1b33ea" title="Enable Interrupt." alt="" coords="527,253,667,280"/>
+<area shape="poly" id="edge10_Node000003_Node000007" title=" " alt="" coords="421,203,544,247,539,248,421,209"/>
+<area shape="rect" id="Node000008" href="$group___c_m_s_i_s___core___n_v_i_c_functions.html#ga505338e23563a9c074910fb14e7d45fd" title="Set Interrupt Priority." alt="" coords="529,328,665,355"/>
+<area shape="poly" id="edge12_Node000003_Node000008" title=" " alt="" coords="398,203,447,244,510,290,558,321,553,320,507,294,444,248,396,208"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="560,28,554,21,558,11,573,5,597,3,623,5,638,14,633,14,621,10,597,8,574,10,562,15,559,20,565,29"/>
+<area shape="poly" id="edge7_Node000005_Node000005" title=" " alt="" coords="560,103,554,95,558,85,573,79,597,77,623,80,638,89,633,89,621,85,597,83,574,85,562,89,559,95,565,104"/>
+<area shape="poly" id="edge9_Node000006_Node000006" title=" " alt="" coords="560,177,554,170,558,160,573,154,597,152,623,155,638,164,633,163,621,160,597,157,574,159,562,164,559,169,565,179"/>
+<area shape="poly" id="edge11_Node000007_Node000007" title=" " alt="" coords="560,252,554,245,558,235,573,229,597,227,623,229,638,238,633,238,621,234,597,232,574,234,562,239,559,244,565,254"/>
+<area shape="poly" id="edge13_Node000008_Node000008" title=" " alt="" coords="560,326,554,319,558,309,573,303,597,301,623,304,638,313,633,312,621,309,597,307,574,309,562,313,559,319,565,329"/>
+<area shape="poly" id="edge16_Node000009_Node000009" title=" " alt="" coords="178,252,174,245,177,235,187,229,204,227,222,229,232,238,227,238,220,234,204,232,189,234,181,238,179,244,183,254"/>
+</map>

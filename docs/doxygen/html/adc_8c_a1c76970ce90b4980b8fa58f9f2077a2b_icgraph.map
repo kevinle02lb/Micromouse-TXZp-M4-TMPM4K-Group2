@@ -1,0 +1,7 @@
+<map id="AINC_StartSGL" name="AINC_StartSGL">
+<area shape="rect" id="Node000001" title="Trigger a single conversion on ADC Unit C." alt="" coords="146,29,261,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="228,14,220,10,203,8,188,10,180,14,178,20,182,30,177,28,172,21,175,11,186,5,203,3,222,5,233,15"/>
+<area shape="rect" id="Node000002" href="$adc_8c.html#a6932d62f7de26f1c146349a5214ce0f9" title="Blocking read from ADC Unit C (no DMA)." alt="" coords="5,29,98,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,43,98,45,98,40,133,42"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="76,14,68,10,51,8,36,10,28,14,26,20,30,29,25,29,20,21,24,11,34,5,52,3,70,5,81,14"/>
+</map>

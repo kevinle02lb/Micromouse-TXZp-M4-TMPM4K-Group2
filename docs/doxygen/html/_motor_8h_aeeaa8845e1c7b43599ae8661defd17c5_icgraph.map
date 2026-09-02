@@ -1,0 +1,25 @@
+<map id="Motor_Set" name="Motor_Set">
+<area shape="rect" id="Node000001" title=" " alt="" coords="616,67,697,93"/>
+<area shape="poly" id="edge15_Node000001_Node000001" title=" " alt="" coords="682,51,674,48,656,45,640,47,631,52,629,57,634,67,629,65,624,58,627,48,638,42,656,40,676,43,687,52"/>
+<area shape="rect" id="Node000002" href="$_motion_8c.html#aa20083cfa17fb2ab40a445c13b855966" title="Convert PID output to motor direction and duty." alt="" coords="428,29,568,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="598,67,557,59,557,54,603,67"/>
+<area shape="rect" id="Node000007" href="$_motion_8c.html#a4fcf5068d6c04dbe566eb8e92b76f909" title="Stop immediately." alt="" coords="451,104,545,131"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="603,93,546,109,545,104,598,93"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="523,14,515,10,498,8,482,10,473,15,471,20,475,30,470,28,466,21,469,11,480,5,498,3,517,5,529,15"/>
+<area shape="rect" id="Node000003" href="$_motion_8c.html#a47cf1896361b4c623fb00a5ab7673c56" title="Run one PID control tick." alt="" coords="262,29,372,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="410,43,373,45,372,40,415,42"/>
+<area shape="poly" id="edge6_Node000003_Node000003" title=" " alt="" coords="343,14,335,10,317,8,300,10,291,15,289,20,294,30,289,28,284,21,287,11,299,5,317,3,337,5,349,14"/>
+<area shape="rect" id="Node000004" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="130,104,179,131"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="270,61,255,70,181,107,179,102,253,66,264,63"/>
+<area shape="rect" id="Node000005" href="$_module_test_8c.html#a6d3b3560cd07a79f42c26e611240121d" title="Run one profiled pivot, then hold and keep streaming." alt="" coords="103,29,206,56"/>
+<area shape="poly" id="edge7_Node000003_Node000005" title=" " alt="" coords="244,43,207,45,206,40,250,42"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="174,88,168,85,154,83,142,85,135,89,134,95,137,105,132,102,128,95,131,86,140,80,154,77,170,80,179,89"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="174,14,168,10,154,8,142,10,135,14,134,20,137,29,132,28,128,20,131,11,140,5,154,3,170,5,179,14"/>
+<area shape="rect" id="Node000006" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,29,55,56"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="85,44,56,45,54,40,89,41"/>
+<area shape="poly" id="edge11_Node000007_Node000007" title=" " alt="" coords="523,88,515,85,498,83,482,85,473,89,471,95,475,105,470,102,466,95,469,86,480,80,498,77,517,80,529,89"/>
+<area shape="rect" id="Node000008" href="$_navigator_8c.html#a9b3a0072f38ba40f05861eb358e087cb" title="Advance the state machine by one tick." alt="" coords="254,104,380,131"/>
+<area shape="poly" id="edge12_Node000007_Node000008" title=" " alt="" coords="433,117,381,120,381,115,438,117"/>
+<area shape="poly" id="edge13_Node000008_Node000004" title=" " alt="" coords="236,117,179,120,179,115,241,117"/>
+<area shape="poly" id="edge14_Node000008_Node000008" title=" " alt="" coords="343,88,335,85,317,83,300,85,291,89,289,95,294,105,289,102,284,95,287,86,299,80,317,77,337,80,349,89"/>
+</map>

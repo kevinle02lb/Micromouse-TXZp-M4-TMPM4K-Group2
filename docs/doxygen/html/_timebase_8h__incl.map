@@ -1,0 +1,5 @@
+<map id="src/modules/Timebase.h" name="src/modules/Timebase.h">
+<area shape="rect" id="Node000001" title="ctrlTick in main.c to indicate when logic should update." alt="" coords="5,5,170,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="50,80,125,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,31,90,65,85,63,86,35"/>
+</map>

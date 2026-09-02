@@ -1,0 +1,66 @@
+<map id="Encoder_GetPosition" name="Encoder_GetPosition">
+<area shape="rect" id="Node000001" title="Get the accumulated position for a motor." alt="" coords="676,353,820,380"/>
+<area shape="poly" id="edge12_Node000001_Node000001" title=" " alt="" coords="779,338,769,334,748,332,728,334,717,339,714,344,720,354,714,352,709,345,713,335,726,329,748,327,771,329,785,338"/>
+<area shape="rect" id="Node000002" href="$_navigator_8c.html#a05d4d0f29d6aec8f263631000956a2ed" title="Latch the encoder positions that segment progress is measured from." alt="" coords="480,328,628,355"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="658,356,628,354,627,348,663,355"/>
+<area shape="rect" id="Node000007" href="$_odometry_8c.html#a7937737adfdd0c82fa1f649c6c930205" title=" " alt="" coords="502,553,606,580"/>
+<area shape="poly" id="edge13_Node000001_Node000007" title=" " alt="" coords="726,390,570,555,567,551,721,392"/>
+<area shape="rect" id="Node000010" href="$_module_test_8c.html#a6d3b3560cd07a79f42c26e611240121d" title="Run one profiled pivot, then hold and keep streaming." alt="" coords="115,479,219,505"/>
+<area shape="poly" id="edge46_Node000001_Node000010" title=" " alt="" coords="691,386,628,408,514,434,401,457,220,487,218,482,400,452,513,429,627,403,696,385"/>
+<area shape="rect" id="Node000013" href="$_odometry_8c.html#a1592e8db0e26db1d11b64f6e1e5ac642" title="Update robot pose from encoder data." alt="" coords="292,403,419,429"/>
+<area shape="poly" id="edge26_Node000001_Node000013" title=" " alt="" coords="658,379,420,411,419,405,663,376"/>
+<area shape="rect" id="Node000014" href="$_navigator_8c.html#a51f364e4b8eb86343c9f850e09a452da" title="Left wheel path since the segment started." alt="" coords="492,179,616,205"/>
+<area shape="poly" id="edge30_Node000001_Node000014" title=" " alt="" coords="718,343,570,208,571,203,723,343"/>
+<area shape="rect" id="Node000018" href="$_navigator_8c.html#a04b6d7b2dd0b06a35f89604186d39240" title="Right wheel path since the segment started." alt="" coords="487,104,621,131"/>
+<area shape="poly" id="edge41_Node000001_Node000018" title=" " alt="" coords="736,337,722,296,699,244,667,191,648,166,626,145,610,134,609,129,629,141,652,163,672,188,704,242,727,294,741,339"/>
+<area shape="poly" id="edge11_Node000002_Node000002" title=" " alt="" coords="586,313,576,309,554,307,534,309,523,313,520,319,526,328,521,327,515,319,519,310,532,303,554,301,577,304,591,313"/>
+<area shape="rect" id="Node000003" href="$_navigator_8c.html#ae7b1e32587c572aca6b01e5a11bbcfac" title="Arm a straight&#45;line segment." alt="" coords="313,253,398,280"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="504,322,431,294,399,283,398,277,433,290,509,321"/>
+<area shape="rect" id="Node000006" href="$_navigator_8c.html#a9aad9a873e7f925b24999c4b3a8a2200" title="Arm an in&#45;place pivot segment." alt="" coords="315,328,395,355"/>
+<area shape="poly" id="edge8_Node000002_Node000006" title=" " alt="" coords="462,342,396,344,395,339,467,340"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="386,239,376,234,355,232,336,234,325,239,323,244,328,253,323,253,317,245,321,235,334,229,355,227,378,229,391,238"/>
+<area shape="rect" id="Node000004" href="$_navigator_8c.html#a9b3a0072f38ba40f05861eb358e087cb" title="Advance the state machine by one tick." alt="" coords="104,216,230,243"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="295,257,231,244,230,239,300,254"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="188,202,181,197,167,195,153,197,146,201,144,207,148,215,143,216,139,207,142,198,151,192,167,189,184,192,193,200"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="6,403,56,429"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="147,257,45,404,40,401,147,252"/>
+<area shape="poly" id="edge6_Node000005_Node000005" title=" " alt="" coords="53,388,46,384,31,381,17,383,10,388,8,394,12,402,7,403,3,394,6,385,15,378,31,376,48,379,57,386"/>
+<area shape="poly" id="edge10_Node000006_Node000004" title=" " alt="" coords="315,321,191,246,191,240,320,318"/>
+<area shape="poly" id="edge9_Node000006_Node000006" title=" " alt="" coords="386,313,376,309,355,307,336,309,325,313,323,319,328,328,323,327,317,319,321,310,334,303,355,301,378,304,391,312"/>
+<area shape="poly" id="edge17_Node000007_Node000007" title=" " alt="" coords="586,538,576,534,554,532,534,534,523,539,520,544,526,554,521,552,515,545,519,535,532,529,554,527,577,529,591,538"/>
+<area shape="rect" id="Node000008" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="126,553,208,580"/>
+<area shape="poly" id="edge14_Node000007_Node000008" title=" " alt="" coords="486,569,208,569,208,564,488,564"/>
+<area shape="rect" id="Node000009" href="$_odometry_8c.html#abc171e9543f2e85354958c4574c25aa2" title=" " alt="" coords="295,528,415,555"/>
+<area shape="poly" id="edge18_Node000007_Node000009" title=" " alt="" coords="485,559,416,552,416,546,490,558"/>
+<area shape="rect" id="Node000012" href="$_module_test_8c.html#ac497d1b7849ac646d67a4f2986b62e15" title=" " alt="" coords="131,628,203,655"/>
+<area shape="poly" id="edge23_Node000007_Node000012" title=" " alt="" coords="488,582,203,637,203,632,487,577"/>
+<area shape="poly" id="edge15_Node000008_Node000005" title=" " alt="" coords="131,544,102,519,64,472,40,432,40,427,69,469,106,516,136,543"/>
+<area shape="poly" id="edge16_Node000008_Node000008" title=" " alt="" coords="188,538,181,534,167,532,153,534,146,538,144,544,148,553,143,552,139,545,142,535,151,529,167,527,184,529,194,538"/>
+<area shape="poly" id="edge19_Node000009_Node000009" title=" " alt="" coords="386,513,376,509,355,507,336,509,325,513,323,519,328,528,323,527,317,519,321,510,334,503,355,501,378,504,391,513"/>
+<area shape="poly" id="edge20_Node000009_Node000010" title=" " alt="" coords="285,524,219,508,219,503,290,523"/>
+<area shape="poly" id="edge22_Node000010_Node000010" title=" " alt="" coords="188,464,181,460,167,457,153,459,146,464,144,470,148,478,143,478,139,470,142,461,151,454,167,452,184,455,193,463"/>
+<area shape="rect" id="Node000011" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="6,553,56,580"/>
+<area shape="poly" id="edge21_Node000010_Node000011" title=" " alt="" coords="113,514,105,520,52,555,48,551,102,515,117,510"/>
+<area shape="poly" id="edge24_Node000012_Node000011" title=" " alt="" coords="126,622,55,583,57,577,130,619"/>
+<area shape="poly" id="edge25_Node000012_Node000012" title=" " alt="" coords="188,612,181,609,167,607,153,609,146,613,144,619,148,629,143,626,139,619,142,610,151,604,167,601,184,604,193,613"/>
+<area shape="poly" id="edge27_Node000013_Node000005" title=" " alt="" coords="275,418,57,419,56,413,277,414"/>
+<area shape="poly" id="edge29_Node000013_Node000010" title=" " alt="" coords="304,437,203,481,201,476,308,434"/>
+<area shape="poly" id="edge28_Node000013_Node000013" title=" " alt="" coords="386,388,376,384,355,381,336,383,325,388,323,393,328,403,323,402,317,394,321,384,334,378,355,376,378,379,391,387"/>
+<area shape="poly" id="edge37_Node000014_Node000014" title=" " alt="" coords="586,164,576,160,554,157,534,159,523,164,520,169,526,179,521,178,515,170,519,160,532,154,554,152,577,155,591,163"/>
+<area shape="rect" id="Node000015" href="$_navigator_8c.html#a6a94c687845f6a3df28c10267e88cfed" title="Wheel arc swept since the turn segment started." alt="" coords="294,179,416,205"/>
+<area shape="poly" id="edge31_Node000014_Node000015" title=" " alt="" coords="474,193,418,194,416,190,479,191"/>
+<area shape="rect" id="Node000016" href="$_navigator_8c.html#ae42a33decbf829a34da36b7a0c5555be" title="Forward distance advanced since the drive segment started." alt="" coords="278,29,432,56"/>
+<area shape="poly" id="edge34_Node000014_Node000016" title=" " alt="" coords="512,170,478,145,463,124,455,105,447,87,431,70,413,59,412,54,434,66,451,84,460,103,468,121,482,141,517,170"/>
+<area shape="rect" id="Node000017" href="$_navigator_8c.html#a19b7a5ba5657589c834aa8fa09d58f37" title="Speed differential that keeps the robot centred and straight." alt="" coords="295,104,415,131"/>
+<area shape="poly" id="edge38_Node000014_Node000017" title=" " alt="" coords="504,173,431,145,401,134,399,129,433,140,509,171"/>
+<area shape="poly" id="edge32_Node000015_Node000004" title=" " alt="" coords="277,209,232,219,229,215,281,205"/>
+<area shape="poly" id="edge33_Node000015_Node000015" title=" " alt="" coords="386,164,376,160,355,157,336,159,325,164,323,169,328,178,323,178,317,170,321,160,334,154,355,152,378,155,391,163"/>
+<area shape="poly" id="edge35_Node000016_Node000004" title=" " alt="" coords="283,66,280,70,243,106,213,147,176,217,171,214,208,144,239,102,276,66,286,62"/>
+<area shape="poly" id="edge36_Node000016_Node000016" title=" " alt="" coords="386,15,376,10,355,8,336,10,325,15,323,20,328,29,323,29,317,21,321,11,334,5,355,3,378,5,391,13"/>
+<area shape="poly" id="edge39_Node000017_Node000004" title=" " alt="" coords="288,139,279,145,225,182,184,217,180,214,222,178,277,140,292,135"/>
+<area shape="poly" id="edge40_Node000017_Node000017" title=" " alt="" coords="386,89,376,85,355,83,336,85,325,89,323,95,328,103,323,104,317,95,321,86,334,79,355,77,378,80,391,88"/>
+<area shape="poly" id="edge42_Node000018_Node000015" title=" " alt="" coords="495,138,481,145,392,180,389,176,479,140,500,135"/>
+<area shape="poly" id="edge43_Node000018_Node000016" title=" " alt="" coords="504,98,431,70,401,59,399,54,433,66,509,97"/>
+<area shape="poly" id="edge45_Node000018_Node000017" title=" " alt="" coords="470,119,417,120,415,115,474,116"/>
+<area shape="poly" id="edge44_Node000018_Node000018" title=" " alt="" coords="586,89,576,85,554,83,534,85,523,89,520,95,526,104,521,103,515,95,519,86,532,79,554,77,577,80,591,88"/>
+</map>

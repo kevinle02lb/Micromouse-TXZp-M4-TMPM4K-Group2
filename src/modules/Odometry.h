@@ -42,17 +42,21 @@
 #include <stdbool.h>
 #include <math.h>
 #include "Encoder.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* ==========================================================================
  *   DEFINES
  * ========================================================================== */
 
+#undef M_PI
 #define M_PI                                3.1415927f      /*!< Single precision for Float */
 #define M_2PI                               6.2831855f      /*!< 2 * PI */
 #define M_PI_DIV_2                          (M_PI / 2.0f)   /*!< 90 Degree - [pi/2] */
 
-#define WHEEL_DIAMETER_MM                   80              /*!< 80mm from Datasheet */
-#define WHEELBASE_MM                        96.0f           /*!< Distance between wheels (mm) */
+#define WHEEL_DIAMETER_MM                   82              /*!< 80mm from Datasheet */
+#define WHEELBASE_MM                        100.0f           /*!< Distance between wheels (mm) */
 #define WHEEL_CIRCUMFERENCE_MM              (WHEEL_DIAMETER_MM * M_PI)
 
 /**
@@ -101,4 +105,7 @@ float Odometry_GetY_mm(void);
 float Odometry_GetHeading_rad(void);
 float Odometry_GetHeading_deg(void);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* ODOMETRY_H */

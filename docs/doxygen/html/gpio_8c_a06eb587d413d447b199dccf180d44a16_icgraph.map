@@ -1,0 +1,25 @@
+<map id="PU_FRn_Clear" name="PU_FRn_Clear">
+<area shape="rect" id="Node000001" title=" " alt="" coords="507,104,617,131"/>
+<area shape="poly" id="edge15_Node000001_Node000001" title=" " alt="" coords="586,88,579,85,562,83,546,85,538,89,536,95,540,105,535,102,531,95,534,86,545,80,562,77,580,80,591,89"/>
+<area shape="rect" id="Node000002" href="$gpio_8c.html#a99e69755f38e2c47da31839037530c6e" title=" " alt="" coords="359,104,459,131"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="488,118,459,120,459,115,494,117"/>
+<area shape="poly" id="edge13_Node000002_Node000002" title=" " alt="" coords="431,88,424,85,409,83,395,85,388,89,386,95,390,105,385,102,381,95,384,86,393,80,409,77,426,80,436,89"/>
+<area shape="rect" id="Node000003" href="$gpio_8c.html#a90363099dc984eccffd2a7ad34def32d" title=" " alt="" coords="232,29,311,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="368,97,297,59,299,54,373,96"/>
+<area shape="rect" id="Node000004" href="$_ir_sensor_8c.html#ab5301b3aadc0a716d895ea4b52a5e7b7" title="Initializes ADC and GPIO for IR emitters." alt="" coords="242,104,302,131"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="341,118,302,120,302,115,346,117"/>
+<area shape="rect" id="Node000007" href="$_module_test_8c.html#ac497d1b7849ac646d67a4f2986b62e15" title=" " alt="" coords="108,155,179,181"/>
+<area shape="poly" id="edge14_Node000002_Node000007" title=" " alt="" coords="347,135,312,145,180,166,179,161,311,140,342,135"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="292,14,285,10,272,8,259,10,252,14,250,20,254,30,249,28,245,21,248,11,257,5,272,3,288,5,297,14"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="292,88,285,85,272,83,259,85,252,89,250,95,254,105,249,103,245,95,248,86,257,80,272,77,288,80,297,89"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="103,80,184,107"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="224,109,185,104,185,98,229,108"/>
+<area shape="poly" id="edge10_Node000004_Node000007" title=" " alt="" coords="230,134,180,157,178,152,225,135"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="160,64,155,61,143,59,132,61,126,65,125,71,128,80,123,79,119,71,122,62,130,56,143,53,157,56,166,64"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,80,55,107"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="85,95,56,96,54,91,89,92"/>
+<area shape="poly" id="edge8_Node000006_Node000006" title=" " alt="" coords="47,65,42,61,30,59,19,61,13,65,11,71,15,79,9,80,6,71,8,62,17,56,30,53,44,56,52,63"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="161,139,155,135,143,133,132,135,126,140,125,146,128,155,123,153,119,146,122,137,130,130,143,128,157,131,166,139"/>
+<area shape="rect" id="Node000008" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,155,55,181"/>
+<area shape="poly" id="edge11_Node000007_Node000008" title=" " alt="" coords="90,169,55,171,55,165,95,167"/>
+</map>

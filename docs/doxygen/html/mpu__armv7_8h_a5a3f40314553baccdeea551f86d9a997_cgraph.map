@@ -1,0 +1,13 @@
+<map id="ARM_MPU_Enable" name="ARM_MPU_Enable">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,104,141,131"/>
+<area shape="poly" id="edge7_Node000001_Node000001" title=" " alt="" coords="47,104,43,95,46,86,56,80,73,77,91,80,102,88,97,89,89,85,73,83,58,85,50,89,48,95,52,103"/>
+<area shape="rect" id="Node000002" href="$group___c_m_s_i_s___core___instruction_interface.html#gab1ea24daaaaee9c828f90cbca330cb5e" title="Data Memory Barrier." alt="" coords="189,29,254,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,101,181,61,178,65,103,106"/>
+<area shape="rect" id="Node000003" href="$group___c_m_s_i_s___core___instruction_interface.html#ga7fe277f5385d23b9c44b2cbda1577ce9" title="Data Synchronization Barrier." alt="" coords="190,104,253,131"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="141,115,177,116,172,118,142,120"/>
+<area shape="rect" id="Node000004" href="$group___c_m_s_i_s___core___instruction_interface.html#gae26c2b3961e702aeabc24d4984ebd369" title="Instruction Synchronization Barrier." alt="" coords="193,179,250,205"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="102,129,182,170,177,173,101,134"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="195,28,191,21,194,11,204,5,221,3,239,5,250,14,245,14,237,10,221,8,206,10,198,14,196,20,200,29"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="195,103,191,95,194,86,204,80,221,77,239,80,250,89,245,89,237,85,221,83,206,85,198,89,196,95,200,104"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="195,177,191,170,194,160,204,154,221,152,239,155,250,164,245,163,237,160,221,157,206,159,198,164,196,169,200,179"/>
+</map>

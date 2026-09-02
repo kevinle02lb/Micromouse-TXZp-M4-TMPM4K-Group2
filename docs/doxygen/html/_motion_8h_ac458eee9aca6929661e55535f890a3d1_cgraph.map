@@ -1,0 +1,7 @@
+<map id="Motion_SetMoveForwardSpeed" name="Motion_SetMoveForwardSpeed">
+<area shape="rect" id="Node000001" title="Sets both wheels forward at the same speed." alt="" coords="5,29,209,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="71,28,65,21,69,11,84,5,107,3,132,5,147,14,142,14,131,10,107,8,85,10,73,15,70,20,76,29"/>
+<area shape="rect" id="Node000002" href="$_motion_8c.html#a66f1e29ca97b74540e70d1ff3ab4eb12" title="Set target wheel speeds." alt="" coords="257,29,381,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="209,40,244,43,238,43,209,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="283,28,277,21,281,11,295,5,319,3,344,5,359,14,354,14,343,10,319,8,297,10,285,15,282,20,288,30"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="NVIC Functions" name="NVIC Functions">
+<area shape="rect" id="Node000004" href="$group___c_m_s_i_s___core___fpu_functions.html" title="Function that provides FPU type." alt="" coords="392,43,501,69"/>
+<area shape="rect" id="Node000003" href="$group___c_m_s_i_s___core___function_interface.html" title=" " alt="" coords="5,5,181,48"/>
+<area shape="rect" id="Node000001" title="Functions that manage interrupts and exceptions via the NVIC." alt="" coords="229,43,344,69"/>
+<area shape="rect" id="Node000002" href="$group___c_m_s_i_s__core__base.html" title="Definitions for base addresses, unions, and structures." alt="" coords="35,72,151,99"/>
+</map>

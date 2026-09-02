@@ -1,0 +1,16 @@
+<map id="Queue_Init" name="Queue_Init">
+<area shape="rect" id="Node000001" title="Reset the queue to empty." alt="" coords="597,29,681,56"/>
+<area shape="poly" id="edge9_Node000001_Node000001" title=" " alt="" coords="663,13,655,10,639,8,624,10,615,14,613,20,617,30,613,28,608,21,611,11,622,5,639,3,657,5,668,15"/>
+<area shape="rect" id="Node000002" href="$_flood_fill_8c.html#a10780bc47c8b58b0bd0d37e334773283" title="Recalculate the distance field from the 2x2 goal area." alt="" coords="429,29,549,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="578,43,549,45,549,40,583,43"/>
+<area shape="poly" id="edge8_Node000002_Node000002" title=" " alt="" coords="513,13,505,10,489,8,474,10,466,14,464,20,468,30,463,28,458,21,461,11,472,5,489,3,507,5,518,15"/>
+<area shape="rect" id="Node000003" href="$_flood_fill_8c.html#ad932410c97ab1e09590f00c4a9582565" title="Decide the next move." alt="" coords="278,29,381,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="411,43,382,45,382,40,416,43"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="355,14,347,10,330,8,313,10,305,15,303,20,307,30,302,28,297,21,301,11,312,5,330,3,349,5,360,15"/>
+<area shape="rect" id="Node000004" href="$_navigator_8c.html#a9b3a0072f38ba40f05861eb358e087cb" title="Advance the state machine by one tick." alt="" coords="104,29,230,56"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="260,43,230,45,230,40,265,43"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="188,14,181,10,167,8,153,10,146,14,144,20,148,30,143,28,139,21,142,11,151,5,167,3,184,5,193,15"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="6,29,56,56"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="85,43,56,45,56,40,90,42"/>
+<area shape="poly" id="edge6_Node000005_Node000005" title=" " alt="" coords="52,15,46,10,31,8,17,10,10,14,8,20,12,28,7,30,3,21,6,11,15,5,31,3,48,5,58,14"/>
+</map>

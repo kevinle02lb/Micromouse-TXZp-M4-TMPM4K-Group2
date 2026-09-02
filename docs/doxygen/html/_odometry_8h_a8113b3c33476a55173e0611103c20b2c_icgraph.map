@@ -1,0 +1,9 @@
+<map id="Odometry_GetHeading_deg" name="Odometry_GetHeading_deg">
+<area shape="rect" id="Node000001" title="Get heading in degrees." alt="" coords="254,29,436,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="376,14,366,10,345,8,325,10,315,15,312,20,317,30,312,28,307,21,311,11,324,5,345,3,368,5,382,15"/>
+<area shape="rect" id="Node000002" href="$_module_test_8c.html#a6d3b3560cd07a79f42c26e611240121d" title="Run one profiled pivot, then hold and keep streaming." alt="" coords="103,29,206,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="236,43,206,45,206,40,241,43"/>
+<area shape="poly" id="edge4_Node000002_Node000002" title=" " alt="" coords="174,14,168,10,154,8,142,10,135,14,134,20,137,30,132,28,128,20,131,11,140,5,154,3,170,5,179,15"/>
+<area shape="rect" id="Node000003" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,29,55,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="84,44,55,45,55,40,89,42"/>
+</map>

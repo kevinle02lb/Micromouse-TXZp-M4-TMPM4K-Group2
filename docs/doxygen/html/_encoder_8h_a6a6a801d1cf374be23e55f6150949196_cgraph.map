@@ -1,0 +1,10 @@
+<map id="Encoder_GetRawCount" name="Encoder_GetRawCount">
+<area shape="rect" id="Node000001" title="Get the raw hardware count for a motor." alt="" coords="5,67,165,93"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="52,66,46,58,50,48,64,42,85,40,108,43,122,51,116,52,106,48,85,45,65,47,54,52,52,57,57,66"/>
+<area shape="rect" id="Node000002" href="$encoder32_a_8c.html#a90e678f419a081da11ed948ca4a854f0" title=" " alt="" coords="213,29,343,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,64,200,57,195,59,158,69"/>
+<area shape="rect" id="Node000003" href="$encoder32_a_8c.html#a95f249ffdc1bdbe5e70677cb9a8a2f3e" title=" " alt="" coords="213,104,343,131"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="157,91,200,102,195,102,157,97"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="245,28,239,21,243,11,256,5,278,3,301,5,315,14,309,14,299,10,278,8,258,10,247,15,244,20,250,30"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="245,102,239,95,243,86,256,79,278,77,301,80,315,89,309,88,299,85,278,83,258,85,247,89,244,95,250,105"/>
+</map>

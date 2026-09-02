@@ -1,0 +1,27 @@
+<map id="PORT_L_Init" name="PORT_L_Init">
+<area shape="rect" id="Node000001" title=" " alt="" coords="591,104,687,131"/>
+<area shape="poly" id="edge16_Node000001_Node000001" title=" " alt="" coords="661,88,654,85,639,83,625,85,618,89,616,95,620,105,615,102,611,95,614,86,624,80,639,77,656,80,666,89"/>
+<area shape="rect" id="Node000002" href="$adc_8c.html#a3aa4d83411aaceb9f1fa27d686f72fb3" title="Initialize ADC Unit A (AINA15, AINA16)." alt="" coords="464,67,542,93"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="573,100,543,93,543,88,579,100"/>
+<area shape="rect" id="Node000009" href="$gpio_8c.html#a90363099dc984eccffd2a7ad34def32d" title=" " alt="" coords="464,141,543,168"/>
+<area shape="poly" id="edge14_Node000001_Node000009" title=" " alt="" coords="578,134,544,146,543,141,573,135"/>
+<area shape="poly" id="edge13_Node000002_Node000002" title=" " alt="" coords="523,51,517,48,503,45,491,47,484,52,483,58,486,67,481,65,477,58,480,49,489,42,503,40,519,43,528,52"/>
+<area shape="rect" id="Node000003" href="$adc_8c.html#a5137b551f1b83b0f4d8df7d071a3d3a6" title="Initialize both ADC units (A and C) for single&#45;conversion DMA." alt="" coords="340,67,416,93"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="446,80,416,83,416,77,451,80"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="396,51,390,48,378,45,367,47,361,52,359,58,362,67,357,65,354,58,356,49,364,42,378,40,393,43,401,52"/>
+<area shape="rect" id="Node000004" href="$_ir_sensor_8c.html#ab5301b3aadc0a716d895ea4b52a5e7b7" title="Initializes ADC and GPIO for IR emitters." alt="" coords="232,67,292,93"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="322,80,293,83,292,77,328,80"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="280,51,274,48,262,45,251,47,245,52,243,58,246,67,241,65,238,58,240,49,249,42,262,40,277,43,285,52"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="103,29,184,56"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="214,66,185,58,184,53,220,65"/>
+<area shape="rect" id="Node000007" href="$_module_test_8c.html#ac497d1b7849ac646d67a4f2986b62e15" title=" " alt="" coords="108,104,179,131"/>
+<area shape="poly" id="edge10_Node000004_Node000007" title=" " alt="" coords="214,95,180,109,179,104,219,93"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="160,14,155,10,143,8,132,10,126,14,125,20,128,29,123,29,119,20,122,11,130,5,143,3,157,5,166,13"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,29,55,56"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="85,44,56,45,54,40,89,41"/>
+<area shape="poly" id="edge8_Node000006_Node000006" title=" " alt="" coords="47,15,42,10,30,8,19,10,13,14,11,20,15,28,9,29,6,20,8,11,17,5,30,3,44,5,52,13"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="160,88,155,85,143,83,132,85,126,89,125,95,128,104,123,103,119,95,122,86,130,80,143,77,157,80,166,88"/>
+<area shape="rect" id="Node000008" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,104,55,131"/>
+<area shape="poly" id="edge11_Node000007_Node000008" title=" " alt="" coords="90,119,56,120,55,115,94,116"/>
+<area shape="poly" id="edge15_Node000009_Node000009" title=" " alt="" coords="523,125,517,122,503,120,491,122,484,126,483,132,486,142,481,140,477,133,480,123,489,117,503,115,519,117,528,127"/>
+</map>

@@ -1,0 +1,27 @@
+<map id="DMA_ConfigChannel" name="DMA_ConfigChannel">
+<area shape="rect" id="Node000001" title="Write a single channel&#39;s primary control data." alt="" coords="699,55,843,81"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="802,39,792,36,771,33,751,35,741,40,738,45,743,55,738,53,733,46,737,36,750,30,771,28,794,31,807,40"/>
+<area shape="rect" id="Node000002" href="$dma_8c.html#ad5643fac5910645e6ff61ac1d2a82400" title="Re&#45;arm DMA channels 16 and 18 for ADC transfer." alt="" coords="511,29,651,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="681,56,652,55,652,49,686,56"/>
+<area shape="rect" id="Node000003" href="$dma_8h.html#a6b0379805690f1464ff66faf389258c0" title=" " alt="" coords="376,55,463,81"/>
+<area shape="poly" id="edge16_Node000001_Node000003" title=" " alt="" coords="681,68,463,71,463,65,686,68"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="607,14,599,10,581,8,564,10,555,15,553,20,558,30,553,28,548,21,551,11,563,5,581,3,600,5,612,14"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="493,57,464,64,463,59,498,56"/>
+<area shape="poly" id="edge6_Node000003_Node000003" title=" " alt="" coords="441,39,435,36,419,33,405,35,398,40,396,46,400,55,395,53,391,46,394,36,404,30,420,28,437,31,447,40"/>
+<area shape="rect" id="Node000004" href="$dma_8c.html#a447560182e5b9ca172067ede4aa4aba2" title="Primary + alternate control table (32 channels × 2 = 64 entries)." alt="" coords="232,17,328,44"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="358,53,329,46,329,41,364,52"/>
+<area shape="rect" id="Node000005" href="$_ir_sensor_8c.html#ab5301b3aadc0a716d895ea4b52a5e7b7" title="Initializes ADC and GPIO for IR emitters." alt="" coords="250,92,310,119"/>
+<area shape="poly" id="edge7_Node000003_Node000005" title=" " alt="" coords="364,83,312,100,310,95,358,84"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="302,76,295,73,280,71,266,73,259,77,257,83,261,93,256,90,252,83,255,74,265,68,280,65,297,68,307,77"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="103,55,184,81"/>
+<area shape="poly" id="edge9_Node000005_Node000006" title=" " alt="" coords="233,94,184,82,185,76,238,93"/>
+<area shape="rect" id="Node000008" href="$_module_test_8c.html#ac497d1b7849ac646d67a4f2986b62e15" title=" " alt="" coords="108,129,179,156"/>
+<area shape="poly" id="edge13_Node000005_Node000008" title=" " alt="" coords="238,117,180,136,179,130,233,118"/>
+<area shape="poly" id="edge12_Node000006_Node000006" title=" " alt="" coords="160,39,155,35,143,33,132,35,126,40,125,46,128,55,123,54,119,46,122,37,130,30,143,28,157,31,166,39"/>
+<area shape="rect" id="Node000007" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,55,55,81"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="85,70,56,71,54,65,89,66"/>
+<area shape="poly" id="edge11_Node000007_Node000007" title=" " alt="" coords="47,40,42,35,30,33,19,35,13,40,11,46,15,54,9,55,6,46,8,37,17,30,30,28,44,31,52,38"/>
+<area shape="poly" id="edge15_Node000008_Node000008" title=" " alt="" coords="161,113,155,110,143,108,132,110,126,114,125,120,128,130,123,128,119,120,122,111,130,105,143,103,157,105,166,114"/>
+<area shape="rect" id="Node000009" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,129,55,156"/>
+<area shape="poly" id="edge14_Node000008_Node000009" title=" " alt="" coords="90,144,55,145,55,140,95,142"/>
+</map>

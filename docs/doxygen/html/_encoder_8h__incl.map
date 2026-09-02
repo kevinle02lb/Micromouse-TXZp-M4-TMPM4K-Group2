@@ -1,0 +1,10 @@
+<map id="src/modules/Encoder.h" name="src/modules/Encoder.h">
+<area shape="rect" id="Node000001" title="Encoder control module – speed and position from quadrature encoders." alt="" coords="5,5,161,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="60,155,124,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,35,55,49,42,66,34,86,36,106,48,126,65,144,60,145,44,129,31,108,29,85,37,64,51,45,69,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="46,80,120,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="84,30,86,65,80,64,82,35"/>
+<area shape="rect" id="Node000004" href="$_motor_8h.html" title="Motor control API for TB67H450AFNG H&#45;bridge drivers." alt="" coords="144,80,209,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="100,30,151,70,146,71,99,35"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="164,106,120,147,117,142,159,108"/>
+</map>

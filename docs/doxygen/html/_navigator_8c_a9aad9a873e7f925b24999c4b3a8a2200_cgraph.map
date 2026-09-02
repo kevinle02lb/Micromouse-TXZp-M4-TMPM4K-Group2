@@ -1,0 +1,13 @@
+<map id="BeginTurn" name="BeginTurn">
+<area shape="rect" id="Node000001" title="Arm an in&#45;place pivot segment." alt="" coords="5,67,86,93"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="17,67,13,58,16,48,27,42,46,40,65,43,77,51,72,52,63,48,45,45,29,47,20,52,18,57,22,66"/>
+<area shape="rect" id="Node000002" href="$_navigator_8c.html#a05d4d0f29d6aec8f263631000956a2ed" title="Latch the encoder positions that segment progress is measured from." alt="" coords="134,29,281,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="85,68,134,59,130,62,87,73"/>
+<area shape="rect" id="Node000004" href="$_profile_8c.html#a5801e7586058946593f89bbfbc181f1d" title="Arm a profile for a new segment." alt="" coords="158,104,256,131"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="86,87,146,101,141,104,86,92"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="179,28,174,21,178,11,189,5,207,3,227,5,239,14,233,14,225,10,207,8,191,10,182,15,180,20,184,29"/>
+<area shape="rect" id="Node000003" href="$_encoder_8c.html#ad92861cad0fe5e13d90aae6d3ffdc503" title="Get the accumulated position for a motor." alt="" coords="329,29,473,56"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="281,40,316,42,311,43,282,45"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="368,28,362,21,366,11,380,5,401,3,424,5,438,14,433,14,423,10,401,8,381,10,370,15,368,20,373,30"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="179,102,174,95,178,86,189,80,207,77,227,80,239,89,233,88,225,85,207,83,191,85,182,89,180,95,184,105"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="PID_Create" name="PID_Create">
+<area shape="rect" id="Node000001" title="Create and initialize a PID controller with default gains." alt="" coords="365,67,456,93"/>
+<area shape="poly" id="edge10_Node000001_Node000001" title=" " alt="" coords="432,51,425,48,410,45,397,47,390,52,388,58,391,67,387,65,382,58,385,49,395,42,411,40,427,43,437,52"/>
+<area shape="rect" id="Node000002" href="$_motion_8c.html#aad8ce1070ef0837cd67c0371c32df102" title="Initialize PID controllers &amp; Motor related modules." alt="" coords="232,67,317,93"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="347,80,318,83,318,77,352,80"/>
+<area shape="poly" id="edge6_Node000002_Node000002" title=" " alt="" coords="295,51,289,48,275,45,261,47,254,52,253,58,256,67,251,65,247,58,250,49,260,42,275,40,291,43,301,52"/>
+<area shape="rect" id="Node000003" href="$main_8c.html#af7b7b66e2842b8b81cb18fab136f7a77" title="Initialize all modules in dependency order." alt="" coords="103,29,184,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="214,64,184,57,185,52,220,63"/>
+<area shape="rect" id="Node000005" href="$_module_test_8c.html#ac497d1b7849ac646d67a4f2986b62e15" title=" " alt="" coords="108,104,179,131"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="219,96,180,110,179,105,214,97"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="160,14,155,10,143,8,132,10,126,14,125,20,128,29,123,28,119,20,122,11,130,5,143,3,157,5,166,14"/>
+<area shape="rect" id="Node000004" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,29,55,56"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="85,44,56,45,54,40,89,41"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="47,14,42,10,30,8,19,10,13,14,11,20,15,28,9,29,6,20,8,11,17,5,30,3,44,5,52,13"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="161,88,155,85,143,83,132,85,126,89,125,95,128,105,123,102,119,95,122,86,130,80,143,77,157,80,166,89"/>
+<area shape="rect" id="Node000006" href="$_module_test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,104,55,131"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="90,118,55,120,55,115,95,116"/>
+</map>

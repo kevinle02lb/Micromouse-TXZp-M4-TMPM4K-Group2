@@ -1,0 +1,7 @@
+<map id="src/drivers/adc.h" name="src/drivers/adc.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="85,5,204,32"/>
+<area shape="rect" id="Node000002" href="$adc_8c.html" title="ADC&#45;I driver implementation for TMPM4Ky RISC microcontrollers." alt="" coords="5,80,124,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,42,80,82,77,77,117,43"/>
+<area shape="rect" id="Node000003" href="$_ir_sensor_8c.html" title="IR Sensor driver implementation for TMPM4Ky micromouse." alt="" coords="148,80,304,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,40,214,80,209,80,169,45"/>
+</map>

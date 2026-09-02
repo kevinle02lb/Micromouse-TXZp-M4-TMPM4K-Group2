@@ -1,0 +1,20 @@
+<map id="ADC_Init" name="ADC_Init">
+<area shape="rect" id="Node000001" title="Initialize both ADC units (A and C) for single&#45;conversion DMA." alt="" coords="5,104,81,131"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="20,104,17,95,20,86,29,80,43,77,59,80,68,88,63,89,56,85,43,83,30,85,24,89,22,95,26,103"/>
+<area shape="rect" id="Node000002" href="$adc_8c.html#a3aa4d83411aaceb9f1fa27d686f72fb3" title="Initialize ADC Unit A (AINA15, AINA16)." alt="" coords="129,67,208,93"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="80,104,116,94,112,98,82,108"/>
+<area shape="rect" id="Node000005" href="$adc_8c.html#a177871896322a36c3d222b34b92620fa" title="Initialize ADC Unit C (AINC00, AINC01)." alt="" coords="129,141,208,168"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="81,126,116,137,111,139,81,131"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="146,66,142,58,145,49,154,42,168,40,184,43,193,51,188,52,182,48,168,45,156,47,149,52,148,58,151,67"/>
+<area shape="rect" id="Node000003" href="$gpio_8c.html#aceb1f0aae89bec01a62bd50fbab3e331" title=" " alt="" coords="256,29,352,56"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="207,67,243,59,239,61,209,72"/>
+<area shape="rect" id="Node000004" href="$systick_8c.html#ad9af3d080726acc5f1003de96ee90bb5" title="Blocking delay in microseconds." alt="" coords="259,104,349,131"/>
+<area shape="poly" id="edge6_Node000002_Node000004" title=" " alt="" coords="208,88,247,100,241,101,208,93"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="280,28,276,21,279,11,289,5,304,3,321,5,331,14,326,14,319,10,304,8,290,10,283,14,281,20,285,30"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="280,103,276,95,279,86,289,80,304,77,321,80,331,89,326,88,319,85,304,83,290,85,283,89,281,95,285,105"/>
+<area shape="poly" id="edge12_Node000005_Node000004" title=" " alt="" coords="208,141,247,133,242,135,209,146"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="146,140,142,133,145,123,154,117,168,115,184,117,193,126,188,126,182,122,168,120,156,122,149,126,148,132,151,142"/>
+<area shape="rect" id="Node000006" href="$gpio_8c.html#afc5a02b244f93ceaa5e6f6fafd7468f2" title=" " alt="" coords="256,179,352,205"/>
+<area shape="poly" id="edge10_Node000005_Node000006" title=" " alt="" coords="209,163,244,175,239,175,208,168"/>
+<area shape="poly" id="edge11_Node000006_Node000006" title=" " alt="" coords="280,177,276,170,279,161,289,154,304,152,321,155,331,164,326,163,319,160,304,157,290,159,283,164,281,170,285,179"/>
+</map>
