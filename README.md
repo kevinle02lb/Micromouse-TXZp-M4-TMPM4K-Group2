@@ -65,9 +65,9 @@ Here the same silicon runs a much smaller problem: a 1 kHz driven by an interrup
 
 <div align="center">
 
-<img src="docs/assets/pcb-3d.png" width="300" alt="Custom PCB"> &nbsp;&nbsp; <img src="docs/assets/maze.jpg" width="300" alt="Test maze run">
+<img src="docs/assets/pcb-3d.png" width="300" alt="Custom PCB"> &nbsp;&nbsp;
 
-*Custom PCB and test maze run*
+*Custom PCB*
 
 <br>
 

@@ -14,7 +14,7 @@ One at a time. Work down the table — later tests assume earlier ones pass.
 | 5 | `ODOM_TEST` | Pose maths, encoder signs | Pushed straight: `encL ≈ encR`, `deg ≈ 0`. Rotated CCW: `deg` rises, `diff` positive | &#9989; | "evidence\05_ODOM_TEST.mp4" |
 | 6 | `DRIVE_TEST` | Distance calibrated | Final `dist` matches a ruler within 2 mm | &#9989; | "evidence\06_DRIVE.mp4" , "evidence\06_DRIVE.txt"|
 | 7 | `TURN_TEST` | Angle calibrated | Final `arc` reaches `target`; protractor reads 90&deg; | &#9989; | "evidence\07_TURN_TEST.mp4" , "evidence\07_TURN_DATA.txt" |
-| 8 | Full run (`main.c`) | Robot solves the maze | Reaches the 2&times;2 goal | &#128260; | |
+| 8 | Full run (`main.c`) | Robot solves the maze | Reaches the 2&times;2 goal | &#9989; | "evidence\08_MAIN_TEST.mp4" |
 
 ## Watch out
 
