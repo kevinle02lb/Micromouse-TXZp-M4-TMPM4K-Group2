@@ -1,4 +1,4 @@
-![status](https://img.shields.io/badge/status-in%20development-yellow)
+![status](https://img.shields.io/badge/status-complete-brightgreen)
 ![MCU](https://img.shields.io/badge/MCU-TMPM4KNF10AFG-blue)
 ![core](https://img.shields.io/badge/Arm-Cortex--M4-0091BD)
 ![language](https://img.shields.io/badge/language-C-A8B9CC)
