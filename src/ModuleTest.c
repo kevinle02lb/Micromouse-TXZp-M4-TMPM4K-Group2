@@ -28,11 +28,11 @@
  * ========================================================================== */
 //#define MOTOR_TEST
 //#define IR_TEST
-#define MOTION_TEST
+//#define MOTION_TEST
 //#define IR_EMITTER_TEST
 //#define ODOM_TEST
 //#define TURN_TEST
-//#define DRIVE_TEST
+#define DRIVE_TEST
 
 /* ==========================================================================
  *   Shared Helper

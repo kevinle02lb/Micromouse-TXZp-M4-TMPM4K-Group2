@@ -17,8 +17,8 @@
  *   State Flow:
  *   1. NAV_PLAN    - read walls, ask FloodFill, arm a segment
  *   2. NAV_TURN    - pivot, only if the action needs one
- *   3. NAV_BACKUP  - square against the dead end wall, only after a turn
- *                    around that was planned with a wall ahead
+ *   3. NAV_BACKUP  - reverse onto the wall behind to square up, after any
+ *                    turn around
  *   4. NAV_DRIVE   - advance one cell, stopping against a wall ahead if one
  *                    comes into range
  *   5. NAV_SETTLE  - hold at the cell centre, report the move, back to 1
@@ -47,6 +47,7 @@
  * ========================================================================== */
 
 #define CELL_SIZE_MM            180.0f      /* one maze cell, centre to centre */
+#define WALL_THICKNESS_MM        12.0f      /* wall straddles the boundary, face sits half in */
 
 #define DRIVE_SPEED_MM_S        600.0f      /* straight cruise ceiling */
 #define DRIVE_MIN_MM_S           0.0f      /* straight floor, clears stiction */
@@ -56,21 +57,18 @@
 #define TURN_MIN_MM_S            0.0f       /* pivot floor, clears stiction */
 #define TURN_ACCEL_MM_S2        4500.0f      /* pivot ramp and brake  */
 
-#define KP_STRAIGHT               3.0f      /* damping trim, (mm/s) per mm of wheel skew */
-#define KP_WALL                   0.4f      /* wall trim, (mm/s) per mm of lateral error */
-#define IR_SIDE_TARGET_MM        30.0f      /* side reading when centred, measured */
+#define KP_STRAIGHT               8.0f      /* damping trim, (mm/s) per mm of wheel skew */
+#define KP_WALL                   1.9f      /* wall trim, (mm/s) per mm of lateral error */
+#define IR_SIDE_TARGET_MM        25.0f      /* side reading when centred, measured */
 #define IR_FRONT_TARGET_MM       20.0f      /* front reading at a cell centre, measured */
 
 #define SETTLE_TICKS             60U        /* stationary hold at the cell centre */
 
-#define IR_SIDE_OFFSET_MM        45.0f      /* axle to side beam, forward positive, MEASURE */
-#define AXLE_TO_REAR_MM          55.0f      /* axle to rearmost chassis point, MEASURE */
-#define EDGE_TOLERANCE_MM        40.0f      /* edge is ignored if it lands outside this band */
+#define AXLE_TO_REAR_MM          43.0f      /* axle to rearmost chassis point, MEASURE */
+#define FRONT_TOLERANCE_MM       35.0f      /* front reading is ignored if it reaches this far past the target */
 
-#define BACKUP_SPEED_MM_S       120.0f      /* reverse crawl into the dead end wall */
-#define BACKUP_STALL_MM           1.0f      /* travel below this over a window means contact */
-#define BACKUP_STALL_TICKS       50U        /* stall detection window */
-#define BACKUP_TIMEOUT_TICKS    800U        /* abort the crawl if no wall is ever met */
+#define BACKUP_SPEED_MM_S       250.0f      /* reverse crawl into the dead end wall */
+#define BACKUP_TICKS           1500U        /* crawl duration, far longer than the gap takes to close */
 
 /* ==========================================================================
  *   State Machine
@@ -100,16 +98,10 @@ static profile_t   segment;             // active drive or turn profile
 static int32_t     seg_start_countL;    // left encoder position at segment start
 static int32_t     seg_start_countR;    // right encoder position at segment start
 static float       turn_sign;           // +1 = CCW, -1 = CW
+static float       seg_nominal_mm;      // armed drive length, before any correction
 static uint16_t    settle_ticks;        // ticks elapsed in the active settle
 
-static bool        dead_end;            // wall ahead when the turn around was planned
 static uint16_t    backup_ticks;        // ticks elapsed in the active crawl
-static uint16_t    backup_window;       // ticks since the last stall sample
-static float       backup_mark_mm;      // travel at the last stall sample
-
-static bool        edge_seen_left;      // side wall state on the previous tick
-static bool        edge_seen_right;
-static bool        edge_applied;        // one edge correction per drive segment
 
 /* ==========================================================================
  *   Motion Interface
@@ -222,48 +214,6 @@ static float StraightnessTrim(void)
 }
 
 /**
- * @brief  Pin the active drive target to the cell boundary a side wall ends on.
- * @param  traveled_mm  Distance covered so far in this segment.
- * @details
- *   Maze walls terminate on the posts that mark cell corners, so the tick a
- *   side wall leaves the beam places that beam level with a cell boundary.
- *   The axle trails the beam by IR_SIDE_OFFSET_MM, so at that instant the
- *   axle still owes half a cell plus its own offset to reach the next centre.
- *
- *   Only the trailing edge is used. A leading edge marks the same boundary but
- *   arrives while the previous cell is still being left, which places it
- *   outside this segment.
- *
- *   The edge is accepted only if it lands within EDGE_TOLERANCE_MM of where
- *   dead reckoning expected it. A wall ending behind the segment start, or a
- *   dropout from a dirty reading, falls outside that band and is discarded.
- *
- *   One correction per segment. A wall that flickers near its end would
- *   otherwise reset the target on every flicker.
- */
-static void ApplySideEdgeCorrection(float traveled_mm)
-{
-    bool  left    = IR_IsWallPresent(IR_FAR_LEFT);
-    bool  right   = IR_IsWallPresent(IR_FAR_RIGHT);
-    bool  falling = (edge_seen_left && !left) || (edge_seen_right && !right);
-    float expected;
-
-    edge_seen_left  = left;
-    edge_seen_right = right;
-
-    if (edge_applied || !falling)
-        return;
-
-    expected = (CELL_SIZE_MM * 0.5f) - IR_SIDE_OFFSET_MM;
-
-    if (fabsf(traveled_mm - expected) > EDGE_TOLERANCE_MM)
-        return;
-
-    segment.distance_mm = traveled_mm + (CELL_SIZE_MM * 0.5f) + IR_SIDE_OFFSET_MM;
-    edge_applied        = true;
-}
-
-/**
  * @brief  Move the active drive target to sit at a fixed distance from a wall
  *         ahead.
  * @param  traveled_mm  Distance covered so far in this segment.
@@ -283,13 +233,24 @@ static void ApplySideEdgeCorrection(float traveled_mm)
 static void ApplyFrontWallCorrection(float traveled_mm)
 {
     float front_mm;
+    float implied;
+    float nominal;
 
     if (!IR_IsWallPresent(IR_LEFT) || !IR_IsWallPresent(IR_RIGHT))
         return;
 
     front_mm = 0.5f * (IR_GetDistance_mm(IR_LEFT) + IR_GetDistance_mm(IR_RIGHT));
+    implied  = front_mm - IR_FRONT_TARGET_MM;
+    nominal  = seg_nominal_mm - traveled_mm;
 
-    segment.distance_mm = traveled_mm + (front_mm - IR_FRONT_TARGET_MM);
+    /* The test is one sided. A wall further out than the segment was armed
+       for belongs to a later cell and is ignored. A wall nearer than dead
+       reckoning expects is obeyed without question, since rejecting it is
+       what drives the robot into it. */
+    if (implied > nominal + FRONT_TOLERANCE_MM)
+        return;
+
+    segment.distance_mm = traveled_mm + implied;
 }
 
 /* ==========================================================================
@@ -303,12 +264,7 @@ static void ApplyFrontWallCorrection(float traveled_mm)
 static void BeginDrive(float distance_mm)
 {
     CaptureSegmentStart();
-
-    /* Seeded from the live readings so the first tick cannot register an edge
-       against an uninitialised previous state. */
-    edge_seen_left  = IR_IsWallPresent(IR_FAR_LEFT);
-    edge_seen_right = IR_IsWallPresent(IR_FAR_RIGHT);
-    edge_applied    = false;
+    seg_nominal_mm = distance_mm;
 
     Profile_Begin(&segment, distance_mm,
                   DRIVE_SPEED_MM_S, DRIVE_MIN_MM_S, DRIVE_ACCEL_MM_S2);
@@ -318,18 +274,16 @@ static void BeginDrive(float distance_mm)
 /**
  * @brief  Arm the reverse crawl that squares the robot on a dead end wall.
  * @details
- *   Runs after the turn around, with the dead end wall now behind. Contact is
- *   detected by stall rather than by a sensor, since nothing faces backwards.
- *   Both wheels reaching the wall together leaves the chassis square to it,
- *   which removes the heading error the dead end approach accumulated.
+ *   Runs after the turn around, with the dead end wall now behind. The crawl
+ *   is timed rather than sensed, and BACKUP_TICKS is longer than the gap
+ *   takes to close, so the wheels stall against the wall and hold there.
+ *   Both wheels ending on the wall leaves the chassis square to it, which
+ *   removes the heading error the dead end approach accumulated.
  */
 static void BeginBackup(void)
 {
-    CaptureSegmentStart();
-    backup_ticks   = 0U;
-    backup_window  = 0U;
-    backup_mark_mm = 0.0f;
-    nav_state      = NAV_BACKUP;
+    backup_ticks = 0U;
+    nav_state    = NAV_BACKUP;
 }
 
 /**
@@ -365,16 +319,10 @@ void Navigator_Init(void)
     seg_start_countL = 0;
     seg_start_countR = 0;
     turn_sign        = 1.0f;
+    seg_nominal_mm   = 0.0f;
     settle_ticks     = 0U;
 
-    dead_end         = false;
     backup_ticks     = 0U;
-    backup_window    = 0U;
-    backup_mark_mm   = 0.0f;
-
-    edge_seen_left   = false;
-    edge_seen_right  = false;
-    edge_applied     = false;
 
     CommandWheels(0.0f, 0.0f);
 
@@ -394,12 +342,10 @@ void Navigator_Update(void)
          * ============================================================== */
         case NAV_PLAN:
         {
-            bool front_wall = IR_IsWallPresent(IR_LEFT) &&
-                              IR_IsWallPresent(IR_RIGHT);
-
             CommandWheels(0.0f, 0.0f);
 
-            FloodFill_SetWalls(front_wall,
+            FloodFill_SetWalls(IR_IsWallPresent(IR_LEFT) &&
+                               IR_IsWallPresent(IR_RIGHT),
                                IR_IsWallPresent(IR_FAR_LEFT),
                                IR_IsWallPresent(IR_FAR_RIGHT));
 
@@ -420,9 +366,6 @@ void Navigator_Update(void)
                     break;
 
                 case FLOODFILL_TURN_AROUND:
-                    /* A turn around away from a wall is a replan, not a dead
-                       end, and has nothing behind it to square against. */
-                    dead_end = front_wall;
                     BeginTurn(M_PI);
                     break;
 
@@ -449,7 +392,7 @@ void Navigator_Update(void)
             {
                 CommandWheels(0.0f, 0.0f);
 
-                if (dead_end)
+                if (current_action == FLOODFILL_TURN_AROUND)
                     BeginBackup();
                 else
                     BeginDrive(CELL_SIZE_MM);
@@ -462,29 +405,19 @@ void Navigator_Update(void)
          * ============================================================== */
         case NAV_BACKUP:
         {
-            float traveled = SegmentDistance_mm();
-
             CommandWheels(-BACKUP_SPEED_MM_S, -BACKUP_SPEED_MM_S);
-            backup_ticks++;
-            backup_window++;
 
-            if (backup_window >= BACKUP_STALL_TICKS)
+            if (++backup_ticks >= BACKUP_TICKS)
             {
-                bool stopped = fabsf(traveled - backup_mark_mm) < BACKUP_STALL_MM;
+                CommandWheels(0.0f, 0.0f);
 
-                backup_window  = 0U;
-                backup_mark_mm = traveled;
-
-                if (stopped || backup_ticks >= BACKUP_TIMEOUT_TICKS)
-                {
-                    CommandWheels(0.0f, 0.0f);
-                    dead_end = false;
-
-                    /* Squared on the wall the axle sits AXLE_TO_REAR_MM from
-                       it, and the next cell centre is one and a half cells
-                       further on. */
-                    BeginDrive((CELL_SIZE_MM * 1.5f) - AXLE_TO_REAR_MM);
-                }
+                /* Measured from the wall face, not the cell boundary the
+                   wall straddles. The axle sits AXLE_TO_REAR_MM off that
+                   face, and the next cell centre is one and a half cells on
+                   from the boundary half a wall thickness behind it. */
+                BeginDrive((CELL_SIZE_MM * 1.5f)
+                           - (WALL_THICKNESS_MM * 0.5f)
+                           - AXLE_TO_REAR_MM);
             }
             break;
         }
@@ -498,9 +431,6 @@ void Navigator_Update(void)
             float v;
             float trim;
 
-            /* The wall ahead is a direct measurement of what remains, so it
-               is applied last and overrides the edge. */
-            ApplySideEdgeCorrection(traveled);
             ApplyFrontWallCorrection(traveled);
 
             v    = Profile_Step(&segment, traveled);
